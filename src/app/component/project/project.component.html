@@ -1,0 +1,157 @@
+<div class="page-container">
+  <p class="page-tittle">
+    Project
+  </p>
+  <div class="button add">
+    <button mat-button mat-raised-button>Create Project</button>
+  </div>
+  <div class="suggestions">
+    <p class="suggestion-title">Suggested projects</p>
+    <div class="suggestion-items">
+        <div class="item-container">
+            <mat-card class="card-front">
+             POS
+            </mat-card>
+            <mat-card class="card-back">
+              <mat-card-header>
+               <mat-card-title>
+                 <!-- <span><mat-icon >folder</mat-icon></span> -->
+                 <span>
+                 Auto Payment
+               </span>
+              </mat-card-title>
+                <mat-card-subtitle>Software Project</mat-card-subtitle>
+              </mat-card-header>
+                <mat-card-actions>
+                    <button mat-icon-button><mat-icon>category</mat-icon></button>
+                    <button mat-button [matMenuTriggerFor]="payment"><mat-icon>more_vert</mat-icon></button>
+                    <mat-menu #payment="matMenu" yPosition="above">
+                        <button mat-menu-item>
+                          <mat-icon >store
+                          </mat-icon>
+                           <span>
+                             View Update
+                           </span>
+                         </button>
+                         <button mat-menu-item>
+                            <mat-icon >store</mat-icon>
+                            <span>
+                              Repository
+                            </span>
+                          </button>
+                    </mat-menu>
+                </mat-card-actions>
+            </mat-card>
+          </div>
+          <div class="item-container">
+              <mat-card class="card-front">
+               Sales Management Solution
+              </mat-card>
+              <mat-card class="card-back">
+                <mat-card-header>
+                 <mat-card-title>
+                   <!-- <span><mat-icon >folder</mat-icon></span> -->
+                   <span>
+                   Sales Tracker
+                 </span>
+                </mat-card-title>
+                  <mat-card-subtitle>Software Project</mat-card-subtitle>
+                </mat-card-header>
+                  <mat-card-actions>
+                      <button mat-icon-button><mat-icon>category</mat-icon></button>
+                      <button mat-button [matMenuTriggerFor]="comsoft"><mat-icon>more_vert</mat-icon></button>
+                          <mat-menu #comsoft="matMenu" yPosition="above">
+                              <button mat-menu-item>
+                                <mat-icon >store
+                                </mat-icon>
+                                 <span>
+                                   View Update
+                                 </span>
+                               </button>
+                               <button mat-menu-item>
+                                  <mat-icon >store</mat-icon>
+                                  <span>
+                                    Repository
+                                  </span>
+                                </button>
+                          </mat-menu>
+                  </mat-card-actions>
+              </mat-card>
+            </div>
+      <div class="item-container">
+        <mat-card class="card-front">
+         Sales Management Solution
+        </mat-card>
+        <mat-card class="card-back">
+          <mat-card-header>
+           <mat-card-title>
+             <!-- <span><mat-icon >folder</mat-icon></span> -->
+             <span>
+             Sales Tracker
+           </span>
+          </mat-card-title>
+            <mat-card-subtitle>Software Project</mat-card-subtitle>
+          </mat-card-header>
+            <mat-card-actions>
+                <button mat-icon-button><mat-icon>category</mat-icon></button>
+                <button mat-button [matMenuTriggerFor]="software"><mat-icon>more_vert</mat-icon></button>
+                    <mat-menu #software="matMenu" yPosition="above">
+                        <button mat-menu-item>
+                          <mat-icon >store
+                          </mat-icon>
+                           <span>
+                             View Update
+                           </span>
+                         </button>
+                         <button mat-menu-item>
+                            <mat-icon >store</mat-icon>
+                            <span>
+                              Repository
+                            </span>
+                          </button>
+                    </mat-menu>
+            </mat-card-actions>
+        </mat-card>
+      </div>
+      <div id="second" class="item-container">
+          <mat-card class="card-front">
+            File Mechanics
+          </mat-card>
+          <mat-card class="card-back">
+            <mat-card-header>
+             <mat-card-title>
+               <!-- <span><mat-icon >folder</mat-icon></span> -->
+               <span>
+               File Mechanics
+             </span>
+            </mat-card-title>
+              <mat-card-subtitle>Software Project</mat-card-subtitle>
+            </mat-card-header>
+              <mat-card-actions>
+
+                  <button mat-icon-button><mat-icon>category</mat-icon></button>
+                  <button mat-button [matMenuTriggerFor]="file"><mat-icon>more_vert</mat-icon></button>
+                    <mat-menu #file="matMenu" yPosition="above">
+                        <button mat-menu-item>
+                          <mat-icon >store
+                          </mat-icon>
+                           <span>
+                             View Update
+                           </span>
+                         </button>
+                         <button mat-menu-item>
+                            <mat-icon >store</mat-icon>
+                            <span>
+                              Repository
+                            </span>
+                          </button>
+                    </mat-menu>
+              </mat-card-actions>
+          </mat-card>
+        </div>
+    </div>
+  </div>
+  <div class="table-section">
+    <app-project-table></app-project-table>
+  </div>
+</div>

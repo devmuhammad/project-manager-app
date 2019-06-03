@@ -1,0 +1,40 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field-underline {
+  background-color: green;
+}
+
+.mat-form-field-empty.mat-form-field-label {
+  color: green;
+}
+
+.mat-form-field-empty.mat-form-field-label {
+  background: green;
+  color: green;
+}
+
+
+mat-form-field{
+  width: 40%;
+}
+
+.mat-form-field-underline {
+  background-color: green;
+  color: green;
+}
+
+.mat-elevation-z8{
+  /* box-shadow: none; */
+}
+.mat-focused .mat-form-field-underline {
+  color: #5cb53f !important;
+  }
+  .mat-focused .mat-form-field-label {
+    color: #5cb53f !important;
+    }
+
+    .mat-form-field-ripple {
+    background-color: #5cb53f !important;
+    }

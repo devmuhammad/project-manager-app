@@ -1,0 +1,36 @@
+<mat-form-field >
+
+  <input (keyup)="applyFilter($event.target.value)" matInput  placeholder="Search project"/>
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<div class="mat-elevation-z8">
+<mat-table [dataSource]="dataSource" matSort >
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="paradigm">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Paradigm </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.paradigm}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+</div>

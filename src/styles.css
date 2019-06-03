@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2) format('woff2');
+}
+:root{
+  --primaryFont:'Open Sans',sans-serif;
+  --primaryColor:#2E7D32;
+  --lightColor:#fff;
+  --fontSize:16px;
+  --dangerColor:#dd2b34;
+  --greyColor:#888888;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  height: 100%;
+}
+
+.main-nav{
+  width: 100%;
+  position: relative;
+background:var(--lightColor);
+ box-shadow: 3px 0 6px rgba(0, 0,0, .25);
+color:var(--primaryColor);
+font-family: var(--primaryFont);
+}
+
