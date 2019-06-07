@@ -17,20 +17,25 @@
 
           <a mat-list-item (click)="setStep(item,i)">
             <span class="link-icon">
-              <mat-icon class="icon dashboard-icon">dashboard</mat-icon>
+              <mat-icon class="icon dashboard-icon">{{item.icon}}</mat-icon>
             </span>
             {{item.name}}
             <span *ngIf="item.children">
               <mat-icon class="icon arrow-icon">{{step===i?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
             </span>
+            <span *ngIf="!item.children">
+                <mat-icon class="icon arrow-icon">keyboard_arrow_right</mat-icon>
+              </span>
+
           </a>
           <mat-expansion-panel class="expansion" [expanded]="step===i">
             <ng-container *ngFor="let child of item.children">
                 <a mat-list-item (click)="setStep(child)" >
                     <span class="link-icon">
-                      <mat-icon class="icon">view_list</mat-icon>
+                      <mat-icon class="icon">{{child.icon}}</mat-icon>
                     </span>
                     {{child.name}}
+
                   </a>
             </ng-container>
           </mat-expansion-panel>
@@ -41,11 +46,22 @@
         <div class="header">
           <!-- <h4 class="toolbar-header">Tools bar</h4> -->
           <div class="actions">
+              <button
+              (click)="openBottomSheet()"
+              matTooltipPosition="right"
+              matTooltip="Add new task"
+               mat-icon-button>
+                <mat-icon style="font-size:30px" class="tool-icon">add</mat-icon>
+              </button>
             <button
             matTooltipPosition="right"
             matTooltip="quick search"
              mat-icon-button>
-              <mat-icon class="tool-icon">notifications</mat-icon>
+              <mat-icon
+              matBadge="8"
+              matBadgePosition="after"
+              matBadgeColor="warn"
+               class="tool-icon">notifications</mat-icon>
             </button>
             <button
             matTooltipPosition="right"
@@ -68,7 +84,6 @@
       <mat-toolbar class="main-nav">
         <span>Project Manager</span>
         <div class="account">
-
           <span *ngIf="!(isHandset$ | async)">Ibrahim M Bashir</span>
           <span *ngIf="(isHandset$ | async)">IMB</span>
           <span><button mat-icon-button [matMenuTriggerFor]="auth"><mat-icon class="auth-user">person</mat-icon></button></span>

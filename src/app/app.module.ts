@@ -14,8 +14,13 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { routing } from './app-routing.module';
 import { ProjectTableComponent } from './component/project-table/project-table.component';
+import { ScrollingModule} from '@angular/cdk/scrolling';
+import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component'
+import { NgReduxModule,NgRedux} from "@angular-redux/store"
 
-
+import rootReducer from './reducer';
+import { IAppState, store } from './store';
+rootReducer
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
 @NgModule({
   declarations: [
@@ -28,6 +33,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     RecordsComponent,
     SettingsComponent,
     ProjectTableComponent,
+    BottomSheetComponent,
 
   ],
   imports: [
@@ -37,8 +43,15 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     BrowserAnimationsModule,
     LayoutModule,
     MaterialModule,
+    ScrollingModule,
+    NgReduxModule,
   ],
+  entryComponents:[BottomSheetComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(ngRedux: NgRedux<IAppState>) {
+      ngRedux.provideStore(store);
+    }
+}

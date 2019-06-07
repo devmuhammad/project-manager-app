@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
+import { MatBottomSheet } from '@angular/material';
+import { BottomSheetComponent } from 'src/app/component/bottom-sheet/bottom-sheet.component';
 
 @Component({
   selector: 'app-defaultlayout',
@@ -10,7 +12,9 @@ import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
   styleUrls: ['./defaultlayout.component.css']
 })
 export class DefaultlayoutComponent {
-  constructor(private breakpointObserver: BreakpointObserver,private service:DefaultlayoutService) { }
+  constructor(private breakpointObserver: BreakpointObserver,
+    private service:DefaultlayoutService,
+    private bottomSheet: MatBottomSheet) { }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -19,6 +23,15 @@ export class DefaultlayoutComponent {
 
   step = '';
   opened = true;
+  /**
+   *  @title 'set-step'
+   * Utility function to control
+   *  side bar toggle
+   * and actuate navigation when
+   *  items is clicked
+   * @param object and index
+   * @returns navigation function
+   *  */
   setStep(item, index) {
     if (item.children) {
       if (this.step === index) {
@@ -30,21 +43,26 @@ export class DefaultlayoutComponent {
     return  this.service.navigateToPath(item.link)
   }
 
+
+  openBottomSheet(){
+    this.bottomSheet.open(BottomSheetComponent)
+  }
+
   menuList = [
     {
-      name: "General", children: [
-        { name: "Dashboard", link: "/dashboard" },
-        { name: "Profile", link: "/profile" }
+      name: "General",icon:'dashboard', children: [
+        { name: "Dashboard", icon:'dashboard', link: "/dashboard" },
+        { name: "Profile",icon:'person', link: "/profile" }
       ]
     },
     {
-      name: "Project", children: [
-        { name: 'Activities', link: "/project" },
-        { name: 'Create', link: "/create" }
+      name: "Project", icon:'folder', children: [
+        { name: 'Activities',icon:'folder', link: "/project" },
+        { name: 'Create',icon:'add', link: "/create" }
       ]
     },
-    { name: "Settings", link: "/settings" },
-    { name: "Report", link: "/report" },
+    { name: "Settings", icon:'settings', link: "/settings" },
+    { name: "Report", icon:'reports', link: "/report" },
   ]
 
 }

@@ -1,0 +1,74 @@
+.form-container{
+  width: 100%;
+}
+
+.task-header{
+  font-size: 20px;
+  margin:15px 0 5px 0;
+  color: var(--primaryColor);
+  font-family: var(--primaryFont);
+  letter-spacing: 3px;
+}
+
+/* :host ::ng-deep {
+  padding: 0.5em;
+  font-style:normal;
+
+} */
+
+mat-form-field{
+  margin-inline-end: 5px;
+  margin-inline-start: 5px;
+}
+
+ .mat-select{
+padding: 0.1em 0 0.1em 0;
+}
+.mat-label{
+  font-family: var(--primaryFont);
+  transform: translate(14px, 12px);
+  color:var(--greyColor);
+}
+/* .input-select{
+  padding: 0.1em;
+} */
+.form-section{
+margin-top: 15px;
+padding: 10px;
+}
+
+.project-input{
+  width: 50%;
+}
+
+.mat-grid-tile .project-input{
+  width: 100%;
+}
+
+.attach-button{
+  font-weight: 200;
+  font-family: var(--primaryFont);
+  letter-spacing: 2.5px;
+  background: var(--primaryColor);
+  padding: 0 20px 0 20px;
+  color: var(--lightColor);
+}
+
+.submit-button-section{
+  width: 100%;
+}
+.submit-button-section button{
+  color: var(--lightColor);
+  text-transform: uppercase;
+  width: 100%;
+  font-family: var(--primaryFont);
+  letter-spacing: 2.5px;
+  font-size: 16px;
+}
+
+.submit-button-section button mat-icon{
+  font-size: 20px;
+}
+.task-textarea{
+  width: 100%;
+}

@@ -1,0 +1,62 @@
+<div class="form-container">
+  <header class="task-header">
+    Task manager
+  </header>
+  <mat-divider></mat-divider>
+  <form action="" class="form-section">
+     <div>
+        <mat-grid-list cols="2" rowHeight="2:0.5">
+            <mat-grid-tile>
+                <mat-form-field class="project-input">
+                    <mat-label>Project</mat-label>
+                    <mat-select class="input-select">
+                      <mat-option *ngFor="let project of projects" [value]="project.value">
+                        {{project.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="project-input">
+                    <mat-label>Task type</mat-label>
+                    <mat-select class="input-select">
+                      <mat-option *ngFor="let task of tasks" [value]="task.value">
+                        {{task.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="project-input">
+                    <mat-label>Assigned to</mat-label>
+                    <mat-select class="input-select">
+                      <mat-option *ngFor="let project of projects" [value]="project.value">
+                        {{project.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                    <button  mat-raised-button class="attach-button">
+                      <mat-icon style="font-size: 18px;">cloud</mat-icon>
+                      Attach file
+                    </button>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <mat-form-field class="task-textarea">
+              <textarea type="text" matInput placeholder="Summary"></textarea>
+            </mat-form-field>
+
+            <div class="submit-button-section">
+                <button mat-raised-button class="attach-button">
+                    Create task
+                  <mat-icon>
+                    send
+                  </mat-icon>
+
+                </button>
+            </div>
+     </div>
+  </form>
+</div>
+

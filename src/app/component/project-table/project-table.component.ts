@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatSort,MatPaginator} from '@angular/material'
+import { ProgrammingLanguages } from 'src/app/reducer/project.reducer';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  paradigm: string;
-  symbol: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
+
+const ELEMENT_DATA: ProgrammingLanguages[] = [
   {position: 1, name: 'Introduction to C#', paradigm: 'OOP', symbol: 'C#'},
   {position: 2, name: 'Angular', paradigm: 'Scrypting', symbol: 'A'},
   {position: 3, name: 'React', paradigm: 'Scrypting', symbol: 'React'},
