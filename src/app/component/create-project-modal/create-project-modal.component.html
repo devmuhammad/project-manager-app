@@ -1,0 +1,100 @@
+
+<div style="width: 100%">
+  <h2 mat-dialog-title>Create Project</h2>
+  <!-- <mat-divider style="margin-top: 0px;width: 100%"></mat-divider> -->
+  <form [formGroup]="service.form" class="project-form">
+<div class="input-container">
+  <input type="hidden" formControlName="$key">
+  <input type="hidden" formControlName="createdAt" value="{{currentDate}}">
+  <mat-form-field class="project-form-field" floatLabel="never" >
+      <input matInput
+              placeholder="Name"
+             formControlName="name"  floatPlaceholder="never" required>
+             <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                <mat-icon >folder </mat-icon>
+             </button>
+             <mat-error >Invalid project name</mat-error>
+  </mat-form-field>
+  <mat-form-field class="project-form-field" style="width: 15%" floatLabel="never" >
+      <input matInput
+              placeholder="Alias"
+             formControlName="alias"  floatPlaceholder="never" required>
+             <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                <mat-icon >folder </mat-icon>
+             </button>
+             <mat-error>Invalid alias</mat-error>
+  </mat-form-field>
+  <mat-form-field floatLabel="never"  class="project-form-field" style="margin-top: 20px">
+      <mat-select class="select"formControlName="type"  placeholder="Project type"
+        floatPlaceholder="never" required>
+        <mat-option *ngFor="let item of types" [value]="item.name">{{item.name}}</mat-option>
+      </mat-select>
+
+    </mat-form-field>
+    <mat-form-field floatLabel="never" class="project-form-field" style="margin-top: 20px">
+        <mat-select class="select" formControlName="status" [value]="status[1][name]" placeholder="Project Status"
+          floatPlaceholder="never" required>
+          <mat-option *ngFor="let item of status" [value]="item.name">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="project-form-field" style="margin-top: 20px" floatLabel="never" >
+          <input matInput
+                  placeholder="Repository Link"
+                 formControlName="repository"  floatPlaceholder="never" required>
+                 <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                    <mat-icon >link </mat-icon>
+                 </button>
+      </mat-form-field>
+
+</div>
+<mat-divider style="margin-top: 20px;width: 100%"></mat-divider>
+<mat-form-field class="project-form-field" style="margin-top: 20px;width: 95%" floatLabel="never" >
+    <textarea matInput
+            placeholder="Description"
+           formControlName="description"  floatPlaceholder="never" >
+           </textarea>
+</mat-form-field>
+
+<div class="input-container">
+    <mat-form-field class="project-form-field" style="margin-top: 20px" floatLabel="never" >
+        <input matInput
+                placeholder="Staging Server"
+               formControlName="repository"  floatPlaceholder="never" required>
+               <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon >link </mat-icon>
+               </button>
+    </mat-form-field>
+    <mat-form-field class="project-form-field" style="margin-top: 20px" floatLabel="never" >
+        <input matInput
+                placeholder="Production Server"
+               formControlName="repository"  floatPlaceholder="never" >
+               <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon >link </mat-icon>
+               </button>
+    </mat-form-field>
+  </div>
+<!--
+
+            <mat-grid-tile>
+                <div class="form-container">
+
+                  </div>
+              </mat-grid-tile>
+        </mat-grid-list> -->
+
+      <!-- <mat-form-field>
+          <input matInput
+                  placeholder="Course Description"
+                 formControlName="description">
+      </mat-form-field> -->
+
+
+
+  <mat-dialog-actions>
+      <button class="mat-raised-button"(click)="close()">Close</button>
+      <button [disabled]="service.form.invalid" class="mat-raised-button mat-primary save"  (click)="save()">Save</button>
+  </mat-dialog-actions>
+</form>
+</div>
+
+

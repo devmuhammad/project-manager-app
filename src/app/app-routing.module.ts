@@ -7,13 +7,15 @@ import { DefaultlayoutComponent } from './layout/defaultlayout/defaultlayout.com
 import { SettingsComponent } from './component/settings/settings.component';
 import { RecordsComponent } from './component/records/records.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ActivityComponent } from './component/activity/activity.component';
 
 export const routes: Routes = [
   {path:'login',component:GuestlayoutComponent,children:[
     {path:'',component:AuthenticationComponent}
   ]},
   {path:'project',component:DefaultlayoutComponent,children:[
-    {path:'',component:ProjectComponent}
+    {path:'',component:ProjectComponent},
+    {path:'activities',component:ActivityComponent},
   ]},
 
   {path:'settings',component:DefaultlayoutComponent,children:[

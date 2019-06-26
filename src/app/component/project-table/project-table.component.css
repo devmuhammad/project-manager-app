@@ -1,21 +1,98 @@
 table {
   width: 100%;
 }
-
-.mat-form-field-underline {
-  background-color: green;
+/*
+.search-form-field div.mat-form-field-underline {
+  background-color: green !important;
+  border-color: var(--primaryColor);
 }
 
 .mat-form-field-empty.mat-form-field-label {
-  color: green;
+  color: green !important;
 }
 
 .mat-form-field-empty.mat-form-field-label {
-  background: green;
-  color: green;
+  background: green !important;
+  color: green !important;
+} */
+
+ mat-header-cell.status-column{
+  display: flex !important;
+  justify-content:center !important;
 }
 
+.status-container mat-cell{
+  /* display: none !important; */
+  text-align: center !important;
+  justify-content:center !important;
+}
 
+.status-cell{
+  display: flex;
+  flex-direction: row;
+  text-align: center !important;
+  align-items: center !important;
+  justify-items: first baseline !important;
+  width: 100%;
+  color:var(--lightColor);
+}
+mat-cell{
+color: var(--darkColor);
+font-family: var(--primaryFont);
+font-weight: 50;
+font-size: 13px;
+align-items: center;
+/* font-style: italic; */
+}
+.todo{
+  background: var(--dangerColor);
+  color:var(--lightColor) !important;
+  align-items: center;
+text-align: center;
+}
+/* .mat-header-cell{
+text-align: center !important;
+width: 100%;
+} */
+.completed{
+  background: var(--primaryColor);
+  color:var(--lightColor) !important;
+  align-items: center;
+text-align: center;
+}
+.inprogress{
+  background: var(--warningColor) !important;
+  color:var(--lightColor);
+  align-items: center !important;
+text-align: center !important;
+}
+mat-cell:first-of-type {
+  padding-left: 15px !important;
+  border-left:10px solid var(--primaryColor)
+}
+mat-cell:last-of-type{
+  border-right:10px solid #f5f5f5;
+}
+.cell-name{
+  padding-right: 35px !important;
+}
+mat-row:nth-child(even){
+  background: linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(250, 255, 253) 127.18%);
+                }
+/*
+mat-cell:nth-child(even){
+  background:var(--greyColor) ;
+} */
+.status-span{
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
+}
+mat-cell:first-of-type{
+  width: 100px;
+}
 mat-form-field{
   width: 40%;
 }
@@ -24,17 +101,3 @@ mat-form-field{
   background-color: green;
   color: green;
 }
-
-.mat-elevation-z8{
-  /* box-shadow: none; */
-}
-.mat-focused .mat-form-field-underline {
-  color: #5cb53f !important;
-  }
-  .mat-focused .mat-form-field-label {
-    color: #5cb53f !important;
-    }
-
-    .mat-form-field-ripple {
-    background-color: #5cb53f !important;
-    }

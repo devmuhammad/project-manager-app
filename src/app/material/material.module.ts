@@ -21,6 +21,10 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSortModule} from '@angular/material/sort';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
+import {
+  FormsModule,
+} from '@angular/forms'
 @NgModule({
   imports: [
     MatButtonModule,
@@ -42,7 +46,10 @@ import {MatMenuModule} from '@angular/material/menu';
       MatTooltipModule,
       MatMenuModule,
       MatBottomSheetModule,
-      MatBadgeModule
+      MatBadgeModule,
+      MatDialogModule,
+      FormsModule,
+
     ],
 
   exports: [
@@ -65,7 +72,10 @@ import {MatMenuModule} from '@angular/material/menu';
       MatTooltipModule,
       MatMenuModule,
       MatBottomSheetModule,
-      MatBadgeModule
+      MatBadgeModule,
+      MatDialogModule,
+      FormsModule,
+
     ],
 
 })

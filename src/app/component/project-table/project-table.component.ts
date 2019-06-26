@@ -1,21 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatSort,MatPaginator} from '@angular/material'
-import { ProgrammingLanguages } from 'src/app/reducer/project.reducer';
-
-
-
-const ELEMENT_DATA: ProgrammingLanguages[] = [
-  {position: 1, name: 'Introduction to C#', paradigm: 'OOP', symbol: 'C#'},
-  {position: 2, name: 'Angular', paradigm: 'Scrypting', symbol: 'A'},
-  {position: 3, name: 'React', paradigm: 'Scrypting', symbol: 'React'},
-  {position: 4, name: 'Redux', paradigm: 'State Manager', symbol: 'RR'},
-  {position: 5, name: 'ECMA Script', paradigm: 'Scrypting', symbol: 'ES'},
-  {position: 6, name: 'Waterfall', paradigm:'Model' , symbol: 'W'},
-  {position: 7, name: 'Prototyping', paradigm: 'Model', symbol: 'P'},
-  {position: 8, name: 'SDLC', paradigm: 'Process', symbol: 'SDLC'},
-  {position: 9, name: 'Mongo Db', paradigm: 'Database', symbol: 'MGDB'},
-  {position: 10, name: 'GraphSql', paradigm: 'Database', symbol: 'GSql'},
-];
+import { ProjectType, project } from 'src/app/reducer/project.reducer';
+import {ProjectService} from '../../services/project.service'
 
 
 
@@ -25,21 +11,35 @@ const ELEMENT_DATA: ProgrammingLanguages[] = [
   styleUrls: ['./project-table.component.css']
 })
 export class ProjectTableComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'paradigm', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA) ;
-  constructor() { }
+
+  displayedColumns: string[] = ['#', 'name',  'status','date','actions','more'];
+  // dataSource = new MatTableDataSource(tableData) ;
+  constructor( private service:ProjectService) { }
 
   @ViewChild(MatSort) sort:MatSort;
   @ViewChild(MatPaginator)paginator :MatPaginator;
 
+  dataSource:MatTableDataSource<any>
   ngOnInit() {
+ this.service.gettableData()
+   .subscribe((projects) => {
+     let datarray =projects.map(item=>{
+      return {...item}
+    });
+    this.dataSource = new MatTableDataSource(datarray);
+   });
     this.dataSource.sort = this.sort;
     this.dataSource.paginator =this.paginator;
   }
 
+  searchKey=""
 
-  applyFilter(value:string){
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  onSearchClear(){
+    this.searchKey="";
+    this.applyFilter();
+  }
+  applyFilter(){
+    this.dataSource.filter = this.searchKey.trim().toLocaleLowerCase();
   }
 
 }

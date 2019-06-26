@@ -4,7 +4,7 @@
   </p>
   <div class="button add">
 
-    <button mat-button mat-raised-button>Create Project</button>
+    <button (click)="onCreate()" mat-button mat-raised-button>Create Project</button>
   </div>
   <div class="suggestions">
     <p class="suggestion-title">Suggested projects</p>
@@ -27,14 +27,14 @@
                     <button mat-icon-button>Oct 13 2017</button>
                     <button id="file" mat-icon-button [matMenuTriggerFor]="payment"><mat-icon>more_vert</mat-icon></button>
                     <mat-menu #payment="matMenu" yPosition="above">
-                        <button mat-menu-item>
+                        <button class="menu-button" mat-menu-item>
                           <mat-icon >store
                           </mat-icon>
                            <span>
                              View Update
                            </span>
                          </button>
-                         <button mat-menu-item>
+                         <button class="menu-button" mat-menu-item>
                             <mat-icon >store</mat-icon>
                             <span>
                               Repository
@@ -63,14 +63,14 @@
                        mat-icon-button>Jan 01 2019</button>
                       <button id="file"  mat-icon-button [matMenuTriggerFor]="comsoft"><mat-icon>more_vert</mat-icon></button>
                           <mat-menu #comsoft="matMenu" yPosition="above">
-                              <button mat-menu-item>
+                              <button mat-menu-item class="menu-button">
                                 <mat-icon >store
                                 </mat-icon>
                                  <span>
                                    View Update
                                  </span>
                                </button>
-                               <button mat-menu-item>
+                               <button mat-menu-item class="menu-button">
                                   <mat-icon >store</mat-icon>
                                   <span>
                                     Repository
@@ -98,14 +98,15 @@
                 <button mat-icon-button>May 20 2019</button>
                 <button id="file" mat-icon-button [matMenuTriggerFor]="software"><mat-icon>more_vert</mat-icon></button>
                     <mat-menu #software="matMenu" yPosition="above">
-                        <button mat-menu-item>
-                          <mat-icon >store
+                        <button class="menu-button" mat-menu-item >
+                          <mat-icon >
+                            store
                           </mat-icon>
                            <span>
                              View Update
                            </span>
                          </button>
-                         <button mat-menu-item>
+                         <button class="menu-button" mat-menu-item >
                             <mat-icon >store</mat-icon>
                             <span>
                               Repository
@@ -134,14 +135,14 @@
                   <button mat-icon-button>Feb 11 2015</button>
                   <button id="file" mat-icon-button [matMenuTriggerFor]="file"><mat-icon>more_vert</mat-icon></button>
                     <mat-menu #file="matMenu" yPosition="above">
-                        <button mat-menu-item>
+                        <button mat-menu-item class="menu-button">
                           <mat-icon >store
                           </mat-icon>
                            <span>
                              View Update
                            </span>
                          </button>
-                         <button mat-menu-item>
+                         <button mat-menu-item class="menu-button">
                             <mat-icon >store</mat-icon>
                             <span>
                               Repository

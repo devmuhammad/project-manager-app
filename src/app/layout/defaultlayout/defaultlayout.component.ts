@@ -49,20 +49,15 @@ export class DefaultlayoutComponent {
   }
 
   menuList = [
-    {
-      name: "General",icon:'dashboard', children: [
-        { name: "Dashboard", icon:'dashboard', link: "/dashboard" },
-        { name: "Profile",icon:'person', link: "/profile" }
-      ]
-    },
+    { name: "Dashboard", icon:'dashboard', link: "/dashboard" },
     {
       name: "Project", icon:'folder', children: [
-        { name: 'Activities',icon:'folder', link: "/project" },
-        { name: 'Create',icon:'add', link: "/create" }
+        { name: 'Projects',icon:'folder', link: "/project" },
+        { name: 'Activities',icon:'work', link: "/project/activities" },
       ]
     },
+    { name: "Users", icon:'people', link: "/report" },
     { name: "Settings", icon:'settings', link: "/settings" },
-    { name: "Report", icon:'reports', link: "/report" },
   ]
 
 }

@@ -6,12 +6,15 @@ import {
   createStore,
 } from 'redux';
 import { createLogger } from 'redux-logger';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 export interface IAppState {
   /* ... */
+
 }
-export const store: Store<IAppState> = createStore(
+export const store: Store = createStore(
   rootReducer,
+  composeWithDevTools(
   applyMiddleware(createLogger()),
+  )
 );

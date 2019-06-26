@@ -12,11 +12,19 @@ background: #eee8;
 }
 .account{
   position: absolute;
-  right: 15%;
+  right: 8%;
   font-size: 15px;
   color: var(--primaryColor);
 }
 
+.navbar-profile{
+  font-family: var(--primaryFont);
+  color: var(--primaryColor);
+  letter-spacing: 1.5px;
+}
+.navbar-profile mat-icon{
+  color: var(--primaryColor);
+}
 .mat-card-avatar {
   height: var(--mat-card-header-size);
   width: var(--mat-card-header-size);

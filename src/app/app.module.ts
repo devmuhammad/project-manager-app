@@ -17,10 +17,15 @@ import { ProjectTableComponent } from './component/project-table/project-table.c
 import { ScrollingModule} from '@angular/cdk/scrolling';
 import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component'
 import { NgReduxModule,NgRedux} from "@angular-redux/store"
-
+import {ReactiveFormsModule} from '@angular/forms'
 import rootReducer from './reducer';
 import { IAppState, store } from './store';
-rootReducer
+import { CreateProjectModalComponent } from './component/create-project-modal/create-project-modal.component';
+import { ProjectService } from './services/project.service';
+import { ActivityComponent } from './component/activity/activity.component';
+import { ActivityDetailComponent } from './component/activity-detail/activity-detail.component';
+
+
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
 @NgModule({
   declarations: [
@@ -34,6 +39,9 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     SettingsComponent,
     ProjectTableComponent,
     BottomSheetComponent,
+    CreateProjectModalComponent,
+    ActivityComponent,
+    ActivityDetailComponent,
 
   ],
   imports: [
@@ -45,9 +53,13 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     MaterialModule,
     ScrollingModule,
     NgReduxModule,
+    ReactiveFormsModule
   ],
-  entryComponents:[BottomSheetComponent],
-  providers: [],
+  entryComponents:[
+    BottomSheetComponent,
+    CreateProjectModalComponent,
+  ],
+  providers: [ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

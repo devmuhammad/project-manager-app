@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -13,15 +13,31 @@
   --fontSize:16px;
   --dangerColor:#dd2b34;
   --greyColor:#888888;
+  --darkColor:#212121;
+  --blueColor: #1e88e5;
+  --warningColor:#ffa726;
 }
 *{
   margin: 0;
   padding: 0;
 }
+.form-container{
+  width:100%;
+}
+form.project-form{
+margin:10px;
+}
 html,body{
   height: 100%;
 }
-
+.menu-button{
+  font-family: var(--primaryFont);
+  color: var(--primaryColor);
+  letter-spacing: 1px;
+}
+.menu-button mat-icon{
+  color: var(--primaryColor) !important;
+}
 .main-nav{
   width: 100%;
   position: relative;
@@ -31,3 +47,61 @@ color:var(--primaryColor);
 font-family: var(--primaryFont);
 }
 
+mat-dialog-content {
+  width: 100%;
+  padding:0;
+}
+.project-form-field{
+  display: inline-block;
+  background-color:#f5f5f5;
+  width: 45%;
+  border-radius: 4px;
+  border:0.5px solid #cecece;
+  padding: 2px 6px;
+  /* margin-left:5px; */
+  font-size: 14px;
+  font-family: var(--primaryFont);
+}
+.project-form-field div.mat-form-field-underline {
+  display: none;
+  /* border-color: #2E7D32; */
+}
+.project-form-field div.mat-form-field-infix{
+  border-top:0px;
+
+}
+.project-form-field:nth-child(odd) {margin-right:20px}
+.input-container{
+margin: auto;
+   text-align: justify;
+   align-self: center;
+  justify-content: 'center';
+}
+.project-form-field div.mat-form-field-wrapper{
+  padding-bottom:0px;
+
+}
+mat-form-field{
+  position: relative;
+}
+mat-form-field mat-error{
+  position: absolute;
+  left: 10px;
+}
+.page-tittle{
+  font-size: 24px;
+
+}
+.page-container{
+  position: relative;
+  color:var(--primaryColor);
+  padding: 5px;
+  font-family: var(--primaryFont);
+}
+mat-dialog-actions .save{
+  background: var(--primaryColor) !important;
+  color:var(--lightColor);
+}
+.project-form{
+  width: 100%;
+}

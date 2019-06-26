@@ -1,36 +1,102 @@
-<mat-form-field  >
-
-  <input (keyup)="applyFilter($event.target.value)" matInput  placeholder="Search project"/>
-  <mat-icon matSuffix>search</mat-icon>
+<mat-form-field class="search-form-field" floatLabel="never" >
+  <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search project"/>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon >close</mat-icon>
+  </button>
+  <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+      <mat-icon >search</mat-icon>
+  </button>
 </mat-form-field>
 <div class="mat-elevation-z8">
 <mat-table [dataSource]="dataSource" matSort >
     <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
+      <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell colspan="1" *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="paradigm">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Paradigm </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.paradigm}} </mat-cell>
+    <ng-container class="status-container"  matColumnDef="status">
+      <mat-header-cell class="status-column" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+      <mat-cell class="status-cell"  *matCellDef="let element"
+      [ngClass]="{
+        'todo' : element.status =='To do',
+        'inprogress' : element.status =='In Progress',
+        'completed' : element.status =='Completed'
+     }"
+      >
+      <span class="status-span">{{element.status}}</span></mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+    <ng-container matColumnDef="date">
+      <mat-header-cell class="status-column" *matHeaderCellDef> Created At</mat-header-cell>
+      <mat-cell *matCellDef="let element"> <span class="status-span">{{element.date}}</span> </mat-cell>
+    </ng-container>
+     <!-- Symbol Column -->
+     <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+      <button mat-icon-button>
+        <mat-icon style="color:var(--blueColor)">
+          launch
+        </mat-icon>
+      </button>
+      <button mat-icon-button>
+          <mat-icon style="color: var(--dangerColor)">
+            delete_outlined
+          </mat-icon>
+        </button>
+      </mat-cell>
     </ng-container>
 
+     <!-- Weight Column -->
+     <ng-container matColumnDef="more">
+        <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
+            <mat-menu #moreMenu="matMenu" yPosition="below">
+                <button class="menu-button" mat-menu-item>
+                  <mat-icon >list
+                  </mat-icon>
+                   <span>
+                     Details
+                   </span>
+                 </button>
+                 <button class="menu-button" mat-menu-item>
+                    <mat-icon >
+                      store
+                    </mat-icon>
+                    <span>
+                      Activities
+                    </span>
+                  </button>
+                  <button class="menu-button" mat-menu-item>
+                      <mat-icon >
+                        link
+                      </mat-icon>
+                      <span>
+                        Repository
+                      </span>
+                    </button>
+                    </mat-menu>
+           </mat-cell>
+      </ng-container>
+    <!-- Name Column -->
+    <!-- <ng-container matColumnDef="noData" >
+        <mat-footer-cell  *matHeaderCellDef colspan="6">
+          No project record found
+        </mat-footer-cell> -->
+      <!-- </ng-container> -->
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <!-- <mat-footer-row *matFooterRowDef="['noData']"></mat-footer-row> -->
   </mat-table>
-<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>
