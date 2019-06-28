@@ -24,6 +24,7 @@ import { CreateProjectModalComponent } from './component/create-project-modal/cr
 import { ProjectService } from './services/project.service';
 import { ActivityComponent } from './component/activity/activity.component';
 import { ActivityDetailComponent } from './component/activity-detail/activity-detail.component';
+import { ServerDetailsComponent } from './component/server-details/server-details.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -42,6 +43,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     CreateProjectModalComponent,
     ActivityComponent,
     ActivityDetailComponent,
+    ServerDetailsComponent,
 
   ],
   imports: [

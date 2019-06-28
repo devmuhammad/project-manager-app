@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 export class DefaultlayoutService {
 
   constructor(private router:Router) {}
-    navigateToPath(path){
+  navigateToPath(path){
       this.router.navigateByUrl(path);
     }
 

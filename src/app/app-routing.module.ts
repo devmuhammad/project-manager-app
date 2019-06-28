@@ -8,6 +8,7 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { RecordsComponent } from './component/records/records.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ActivityComponent } from './component/activity/activity.component';
+import { ServerDetailsComponent } from './component/server-details/server-details.component';
 
 export const routes: Routes = [
   {path:'login',component:GuestlayoutComponent,children:[
@@ -19,7 +20,8 @@ export const routes: Routes = [
   ]},
 
   {path:'settings',component:DefaultlayoutComponent,children:[
-    {path:'',component:SettingsComponent}
+    {path:'',component:SettingsComponent},
+    {path:'server',component:ServerDetailsComponent},
   ]},
   {path:'dashboard',component:DefaultlayoutComponent,children:[
     {path:'',component:DashboardComponent}

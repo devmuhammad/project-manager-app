@@ -57,7 +57,9 @@ export class DefaultlayoutComponent {
       ]
     },
     { name: "Users", icon:'people', link: "/report" },
-    { name: "Settings", icon:'settings', link: "/settings" },
+    { name: "Settings", icon:'settings', children:[
+      { name: 'Server',icon:'network_check', link: "/settings/server" },
+    ] },
   ]
 
 }
