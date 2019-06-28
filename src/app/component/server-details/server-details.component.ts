@@ -10,7 +10,7 @@ export class ServerDetailsComponent implements OnInit {
   displayedAccountColumns: string[] = ['#', 'name',  'provider','charges','actions'];
   displayedCredentialsColumns: string[] = ['#', 'username',  'password','ipAddress','OS','servername','Type','accountid','actions'];
   displayedToolsColumns: string[] = ['#',  'Database','applicationserver','credentialid','actions'];
-  displayedApplications:string[] =['#','applicationname'];
+  displayedApplications:string[] =['#','applicationname','utilid', 'actions'];
   constructor(private service:ServerService) { }
   @ViewChild(MatSort) sort:MatSort;
   @ViewChild(MatPaginator)paginator :MatPaginator;
