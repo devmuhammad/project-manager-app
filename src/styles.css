@@ -21,6 +21,28 @@
   margin: 0;
   padding: 0;
 }
+
+/* snackbar */
+.info {
+  background: #2196F3;
+}
+.success {
+  background:var(--primaryColor);
+  color: var(--lightColor);
+
+}
+.warning{
+ background: var(--warningColor);
+ color: var(--darkColor);
+}
+.error {
+  background:var(--dangerColor);
+  color: var(--lightColor);
+}
+main{
+/* text-align: center; */
+position: relative;
+}
 .form-container{
   width:100%;
 }

@@ -1,3 +1,55 @@
-<p>
-  authentication works!
-</p>
+
+
+
+  <div class="card-wrapper">
+    <div class="form-wrapper">
+      <p>Login</p>
+      <form [formGroup]="form" (submit)="getSignIn(form)">
+        <div class="form-container">
+            <mat-form-field class="project-form-field auth-form-field" floatLabel="never" >
+                <input matInput
+                        placeholder="Username"
+                       formControlName="username"  floatPlaceholder="never">
+                       <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                          <mat-icon >person</mat-icon>
+                       </button>
+                       <mat-error >Invalid project name</mat-error>
+            </mat-form-field>
+            <mat-form-field style="margin-top:20px" class="project-form-field auth-form-field" floatLabel="never" >
+                <input matInput
+                        placeholder="Password"
+                       formControlName="password" type="{{inputType}}" floatPlaceholder="never">
+                       <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                          <mat-icon (click)="toggleView()" >
+                              <img *ngIf="view" class="passwordicon" src="../../../../assets/img/eye-open.png"/>
+                            <img *ngIf="!view" class="passwordicon" src="../../../../assets/img/show_hide_password.png"/>
+                          </mat-icon>
+
+                       </button>
+                       <mat-error >Invalid project name</mat-error>
+            </mat-form-field>
+
+          <button  mat-raised-button class="submit-button">
+            Sign in
+          </button>
+          <div class="alt">
+            <p class="alt-label">Or login with</p>
+            <div class="alt-auth">
+              <div>
+                <img alt="google-logo" class="alt-items" src="../../../../assets/img/google.png"/>
+              </div>
+              <div>
+                  <img alt="git-logo" class="alt-items" src="../../../../assets/img/git.png"/>
+                </div>
+            </div>
+            <!-- <ngx-ui-loader fgsSize="75" [fgsType]="SPINNER.wanderingCubes"></ngx-ui-loader> -->
+          </div>
+          <div>
+            <button type="submit" mat-button [disabled]="!form.valid" class="sign-up">Sign Up</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+

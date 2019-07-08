@@ -1,9 +1,13 @@
 <mat-toolbar class="main-nav" >
-  <span>Project Manager</span>
-  <div class="account">
+    <span>Project Manager</span>
+    <div class="account">
+    </div>
+  </mat-toolbar>
+  <div class="wrapper" >
+    <div   [@routAnimationsGuest]="prepareRoute(outlet)"  fxFlex>
+      <router-outlet  #outlet="outlet"></router-outlet>
+     </div>
+     <div class="powered">
+       <p>Powered By Comsoft ltd.</p>
+     </div>
   </div>
-</mat-toolbar>
-
-<div class="content" fxFlex>
-  <router-outlet></router-outlet>
- </div>

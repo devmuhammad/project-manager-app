@@ -83,8 +83,10 @@ bottom:5%;
 
   width: 230px;
   /* background: linear-gradient(to right, #4caf50, #52c234); */
-  /* background: linear-gradient(228.76deg, rgb(126, 196, 46) -34.42%, #E084F1 127.18%); */
+  /* background: linear-gradient(228.76deg, rgb(126, 196, 46) -34.42%, --primaryColor 127.18%); */
    background:var(--primaryColor);
+   /* background-color: rgba(0, 151, 19, 0.6); */
+   /* background: rgba(156, 240, 156, 0.3); */
   font-family:var(--primaryFont);
 }
 .icon{
@@ -109,6 +111,7 @@ bottom:5%;
   padding: 20px;
 }
 .sidenav-container{
+  min-height: 100vh;
   /* background:var(--lightColor); */
   background: linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(250, 255, 253) 127.18%);
   /* background:linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(183, 224, 215) 127.18%); */
@@ -122,6 +125,7 @@ bottom:5%;
   align-self:right;
   position: absolute;
   right: 10px;
+  background: transparent !important;
 
 }
 

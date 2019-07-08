@@ -13,12 +13,15 @@ import { RecordsComponent } from './component/records/records.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { routing } from './app-routing.module';
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { ProjectTableComponent } from './component/project-table/project-table.component';
 import { ScrollingModule} from '@angular/cdk/scrolling';
 import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component'
 import { NgReduxModule,NgRedux} from "@angular-redux/store"
 import {ReactiveFormsModule} from '@angular/forms'
 import rootReducer from './reducer';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 import { IAppState, store } from './store';
 import { CreateProjectModalComponent } from './component/create-project-modal/create-project-modal.component';
 import { ProjectService } from './services/project.service';
@@ -55,7 +58,14 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     MaterialModule,
     ScrollingModule,
     NgReduxModule,
-    ReactiveFormsModule
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    ReactiveFormsModule,
+    NgxUiLoaderModule,
+    HttpClientModule
   ],
   entryComponents:[
     BottomSheetComponent,

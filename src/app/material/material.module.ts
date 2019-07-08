@@ -5,9 +5,10 @@ import { MatToolbarModule,
     MatSidenavModule,
      MatIconModule,
       MatListModule
-      
+
      } from '@angular/material';
 import { NgModule } from '@angular/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card'
@@ -32,6 +33,7 @@ import {
     MatToolbarModule,
      MatCheckboxModule,
       MatIconModule,
+      MatSnackBarModule,
       MatSidenavModule,
       MatFormFieldModule,
       MatCardModule,
@@ -55,6 +57,7 @@ import {
 
   exports: [
     MatToolbarModule,
+    MatSnackBarModule,
     MatButtonModule,
      MatCheckboxModule,
       MatIconModule,

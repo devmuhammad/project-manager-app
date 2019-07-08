@@ -94,29 +94,30 @@
                    Profile
                  </span>
                </button>
-               <button class="navbar-profile" mat-menu-item >
+               <button (click)="handleLogOut()" class="navbar-profile" mat-menu-item >
                   <mat-icon style="color:var(--dangerColor)">logout</mat-icon>
                   <span>
                     Logout
                   </span>
                 </button>
           </mat-menu>
-          <span *ngIf="!(isHandset$ | async)">Ibrahim M Bashir</span>
-          <span *ngIf="(isHandset$ | async)">IMB</span>
+          <span *ngIf="!(isHandset$ | async)">{{name}}</span>
+          <span *ngIf="(isHandset$ | async)">{{alias}}</span>
           <div class="mat-card-avatar"></div>
         </div>
-        <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" type="button"
+        <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon"
           aria-label="Toggle sidenav" mat-icon-button (click)="opened=!opened">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          <mat-icon  *ngIf="opened">menu</mat-icon>
+          <mat-icon  *ngIf="!opened">cancel</mat-icon>
         </button>
 
       </mat-toolbar>
 
-      <div class="content" fxFlex
+      <div class="content" [@routeAnimations]="prepareRoute(outlet)" fxFlex
       >
-        <router-outlet></router-outlet>
+        <router-outlet #outlet="outlet" ></router-outlet>
       </div>
-      <p class="footer">CopyRight Comsoft Limited &copy;2019</p>
+      <!-- <p class="footer">CopyRight Comsoft Limited &copy;2019</p> -->
     </mat-sidenav-content>
   </mat-sidenav-container>
   </div>

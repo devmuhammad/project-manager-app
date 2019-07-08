@@ -11,17 +11,17 @@ import { ActivityComponent } from './component/activity/activity.component';
 import { ServerDetailsComponent } from './component/server-details/server-details.component';
 
 export const routes: Routes = [
-  {path:'login',component:GuestlayoutComponent,children:[
+  {path:'login', data:{animation:'isRight'},component:GuestlayoutComponent,children:[
     {path:'',component:AuthenticationComponent}
   ]},
-  {path:'project',component:DefaultlayoutComponent,children:[
+  {path:'project',component:DefaultlayoutComponent, children:[
     {path:'',component:ProjectComponent},
     {path:'activities',component:ActivityComponent},
   ]},
 
   {path:'settings',component:DefaultlayoutComponent,children:[
-    {path:'',component:SettingsComponent},
-    {path:'server',component:ServerDetailsComponent},
+    {path:'',component:SettingsComponent,data:{animation:'isRight'}},
+    {path:'server',component:ServerDetailsComponent },
   ]},
   {path:'dashboard',component:DefaultlayoutComponent,children:[
     {path:'',component:DashboardComponent}
@@ -29,7 +29,7 @@ export const routes: Routes = [
   {path:'report',component:DefaultlayoutComponent,children:[
     {path:'',component:RecordsComponent }
   ]},
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'login'}
 ];
 
 

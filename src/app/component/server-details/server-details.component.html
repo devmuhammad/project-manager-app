@@ -85,7 +85,7 @@
           <div><p>Sever Credentials</p></div>
         </div>
         <mat-form-field class="search-form-field" floatLabel="never" >
-            <input [(ngModel)]="credentialsSearchKey" (keyup)="applyCredFilter()" matInput  placeholder="Search Server Account"/>
+            <input [(ngModel)]="credentialsSearchKey" (keyup)="applyCredFilter()" matInput  placeholder="Search Server credentials"/>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="credentialsSearchKey" (click)="onCredSearchClear()">
                 <mat-icon >close</mat-icon>
             </button>
@@ -179,7 +179,7 @@
           </div>
           <mat-form-field class="search-form-field" floatLabel="never" >
 
-              <input [(ngModel)]="toolsearchKey" (keyup)="applyToolFilter()" matInput  placeholder="Search Server Account"/>
+              <input [(ngModel)]="toolsearchKey" (keyup)="applyToolFilter()" matInput  placeholder="Search Server Tools"/>
               <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="toolsearchKey" (click)="applyToolFilter()">
                   <mat-icon >close</mat-icon>
               </button>
@@ -206,7 +206,11 @@
                     </ng-container>
                     <ng-container matColumnDef="credentialid">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>Server Credential ID </mat-header-cell>
-                        <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.credentialid}}</mat-cell>
+                        <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element">
+                           <span  style="margin-left: 20%">
+                          {{element.credentialid}}
+                        </span>
+                          </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="actions">
@@ -256,7 +260,7 @@
               <div><p>Applications</p></div>
             </div>
             <mat-form-field class="search-form-field" floatLabel="never" >
-                <input [(ngModel)]="appSearchKey" (keyup)="applyAppFilter()" matInput  placeholder="Search Server Account"/>
+                <input [(ngModel)]="appSearchKey" (keyup)="applyAppFilter()" matInput  placeholder="Search Application"/>
                 <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="appSearchKey" (click)="onAppSearchClear()">
                     <mat-icon >close</mat-icon>
                 </button>
@@ -277,8 +281,8 @@
                       </ng-container>
                       <ng-container class="status-column status-container" matColumnDef="utilid">
                           <mat-header-cell *matHeaderCellDef mat-sort-header> Tools/Utility ID </mat-header-cell>
-                          <mat-cell class="cell-name status-cell" style="color: var(--primaryColor)" *matCellDef="let element">
-                            <span  style="text-align: center">
+                          <mat-cell class="cell-name status-cell" style="color: var(--primaryColor) " *matCellDef="let element">
+                            <span  style="margin-left: 20%">
                               {{element.utilid}}
                             </span>
                            </mat-cell>

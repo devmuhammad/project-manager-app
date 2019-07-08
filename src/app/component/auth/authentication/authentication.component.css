@@ -1,0 +1,124 @@
+.wrapper{
+  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background:linear-gradient(228.76deg,  #2E7D32 -34.42%, #E084F1 127.18%); */
+  /* background:  #2E7D32; */
+background: url('../../../../assets/img/greenland.jpg') center no-repeat ;
+background-size: cover;
+/* background-color: rgba(3, 61, 22, 0.14); */
+min-height: 100vh;
+overflow: hidden !important;
+}
+.main-nav{
+  position: fixed;
+}
+.alt-auth{
+  text-align: center;
+    display: flex;
+    flex-direction: row;
+    width: 38%;
+    align-items: center;
+    margin: auto;
+    justify-content: space-around;
+
+}
+.alt{
+  margin-top: 30px;
+}
+.alt-label{
+  font-size: 13px !important;
+  color: var(--lightColor) !important;
+  margin-bottom: 10px;
+}
+.alt-items{
+  height: 25px;
+  width:25px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.card-wrapper{
+  width: 330px;
+  position: relative;
+  height: 500px;
+  margin-top:30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: rgba(86, 124, 106, 0.4);
+  /* background:var(--lightColor); */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.form-wrapper{
+  padding:30px 10px 10px 10px;
+
+}
+.form-wrapper p{
+  font-size: 22px;
+  font-family: var(--primaryFont);
+  color: var(--lightColor);
+  letter-spacing: 2px;
+}
+
+.form-container{
+  /* padding:10px; */
+  margin-top: 20px;
+}
+.auth-form-field{
+  display: inline-block;
+  background-color:#fff;
+  width: 80%;
+  margin: auto;
+  border:none;
+  /* margin-top:15px; */
+  border-radius: 12px;
+  padding:0.8em;
+
+  /* margin:10px 20px 10px 20px; */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  font-size: 13px;
+  font-family: var(--primaryFont);
+}
+.sign-up{
+position:absolute;
+bottom: 20px;
+  color: var(--lightColor) !important;
+  padding: 2px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: var(--primaryFont);
+  font-weight: 300;
+  /* border-radius:30px; */
+  width: 50%;
+  left: 25%;
+  align-self: center;
+
+  margin: auto !important;
+}
+.submit-button{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  color: var(--lightColor);
+  padding: 4px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-family: var(--primaryFont);
+  font-weight: 300;
+  border-radius:30px;
+  background: var(--primaryColor);
+  margin-top:30px;
+  width: 45%;
+}
+
+.passwordicon{
+  height: 18px;
+  width:18px;
+}
