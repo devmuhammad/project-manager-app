@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {fader, slider} from './router-animations/router-animations.module'
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

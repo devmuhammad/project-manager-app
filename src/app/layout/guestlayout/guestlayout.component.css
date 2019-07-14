@@ -6,10 +6,10 @@
     align-items: center;
     justify-content: center;
     /* background:linear-gradient(228.76deg,  #2E7D32 -34.42%, #E084F1 127.18%); */
-  /* background:  #2E7D32; */
-background: url('../../../assets/img/greenland.jpg') center no-repeat ;
+    /* background: #eee8; */
+/* background: url('../../../assets/img/greenland.jpg') center no-repeat ; */
 background-size: cover;
-/* background-color: rgba(3, 61, 22, 0.14); */
+background-color:#b0b0b0;
 height:100vh;
 overflow: hidden !important;
 }

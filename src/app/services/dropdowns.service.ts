@@ -4,19 +4,19 @@ import { IAppState, store } from '../store';
 import { HttpClient } from '@angular/common/http';
 import { BaseApi } from '../helpers/constants';
 import 'rxjs/add/observable/of';
-import {Router} from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
 @Injectable({
   providedIn: 'root'
 })
-
-export class AuthserviceService {
+export class DropdownsService {
 
   constructor(private http: HttpClient) { }
 
-     login(payload: object): Observable<any> {
-    return this.http.post<any>(BaseApi.URL + BaseApi.PATH['LOGIN'], payload);
-
+  getDesignations(): Observable<any> {
+    return this.http.get<any>(BaseApi.URL + BaseApi.PATH['DESIGNATIONS']);
   }
 
+  getInstitutions(): Observable<any> {
+    return this.http.get<any>(BaseApi.URL + BaseApi.PATH['INSTITUTIONS']);
+  }
 }

@@ -22,6 +22,30 @@
   padding: 0;
 }
 
+.form-wrapper ul{
+  display: block;
+  padding-inline-start:26px;
+  
+  align-items: center;
+  text-align: center !important;
+  align-self: auto;
+  width: 100%;
+}
+.form-wrapper ul li{
+display: inline-block !important;
+width: 150px;
+justify-items: center;
+text-align: center;
+list-style: none;
+margin-inline-end: 0px;
+margin-inline-start: 0px;
+z-index: 1000;
+}
+
+.form-wrapper ul li mat-divider{
+color: #2E7D32;
+
+}
 /* snackbar */
 .info {
   background: #2196F3;
@@ -138,4 +162,13 @@ mat-dialog-actions .save{
 }
 mat-row:nth-child(even){
   background: linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(250, 255, 253) 127.18%);
+                }
+
+                @media (min-width: 320px) and (max-width: 480px) {
+                  form-wrapper ul li{
+                    width: 20px !important;
+                  }
+                  .mat-divider{
+                    display: none;
+                  }
                 }

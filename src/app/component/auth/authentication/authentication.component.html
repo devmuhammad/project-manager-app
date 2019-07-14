@@ -10,16 +10,16 @@
                 <input matInput
                         placeholder="Username"
                        formControlName="username"  floatPlaceholder="never">
-                       <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                       <button mat-button matSuffix mat-icon-button  (click)="doNothing()">
                           <mat-icon >person</mat-icon>
                        </button>
-                       <mat-error >Invalid project name</mat-error>
+                       <mat-error >Invalid username name</mat-error>
             </mat-form-field>
             <mat-form-field style="margin-top:20px" class="project-form-field auth-form-field" floatLabel="never" >
                 <input matInput
                         placeholder="Password"
                        formControlName="password" type="{{inputType}}" floatPlaceholder="never">
-                       <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                       <button mat-button matSuffix mat-icon-button >
                           <mat-icon (click)="toggleView()" >
                               <img *ngIf="view" class="passwordicon" src="../../../../assets/img/eye-open.png"/>
                             <img *ngIf="!view" class="passwordicon" src="../../../../assets/img/show_hide_password.png"/>
@@ -28,8 +28,10 @@
                        </button>
                        <mat-error >Invalid project name</mat-error>
             </mat-form-field>
-
-          <button  mat-raised-button class="submit-button">
+            <div class="forgetpasswordwrapper">
+              <button mat-button class="ForgetPassword">Forget Password ?</button>
+            </div>
+          <button [disabled]="!form.valid" [ngClass]="!form.valid?'disabled': '' " mat-raised-button class="submit-button">
             Sign in
           </button>
           <div class="alt">
@@ -42,10 +44,11 @@
                   <img alt="git-logo" class="alt-items" src="../../../../assets/img/git.png"/>
                 </div>
             </div>
-            <!-- <ngx-ui-loader fgsSize="75" [fgsType]="SPINNER.wanderingCubes"></ngx-ui-loader> -->
+            <!-- <ngx-ui-loader fgsSize="45" [fgsType]="SPINNER.wanderingCubes"></ngx-ui-loader> -->
           </div>
           <div>
-            <button type="submit" mat-button [disabled]="!form.valid" class="sign-up">Sign Up</button>
+            
+            <button (click)="gotoPath()"  mat-button  class="sign-up">Sign Up</button>
           </div>
         </div>
 

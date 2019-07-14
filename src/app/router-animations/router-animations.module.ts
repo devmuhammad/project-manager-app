@@ -1,81 +1,82 @@
 import {
   transition,
   trigger,
-   query,
+  query,
   style,
   animate,
-   group,
-   keyframes} from '@angular/animations';
+  group,
+  keyframes
+} from '@angular/animations';
 
 
 
-   export const fader =
-   trigger('routeAnimations', [
-     transition('* <=> *', [
-       // Set a default  style for enter and leave
-       query(':enter, :leave', [
-         style({
-           position: 'absolute',
-           left: 0,
-           width: '100%',
-           opacity: 0,
-           transform: 'scale(0) translateY(100%)',
-         }),
-       ], { optional: true }),
-       // Animate the new page in
-       query(':enter', [
-         animate('600ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
-       ], { optional: true })
-     ]),
- ]);
- export const slider =
- trigger('routeAnimations', [
-   transition('* => isLeft', slideTo('left') ),
-   transition('* => isRight', slideTo('right') ),
-   transition('isRight => *', slideTo('left') ),
-   transition('isLeft => *', slideTo('right') )
- ]);
+export const fader =
+  trigger('routeAnimations', [
+    transition('* <=> *', [
+      // Set a default  style for enter and leave
+      query(':enter, :leave', [
+        style({
+          position: 'absolute',
+          left: 0,
+          width: '100%',
+          opacity: 0,
+          transform: 'scale(0) translateY(100%)',
+        }),
+      ], { optional: true }),
+      // Animate the new page in
+      query(':enter', [
+        animate('600ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
+      ], { optional: true })
+    ]),
+  ]);
+export const slider =
+  trigger('routeAnimations', [
+    transition('* => isLeft', slideTo('left')),
+    transition('* => isRight', slideTo('right')),
+    transition('isRight => *', slideTo('left')),
+    transition('isLeft => *', slideTo('right'))
+  ]);
 
 function slideTo(direction) {
- const optional = { optional: true };
- return [
-   query(':enter, :leave', [
-     style({
-       position: 'absolute',
-       top: 0,
-       [direction]: 0,
-       width: '100%'
-     })
-   ], optional),
-   query(':enter', [
-     style({ [direction]: '-100%'})
-   ]),
-   group([
-     query(':leave', [
-       animate('600ms ease', style({ [direction]: '100%'}))
-     ], optional),
-     query(':enter', [
-       animate('600ms ease', style({ [direction]: '0%'}))
-     ])
-   ]),
-   // Normalize the page style... Might not be necessary
+  const optional = { optional: true };
+  return [
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        top: 0,
+        [direction]: 0,
+        width: '100%'
+      })
+    ], optional),
+    query(':enter', [
+      style({ [direction]: '-100%' })
+    ]),
+    group([
+      query(':leave', [
+        animate('600ms ease', style({ [direction]: '100%' }))
+      ], optional),
+      query(':enter', [
+        animate('600ms ease', style({ [direction]: '0%' }))
+      ])
+    ]),
+    // Normalize the page style... Might not be necessary
 
-   // Required only if you have child animations on the page
-  //  query(':leave', animateChild()),
-  //  query(':enter', animateChild()),
- ];
+    // Required only if you have child animations on the page
+    //  query(':leave', animateChild()),
+    //  query(':enter', animateChild()),
+  ];
 }
 
 export const transformer =
   trigger('routeAnimations', [
-    transition('* => isLeft', transformTo({ x: -100, y: -100, rotate: -720 }) ),
-    transition('* => isRight', transformTo({ x: 100, y: -100, rotate: 90 }) ),
-    transition('isRight => *', transformTo({ x: -100, y: -100, rotate: 360 }) ),
-    transition('isLeft => *', transformTo({ x: 100, y: -100, rotate: -360 }) )
-]);
+    transition('* => isLeft', transformTo({ x: -100, y: -100, rotate: -720 })),
+    transition('* => isRight', transformTo({ x: 100, y: -100, rotate: 90 })),
+    transition('isRight => *', transformTo({ x: -100, y: -100, rotate: 360 })),
+    transition('isLeft => *', transformTo({ x: 100, y: -100, rotate: -360 }))
+  ]);
 
 
-function transformTo({x = 100, y = 0, rotate = 0}) {
+function transformTo({ x = 100, y = 0, rotate = 0 }) {
   const optional = { optional: true };
   return [
     query(':enter, :leave', [
@@ -87,14 +88,14 @@ function transformTo({x = 100, y = 0, rotate = 0}) {
       })
     ], optional),
     query(':enter', [
-      style({ transform: `translate(${x}%, ${y}%) rotate(${rotate}deg)`})
+      style({ transform: `translate(${x}%, ${y}%) rotate(${rotate}deg)` })
     ]),
     group([
       query(':leave', [
-        animate('600ms ease-out', style({ transform: `translate(${x}%, ${y}%) rotate(${rotate}deg)`}))
+        animate('600ms ease-out', style({ transform: `translate(${x}%, ${y}%) rotate(${rotate}deg)` }))
       ], optional),
       query(':enter', [
-        animate('600ms ease-out', style({ transform: `translate(0, 0) rotate(0)`}))
+        animate('600ms ease-out', style({ transform: `translate(0, 0) rotate(0)` }))
       ])
     ]),
   ];
@@ -128,65 +129,65 @@ export const stepper =
       ]),
     ])
 
-]);
+  ]);
 
 
 export const sliderGuest =
- trigger('routAnimationsGuest', [
-   transition('* => isLeft', slideDirection('left') ),
-   transition('* => isRight', slideDirection('right') ),
-   transition('isRight => *', slideDirection('left') ),
-   transition('isLeft => *', slideDirection('right') )
- ]);
+  trigger('routAnimationsGuest', [
+    transition('* => isLeft', slideDirection('left')),
+    transition('* => isRight', slideDirection('right')),
+    transition('isRight => *', slideDirection('left')),
+    transition('isLeft => *', slideDirection('right'))
+  ]);
 
 function slideDirection(direction) {
- const optional = { optional: true };
- return [
-   query(':enter, :leave', [
-     style({
-      overflow:'hidden',
-       position: 'absolute',
-       top: '8%',
-       [direction]: 0,
-       width: '60%'
-     })
-   ], optional),
-   query(':enter', [
-     style({ [direction]: '-100%'})
-   ]),
-   group([
-     query(':leave', [
-       animate('600ms ease', style({ [direction]: '100%'}))
-     ], optional),
-     query(':enter', [
-       animate('600ms ease', style({ [direction]: '0%'}))
-     ])
-   ]),
-   // Normalize the page style... Might not be necessary
+  const optional = { optional: true };
+  return [
+    query(':enter, :leave', [
+      style({
+        overflow: 'hidden',
+        position: 'absolute',
+        top: '18%',
+        [direction]: 0,
+        width: '60%'
+      })
+    ], optional),
+    query(':enter', [
+      style({ [direction]: '-100%' })
+    ]),
+    group([
+      query(':leave', [
+        animate('600ms ease', style({ [direction]: '100%' }))
+      ], optional),
+      query(':enter', [
+        animate('600ms ease', style({ [direction]: '0%' }))
+      ])
+    ]),
+    // Normalize the page style... Might not be necessary
 
-   // Required only if you have child animations on the page
-  //  query(':leave', animateChild()),
-  //  query(':enter', animateChild()),
- ];
+    // Required only if you have child animations on the page
+    //  query(':leave', animateChild()),
+    //  query(':enter', animateChild()),
+  ];
 }
 
 export const guestfader =
-   trigger('routeAnimations', [
-     transition('* <=> *', [
-       // Set a default  style for enter and leave
-       query(':enter, :leave', [
-         style({
-           position: 'absolute',
-           left: 0,
-           width: '100%',
-           opacity: 0,
-           transform: 'scale(0) translateY(100%)',
-         }),
-       ], { optional: true }),
-       // Animate the new page in
-       query(':enter', [
-         animate('600ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
-       ], { optional: true })
-     ]),
- ]);
-export class routerAnimations {}
+  trigger('routAnimationsGuest', [
+    transition('* <=> *', [
+      // Set a default  style for enter and leave
+      query(':enter, :leave', [
+        style({
+          position: 'absolute',
+          left: 0,
+          width: '100%',
+          opacity: 0,
+          transform: 'scale(0) translateY(100%)',
+        }),
+      ], { optional: true }),
+      // Animate the new page in
+      query(':enter', [
+        animate('600ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
+      ], { optional: true })
+    ]),
+  ]);
+export class RouterAnimations { }

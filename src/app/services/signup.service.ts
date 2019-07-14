@@ -1,21 +1,21 @@
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IAppState, store } from '../store';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseApi } from '../helpers/constants';
 import 'rxjs/add/observable/of';
-import {Router} from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthserviceService {
-
+export class SignupService {
+  headers = new HttpHeaders({'Access-Control-Allow-Origin' : '*'});
   constructor(private http: HttpClient) { }
 
-     login(payload: object): Observable<any> {
-    return this.http.post<any>(BaseApi.URL + BaseApi.PATH['LOGIN'], payload);
+     signup(payload: object): Observable<any> {
+    return this.http.post<any>(BaseApi.URL + BaseApi.PATH['SIGNUP'], payload);
 
   }
 

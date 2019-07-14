@@ -13,12 +13,14 @@ import { RecordsComponent } from './component/records/records.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { routing } from './app-routing.module';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { AngularButtonLoaderModule } from 'angular-button-loader';
 import { ProjectTableComponent } from './component/project-table/project-table.component';
 import { ScrollingModule} from '@angular/cdk/scrolling';
 import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component'
-import { NgReduxModule,NgRedux} from "@angular-redux/store"
-import {ReactiveFormsModule} from '@angular/forms'
+import { NgReduxModule,NgRedux} from '@angular-redux/store';
+import {ReactiveFormsModule} from '@angular/forms';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+// import { LoadingBarHttpModule } from '@ngx-loading-bar/http';
 import rootReducer from './reducer';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +30,8 @@ import { ProjectService } from './services/project.service';
 import { ActivityComponent } from './component/activity/activity.component';
 import { ActivityDetailComponent } from './component/activity-detail/activity-detail.component';
 import { ServerDetailsComponent } from './component/server-details/server-details.component';
+import { SignupComponent } from './component/auth/signup/signup.component';
+import { ResetuserpasswordComponent } from './component/resetuserpassword/resetuserpassword.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -47,12 +51,18 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     ActivityComponent,
     ActivityDetailComponent,
     ServerDetailsComponent,
+    SignupComponent,
+    ResetuserpasswordComponent,
 
   ],
   imports: [
     BrowserModule,
     rootRouting,
     routing,
+    AngularButtonLoaderModule.forRoot(),
+    LoadingBarModule,
+    // LoadingBarHttpClientModule,
+    // LoadingBarHttpModule,
     BrowserAnimationsModule,
     LayoutModule,
     MaterialModule,
@@ -64,7 +74,6 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
       preventDuplicates: true,
     }),
     ReactiveFormsModule,
-    NgxUiLoaderModule,
     HttpClientModule
   ],
   entryComponents:[
