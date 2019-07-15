@@ -5,7 +5,7 @@ import { MatToolbarModule,
     MatSidenavModule,
      MatIconModule,
       MatListModule
-
+    
      } from '@angular/material';
 import { NgModule } from '@angular/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -24,6 +24,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSortModule} from '@angular/material/sort';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatStepperModule} from '@angular/material/stepper'
 import {
   FormsModule,
 } from '@angular/forms'
@@ -52,10 +53,11 @@ import {
       MatBadgeModule,
       MatDialogModule,
       FormsModule,
-
+      MatStepperModule
     ],
 
   exports: [
+    MatStepperModule,
     MatToolbarModule,
     MatSnackBarModule,
     MatButtonModule,

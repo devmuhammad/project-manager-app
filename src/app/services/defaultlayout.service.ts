@@ -10,7 +10,7 @@ export class DefaultlayoutService {
       this.router.navigateByUrl(path);
     }
     get user(): any {
-      return localStorage.getItem('profile');
+      return JSON.parse(localStorage.getItem('profile'));
   }
 
 

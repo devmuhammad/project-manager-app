@@ -31,7 +31,7 @@ import { ActivityComponent } from './component/activity/activity.component';
 import { ActivityDetailComponent } from './component/activity-detail/activity-detail.component';
 import { ServerDetailsComponent } from './component/server-details/server-details.component';
 import { SignupComponent } from './component/auth/signup/signup.component';
-import { ResetuserpasswordComponent } from './component/resetuserpassword/resetuserpassword.component';
+import { ResetuserpasswordComponent } from './component/auth/resetuserpassword/resetuserpassword.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -53,7 +53,6 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     ServerDetailsComponent,
     SignupComponent,
     ResetuserpasswordComponent,
-
   ],
   imports: [
     BrowserModule,

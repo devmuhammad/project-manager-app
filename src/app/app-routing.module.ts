@@ -10,12 +10,14 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ActivityComponent } from './component/activity/activity.component';
 import { ServerDetailsComponent } from './component/server-details/server-details.component';
 import { SignupComponent } from './component/auth/signup/signup.component';
+import { ResetuserpasswordComponent } from './component/auth/resetuserpassword/resetuserpassword.component';
 
 export const routes: Routes = [
   {
     path: '',  component: GuestlayoutComponent, children: [
       { path: 'login', data: { animation: 'isRight' }, component: AuthenticationComponent },
-      { path: 'signup',  component: SignupComponent }
+      { path: 'signup',  component: SignupComponent },
+      {path: 'reset', component: ResetuserpasswordComponent}
     ]
   },
   {

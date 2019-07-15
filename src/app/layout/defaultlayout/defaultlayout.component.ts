@@ -42,7 +42,11 @@ export class DefaultlayoutComponent implements OnInit {
         { name: 'Activities', icon: 'work', link: '/project/activities' },
       ]
     },
-    { name: 'Users', icon: 'people', link: '/report' },
+    { name: 'User Mgt', icon: 'people', children: [
+      { name: 'Groups', icon: 'people', link: '/group' },
+      { name: 'Requests', icon: 'person_add', link: '/request' },
+      { name: 'Users', icon: 'people', link: '/project' },
+    ]},
     {
       name: 'Settings', icon: 'settings', children: [
         { name: 'Server', icon: 'network_check', link: '/settings/server' },
@@ -79,7 +83,7 @@ export class DefaultlayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    const authUser = window.localStorage.getItem('currentUser');
+    const authUser = localStorage.getItem('currentUser');
     if (!authUser) { return this.service.navigateToPath('/'); }
     this.getProfile(this.service.user);
   }

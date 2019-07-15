@@ -1,7 +1,30 @@
 <mat-toolbar class="main-nav" >
     <span>Project Manager</span>
     <div class="account">
-    </div>
+        <span>
+          <button mat-icon-button [matMenuTriggerFor]="auth">
+          <mat-icon class="auth-user">person_outline</mat-icon>
+         
+        </button>
+        </span>
+        <mat-menu  #auth="matMenu" yPosition="above">
+            <button (click)="gotoPath('/signup')" class="navbar-profile" mat-menu-item>
+              <mat-icon >person_add
+              </mat-icon>
+               <span>
+                 Sign Up
+               </span>
+             </button>
+             <button (click)="gotoPath('/login')" class="navbar-profile" mat-menu-item>
+                <mat-icon >person
+                </mat-icon>
+                 <span>
+                   SignIn
+                 </span>
+               </button>
+        </mat-menu>
+       
+        </div>
   </mat-toolbar>
   <div class="wrapper" >
     <div   [@routAnimationsGuest]="prepareRoute(outlet)"  fxFlex>

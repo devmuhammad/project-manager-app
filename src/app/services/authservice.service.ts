@@ -14,6 +14,9 @@ export class AuthserviceService {
 
   constructor(private http: HttpClient) { }
 
+  resetPassword(username: string): Observable<any> {
+ return this.http.get(`${BaseApi.URL + BaseApi.PATH['RESET_PASSWORD']}?username=${username}`);
+  }
      login(payload: object): Observable<any> {
     return this.http.post<any>(BaseApi.URL + BaseApi.PATH['LOGIN'], payload);
 

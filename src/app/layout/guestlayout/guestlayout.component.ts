@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { stepper,slider,transformer,fader, sliderGuest, guestfader } from 'src/app/router-animations/router-animations.module';
 import { RouterOutlet } from '@angular/router';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-guestlayout',
@@ -19,9 +20,13 @@ export class GuestlayoutComponent implements OnInit {
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
-  constructor() { }
+  constructor(
+    private routerHelper: DefaultlayoutService,
+  ) { }
 
   ngOnInit() {
   }
-
+gotoPath(path: string) {
+  this.routerHelper.navigateToPath(path);
+}
 }

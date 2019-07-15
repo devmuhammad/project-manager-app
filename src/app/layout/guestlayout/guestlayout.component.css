@@ -36,6 +36,18 @@ overflow: hidden !important;
     justify-content: space-around;
 
 }
+.navbar-profile{
+  font-family: var(--primaryFont);
+  color: var(--primaryColor);
+  letter-spacing: 1.5px;
+}
+.navbar-profile mat-icon{
+  color: var(--primaryColor);
+}
+.auth-user{
+  font-size: 25px;
+  color: var(--primaryColor);
+}
 .alt{
   margin-top: 30px;
 }
@@ -43,6 +55,12 @@ overflow: hidden !important;
   font-size: 13px !important;
   color: var(--lightColor) !important;
   margin-bottom: 10px;
+}
+.account{
+  text-align: right !important;
+  /* float: right; */
+  position: absolute;
+  right: 20px;
 }
 .alt-items{
   height: 25px;

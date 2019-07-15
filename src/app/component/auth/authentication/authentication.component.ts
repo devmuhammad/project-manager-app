@@ -34,9 +34,10 @@ export class AuthenticationComponent implements OnInit {
     event.preventDefault();
   }
 
-  gotoPath() {
+  gotoPath(path: string) {
+    // tslint:disable-next-line: deprecation
     event.preventDefault();
-    this.routerHelper.navigateToPath('/signup');
+    this.routerHelper.navigateToPath(path);
   }
   toggleView() {
     // tslint:disable-next-line: deprecation

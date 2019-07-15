@@ -5,6 +5,8 @@ export const BaseApi = {
     RESET_PASSWORD: 'entrance/password-reset',
     GET_TOKEN: 'super/tokens',
     SIGNUP: 'users/signup',
+    SIGNUPREQUEST: 'users/user/signup/request',
+    SIGNUPAPPROVAL: 'users/user/signup/approval',
     // dropdowns
     INSTITUTIONS: 'users/institutions',
     DESIGNATIONS: 'users/designations',

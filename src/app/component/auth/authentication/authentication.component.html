@@ -29,7 +29,7 @@
                        <mat-error >Invalid project name</mat-error>
             </mat-form-field>
             <div class="forgetpasswordwrapper">
-              <button mat-button class="ForgetPassword">Forget Password ?</button>
+              <button mat-button class="ForgetPassword" (click)="gotoPath('/reset')">Forget Password ?</button>
             </div>
           <button [disabled]="!form.valid" [ngClass]="!form.valid?'disabled': '' " mat-raised-button class="submit-button">
             Sign in
@@ -48,7 +48,7 @@
           </div>
           <div>
             
-            <button (click)="gotoPath()"  mat-button  class="sign-up">Sign Up</button>
+            <button (click)="gotoPath('/signup')"  mat-button  class="sign-up">Sign Up</button>
           </div>
         </div>
 

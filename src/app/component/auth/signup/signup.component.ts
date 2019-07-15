@@ -28,7 +28,7 @@ export interface InstitutionType {
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
-    // const invalidParent = !!(control && control.pristine && control.parent.invalid && control.parent.dirty);
+    const invalidParent = !!(control.parent && control.pristine && control.parent.invalid && control.parent.dirty);
 
     return (invalidCtrl);
   }
@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit {
       fullname: ['', Validators.required],
       institutionId: ['', Validators.required],
       phone: ['', Validators.required]
-    }, {validator: this.checkPasswords });
+    });
   }
 
   public signupData = {
@@ -140,10 +140,12 @@ toggleShow() {
       return this.signUpService.signup(this.signupData)
       .subscribe(response => {
         console.log(response);
+        console.log(response.status);
         if (response && response.message === 'Success') {
           this.btnLoader.hideLoader();
           this.loadingBar.complete();
           this.form.reset();
+          this.gotoPath();
           const message = response['data'];
           return this.snackBar.open(message, 'Dismiss', {
             duration: 7000,
