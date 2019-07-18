@@ -34,6 +34,12 @@ export class AuthenticationComponent implements OnInit {
     event.preventDefault();
   }
 
+  redirectRoute() {
+    const authUser = JSON.parse(localStorage.getItem('profile'));
+    console.log(authUser);
+    if(authUser){ return this.routerHelper.navigateToPath('/project');}
+    console.log("couldnt route");
+  }
   gotoPath(path: string) {
     // tslint:disable-next-line: deprecation
     event.preventDefault();
@@ -47,6 +53,7 @@ export class AuthenticationComponent implements OnInit {
     return this.inputType = 'password';
   }
   ngOnInit() {
+    this.redirectRoute();
     this.inputType = 'password';
     this.view = false;
     this.form = this.fb.group({
@@ -54,6 +61,7 @@ export class AuthenticationComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
+
 
   getSignIn() {
     event.preventDefault();

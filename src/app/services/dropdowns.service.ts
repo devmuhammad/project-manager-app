@@ -15,7 +15,9 @@ export class DropdownsService {
   getDesignations(): Observable<any> {
     return this.http.get<any>(BaseApi.URL + BaseApi.PATH['DESIGNATIONS']);
   }
-
+  getGroups(): Observable<any> {
+    return this.http.get<any>(BaseApi.URL + BaseApi.PATH['GROUPLIST']);
+  }
   getInstitutions(): Observable<any> {
     return this.http.get<any>(BaseApi.URL + BaseApi.PATH['INSTITUTIONS']);
   }

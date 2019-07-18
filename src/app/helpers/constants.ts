@@ -7,6 +7,7 @@ export const BaseApi = {
     SIGNUP: 'users/signup',
     SIGNUPREQUEST: 'users/user/signup/request',
     SIGNUPAPPROVAL: 'users/user/signup/approval',
+    GROUPLIST : 'users/group/list',
     // dropdowns
     INSTITUTIONS: 'users/institutions',
     DESIGNATIONS: 'users/designations',

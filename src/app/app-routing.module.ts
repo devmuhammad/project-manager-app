@@ -11,6 +11,7 @@ import { ActivityComponent } from './component/activity/activity.component';
 import { ServerDetailsComponent } from './component/server-details/server-details.component';
 import { SignupComponent } from './component/auth/signup/signup.component';
 import { ResetuserpasswordComponent } from './component/auth/resetuserpassword/resetuserpassword.component';
+import { UserRequestComponent } from './component/user-request/user-request.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,11 @@ export const routes: Routes = [
   {
     path: 'dashboard', component: DefaultlayoutComponent, children: [
       { path: '', component: DashboardComponent }
+    ]
+  },
+  {
+    path: 'user', component: DefaultlayoutComponent, children: [
+      { path: 'request', component: UserRequestComponent }
     ]
   },
   {

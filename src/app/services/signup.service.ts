@@ -16,7 +16,13 @@ export class SignupService {
 
      signup(payload: object): Observable<any> {
     return this.http.post<any>(BaseApi.URL + BaseApi.PATH['SIGNUP'], payload);
-
   }
 
+  signUpRequest(id: number): Observable<any> {
+    return this.http.get<any>(`${BaseApi.URL + BaseApi.PATH['SIGNUPREQUEST']}/${id}`);
+  }
+
+  signUpApprove(id: number, payload: object): Observable<any> {
+    return this.http.put<any>(`${BaseApi.URL + BaseApi.PATH['SIGNUPAPPROVAL']}/${id}`, payload);
+  }
 }
