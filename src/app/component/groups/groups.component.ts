@@ -1,51 +1,48 @@
+
+
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatSort, MatPaginator, MatSnackBar} from '@angular/material';
-import {SignupService} from '../../services/signup.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-
-
+import { DropdownsService } from 'src/app/services/dropdowns.service';
 @Component({
-  selector: 'app-request-table',
-  templateUrl: './request-table.component.html',
-  styleUrls: ['./request-table.component.css'],
- 
+  selector: 'app-groups',
+  templateUrl: './groups.component.html',
+  styleUrls: ['./groups.component.css']
 })
-
-export class RequestTableComponent implements OnInit {
+export class GroupsComponent implements OnInit{
   constructor(
     private snackBar: MatSnackBar,
-    private service: SignupService,
+    private groupService: DropdownsService,
     private loaderService: LoadingBarService,
     ) { }
-  displayedColumns: string[] = ['#', 'fullname',  'contactemail', 'phone', 'roletypes', 'actions', 'institution'];
-
+  displayedColumns: string[] = ['#', 'name',  'datecreated', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator)paginator: MatPaginator;
 
 
   dataSource: MatTableDataSource<any>;
 
-  searchKey = ""
+  searchKey = "";
 
   fetchdata() {
-    const authUser = JSON.parse(localStorage.getItem('profile'));
     this.loaderService.start();
-    this.service.signUpRequest(authUser.id)
+    this.groupService.getGroups()
     .subscribe(({message, meta, data})=> {
       
       console.log(data)
       if(message === "Success") {
-        let users = data.map((user: any) => {
-          return {...user};
+        let groups = data.map((grp: any) => {
+          return {...grp};
         });
-        this.dataSource = new MatTableDataSource(users);
+        this.dataSource = new MatTableDataSource(groups);
       }else{
         this.snackBar.open("Fail to load data", "Dismiss",
         {
           duration: 7000,
           direction: 'rtl',
           panelClass: ['error']
-        })
+        });
         return this.loaderService.complete();
       }
       this.dataSource.sort = this.sort;

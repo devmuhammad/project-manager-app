@@ -11,7 +11,16 @@ import 'rxjs/add/observable/of';
 export class DropdownsService {
 
   constructor(private http: HttpClient) { }
-
+  
+  deleteGroup(id: number): Observable<any> {
+    return this.http.delete<any>(`${BaseApi.URL + BaseApi.PATH['DELETE_GROUP']}/${id}`);
+  }
+  updateGroup(payload: object): Observable<any> {
+    return this.http.put<any>(BaseApi.URL + BaseApi.PATH['UPDATE_GROUP'], payload)
+  }
+  addNewGroup(payload: object): Observable<any> {
+    return this.http.put<any>(BaseApi.URL + BaseApi.PATH['ADD_GROUP'],payload);
+  }
   getDesignations(): Observable<any> {
     return this.http.get<any>(BaseApi.URL + BaseApi.PATH['DESIGNATIONS']);
   }

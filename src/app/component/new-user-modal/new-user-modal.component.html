@@ -1,0 +1,74 @@
+<div style="width: 100%">
+    <h2 mat-dialog-title>Register new User</h2>
+</div>
+<mat-dialog-content >
+    <form [formGroup]="form" (submit)="getSignUp()">
+        <div class="form-container">
+          <mat-form-field class="" >
+            <input matInput placeholder="Fullname" formControlName="fullname" floatPlaceholder="never">
+            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+              <mat-icon>person</mat-icon>
+            </button>
+            <mat-error>Invalid name</mat-error>
+          </mat-form-field>
+          <mat-form-field class=" " >
+            <input matInput placeholder="Email" formControlName="contactemail">
+            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+              <mat-icon>email</mat-icon>
+            </button>
+            <mat-error>Invalid email address</mat-error>
+          </mat-form-field>
+          <mat-form-field class=" " >
+            <input matInput placeholder="Phone"  formControlName="phone" floatPlaceholder="never">
+            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+              <mat-icon>phone</mat-icon>
+            </button>
+            <mat-error>Invalid phone number</mat-error>
+          </mat-form-field>
+          <mat-form-field class="" floatLabel="never">
+              <input matInput placeholder="Password" ng-minlength="6" type="{{inputType}}" formControlName="password"
+                floatPlaceholder="never">
+              <button mat-button matSuffix mat-icon-button>
+                <mat-icon (click)="toggleView()">
+                  <img *ngIf="view" class="passwordicon" src="../../../../assets/img/eye-open.png" />
+                  <img *ngIf="!view" class="passwordicon" src="../../../../assets/img/show_hide_password.png" />
+                </mat-icon>
+              </button>
+              <mat-error *ngIf="form.hasError('required', 'password')">
+                Please enter your newpassword
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="" floatLabel="never">
+              <input matInput placeholder="Verify Password" type="{{vpasswordType}}" [errorStateMatcher]="matcher" formControlName="verifyPassword"
+                floatPlaceholder="never">
+              <button mat-button matSuffix mat-icon-button>
+                <mat-icon (click)="toggleShow()">
+                  <img *ngIf="show" class="passwordicon" src="../../../../assets/img/eye-open.png" />
+                  <img *ngIf="!show" class="passwordicon" src="../../../../assets/img/show_hide_password.png" />
+                </mat-icon>
+              </button>
+              <mat-error *ngIf="form.hasError('notSame')">Password Missmatch</mat-error>
+            </mat-form-field>
+            <mat-form-field floatLabel="never" class="">
+              <mat-select class="select" formControlName="institutionId" placeholder="Institution" floatPlaceholder="never"
+              >
+                <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field floatLabel="never" class="">
+    
+              <mat-select class="select" formControlName="designationId" placeholder="Designation" floatPlaceholder="never"
+                >
+                <mat-option *ngFor="let item of designationList" [value]="item.designationid">{{item.description}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button [disabled]="form.invalid" class="mat-raised-button mat-primary save"  (click)="save()">Save</button>
+</mat-dialog-actions>

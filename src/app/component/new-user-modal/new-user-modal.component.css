@@ -1,0 +1,13 @@
+h2{
+    font-family: var(--primaryFont);
+  
+  }
+
+  .form-container{
+      width: 100%;
+  }
+
+  .passwordicon{
+    height: 18px;
+    width:18px;
+  }

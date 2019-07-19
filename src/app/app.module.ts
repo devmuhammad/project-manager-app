@@ -34,6 +34,11 @@ import { SignupComponent } from './component/auth/signup/signup.component';
 import { ResetuserpasswordComponent } from './component/auth/resetuserpassword/resetuserpassword.component';
 import { UserRequestComponent } from './component/user-request/user-request.component';
 import { RequestTableComponent } from './component/request-table/request-table.component';
+import { GroupsComponent } from './component/groups/groups.component';
+import { UsersComponent } from './component/users/users.component';
+import { NewUserModalComponent } from './component/new-user-modal/new-user-modal.component';
+import { ApprovalModalComponent } from './component/approval-modal/approval-modal.component';
+import { NewGroupModalComponent } from './component/new-group-modal/new-group-modal.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -57,6 +62,11 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     ResetuserpasswordComponent,
     UserRequestComponent,
     RequestTableComponent,
+    GroupsComponent,
+    UsersComponent,
+    NewUserModalComponent,
+    ApprovalModalComponent,
+    NewGroupModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +92,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
   entryComponents:[
     BottomSheetComponent,
     CreateProjectModalComponent,
+    NewUserModalComponent,
   ],
   providers: [ProjectService],
   bootstrap: [AppComponent]

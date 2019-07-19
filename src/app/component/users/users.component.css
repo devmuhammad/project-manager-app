@@ -1,0 +1,10 @@
+mat-cell:first-of-type {
+    padding-left: 15px !important;
+    border-left:10px solid var(--primaryColor)
+  }
+  mat-cell:last-of-type{
+    border-right:10px solid #f5f5f5;
+  }
+  /* .cell-name{
+    padding-right: 35px !important;
+  } */

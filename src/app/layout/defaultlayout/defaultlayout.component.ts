@@ -43,9 +43,9 @@ export class DefaultlayoutComponent implements OnInit {
       ]
     },
     { name: 'User Mgt', icon: 'people', children: [
-      { name: 'Groups', icon: 'people', link: '/group' },
+      { name: 'Groups', icon: 'people', link: '/user/group' },
       { name: 'Requests', icon: 'person_add', link: '/user/request' },
-      { name: 'Users', icon: 'people', link: '/project' },
+      { name: 'Users', icon: 'people', link: '/user' },
     ]},
     {
       name: 'Settings', icon: 'settings', children: [

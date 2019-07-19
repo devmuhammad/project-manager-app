@@ -12,6 +12,8 @@ import { ServerDetailsComponent } from './component/server-details/server-detail
 import { SignupComponent } from './component/auth/signup/signup.component';
 import { ResetuserpasswordComponent } from './component/auth/resetuserpassword/resetuserpassword.component';
 import { UserRequestComponent } from './component/user-request/user-request.component';
+import { GroupsComponent } from './component/groups/groups.component';
+import { UsersComponent } from './component/users/users.component';
 
 export const routes: Routes = [
   {
@@ -41,7 +43,9 @@ export const routes: Routes = [
   },
   {
     path: 'user', component: DefaultlayoutComponent, children: [
-      { path: 'request', component: UserRequestComponent }
+      {path: '', component:UsersComponent,data:{animation: 'isRight'}},
+      { path: 'request', component: UserRequestComponent },
+      { path: 'group', component: GroupsComponent },
     ]
   },
   {
