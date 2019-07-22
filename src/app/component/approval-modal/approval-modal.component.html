@@ -1,3 +1,45 @@
-<p>
-  approval-modal works!
-</p>
+
+
+
+
+<div style="width: 100%">
+    <h2 mat-dialog-title>User Approval</h2>
+</div>
+
+<mat-dialog-content>
+  <form  [formGroup]="form" >
+  <div>
+    <div class="formControl">
+        <label>Role Types</label>
+    <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+        <mat-select  formControlName="roletypes"  placeholder="User role type" floatPlaceholder="never">
+          <mat-option value="All">All</mat-option>
+          <mat-option value="Authorizer">Authorizer</mat-option>
+          <mat-option value="Initiator">Initiator</mat-option>
+          <mat-option value="Notification">Notification</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+      <div>
+          <div class="fancy"> User assigned to {{userRole.selectedOptions.selected.length}} group(s) </div>
+          <div class="group-list">
+            <mat-selection-list #userRole formControlName="groups">
+              <!-- [value]="group.name" *ngFor="let group of groups" -->
+              <mat-list-option [value]="group.id" 
+              *ngFor="let group of groupList"> 
+                {{group.name}}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+      </div>
+  </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button [disabled]="form.invalid" (click)="approveUser()" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" >
+      <span></span>
+      Approve User
+    </button>
+</mat-dialog-actions>

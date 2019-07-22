@@ -1,5 +1,5 @@
 <div style="width: 100%">
-    <h2 mat-dialog-title>Create New User</h2>
+    <h2 mat-dialog-title>Update New User</h2>
 </div>
 
 <mat-dialog-content >
@@ -37,16 +37,6 @@
               <mat-error>Invalid email address</mat-error>
             </mat-form-field>
         </div>
-        <div class="formControl">
-            <label>Password</label>
-            <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-              <input matInput placeholder="Password" formControlName="password" floatPlaceholder="never">
-                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-                  <mat-icon>password</mat-icon>
-                </button>
-                <mat-error>Invalid email address</mat-error>
-              </mat-form-field>
-          </div>
         <div class="formControl">
             <label>Phone </label>
             <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
@@ -101,7 +91,7 @@
             <mat-selection-list #userRole formControlName="groups">
               <!-- [value]="group.name" *ngFor="let group of groups" -->
               <mat-list-option [value]="group.id" 
-              *ngFor="let group of groupList"> 
+              *ngFor="let group of groups"> 
                 {{group.name}}
               </mat-list-option>
             </mat-selection-list>
@@ -115,6 +105,6 @@
     <button class="mat-raised-button"(click)="close()">Close</button>
     <button [disabled]="" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" (click)="save()">
       <span></span>
-      Add User
+      Save
     </button>
 </mat-dialog-actions>

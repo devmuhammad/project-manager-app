@@ -1,0 +1,75 @@
+<div style="width: 100%" class="wrapper" style="justify-content: space-between">
+    <h2 mat-dialog-title><mat-icon>person_outlined</mat-icon> </h2>
+    
+    <h4  class="date"> <span style="color: var(--greyColor)">Date created :</span> {{data.datecreated|date}}</h4>
+</div>
+<mat-dialog-content >
+<div id="main" class="wrapper">
+  <div class="firstcontainer">
+    <div>
+     
+      <img class="user-pic" src="../../../assets/img/images.png" />
+    </div>
+    <div>
+        <h3  class="wrapper">
+           <span style="font-size:21px;letter-spacing:1.3px;">{{data.fullname}}</span>
+        </h3>
+    </div>
+    <div>
+        <h3 class="wrapper">
+          <!-- <mat-icon>email</mat-icon> -->
+           <span>{{data.contactemail}}</span>
+        </h3>
+    </div>
+    <div>
+        <h3 class="wrapper">
+          <!-- <mat-icon>phone</mat-icon> -->
+           <span>{{data.phone}}</span>
+           
+        </h3>
+    </div>
+    <div>
+        <h3 class="wrapper">
+          <!-- <mat-icon>phone</mat-icon> -->
+           <span>Developer</span> 
+        </h3>
+    </div>
+    <div>
+        <h3 class="wrapper">
+          <mat-icon>business</mat-icon>
+           <span>Software</span>
+           
+        </h3>
+    </div>
+  </div>
+
+  <div class="lastcontainer">
+    <div class="associates">
+      <p class="value"> {{data.roletypes}}</p>
+      <p class="label">Role type</p>
+    </div>
+    <div class="associates">
+        <p class="value"> {{spvsrName}}</p>
+        <p class="label">Supervisor</p>
+      </div>
+      <div class="associates">
+          <p style="margin-top: -10px;margin-bottom:8px" class="label">User Belongs to {{groups.length}} group(s)</p>
+          <ul  *ngFor="let group of groups" >
+            <li class="groupList">{{group.name}}</li>
+          </ul>
+        </div>
+  </div>
+</div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="wrapper" style="justify-content: space-between;width: 100%">
+    <div >
+      <button matSuffix mat-button class="close-button" (click)="close()">Close</button>
+    </div>
+     
+      <div >
+        <button class=" save" mat-button>
+          View Activies
+        </button>
+      </div>
+  </mat-dialog-actions>

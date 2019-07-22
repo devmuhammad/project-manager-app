@@ -125,10 +125,10 @@ toggleShow() {
   return this.vpasswordType = 'password';
 }
   getSignUp() {
-    this.btnLoader.displayLoader();
     // tslint:disable-next-line: deprecation
     event.preventDefault();
     if (this.form.valid) {
+      this.btnLoader.displayLoader();
       this.loadingBar.start();
       this.signupData.fullname = this.form.get('fullname').value;
       this.signupData.username = this.form.get('username').value;
@@ -149,7 +149,8 @@ toggleShow() {
           const message = response['data'];
           return this.snackBar.open(message, 'Dismiss', {
             duration: 7000,
-            direction: 'rtl',
+            verticalPosition:'bottom',
+            horizontalPosition:'left',
             panelClass: ['success']
           });
         }
@@ -158,7 +159,8 @@ toggleShow() {
           this.loadingBar.complete();
           return  this.snackBar.open('Data not acceptable', 'Dismiss', {
             duration: 4000,
-            direction: 'rtl',
+            verticalPosition:'bottom',
+            horizontalPosition:'left',
             panelClass: ['error']
           });
         }
@@ -167,7 +169,8 @@ toggleShow() {
           this.loadingBar.complete();
           return  this.snackBar.open('Unauthorized user', 'Dismiss', {
             duration: 4000,
-            direction: 'rtl',
+            verticalPosition:'bottom',
+            horizontalPosition:'left',
             panelClass: ['error']
           });
         } else {
@@ -175,7 +178,8 @@ toggleShow() {
           this.loadingBar.complete();
           return this.snackBar.open('Network Failed', 'Dismiss', {
             duration: 4000,
-            direction: 'rtl',
+            verticalPosition:'bottom',
+            horizontalPosition:'left',
             panelClass: ['error']
           });
         }

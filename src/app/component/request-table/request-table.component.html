@@ -1,12 +1,12 @@
 <section>
 <div class="section-header" style="width: 100%;">
 
-    <div style="margin-top: 30px" class="section-header">
+    <div  class="section-header">
       
-      <div><p>Request users</p></div>
+      <div class="title"><p>Request users</p></div>
     </div>
    
-<mat-form-field class="search-form-field" floatLabel="never" >
+<mat-form-field class="search-form-field project-form-field item-search" floatLabel="never" >
     <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search user"/>
     <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
         <mat-icon >close</mat-icon>
@@ -57,8 +57,8 @@
           </mat-icon>
         </button>
         <mat-menu  #actionMenu="matMenu" yPosition="below">
-            <button class="menu-button" mat-menu-item>
-                <mat-icon >list
+            <button (click)="userApproval(element.id)" class="menu-button" mat-menu-item>
+                <mat-icon >how_to_reg
                 </mat-icon>
                  <span>
                    Approve
@@ -66,17 +66,25 @@
                </button>
                <button class="menu-button" mat-menu-item>
                   <mat-icon >
-                    store
+                    person_add_disabled
                   </mat-icon>
                   <span>
                     Decline
+                  </span>
+                </button>
+                <button (click)="showDetails(element)" class="menu-button" mat-menu-item>
+                  <mat-icon>
+                    visibility
+                  </mat-icon>
+                  <span>
+                    View more
                   </span>
                 </button>
           </mat-menu>
         </mat-cell>
       </ng-container>
      
-      <ng-container matColumnDef="institution">
+      <!-- <ng-container matColumnDef="institution">
         <mat-header-cell *matHeaderCellDef >More</mat-header-cell>
         <mat-cell *matCellDef="let element">
             <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
@@ -102,7 +110,7 @@
                     </button>
                     </mat-menu>
            </mat-cell>
-      </ng-container>
+      </ng-container> -->
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>

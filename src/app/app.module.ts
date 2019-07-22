@@ -39,6 +39,9 @@ import { UsersComponent } from './component/users/users.component';
 import { NewUserModalComponent } from './component/new-user-modal/new-user-modal.component';
 import { ApprovalModalComponent } from './component/approval-modal/approval-modal.component';
 import { NewGroupModalComponent } from './component/new-group-modal/new-group-modal.component';
+import { UpdateGroupModalComponent } from './component/update-group-modal/update-group-modal.component';
+import { UserDetailsComponent } from './component/user-details/user-details.component';
+import { UpdateUserModalComponent } from './component/update-user-modal/update-user-modal.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -67,6 +70,9 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     NewUserModalComponent,
     ApprovalModalComponent,
     NewGroupModalComponent,
+    UpdateGroupModalComponent,
+    UserDetailsComponent,
+    UpdateUserModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,6 +99,11 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     BottomSheetComponent,
     CreateProjectModalComponent,
     NewUserModalComponent,
+    ApprovalModalComponent,
+    UserDetailsComponent,
+    NewGroupModalComponent,
+    UpdateGroupModalComponent,
+    UpdateUserModalComponent
   ],
   providers: [ProjectService],
   bootstrap: [AppComponent]

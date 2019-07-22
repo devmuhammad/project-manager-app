@@ -1,3 +1,6 @@
+mat-dialog-content{
+    max-height: 260px;
+}
 
 .formControl{
     position: relative;
@@ -16,5 +19,16 @@
     color: var()
 }
 .auth-form-field{
+    width: 85%;
+}
+.form-container{
+    width: 100%;
+}
+.wrapper{
+display: flex;
+flex-direction: row;
+width: 100%;
+}
+.wrapper div{
     width: 100%;
 }

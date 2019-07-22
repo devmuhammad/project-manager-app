@@ -10,7 +10,7 @@ import { CreateProjectModalComponent } from '../create-project-modal/create-proj
 })
 export class ProjectComponent implements OnInit {
 
-  constructor(private dialog: MatDialog,) { }
+  constructor(private dialog: MatDialog) { }
 
   onCreate() {
 

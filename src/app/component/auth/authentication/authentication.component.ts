@@ -7,6 +7,7 @@ import { AuthserviceService } from 'src/app/services/authservice.service';
 import { store } from 'src/app/store';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
+import { AngularButtonLoaderService } from 'angular-button-loader';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -17,6 +18,7 @@ export class AuthenticationComponent implements OnInit {
   constructor(private service: AuthserviceService,
               private routerHelper: DefaultlayoutService,
               private router: Router,
+              private btnloader: AngularButtonLoaderService,
               private loadingBar: LoadingBarService,
               private snackBar: MatSnackBar,
               private fb: FormBuilder) { }
@@ -67,6 +69,7 @@ export class AuthenticationComponent implements OnInit {
     event.preventDefault();
     if (this.form.valid) {
       this.loadingBar.start();
+      this.btnloader.displayLoader();
       this.loginData.username = this.form.get('username').value;
       this.loginData.password = this.form.get('password').value;
       console.log(this.loginData);
@@ -78,12 +81,14 @@ export class AuthenticationComponent implements OnInit {
           localStorage.setItem('profile', JSON.stringify(response.data));
           console.log(localStorage.getItem('profile'));
           this.loadingBar.complete();
+          this.btnloader.hideLoader();
           return this.router.navigateByUrl('/project');
         } else {
           this.loadingBar.complete();
           return this.snackBar.open('Login Failed', 'Dismiss', {
             duration: 7000,
-            direction: 'rtl',
+            verticalPosition: "bottom",
+            horizontalPosition: 'left',
             panelClass: ['error']
           });
         }
@@ -91,7 +96,9 @@ export class AuthenticationComponent implements OnInit {
     } else {
       this.snackBar.open('Invalid Username Or password', 'Dismiss', {
         duration: 3000,
-        direction: 'rtl',
+        // direction: 'rtl',
+        verticalPosition: 'bottom',
+        horizontalPosition: 'left',
         panelClass: ['warning']
       });
     }

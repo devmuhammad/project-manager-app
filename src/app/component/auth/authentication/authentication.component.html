@@ -31,7 +31,8 @@
             <div class="forgetpasswordwrapper">
               <button mat-button class="ForgetPassword" (click)="gotoPath('/reset')">Forget Password ?</button>
             </div>
-          <button [disabled]="!form.valid" [ngClass]="!form.valid?'disabled': '' " mat-raised-button class="submit-button">
+          <button [disabled]="!form.valid" buttonLoader [loaderColor]="'white'" [ngClass]="!form.valid?'disabled': '' "  class="mat-raised-button submit-button">
+            <span></span>
             Sign in
           </button>
           <div class="alt">
@@ -48,7 +49,10 @@
           </div>
           <div>
             
-            <button (click)="gotoPath('/signup')"  mat-button  class="sign-up">Sign Up</button>
+            <button (click)="gotoPath('/signup')"  mat-button   class="sign-up">
+              
+              Sign Up
+            </button>
           </div>
         </div>
 

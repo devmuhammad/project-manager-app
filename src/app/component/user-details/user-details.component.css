@@ -1,0 +1,92 @@
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    }
+
+ .user-pic{
+     width: 100px;
+     height: 100px;
+     border-radius:50%; 
+     /* border:2px solid var(--primaryColor); */
+     margin-bottom: 10px;
+ }
+
+ .date{
+    font-family: var(--primaryFont);
+        color: var(--primaryColor); 
+        font-weight: 300;
+ }
+ .close-button{
+    background-color: transparent !important;
+}
+    h3.wrapper{
+
+        font-weight: 200;
+        letter-spacing: .7px;
+        font-size: 13px;
+        justify-content: flex-start;
+        font-family: var(--primaryFont);
+        color: var(--darkColor);
+        padding-top:4px;
+    }
+    .associates{
+        width: 100%;
+        justify-content: center;
+        height: 30%;
+        /* border-bottom: .5px solid var(--primaryColor); */
+    }
+    .firstcontainer{
+        display: flex;
+        width: 70%; 
+        height: 260px;
+        border-right: .2px solid var(--greyColor);
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+    }
+    .firstcontainer{
+        flex-direction: column;
+    }
+    h3.wrapper span{
+        margin-left:5px;
+    }
+    h3.wrapper mat-icon{
+       color: var(--primaryColor);
+       font-size: 15px !important;
+    }
+    #main{
+        /* background-color: #f1f4f1;
+        border-radius: 4px; */
+        /* box-shadow: 0 10px 20px rgba(0,0,0,0.19); */
+    }
+    .label{
+        color: var(--greyColor);
+        margin-top:5px;
+        font-family:var(--primaryFont);
+        font-size: 12.5px;
+    }
+    .groupList{
+        /* list-style: none; */
+        text-align: left;
+        /* margin: 5; */
+        margin-left: 30px;
+        margin-bottom:2px; 
+        font-size:13px;
+        color: var(--primaryColor);
+        font-family: var(--primaryFont);
+    }
+    .value{
+        color: var(--primaryColor);
+        
+        font-family:var(--primaryFont);
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+    .lastcontainer{
+        width: 30%;
+        text-align: center;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+    }

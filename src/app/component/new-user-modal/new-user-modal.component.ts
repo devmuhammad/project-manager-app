@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from 'src/app/services/project.service';
 import { getLocaleDateFormat } from '@angular/common';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
 import { DType } from '../auth/signup/signup.component';
-
+import { UsersService } from 'src/app/services/users.service';
+import { map } from 'rxjs/operators';
+import { LoadingBarComponent, LoadingBarService } from '@ngx-loading-bar/core';
+import { AngularButtonLoaderService } from 'angular-button-loader';
 @Component({
   selector: 'app-new-user-modal',
   templateUrl: './new-user-modal.component.html',
@@ -16,33 +19,128 @@ export class NewUserModalComponent implements OnInit {
   designationList: DType[];
   institutionList: [];
   view: boolean;
+  groupList: object;
+  userList: any;
   inputType: string;
   vpasswordType: string;
   show: boolean;
+  isLoading: boolean;
+  fetchmessage: any;
+  public inputFields = {
+    username: '',
+    password: '',
+    fullname: '',
+    contactemail: '',
+    supervisor: '',
+    status: true,
+    institutionid: '',
+    designationid: '',
+    phone: '',
+    groups: [],
+  };
   constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
     private fb: FormBuilder,
+    private loadingBar: LoadingBarService,
+    private btnLoader: AngularButtonLoaderService,
+    private userService: UsersService,
+    private group: DropdownsService,
+    private snackbar: MatSnackBar,
     private dropdownService: DropdownsService,
-    private dialogRef: MatDialogRef<NewUserModalComponent>
+    private dialogref: MatDialogRef<NewUserModalComponent>
     ) {
+      this.groupList = this.data.group;
       this.form = this.fb.group({
-        username: ['', Validators.required],
+        contactemail: ['', Validators.required],
+        username: [ '', Validators.required],
         password: ['', Validators.required],
         verifyPassword: [''],
-        contactemail: ['', Validators.required],
-        designationId: ['', Validators.required],
+        designation: ['', Validators.required],
         fullname: ['', Validators.required],
-        institutionId: ['', Validators.required],
-        phone: ['', Validators.required]
+        institution: ['', Validators.required],
+        phone: ['', Validators.required],
+        roletypes: ['', Validators.required],
+        supervisor: ['', Validators.required],
+        groups: ['', Validators.required]
       });
      }
 
+     getGroups() {
+      this.group.getGroups().subscribe(res => {
+        this.groupList = res.data.map(group => {
+          return {...group};
+        });
+      });
+      
+    }
   ngOnInit() {
     this.inputType = this.vpasswordType = 'password';
-    this.fetchDesignationList();
-    this.fetchInstitutionList();
+    this.isLoading = true;
+    this.fetchmessage = 'Fetching supervisors...';
+    const authUser = JSON.parse(localStorage.getItem('profile'));
+    this.userService.userList(authUser.id)
+      .pipe(map(res => res['data']))
+      .subscribe(res => {
+        this.isLoading = false;
+        this.userList = res.filter((user: any) => user.id !== authUser.id);
+      }, err => {
+        this.fetchmessage = 'Unable to fetch Supervisors';
+      }
+      );
   }
   save() {
-    this.dialogRef.close(this.form.value);
+    this.loadingBar.start();
+    this.btnLoader.displayLoader();
+    this.inputFields.fullname = this.form.get('fullname').value;
+    this.inputFields.username = this.form.get('username').value;
+    // this.inputFields.institution = this.form.get('institution').value;
+    // this.inputFields.designation = this.form.get('designation').value;
+    this.inputFields.supervisor = this.form.get('supervisor').value;
+    this.inputFields.phone = this.form.get('phone').value;
+    this.inputFields.contactemail = this.form.get('contactemail').value;
+    this.inputFields.groups = this.form.get('groups').value;
+    console.log(this.inputFields);
+    return this.userService.addNewUser(this.inputFields)
+    .subscribe(({meta, message, data}) => {
+      console.log(message);
+      console.log(data);
+      if (message === 'Failed') {
+        this.loadingBar.complete();
+        this.btnLoader.hideLoader();
+        return this.snackbar.open(`${message } ${data}`, 'Dismiss', {
+          panelClass: ['error'],
+          duration: 7000,
+          direction: 'rtl'
+        });
+      }
+      if (message === 'Success' || 'Operation Successful') {
+        console.log(data);
+        this.loadingBar.complete();
+        this.btnLoader.hideLoader();
+        this.snackbar.open('New user added Successful', 'Dismiss', {
+          panelClass: ['success'],
+          duration: 7000,
+          direction: 'rtl'
+        });
+        return this.dialogref.close();
+      } else {
+        this.loadingBar.complete();
+        this.btnLoader.hideLoader();
+        return this.snackbar.open('Failed to create new user', 'Dismiss', {
+          panelClass: ['error'],
+          duration: 7000,
+          direction: 'rtl'
+        });
+      }
+    }, err => {
+      this.loadingBar.complete();
+      this.btnLoader.hideLoader();
+      return this.snackbar.open(' Failed to create a new user please check input and try again', 'Dismiss', {
+        panelClass: ['error'],
+        duration: 7000,
+        direction: 'rtl'
+      });
+    });
   }
 
   fetchDesignationList() {
@@ -76,6 +174,6 @@ export class NewUserModalComponent implements OnInit {
       });
   }
 close() {
-    this.dialogRef.close();
+    this.dialogref.close();
   }
 }

@@ -1,0 +1,23 @@
+.formControl{
+    width: 100%;
+}
+
+label,.fancy{
+    /* margin-right: 20px; */
+    color: var(--greyColor);
+    font-size:14px;
+    font-family: var(--primaryFont);
+    margin: 4px;
+}
+.auth-form-field{
+    width: 100%;
+}
+
+.fancy{
+    margin-top:10px; 
+}
+
+
+.mat-pseudo-checkbox-checked{
+    background: var(--primaryColor) !important;
+}

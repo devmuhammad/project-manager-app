@@ -1,9 +1,8 @@
 <section>
     <div class="section-header" style="width: 100%;">
     
-        <div style="margin-top: 10px;" >
-          
-          <button  mat-raised-button>
+        <div  class="button add">
+          <button (click)="onCreate()" mat-raised-button>
             <mat-icon>
               add
           </mat-icon>
@@ -11,8 +10,8 @@
         </button>
         </div>
        
-    <mat-form-field class="search-form-field" floatLabel="never" >
-        <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search user"/>
+    <mat-form-field class="search-form-field project-form-field item-search" floatLabel="never" >
+        <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search group"/>
         <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
             <mat-icon >close</mat-icon>
         </button>
@@ -37,8 +36,8 @@
           <!--date column -->
     
           <ng-container matColumnDef="datecreated">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
-            <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.datecreated}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Created At</mat-header-cell>
+            <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.datecreated| date }} </mat-cell>
         </ng-container>
           <!--actions-->
           <ng-container matColumnDef="actions">
@@ -50,7 +49,7 @@
               </mat-icon>
             </button>
             <mat-menu  #actionMenu="matMenu" yPosition="below">
-                <button class="menu-button red"  mat-menu-item>
+                <button (click)="getDeleteGroup(element.id)" class="menu-button red"  mat-menu-item>
                     <mat-icon class="red"style="color:var(--dangerColor)">
                       delete_outlined
                     </mat-icon>
@@ -58,7 +57,7 @@
                        Delete
                      </span>
                    </button>
-                   <button class="menu-button" mat-menu-item>
+                   <button (click)="getEditGroup(element)" class="menu-button" mat-menu-item>
                       <mat-icon >
                         edit
                       </mat-icon>
