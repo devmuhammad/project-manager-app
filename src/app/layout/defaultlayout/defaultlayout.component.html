@@ -1,124 +1,98 @@
-
 <div class="maindiv">
-<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [(opened)]="opened" [ngClass]="halfclose? 'halfClose':''">
-      <!-- <button *ngIf="isHandset$" class="sticky-menu" (click)="halfclose=!halfclose" > <mat-icon>{{halfclose? 'keyboard_arrow_right':'keyboard_arrow_left'}}</mat-icon></button> -->
       <div class="side-content">
-      <mat-toolbar class="toolbar-theme">
-        <div class="toolbar-item">
-            <mat-icon>business_icon</mat-icon>
-              <h2>ComSoft Ltd</h2>
-             <!-- <img height="100px" src='../../../assets/img/comsoftlogo.png'/> -->
-        </div>
-      </mat-toolbar>
-      <mat-nav-list class="nav-list">
-        <ng-container *ngFor="let item of menuList; let i = index" [attr.data-index]="i">
-
-          <a mat-list-item (click)="setStep(item,i)">
-            <span class="link-icon">
-              <mat-icon class="icon dashboard-icon">{{item.icon}}</mat-icon>
-            </span>
-            {{item.name}}
-            <span *ngIf="item.children">
-              <mat-icon class="icon arrow-icon">{{step===i?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
-            </span>
-            <span *ngIf="!item.children">
+        <mat-toolbar class="toolbar-theme">
+          <div class="toolbar-item">
+            <mat-icon>business</mat-icon>
+            <h2>Comsoft Ltd</h2>
+          </div>
+        </mat-toolbar>
+        <mat-nav-list class="nav-list">
+          <ng-container *ngFor="let item of menuList; let i = index" [attr.data-index]="i">
+            <a mat-list-item (click)="setStep(item,i)">
+              <span class="link-icon">
+                <mat-icon class="icon dashboard-icon">{{item.icon}}</mat-icon>
+              </span>
+              {{item.name}}
+              <span *ngIf="item.children">
+                <mat-icon class="icon arrow-icon">{{step===i?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
+              </span>
+              <span *ngIf="!item.children">
                 <mat-icon class="icon arrow-icon">keyboard_arrow_right</mat-icon>
               </span>
-
-          </a>
-          <mat-expansion-panel class="expansion" [expanded]="step===i">
-            <ng-container *ngFor="let child of item.children">
-                <a mat-list-item (click)="setStep(child)" >
-                    <span class="link-icon">
-                      <mat-icon class="icon">{{child.icon}}</mat-icon>
-                    </span>
-                    {{child.name}}
-
-                  </a>
-            </ng-container>
-          </mat-expansion-panel>
-        </ng-container>
-
-      </mat-nav-list>
-      <div class="quick-bar">
-        <div class="header">
-          <!-- <h4 class="toolbar-header">Tools bar</h4> -->
-          <div class="actions">
-              <button
-              (click)="openBottomSheet()"
-              matTooltipPosition="right"
-              matTooltip="Add new task"
-               mat-icon-button>
+            </a>
+            <mat-expansion-panel class="expansion" [expanded]="step===i">
+              <ng-container *ngFor="let child of item.children">
+                <a mat-list-item (click)="setStep(child)">
+                  <span class="link-icon">
+                    <mat-icon class="icon">{{child.icon}}</mat-icon>
+                  </span>
+                  {{child.name}}
+                </a>
+              </ng-container>
+            </mat-expansion-panel>
+          </ng-container>
+        </mat-nav-list>
+        <div class="quick-bar">
+          <div class="header">
+            <div class="actions">
+              <button (click)="openBottomSheet()" matTooltipPosition="right" matTooltip="Add new task" mat-icon-button>
                 <mat-icon style="font-size:30px" class="tool-icon">add</mat-icon>
               </button>
-            <button
-            matTooltipPosition="right"
-            matTooltip="quick search"
-             mat-icon-button>
-              <mat-icon
-              matBadge="8"
-              matBadgePosition="after"
-              matBadgeColor="warn"
-               class="tool-icon">notifications</mat-icon>
-            </button>
-            <button
-            matTooltipPosition="right"
-            matTooltip="Switch module"
-             mat-icon-button>
+              <button matTooltipPosition="right" matTooltip="quick search" mat-icon-button>
+                <mat-icon matBadge="8" matBadgePosition="after" matBadgeColor="warn" class="tool-icon">notifications
+                </mat-icon>
+              </button>
+              <button matTooltipPosition="right" matTooltip="Switch module" mat-icon-button>
                 <mat-icon class="tool-icon">list</mat-icon>
               </button>
-              <button
-              matTooltipPosition="right"
-              matTooltip="click here to ask for help"
-              mat-icon-button>
-                  <mat-icon class="tool-icon">help</mat-icon>
-                </button>
+              <button matTooltipPosition="right" matTooltip="click here to ask for help" mat-icon-button>
+                <mat-icon class="tool-icon">help</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar class="main-nav">
         <span>Project Manager</span>
         <div class="account">
-          <span><button mat-icon-button [matMenuTriggerFor]="auth"><mat-icon class="auth-user">person</mat-icon></button></span>
-          <mat-menu  #auth="matMenu" yPosition="above">
-              <button class="navbar-profile" mat-menu-item>
-                <mat-icon >person
-                </mat-icon>
-                 <span>
-                   Profile
-                 </span>
-               </button>
-               <button (click)="handleLogOut()" class="navbar-profile" mat-menu-item >
-                  <mat-icon style="color:var(--dangerColor)">logout</mat-icon>
-                  <span>
-                    Logout
-                  </span>
-                </button>
+          <span><button mat-icon-button [matMenuTriggerFor]="auth">
+              <mat-icon class="auth-user">person</mat-icon>
+            </button></span>
+          <mat-menu #auth="matMenu" yPosition="above">
+            <button class="navbar-profile" mat-menu-item>
+              <mat-icon>person
+              </mat-icon>
+              <span>
+                Profile
+              </span>
+            </button>
+            <button (click)="handleLogOut()" class="navbar-profile" mat-menu-item>
+              <mat-icon style="color:var(--dangerColor)">logout</mat-icon>
+              <span>
+                Logout
+              </span>
+            </button>
           </mat-menu>
           <span *ngIf="!(isHandset$ | async)">{{name}}</span>
           <span *ngIf="(isHandset$ | async)">{{alias}}</span>
           <div class="mat-card-avatar"></div>
         </div>
-        <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon"
-          aria-label="Toggle sidenav" mat-icon-button (click)="opened=!opened">
-          <mat-icon  *ngIf="opened">menu</mat-icon>
-          <mat-icon  *ngIf="!opened">cancel</mat-icon>
+        <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" aria-label="Toggle sidenav"
+          mat-icon-button (click)="opened=!opened">
+          <mat-icon *ngIf="opened">menu</mat-icon>
+          <mat-icon *ngIf="!opened">cancel</mat-icon>
         </button>
-
       </mat-toolbar>
-
-      <div class="content" [@routeAnimations]="prepareRoute(outlet)" fxFlex
-      >
-        <router-outlet #outlet="outlet" ></router-outlet>
+      <div class="content" [@routeAnimations]="prepareRoute(outlet)" fxFlex>
+        <router-outlet #outlet="outlet"></router-outlet>
       </div>
       <!-- <p class="footer">CopyRight Comsoft Limited &copy;2019</p> -->
     </mat-sidenav-content>
   </mat-sidenav-container>
-  </div>
-
+</div>

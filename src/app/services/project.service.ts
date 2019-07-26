@@ -19,17 +19,15 @@ export class ProjectService {
   constructor() { }
 
   form: FormGroup = new FormGroup({
-    $key: new FormControl(null),
     name: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
-    status: new FormControl('1'),
     description: new FormControl(''),
-    stagingSeverUrl: new FormControl(''),
-    productionServerUrl: new FormControl(''),
-    repository: new FormControl('', Validators.required),
-    remarks: new FormControl(''),
-    alias: new FormControl(''),
-    createdAt: new FormControl(''),
+    // stagingSeverUrl: new FormControl(''),
+    // productionServerUrl: new FormControl(''),
+    // repository: new FormControl('', Validators.required),
+    alias: new FormControl('',Validators.required),
+    client: new FormControl('',Validators.required),
+    projectmanager: new FormControl('',Validators.required),
   });
   gettableData(): Observable<ProjectType[]> {
     const { ELEMENT_DATA } = store.getState().project;

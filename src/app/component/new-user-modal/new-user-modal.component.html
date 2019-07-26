@@ -9,12 +9,12 @@
         
         <div class="formControl">
           <label>Fullname</label>
-          <mat-form-field class="project-form-field auth-form-field half" floatLabel="never">
+          <mat-form-field class="project-form-field auth-form-field half" appearance="outline" floatLabel="never">
               <input matInput placeholder="Fullname" formControlName="fullname" floatPlaceholder="never">
               <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                 <mat-icon>person</mat-icon>
               </button>
-              <mat-error>Invalid email address</mat-error>
+              <mat-error *ngIf="fullname.errors && (fullname.dirty || fullname.touched)">Invalid email address</mat-error>
             </mat-form-field>
         </div>
         <div class="formControl">

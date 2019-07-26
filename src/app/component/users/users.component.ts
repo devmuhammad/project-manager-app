@@ -33,6 +33,7 @@ export class UsersComponent implements OnInit {
   searchKey = "";
   groupList: any;
   allUsers: any;
+  status: boolean;
   onCreate() {
     console.log(this.groupList)
     const dialogConfig = new MatDialogConfig();
@@ -85,7 +86,7 @@ export class UsersComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
     dialogConfig.height = '400px';
-    dialogConfig.data = {data:row, group: this.groupList};
+    dialogConfig.data = {data:row,  group: this.groupList};
     this.dialog.open(UpdateUserModalComponent, dialogConfig).afterClosed().subscribe(
       () => {
         this.fetchdata();
@@ -103,7 +104,7 @@ export class UsersComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
     dialogConfig.height = '400px';
-    dialogConfig.data = {details: row, users: this.allUsers, group: this.groupList};
+    dialogConfig.data = {details: row, users: this.allUsers, activities: this.status, group: this.groupList};
     this.dialog.open(UserDetailsComponent, dialogConfig);
   }
  
@@ -172,7 +173,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.fetchdata();
     this.getGroups();
-
+    this.status = true;
   }
 
   onSearchClear() {

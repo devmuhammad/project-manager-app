@@ -2,3 +2,49 @@ h2{
   font-family: var(--primaryFont);
 
 }
+.halfing{
+  width: 20% ;
+}
+.form-control{
+  width: 100%;
+  position: relative;
+  margin: 10px 0 0px 0;
+  padding:10px;
+  display: inline ;
+}
+.form-control label{
+  position: absolute;
+  top: -16px;
+  color: var(--primaryColor);
+  font-size: 13px;
+
+  font-weight: 300;
+  font-family: var(--primaryFont);
+  /* color: var(--primaryColor); */
+}
+.client-section{
+  margin-top: 10px;
+}
+.block{
+  margin-top:0; 
+}
+.block label{
+top: 2px;
+}
+.description{
+width: 95%;
+}
+@media (min-width: 320px) and (max-width: 1007px) {
+.form-control{
+  display: block;
+}
+.halfing{
+  width:100%;
+}
+.input-container{
+  padding-right: 5%;
+}
+.project-form-field{
+  width: 90%;
+}
+}

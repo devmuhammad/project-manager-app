@@ -18,16 +18,9 @@ export class ProjectComponent implements OnInit {
 
      dialogConfig.disableClose = true;
      dialogConfig.autoFocus = true;
-     dialogConfig.width ="60%";
-    // dialogConfig.data = {
-    //   id: 1,
-    //   title: 'Project Details',
-    // };
-    // dialogConfig.position = {
-    //   'top': '0',
-    //   'right': '50%'
-    // };
-    this.dialog.open(CreateProjectModalComponent,dialogConfig);
+     dialogConfig.width ="55%";
+    
+    this.dialog.open(CreateProjectModalComponent, dialogConfig);
   }
 
   ngOnInit() {

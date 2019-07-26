@@ -11,20 +11,22 @@ import { ProjectService } from '../../services/project.service';
   styleUrls: ['./project-table.component.css']
 })
 export class ProjectTableComponent implements OnInit {
-
-  displayedColumns: string[] = ['#', 'name', 'status', 'date', 'actions', 'more'];
   // dataSource = new MatTableDataSource(tableData) ;
   constructor(private service: ProjectService) { }
+
+  displayedColumns: string[] = ['#', 'name', 'status', 'date', 'actions', 'more'];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   dataSource: MatTableDataSource<any>
+
+  searchKey = '';
   ngOnInit() {
     this.service.gettableData()
       .subscribe((projects) => {
-        let datarray = projects.map(item => {
-          return { ...item }
+        const datarray = projects.map(item => {
+          return { ...item };
         });
         this.dataSource = new MatTableDataSource(datarray);
       });
@@ -32,10 +34,8 @@ export class ProjectTableComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  searchKey = ""
-
   onSearchClear() {
-    this.searchKey = "";
+    this.searchKey = '';
     this.applyFilter();
   }
   applyFilter() {

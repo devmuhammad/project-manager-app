@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from 'src/app/services/project.service';
 import { getLocaleDateFormat } from '@angular/common';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
-import { DType } from '../auth/signup/signup.component';
+
 
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AngularButtonLoaderService } from 'angular-button-loader';
@@ -18,7 +18,7 @@ import { AngularButtonLoaderService } from 'angular-button-loader';
 })
 export class NewGroupModalComponent implements OnInit {
   form: FormGroup;
-  designationList: DType[];
+  designationList: any[];
   institutionList: [];
   view: boolean;
   inputType: string;
@@ -28,10 +28,9 @@ export class NewGroupModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private btnLoader: AngularButtonLoaderService,
-    // private groupService: DropdownsService,
+    private groupService: DropdownsService,
     private dropdownService: DropdownsService,
     private loadingBar: LoadingBarService,
-    private groupService: DropdownsService,
     private snackbar: MatSnackBar,
     private dialogRef: MatDialogRef<NewGroupModalComponent>
     ) {
@@ -42,8 +41,6 @@ export class NewGroupModalComponent implements OnInit {
 
   ngOnInit() {
     this.inputType = this.vpasswordType = 'password';
-    // this.fetchDesignationList();
-    // this.fetchInstitutionList();
   }
   save() {
     this.groups = this.form.get('name').value;

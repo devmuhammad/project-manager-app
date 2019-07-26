@@ -6,7 +6,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import {MatTableDataSource, MatSort, MatPaginator, MatSnackBar} from '@angular/material';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
-import { NewGroupModalComponent } from '../new-group-modal/new-group-modal.component';
+import { NewGroupModalComponent } from '../modals/new-group-modal/new-group-modal.component';
 import { AngularButtonLoaderService } from 'angular-button-loader';
 import { UpdateGroupModalComponent } from '../update-group-modal/update-group-modal.component';
 @Component({

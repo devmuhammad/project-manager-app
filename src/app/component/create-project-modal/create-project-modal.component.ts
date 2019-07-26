@@ -3,6 +3,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ProjectService } from 'src/app/services/project.service';
 import { getLocaleDateFormat } from '@angular/common';
+import { ClientsService } from 'src/app/services/clients.service';
+
+
 
 @Component({
   selector: 'app-create-project-modal',
@@ -17,6 +20,7 @@ export class CreateProjectModalComponent implements OnInit {
   currentDate = ''
   format = 'dd/MM/yyyy';
 
+  clientsList = [];
 
   types = [
     { id: 1, name: 'Software project' },
@@ -35,9 +39,17 @@ export class CreateProjectModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: ProjectService,
+    private clientservice: ClientsService,
     private dialogRef: MatDialogRef<CreateProjectModalComponent>) {
   }
-
+getClients() {
+  this.clientservice.gettableData()
+  .subscribe((clnt) => {
+  this.clientsList = clnt.map(item => {
+      return { id: item.id, name: item.name };
+    });
+});
+}
   getCurrentDate() {
     var today = new Date();
     this.currentDate = today.toDateString();
@@ -46,6 +58,7 @@ export class CreateProjectModalComponent implements OnInit {
   }
   ngOnInit() {
     this.getCurrentDate();
+    this.getClients();
   }
 
   save() {

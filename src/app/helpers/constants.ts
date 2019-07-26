@@ -22,5 +22,8 @@ export const BaseApi = {
     // dropdowns
     INSTITUTIONS: 'users/institutions',
     DESIGNATIONS: 'users/designations',
+    // Projects
+    ADD_PROJECTS: 'project/add',
+    PROJECTS: 'project/list',
   }
 }

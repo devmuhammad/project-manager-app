@@ -14,6 +14,7 @@ import { ResetuserpasswordComponent } from './component/auth/resetuserpassword/r
 import { UserRequestComponent } from './component/user-request/user-request.component';
 import { GroupsComponent } from './component/groups/groups.component';
 import { UsersComponent } from './component/users/users.component';
+import { ClientsComponent } from './component/clients/clients.component';
 
 export const routes: Routes = [
   {
@@ -25,8 +26,9 @@ export const routes: Routes = [
   },
   {
     path: 'project', component: DefaultlayoutComponent, children: [
-      { path: '', component: ProjectComponent },
+      { path: '', component: ProjectComponent, data: { animation: 'isRight' } },
       { path: 'activities', component: ActivityComponent },
+      {path: 'clients', component: ClientsComponent, data: { animation: 'isRight' } }
     ]
   },
 
@@ -43,7 +45,7 @@ export const routes: Routes = [
   },
   {
     path: 'user', component: DefaultlayoutComponent, children: [
-      {path: '', component:UsersComponent,data:{animation: 'isRight'}},
+      {path: '', component: UsersComponent, data: {animation: 'isRight'}},
       { path: 'request', component: UserRequestComponent },
       { path: 'group', component: GroupsComponent },
     ]
