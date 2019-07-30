@@ -8,19 +8,29 @@
     <div class="form-container">
           
       <div class="formControl">
-        <label>Fullname</label>
+        <label>Business Name</label>
         <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
-            <input matInput placeholder="Fullname" formControlName="name" floatPlaceholder="never">
+            <input matInput placeholder="Business Name" formControlName="businessname" floatPlaceholder="never">
             <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-              <mat-icon>person</mat-icon>
+              <mat-icon>business</mat-icon>
             </button>
             <!-- <mat-error class="validation-error" *ngIf="name.invalid && (name.dirty || name.touched)">Invalid name</mat-error> -->
           </mat-form-field>
       </div>
       <div class="formControl">
+          <label>Business code</label>
+          <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
+              <input matInput placeholder="Business code" formControlName="code" floatPlaceholder="never">
+              <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                <mat-icon>scatter_plot</mat-icon>
+              </button>
+              <!-- <mat-error class="validation-error" *ngIf="name.invalid && (name.dirty || name.touched)">Invalid name</mat-error> -->
+            </mat-form-field>
+        </div>
+      <div class="formControl">
           <label>Phone</label>
           <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-              <input matInput placeholder="Designation" formControlName="contactphone" floatPlaceholder="never">
+              <input matInput placeholder="Phone" formControlName="phonenumber" floatPlaceholder="never">
               <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                 <mat-icon>phone</mat-icon>
               </button>
@@ -28,9 +38,9 @@
             </mat-form-field>
         </div>
       <div class="formControl">
-        <label>Contact Email</label>
+        <label>Email</label>
         <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-          <input matInput placeholder="Email" formControlName="contactemail" floatPlaceholder="never">
+          <input matInput placeholder="Email" formControlName="email" floatPlaceholder="never">
             <button mat-button matSuffix mat-icon-button (click)="doNothing()">
               <mat-icon>email</mat-icon>
             </button>
@@ -59,6 +69,26 @@
               <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
             </mat-form-field>
         </div>
+        <div class="formControl">
+            <label>Contact Person Phone </label>
+            <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+              <input matInput placeholder="Contact Person Phone" formControlName="contactphonenumber" floatPlaceholder="never">
+                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                  <mat-icon>phone_outlined</mat-icon>
+                </button>
+                <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+              </mat-form-field>
+          </div>
+          <div class="formControl">
+              <label>Contact Person Email </label>
+              <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+                <input matInput placeholder="Contact Person Email" formControlName="contactpersonemail" floatPlaceholder="never">
+                  <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                    <mat-icon>email_outlined</mat-icon>
+                  </button>
+                  <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                </mat-form-field>
+            </div>
        </div>
   </div>
 </form>

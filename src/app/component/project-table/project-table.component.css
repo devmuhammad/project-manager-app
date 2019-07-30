@@ -16,6 +16,18 @@ table {
   color: green !important;
 } */
 
+mat-table.table{
+  transition: none !important;
+  box-shadow: none !important;
+  border-collapse: collapse;
+  border-bottom: none !important; 
+}
+
+.item-search{
+  width: 35%;
+  margin-bottom: 10px;
+  border:1px solid var(--primaryColor) !important; 
+}
  mat-header-cell.status-column{
   display: flex !important;
   justify-content:center !important;
@@ -26,7 +38,13 @@ table {
   text-align: center !important;
   justify-content:center !important;
 }
+.mat-cell{
+  border-bottom: none !important; 
+}
 
+.mat-header-cell{
+  border-bottom: none !important;
+}
 .status-cell{
   display: flex;
   flex-direction: row;

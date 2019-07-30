@@ -11,7 +11,27 @@ import { CreateProjectModalComponent } from '../create-project-modal/create-proj
 export class ProjectComponent implements OnInit {
 
   constructor(private dialog: MatDialog) { }
+  showSide: boolean;
+  panelOpenState = false;
+  expand: false;
+  panel: number;
+  expandables = [
+    { title: 'Activities', description: 'working on activities'},
+    {title: 'Documents', description: 'Project Documents'},
+    { title: 'Gmail', description: 'working on activities'},
+    {title: 'Skype', description: 'Project Skype messages'},
+    {title: 'Slack', description: 'Project slack messages'},
+    {title: 'Git', description: 'Project repo and branches'},
+    {title: 'Bug', description: 'Project issues'},
+  ]
 
+
+
+  
+  toggleExpand(id) {
+    
+    return this.panel = id;
+  }
   onCreate() {
 
     const dialogConfig = new MatDialogConfig();
@@ -22,11 +42,16 @@ export class ProjectComponent implements OnInit {
     
     this.dialog.open(CreateProjectModalComponent, dialogConfig);
   }
-
   ngOnInit() {
+    this.showSide =false;
   }
 
   onClose(){
 
+  }
+
+  getExpandData($event) {
+    console.log($event);
+  this.showSide = $event;
   }
 }

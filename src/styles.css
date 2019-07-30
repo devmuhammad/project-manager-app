@@ -78,7 +78,7 @@ color: #2E7D32;
   background: #2196F3;
 }
 .success {
-  background:var(--primaryColor);
+  background:#2E7D32;
   color: var(--lightColor);
 
 }

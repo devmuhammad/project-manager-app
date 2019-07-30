@@ -1,4 +1,5 @@
-<mat-form-field class="search-form-field" floatLabel="never" >
+
+<mat-form-field class="search-form-field project-form-field item-search" floatLabel="never" >
   <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search project"/>
   <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
       <mat-icon >close</mat-icon>
@@ -7,8 +8,8 @@
       <mat-icon >search</mat-icon>
   </button>
 </mat-form-field>
-<div class="mat-elevation-z8">
-<mat-table [dataSource]="dataSource" matSort >
+<div >
+<mat-table class="table" [dataSource]="dataSource" matSort >
     <!-- Position Column -->
     <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
       <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
@@ -33,37 +34,66 @@
       >
       <span class="status-span">{{element.status}}</span></mat-cell>
     </ng-container>
-
+    
     <!-- Symbol Column -->
     <ng-container matColumnDef="date">
       <mat-header-cell class="status-column" *matHeaderCellDef> Created At</mat-header-cell>
       <mat-cell *matCellDef="let element"> <span class="status-span">{{element.date}}</span> </mat-cell>
     </ng-container>
      <!-- Symbol Column -->
-     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let row">
-      <button mat-icon-button>
-        <mat-icon style="color:var(--blueColor)">
-          launch
-        </mat-icon>
-      </button>
-      <button mat-icon-button>
-          <mat-icon style="color: var(--dangerColor)">
-            delete_outlined
+     <ng-container matColumnDef="activities">
+        <mat-header-cell *matHeaderCellDef>Activities</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+        <button (click)="toggleExpand(row)" mat-icon-button>
+          <mat-icon style="color:var(--darkColor)">
+            launch
           </mat-icon>
         </button>
+        </mat-cell>
+      </ng-container>
+     <ng-container matColumnDef="teams">
+      <mat-header-cell *matHeaderCellDef> Team</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+      <button (click)="toggleExpand(row)" mat-icon-button>
+        <mat-icon style="color:var(--darkColor)">
+          group
+        </mat-icon>
+      </button>
+     
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="document">
+        <mat-header-cell *matHeaderCellDef> Documents</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+        <button (click)="toggleExpand(row)" mat-icon-button>
+          <mat-icon style="color:var(--darkColor)">
+            folder
+          </mat-icon>
+        </button>
+       
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="webhooks">
+          <mat-header-cell *matHeaderCellDef> Web Hooks</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+          <button (click)="toggleExpand(row)" mat-icon-button>
+            <mat-icon style="color:var(--darkColor)">
+              web
+            </mat-icon>
+          </button>
+         
+          </mat-cell>
+        </ng-container>
+
      <!-- Weight Column -->
      <ng-container matColumnDef="more">
-        <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+        <mat-header-cell *matHeaderCellDef >More</mat-header-cell>
         <mat-cell *matCellDef="let element">
             <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
             <mat-menu #moreMenu="matMenu" yPosition="below">
                 <button class="menu-button" mat-menu-item>
-                  <mat-icon >calendar
+                  <mat-icon >timer
                   </mat-icon>
                    <span>
                      Set Duration
@@ -71,7 +101,7 @@
                  </button>
                  <button class="menu-button" mat-menu-item>
                     <mat-icon >
-                      store
+                      router
                     </mat-icon>
                     <span>
                       Server Credentials

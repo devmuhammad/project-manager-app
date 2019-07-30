@@ -39,14 +39,22 @@ export class ClientsTableComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '30%';
 
-    this.dialog.open(CreateClientComponent, dialogConfig);
-
+    this.dialog.open(CreateClientComponent, dialogConfig).afterClosed().subscribe(
+      () => {
+        this.getTableData();
+      }
+    );
   }
 
   getDeleteClient(id){
     console.log(id);
   }
 
+  getClientList(){
+    this.service.getClients().subscribe(res =>{
+      console.log(res);
+    },err => console.log(err))
+  }
   getEditClient(row) {
     console.log(row);
     const dialogConfig = new MatDialogConfig();
@@ -62,6 +70,7 @@ export class ClientsTableComponent implements OnInit {
   }
   ngOnInit() {
    this.getTableData();
+   this.getClientList();
   }
   onSearchClear() {
     this.searchKey = '';

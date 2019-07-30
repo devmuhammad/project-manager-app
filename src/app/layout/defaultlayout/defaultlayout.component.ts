@@ -3,10 +3,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet, MatDialogConfig, MatDialog } from '@angular/material';
 import { BottomSheetComponent } from 'src/app/component/bottom-sheet/bottom-sheet.component';
 import { fader, slider, stepper, transformer } from 'src/app/router-animations/router-animations.module';
 import { RouterOutlet } from '@angular/router';
+import { CreateProjectModalComponent } from 'src/app/component/create-project-modal/create-project-modal.component';
 
 @Component({
   selector: 'app-defaultlayout',
@@ -22,6 +23,7 @@ import { RouterOutlet } from '@angular/router';
 export class DefaultlayoutComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
               private service: DefaultlayoutService,
+              private dialog: MatDialog,
               private bottomSheet: MatBottomSheet) { }
   name: '';
   alias: '';
@@ -40,7 +42,6 @@ export class DefaultlayoutComponent implements OnInit {
       name: 'Project', icon: 'folder', children: [
         { name: 'Projects', icon: 'folder', link: '/project' },
         { name: 'Activities', icon: 'work', link: '/project/activities' },
-        {name: 'Clents', icon: 'group', link: '/project/clients'}
       ]
     },
     { name: 'User Managment', icon: 'people', children: [
@@ -49,11 +50,25 @@ export class DefaultlayoutComponent implements OnInit {
       { name: 'Users', icon: 'people', link: '/user' },
     ]},
     {
+      name: 'Clients', icon: 'people_outlined', link: '/client'
+    },
+    {
       name: 'Settings', icon: 'settings', children: [
         { name: 'Server', icon: 'network_check', link: '/settings/server' },
       ]
     },
   ];
+
+  onCreate() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width ="55%";
+    
+    this.dialog.open(CreateProjectModalComponent, dialogConfig);
+  }
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }

@@ -25,5 +25,12 @@ export const BaseApi = {
     // Projects
     ADD_PROJECTS: 'project/add',
     PROJECTS: 'project/list',
+    
+    // add clients
+    ADD_CLIENTS: 'project/client/add',
+    DELETE_CLIENT: 'project/client/delete',
+    RETRIEVE_CLIENT: 'project/client/retrieve',
+    UPDATE_CLIENT: 'project/client/update',
+    CLIENTS: 'project/clients'
   }
 }

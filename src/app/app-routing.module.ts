@@ -28,7 +28,12 @@ export const routes: Routes = [
     path: 'project', component: DefaultlayoutComponent, children: [
       { path: '', component: ProjectComponent, data: { animation: 'isRight' } },
       { path: 'activities', component: ActivityComponent },
-      {path: 'clients', component: ClientsComponent, data: { animation: 'isRight' } }
+    ]
+  },
+  {
+    path: 'client', component: DefaultlayoutComponent, children: [
+      { path: '', component: ClientsComponent, data: { animation: 'isRight' } },
+  
     ]
   },
 

@@ -1,7 +1,10 @@
 export interface Client {
     name: string;
     contactphone: string;
-    contactemail: string; contactperson: string; weburl: string;
+    contactemail: string;
+    contactperson: string;
+    weburl: string;
+    code: string;
     id: number;
 }
 const initalState = {

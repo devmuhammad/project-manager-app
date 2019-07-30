@@ -6,7 +6,7 @@
       <div class="side-content">
         <mat-toolbar class="toolbar-theme">
           <div class="toolbar-item">
-            <mat-icon>business</mat-icon>
+            <mat-icon>account_balance</mat-icon>
             <h2>Comsoft Ltd</h2>
           </div>
         </mat-toolbar>
@@ -39,18 +39,27 @@
         <div class="quick-bar">
           <div class="header">
             <div class="actions">
-              <button (click)="openBottomSheet()" matTooltipPosition="right" matTooltip="Add new task" mat-icon-button>
+              <button (click)="onCreate()" matTooltipPosition="right" matTooltip="Add new task" mat-icon-button>
                 <mat-icon style="font-size:30px" class="tool-icon">add</mat-icon>
+                <span style="padding-left: 10px">Add Project</span>
               </button>
+
+              <button (click)="openBottomSheet()" matTooltipPosition="bottom" matTooltip="Add new task" mat-icon-button>
+                  <mat-icon style="font-size:30px" class="tool-icon">add_circle</mat-icon>
+                  <span style="padding-left: 10px">Add Task</span>
+                </button>
               <button matTooltipPosition="right" matTooltip="quick search" mat-icon-button>
                 <mat-icon matBadge="8" matBadgePosition="after" matBadgeColor="warn" class="tool-icon">notifications
                 </mat-icon>
+                <span style="padding-left: 10px">Notification</span>
               </button>
               <button matTooltipPosition="right" matTooltip="Switch module" mat-icon-button>
                 <mat-icon class="tool-icon">list</mat-icon>
+                <span style="padding-left: 10px">Menu</span>
               </button>
               <button matTooltipPosition="right" matTooltip="click here to ask for help" mat-icon-button>
                 <mat-icon class="tool-icon">help</mat-icon>
+                <span style="padding-left: 10px">Help</span>
               </button>
             </div>
           </div>
