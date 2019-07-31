@@ -55,6 +55,10 @@ export class DefaultlayoutComponent implements OnInit {
     {
       name: 'Settings', icon: 'settings', children: [
         { name: 'Server', icon: 'network_check', link: '/settings/server' },
+        { name: 'ProjectTypes', icon: 'folder_open', link: '/settings/project/types' },
+        { name: 'StatusTypes', icon: 'outlined_flag', link: '/settings/status/types' },
+        { name: 'DocumentTypes', icon: 'file_copy', link: '/settings/document/types' },
+        { name: 'taskTypes', icon: 'sort', link: '/settings/task/types' },
       ]
     },
   ];
@@ -89,6 +93,7 @@ export class DefaultlayoutComponent implements OnInit {
       return this.step = index;
     }
 
+  
     return this.service.navigateToPath(item.link);
   }
 

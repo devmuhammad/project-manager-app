@@ -60,6 +60,10 @@ import { UpdateDoctypeModalComponent } from './component/modals/update-doctype-m
 import { AddDocTypeModalComponent } from './component/modals/add-doc-type-modal/add-doc-type-modal.component';
 import { UpdateProjectModalComponent } from './component/modals/update-project-modal/update-project-modal.component';
 import { CreateDocTypeModalComponent } from './component/modals/create-doc-type-modal/create-doc-type-modal.component';
+import { ProjectTypeComponent } from './component/project-type/project-type.component';
+import { TaskTypeComponent } from './component/task-type/task-type.component';
+import { DocumentTypesComponent } from './component/document-types/document-types.component';
+import { StatusTypesComponent } from './component/status-types/status-types.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -106,6 +110,10 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     AddDocTypeModalComponent,
     UpdateProjectModalComponent,
     CreateDocTypeModalComponent,
+    ProjectTypeComponent,
+    TaskTypeComponent,
+    DocumentTypesComponent,
+    StatusTypesComponent,
   ],
   imports: [
     BrowserModule,

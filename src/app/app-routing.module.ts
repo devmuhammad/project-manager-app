@@ -15,6 +15,10 @@ import { UserRequestComponent } from './component/user-request/user-request.comp
 import { GroupsComponent } from './component/groups/groups.component';
 import { UsersComponent } from './component/users/users.component';
 import { ClientsComponent } from './component/clients/clients.component';
+import { ProjectTypeComponent } from './component/project-type/project-type.component';
+import { TaskTypeComponent } from './component/task-type/task-type.component';
+import { DocumentTypesComponent } from './component/document-types/document-types.component';
+import { StatusTypesComponent } from './component/status-types/status-types.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +45,11 @@ export const routes: Routes = [
     path: 'settings', component: DefaultlayoutComponent, children: [
       { path: '', component: SettingsComponent, data: { animation: 'isRight' } },
       { path: 'server', component: ServerDetailsComponent },
+      {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
+      {path: 'task/types', component: TaskTypeComponent, data: {animation: 'isRight'}},
+      {path: 'document/types', component: DocumentTypesComponent, data: {animation: 'isRight'}},
+      {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
+      {path: 'status/types', component: StatusTypesComponent, data: {animation: 'isRight'}}
     ]
   },
   {

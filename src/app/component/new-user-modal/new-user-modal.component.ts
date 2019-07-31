@@ -111,7 +111,8 @@ export class NewUserModalComponent implements OnInit {
         return this.snackbar.open(`${message } ${data}`, 'Dismiss', {
           panelClass: ['error'],
           duration: 7000,
-          direction: 'rtl'
+          horizontalPosition:'right',
+          verticalPosition:'bottom',
         });
       }
       if (message === 'Success' || 'Operation Successful') {
@@ -121,7 +122,8 @@ export class NewUserModalComponent implements OnInit {
         this.snackbar.open('New user added Successful', 'Dismiss', {
           panelClass: ['success'],
           duration: 7000,
-          direction: 'rtl'
+          horizontalPosition:'right',
+          verticalPosition:'bottom',
         });
         return this.dialogref.close();
       } else {
@@ -130,7 +132,8 @@ export class NewUserModalComponent implements OnInit {
         return this.snackbar.open('Failed to create new user', 'Dismiss', {
           panelClass: ['error'],
           duration: 7000,
-          direction: 'rtl'
+          horizontalPosition:'right',
+          verticalPosition:'bottom',
         });
       }
     }, err => {
@@ -139,7 +142,8 @@ export class NewUserModalComponent implements OnInit {
       return this.snackbar.open(' Failed to create a new user please check input and try again', 'Dismiss', {
         panelClass: ['error'],
         duration: 7000,
-        direction: 'rtl'
+        horizontalPosition:'right',
+          verticalPosition:'bottom',
       });
     });
   }
