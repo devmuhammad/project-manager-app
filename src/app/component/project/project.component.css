@@ -56,7 +56,11 @@ flex-direction: column;
   margin-bottom: 15px;
   margin-top: 20px;
 }
-
+.side-icon{
+  color:var(--darkColor);
+  margin-inline-start: 25%;
+  font-size:14px;
+}
 .suggestion-items{
   display:flex;
   width: 100%;

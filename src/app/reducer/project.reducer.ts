@@ -11,19 +11,25 @@ const initalState ={
   {id: 3, name: 'E-learning portal', date: '01 Feb 2018', status: 'In Progress'},
   {id: 4, name: 'Tax Manager', date: '22 Jan 2016', status: 'Completed'},
   {id: 5, name: 'Payroll System', date: '22 April 2010', status: 'In Progress'},
-  {id: 6, name: 'School Portal', date:'20 Jan 2012' , status: 'Completed'},
+  {id: 6, name: 'School Portal', date: '20 Jan 2012' , status: 'Completed'},
   {id: 7, name: 'Payment Gateway', date: '9 July 2019', status: 'To do'},
   {id: 8, name: 'Trade Manager', date: '11 Aug 2014', status: 'In Progress'},
   {id: 9, name: 'Portfolio site', date: '21 Dec 2013', status: 'Completed'},
-  {id: 10, name: 'Web Game', date: '10 Oct 2019', status: 'To do'}]
+  {id: 10, name: 'Web Game', date: '10 Oct 2019', status: 'To do'}],
+  projectList: []
 }
 
 export const project = (state = initalState, action) => {
-  // switch (action.type) {
-  //   case 'NEW_PROJECT':
-  //     return state;
-  //   default:
-  //     return state;
-  // }
-  return state;
+  switch (action.type) {
+    case 'NEW_PROJECT':
+      return state;
+      case 'FETCH_PROJECTS':
+        return{
+          ...state,
+          projectList: action.payload
+        };
+    default:
+      return state;
+  }
+ 
 }

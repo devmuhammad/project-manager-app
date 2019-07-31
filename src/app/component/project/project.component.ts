@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogConfig,MatDialogRef} from "@angular/material";
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import { CreateProjectModalComponent } from '../create-project-modal/create-project-modal.component';
+import { store } from 'src/app/store';
+import { ProjectService } from 'src/app/services/project.service';
 
 
 @Component({
@@ -9,49 +11,72 @@ import { CreateProjectModalComponent } from '../create-project-modal/create-proj
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
-
-  constructor(private dialog: MatDialog) { }
+  public queryParam = {
+    datecreatedfrom: '1567810800000',
+    datecreatedto: '1567810800000',
+    enddate: '1567810800000',
+    page: 1,
+    sfielter: '',
+    size: 20,
+    startdate: '1567810800000'
+  };
+  sideData: object;
+  constructor(
+    private dialog: MatDialog,
+    private service: ProjectService,
+     ) { }
   showSide: boolean;
   panelOpenState = false;
   expand: false;
   panel: number;
+  panelType: any;
+  expandableData: any[];
   expandables = [
-    { title: 'Activities', description: 'working on activities'},
-    {title: 'Documents', description: 'Project Documents'},
-    { title: 'Gmail', description: 'working on activities'},
-    {title: 'Skype', description: 'Project Skype messages'},
-    {title: 'Slack', description: 'Project slack messages'},
-    {title: 'Git', description: 'Project repo and branches'},
-    {title: 'Bug', description: 'Project issues'},
-  ]
+    { title: 'Activities', description: 'working on activities', panelType: 'Activities'},
+    {title: 'Documents', description: 'Project Documents', panelType: 'Documents'},
+    {title: 'Team', description: 'Project Supervisors and Others', panelType: 'Team'},
+    { title: 'Gmail', description: 'working on activities', panelType: 'webHook'},
+    {title: 'Skype', description: 'Project Skype messages', panelType: 'webHook'},
+    {title: 'Slack', description: 'Project slack messages', panelType: 'webHook'},
+    {title: 'Git', description: 'Project repo and branches', panelType: 'webHook'},
+    {title: 'Bug', description: 'Project issues', panelType: 'webHook'},
+  ];
 
 
 
-  
+
   toggleExpand(id) {
-    
     return this.panel = id;
   }
   onCreate() {
 
     const dialogConfig = new MatDialogConfig();
-
-     dialogConfig.disableClose = true;
-     dialogConfig.autoFocus = true;
-     dialogConfig.width ="55%";
-    
-    this.dialog.open(CreateProjectModalComponent, dialogConfig);
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '55%';
+    this.dialog.open(CreateProjectModalComponent, dialogConfig).afterClosed().subscribe(
+      () => {
+        this.updateRecord();
+      }
+    ); 
   }
   ngOnInit() {
-    this.showSide =false;
+    this.showSide = false;
+    this.updateRecord();
+    console.log(this.service.projects);
   }
 
-  onClose(){
+  onClose() {
 
   }
-
+  updateRecord() {
+    this.service.getProjectList(this.queryParam);
+  }
   getExpandData($event) {
     console.log($event);
-  this.showSide = $event;
+    const {showDrawer, data, panelType} = $event;
+    this.showSide = showDrawer;
+    this.sideData = data;
+    this.expandableData = this.expandables.filter((item: any) => item.panelType === panelType);
   }
 }

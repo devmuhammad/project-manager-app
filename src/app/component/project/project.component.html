@@ -2,29 +2,134 @@
     <mat-sidenav #drawer class="sidenav" position="end" mode="push"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [(opened)]="showSide" [ngClass]="halfclose? 'halfClose':''">
-    <div class="side-content" style="padding: 10px">
-        <p class="sub-title">Project Info</p>
-      <ng-container *ngFor="let item of expandables;let i = index" >
-        <mat-expansion-panel 
+    <div class="side-content" *ngIf="showSide" style="padding: 10px">
+        <!-- <p class="sub-title">Project Info</p> -->
+      <ng-container *ngFor="let item of expandableData;let i = index" >
+        <mat-expansion-panel *ngIf="item.title=== 'Activities' && sideData"
          (click)="toggleExpand(i)"
         [expanded]="panel===i" style="margin-bottom: 10px"
          [attr.data-index]="i">
-        <mat-expansion-panel-header>
-        <mat-panel-title>
-        {{item.title}} 
-        </mat-panel-title>
+        <mat-expansion-panel-header >
+        <span style="margin-right: 10px">{{sideData.projectactivitiesList.length}} </span>{{item.title}} 
         </mat-expansion-panel-header>
           <mat-panel-description>
          {{item.description}}
+         <div>
+          
+         </div>
           </mat-panel-description>
         </mat-expansion-panel>
-        <div *ngIf="i===1">
-          <mat-divider></mat-divider>
-  <p class="sub-title">Social hooks</p>
+        
+
+        <mat-expansion-panel *ngIf="item.title=== 'Documents' && sideData"
+        (click)="toggleExpand(i)"
+       [expanded]="panel===i" style="margin-bottom: 10px"
+        [attr.data-index]="i">
+       <mat-expansion-panel-header >
+       <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+       </mat-expansion-panel-header>
+         <mat-panel-description>
+        {{item.description}}
+        <div>
+         
         </div>
+         </mat-panel-description>
+       </mat-expansion-panel>
+       <mat-expansion-panel *ngIf="item.title=== 'Team' && sideData"
+       (click)="toggleExpand(i)"
+      [expanded]="panel===i" style="margin-bottom: 10px"
+       [attr.data-index]="i">
+      <mat-expansion-panel-header >
+      <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+      </mat-expansion-panel-header>
+        <mat-panel-description>
+       {{item.description}}
+       <div>
+        
+       </div>
+        </mat-panel-description>
+      </mat-expansion-panel>
+
+
+        <div *ngIf="i===0
+         && item.title!=='Documents' &&
+         item.title!=='Team'
+         && item.title!=='Activities'">
+          <p class="sub-title">Web hooks</p>
+          <mat-divider></mat-divider>
+</div>
+  <mat-expansion-panel *ngIf="item.title=== 'Skype' && sideData"
+        (click)="toggleExpand(i)"
+       [expanded]="panel===i" style="margin-bottom: 10px"
+        [attr.data-index]="i">
+       <mat-expansion-panel-header >
+       <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+       </mat-expansion-panel-header>
+         <mat-panel-description>
+        {{item.description}}
+        <div>
+         
+        </div>
+         </mat-panel-description>
+       </mat-expansion-panel>
+       <mat-expansion-panel *ngIf="item.title=== 'Slack' && sideData"
+        (click)="toggleExpand(i)"
+       [expanded]="panel===i" style="margin-bottom: 10px"
+        [attr.data-index]="i">
+       <mat-expansion-panel-header >
+       <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+       </mat-expansion-panel-header>
+         <mat-panel-description>
+        {{item.description}}
+        <div>
+         
+        </div>
+         </mat-panel-description>
+       </mat-expansion-panel>
+       <mat-expansion-panel *ngIf="item.title=== 'Git' && sideData"
+       (click)="toggleExpand(i)"
+      [expanded]="panel===i" style="margin-bottom: 10px"
+       [attr.data-index]="i">
+      <mat-expansion-panel-header >
+      <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+      </mat-expansion-panel-header>
+        <mat-panel-description>
+       {{item.description}}
+       <div>
+        
+       </div>
+        </mat-panel-description>
+      </mat-expansion-panel>
+      <mat-expansion-panel *ngIf="item.title === 'Gmail' && sideData"
+      (click)="toggleExpand(i)"
+     [expanded]="panel===i" style="margin-bottom: 10px"
+      [attr.data-index]="i">
+     <mat-expansion-panel-header >
+     <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+     </mat-expansion-panel-header>
+       <mat-panel-description>
+      {{item.description}}
+      <div>
+       
+      </div>
+       </mat-panel-description>
+     </mat-expansion-panel>
+
+     <mat-expansion-panel *ngIf="item.title=== 'Bug' && sideData"
+     (click)="toggleExpand(i)"
+    [expanded]="panel===i" style="margin-bottom: 10px"
+     [attr.data-index]="i">
+    <mat-expansion-panel-header >
+    <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+    </mat-expansion-panel-header>
+      <mat-panel-description>
+     {{item.description}}
+     <div>
+      
+     </div>
+      </mat-panel-description>
+    </mat-expansion-panel>
       </ng-container>
-
-
     </div>
   </mat-sidenav>
 <mat-sidenav-content>
@@ -197,7 +302,7 @@
           </div>
         </div>
         <div class="table-section">
-          <app-project-table (getExpand)=getExpandData($event)></app-project-table>
+          <app-project-table  (getExpand)=getExpandData($event)></app-project-table>
         </div>
       </div>      
 </mat-sidenav-content>

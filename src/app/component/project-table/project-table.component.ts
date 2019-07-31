@@ -17,11 +17,19 @@ import { Subject } from 'rxjs';
 export class ProjectTableComponent implements OnInit {
 
 
-
+public queryParam = {
+  datecreatedfrom: '1567810800000',
+  datecreatedto: '1567810800000',
+  enddate: '1567810800000',
+  page: 1,
+  sfielter: '',
+  size: 20,
+  startdate: '1567810800000'
+};
   // dataSource = new MatTableDataSource(tableData) ;
   constructor(private service: ProjectService) { }
 
-  displayedColumns: string[] = ['#', 'name', 'status', 'date', 'activities', 'teams', 'document', 'webhooks', 'more'];
+  displayedColumns: string[] = ['alias', 'name',  'status', 'date', 'activities', 'teams', 'document', 'webhooks', 'more'];
   message = 'hello';
   rowData: any;
   expand: boolean;
@@ -33,22 +41,21 @@ export class ProjectTableComponent implements OnInit {
 
   searchKey = '';
 
-  toggleExpand(row) {
+  toggleExpand(row, panel) {
     console.log(row);
     this.expand = !this.expand;
     // this.rowData = {...row, expand: this.expand};
     console.log(this.expand);
-    return this.getExpand.emit(this.expand);
+    return this.getExpand.emit({showDrawer: this.expand, panelType: panel, data: row});
   }
-  ngOnInit() {
+
+  getDataTable() {
+  }
+  async ngOnInit() {
     this.expand = false;
-    this.service.gettableData()
-      .subscribe((projects) => {
-        const datarray = projects.map(item => {
-          return { ...item };
-        });
-        this.dataSource = new MatTableDataSource(datarray);
-      });
+    this.service.getProjectList(this.queryParam);
+    const datarray = await this.service.getProjectList(this.queryParam);
+    this.dataSource = await new MatTableDataSource(datarray);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

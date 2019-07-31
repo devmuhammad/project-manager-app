@@ -48,6 +48,18 @@ import { UpdateClientComponent } from './component/modals/update-client/update-c
 import { ServerCredentialsComponent } from './component/modals/server-credentials/server-credentials.component';
 import { ClientsTableComponent } from './component/clients-table/clients-table.component';
 import { NewGroupModalComponent } from './component/modals/new-group-modal/new-group-modal.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { CreateProjectTypeModalComponent } from './component/modals/create-project-type-modal/create-project-type-modal.component';
+import { UpdateProjectTypeModalComponent } from './component/modals/update-project-type-modal/update-project-type-modal.component';
+import { UpdateStatusModalComponent } from './component/modals/update-status-modal/update-status-modal.component';
+import { CreateStatusModalComponent } from './component/modals/create-status-modal/create-status-modal.component';
+import { CreateTaskTypeModalComponent } from './component/modals/create-task-type-modal/create-task-type-modal.component';
+import { UpdateTaskTypeModalComponent } from './component/modals/update-task-type-modal/update-task-type-modal.component';
+import { UpdateDoctypeModalComponent } from './component/modals/update-doctype-modal/update-doctype-modal.component';
+import { AddDocTypeModalComponent } from './component/modals/add-doc-type-modal/add-doc-type-modal.component';
+import { UpdateProjectModalComponent } from './component/modals/update-project-modal/update-project-modal.component';
+import { CreateDocTypeModalComponent } from './component/modals/create-doc-type-modal/create-doc-type-modal.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -84,6 +96,16 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     UpdateClientComponent,
     ServerCredentialsComponent,
     ClientsTableComponent,
+    CreateProjectTypeModalComponent,
+    UpdateProjectTypeModalComponent,
+    UpdateStatusModalComponent,
+    CreateStatusModalComponent,
+    CreateTaskTypeModalComponent,
+    UpdateTaskTypeModalComponent,
+    UpdateDoctypeModalComponent,
+    AddDocTypeModalComponent,
+    UpdateProjectModalComponent,
+    CreateDocTypeModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,9 +138,18 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     UpdateGroupModalComponent,
     UpdateUserModalComponent,
     UpdateClientComponent,
-    CreateClientComponent
+    CreateClientComponent,
+    UpdateDoctypeModalComponent,
+    UpdateProjectModalComponent,
+    UpdateProjectTypeModalComponent,
+    UpdateStatusModalComponent,
+    UpdateTaskTypeModalComponent,
+    CreateStatusModalComponent,
+    CreateProjectTypeModalComponent,
+    CreateTaskTypeModalComponent,
+    CreateDocTypeModalComponent
   ],
-  providers: [ProjectService],
+  providers: [ProjectService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {

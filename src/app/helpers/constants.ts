@@ -25,7 +25,30 @@ export const BaseApi = {
     // Projects
     ADD_PROJECTS: 'project/add',
     PROJECTS: 'project/list',
-    
+    PROJECT_UPDATE: 'project/update',
+    PROJECTS_RETRIEVE: 'project/retrieve',
+    // PROJECT TYPES
+    PROJECT_TYPES: 'project/projecttypes',
+    PROJECT_TYPE_ADD: 'project/projecttype/add',
+    PROJECT_TYPE_UPDATE: 'project/projecttype/update',
+    // Tasks
+    TASK_TYPE_ADD : 'project/tasktype/add',
+    TASK_TYPE_UPDATE: 'project/tasktype/update',
+    TASK_TYPES: 'project/tasktypes',
+    // Documents
+    Documents: 'project/documents',
+    DOC_UPDATE: 'project/document/update',
+    DOC_RETRIEVE: 'project/document/retrieve',
+    DOC_ADD: 'project/document/add',
+
+    // STATUS
+    ADD_STATUS: 'project/status/add',
+    UPDATE_STATUS: 'project/status/update'
+,    // DOCTYPE
+    DOC_TYPE : 'project/documenttype',
+    DOC_TYPE_ADD : 'project/documenttype/add',
+    DOC_TYPE_UPDATE : 'project/documenttype/update',
+    DOC_TYPE_RETRIEVE: 'project/documenttype/retrieve',
     // add clients
     ADD_CLIENTS: 'project/client/add',
     DELETE_CLIENT: 'project/client/delete',
