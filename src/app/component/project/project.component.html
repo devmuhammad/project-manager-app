@@ -28,26 +28,86 @@
        <mat-expansion-panel-header >
        <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
        </mat-expansion-panel-header>
-         <mat-panel-description>
-        {{item.description}}
-        <div>
          
-        </div>
-         </mat-panel-description>
+            <mat-expansion-panel style="margin-bottom: 7px" >
+                <mat-expansion-panel-header >
+                    <mat-icon style="font-size: 16px;">folder_open</mat-icon>
+                  <span style="font-size: 10px;margin-right: 1.5px"> Project Description</span>
+                  </mat-expansion-panel-header>
+                 
+                    <div>
+                        <mat-list>
+                            <mat-list-item >
+                              <div>
+                                <p>
+                                  Timeline Info
+                                </p>
+                              </div>
+                            </mat-list-item>
+                          </mat-list>
+                    </div>
+                
+              </mat-expansion-panel>
        </mat-expansion-panel>
        <mat-expansion-panel *ngIf="item.title=== 'Team' && sideData"
        (click)="toggleExpand(i)"
       [expanded]="panel===i" style="margin-bottom: 10px"
        [attr.data-index]="i">
       <mat-expansion-panel-header >
-      <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+      <span style="margin-right: 10px">3  </span>{{item.title}} <span>Member(s)</span>
       </mat-expansion-panel-header>
-        <mat-panel-description>
-       {{item.description}}
-       <div>
-        
-       </div>
-        </mat-panel-description>
+       
+         
+          <mat-expansion-panel style="margin-bottom: 7px" >
+            <mat-expansion-panel-header >
+                <img class="teammate" src="../../../assets/img/avatar.png" />
+              <span style="font-size: 10px"> Muhammad</span>
+              </mat-expansion-panel-header>
+              <mat-panel-description>
+                <div>
+                    <mat-list>
+                        <mat-list-item >
+                            <p style="font-size: 15px" mat-line><span>Project Manager</span></p>
+                            <!-- <mat-divider></mat-divider> -->
+                        </mat-list-item>
+                      </mat-list>
+                </div>
+              </mat-panel-description>
+          </mat-expansion-panel>
+     
+          <mat-expansion-panel style="margin-bottom: 10px">
+              <mat-expansion-panel-header >
+                  <img class="teammate" src="../../../assets/img/avatar.png" />
+                <span style="font-size: 10px"> Aliyu</span>
+                </mat-expansion-panel-header>
+                <mat-panel-description>
+                  <div>
+                      <mat-list>
+                          <mat-list-item >
+                              <p style="font-size: 15px" mat-line><span>Supevisor</span></p>
+                              <!-- <mat-divider></mat-divider> -->
+                          </mat-list-item>
+                        </mat-list>
+                  </div>
+                </mat-panel-description>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel  style="margin-bottom: 10px">
+                <mat-expansion-panel-header >
+                    <img class="teammate" src="../../../assets/img/avatar.png" />
+                  <span style="font-size: 10px"> Bashir Ibrahim </span>
+                  </mat-expansion-panel-header>
+                  <mat-panel-description>
+                    <div>
+                        <mat-list>
+                            <mat-list-item >
+                                <p style="font-size: 15px" mat-line><span>Engineer</span></p>
+                                <!-- <mat-divider></mat-divider> -->
+                            </mat-list-item>
+                          </mat-list>
+                    </div>
+                  </mat-panel-description>
+              </mat-expansion-panel>
       </mat-expansion-panel>
 
 
@@ -138,10 +198,7 @@
         <p class="page-tittle">
           Project
         </p>
-        <div class="button add">
-      
-          <button (click)="onCreate()" mat-button mat-raised-button>Create Project</button>
-        </div>
+        
         <div class="suggestions">
           <p class="suggestion-title">Suggested projects</p>
           <div class="suggestion-items">

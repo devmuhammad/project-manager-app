@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
 import { ProjectType, project } from 'src/app/reducer/project.reducer';
 import { ProjectService } from '../../services/project.service';
 import { Subject } from 'rxjs';
+import { CreateProjectModalComponent } from '../create-project-modal/create-project-modal.component';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 
 
@@ -17,19 +19,23 @@ import { Subject } from 'rxjs';
 export class ProjectTableComponent implements OnInit {
 
 
-public queryParam = {
-  datecreatedfrom: '1567810800000',
-  datecreatedto: '1567810800000',
-  enddate: '1567810800000',
-  page: 1,
-  sfielter: '',
-  size: 20,
-  startdate: '1567810800000'
-};
+  public queryParam = {
+    datecreatedfrom: '1567810800000',
+    datecreatedto: '1567810800000',
+    enddate: '1567810800000',
+    page: 1,
+    sfielter: '',
+    size: 20,
+    startdate: '1567810800000'
+  };
   // dataSource = new MatTableDataSource(tableData) ;
-  constructor(private service: ProjectService) { }
+  constructor(private service: ProjectService,
+              private loadingBar: LoadingBarService,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog
+  ) { }
 
-  displayedColumns: string[] = ['alias', 'name',  'status', 'date', 'activities', 'teams', 'document', 'webhooks', 'more'];
+  displayedColumns: string[] = ['alias', 'name', 'status', 'date', 'activities', 'teams', 'document', 'webhooks', 'more'];
   message = 'hello';
   rowData: any;
   expand: boolean;
@@ -46,21 +52,53 @@ public queryParam = {
     this.expand = !this.expand;
     // this.rowData = {...row, expand: this.expand};
     console.log(this.expand);
-    return this.getExpand.emit({showDrawer: this.expand, panelType: panel, data: row});
+    return this.getExpand.emit({ showDrawer: this.expand, panelType: panel, data: row });
   }
 
   getDataTable() {
   }
   async ngOnInit() {
     this.expand = false;
-    this.service.getProjectList(this.queryParam);
-    const datarray = await this.service.getProjectList(this.queryParam);
-    this.dataSource = await new MatTableDataSource(datarray);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.updateRecord();
   }
 
+  onCreate() {
 
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '55%';
+    this.dialog.open(CreateProjectModalComponent, dialogConfig).afterClosed().subscribe(
+      () => {
+        this.updateRecord();
+      }
+    );
+  }
+
+  updateRecord() {
+    this.loadingBar.start();
+    this.service.getStatusList()
+    this.service.getProjectList(this.queryParam)
+      .subscribe(response => {
+        if (response.message === 'Success') {
+          this.loadingBar.complete();
+          const datarray = response.data.map(item => {
+            return { ...item };
+          });
+          this.dataSource = new MatTableDataSource(datarray);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        }
+      }, err => {
+        console.log(err);
+        this.loadingBar.complete();
+        this.snackBar.open('Network Failed', 'Dismiss', {
+          panelClass: ['error'],
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right'
+        })
+      });
+  }
   onSearchClear() {
     this.searchKey = '';
     this.applyFilter();

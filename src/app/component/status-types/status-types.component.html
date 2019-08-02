@@ -1,3 +1,81 @@
-<p>
-  status-types works!
-</p>
+<section>
+    <div class="section-header" style="width: 100%;margin-bottom: 10px">
+  
+      <div class="button add">
+        <button (click)="onCreate()" mat-raised-button>
+          <mat-icon>
+            add
+          </mat-icon>
+          Add New Status
+        </button>
+      </div>
+  
+      <mat-form-field class="search-form-field project-form-field item-search" style="width: 25%" floatLabel="never">
+        <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput placeholder="Search Status" />
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-button matSuffix mat-icon-button *ngIf="!searchKey">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    
+      <mat-table [dataSource]="dataSource" matSort>
+        <!-- Id Column -->
+        <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
+          <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell colspan="1" *matCellDef="let element"> {{element.statustypeid}} </mat-cell>
+        </ng-container>
+  
+        <!-- fullname Column -->
+        <ng-container matColumnDef="code">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
+          <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.code}}
+          </mat-cell>
+        </ng-container>
+  
+        <!-- fullname Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+          <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element">
+            {{element.description}} </mat-cell>
+        </ng-container>
+  
+        <!--actions-->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button [matMenuTriggerFor]="actionMenu" mat-icon-button>
+              <mat-icon style="color:var(--darkColor)">
+                settings
+              </mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" yPosition="below">
+              <button (click)="getDeleteType(element.id)" class="menu-button red" mat-menu-item>
+                <mat-icon class="red" style="color:var(--dangerColor)">
+                  delete_outlined
+                </mat-icon>
+                <span class="red">
+                  Delete
+                </span>
+              </button>
+              <button (click)="getEditType(element)" class="menu-button" mat-menu-item>
+                <mat-icon>
+                  edit
+                </mat-icon>
+                <span>
+                  Edit
+                </span>
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+        <!--more-->
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    
+  </section>

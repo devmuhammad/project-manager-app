@@ -1,3 +1,58 @@
-<p>
-  create-status-modal works!
-</p>
+<div style="width: 100%">
+    <h2 mat-dialog-title>Add Status</h2>
+  </div>
+  <mat-dialog-content >
+  <form  [formGroup]="form">
+   
+      <div class="form-container">
+            
+        <div class="formControl">
+          <label>Description</label>
+          <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
+              <input matInput placeholder="Description" formControlName="description" floatPlaceholder="never">
+              <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                <mat-icon>business</mat-icon>
+              </button>
+              <!-- <mat-error class="validation-error" *ngIf="name.invalid && (name.dirty || name.touched)">Invalid name</mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="formControl">
+            <label>code</label>
+            <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
+                <input matInput placeholder="Status code" formControlName="code" floatPlaceholder="never">
+                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                  <mat-icon>scatter_plot</mat-icon>
+                </button>
+                <!-- <mat-error class="validation-error" *ngIf="name.invalid && (name.dirty || name.touched)">Invalid name</mat-error> -->
+              </mat-form-field>
+          </div>
+       
+            
+        <div class="formControl">
+          
+            <label>Institution</label>
+            <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+              <mat-select  class="select" formControlName="institution" placeholder="Institution" floatPlaceholder="never"
+              >
+                <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                </mat-option>
+              </mat-select>
+                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+              </mat-form-field>
+          </div>
+         </div>
+  </form>
+  
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Close</button>
+    <button [disabled]="form.invalid" class="mat-raised-button mat-primary save"  buttonLoader [loaderColor]="'white'" (click)="saveAndAdd()">
+     <span></span>
+      Add more
+    </button>
+    <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" (click)="save()">
+      <span></span>
+      Add 
+    </button>
+  </mat-dialog-actions>
+  

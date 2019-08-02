@@ -88,12 +88,13 @@ export class CreateProjectModalComponent implements OnInit {
     this.service.getProjectType()
       .subscribe(({ meta, data, message }) => {
         if (message === "Success") {
+          console.log(data);
           this.types = data.map(item => {
             return { ...item };
           });
           this.typeLabel = "Types"
         }
-      }, err => this.typeLabel = 'Could\'nt fetch project types');
+      }, err => this.typeLabel = 'Could\'nt fetch projects');
   }
   getCurrentDate() {
     var today = new Date();

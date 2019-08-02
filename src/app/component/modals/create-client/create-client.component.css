@@ -13,7 +13,8 @@ h2{
   }
 
   mat-dialog-content{
-    max-height: 350px;
+    max-height:350px;
+    overflow-x: hidden !important;
 }
 
 .formControl{

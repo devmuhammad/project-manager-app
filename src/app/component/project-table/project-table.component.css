@@ -15,7 +15,13 @@ table {
   background: green !important;
   color: green !important;
 } */
-
+.add button{
+  font-size: 16px;
+  font-weight: 400;
+  background: var(--primaryColor);
+  padding: 0 20px 0 20px;
+  color: var(--lightColor);
+}
 mat-table.table{
   transition: none !important;
   box-shadow: none !important;

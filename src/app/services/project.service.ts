@@ -32,32 +32,43 @@ projects: [];
   //   projectmanager: new FormControl('',Validators.required),
   // });
   gettableData(): Observable<any[]> {
-
     const { projectList } = store.getState().project;
+    console.log(projectList);
     return Observable.of(projectList);
   }
   // Projects
 addnewProject(payload: object): Observable<any> {
   return this.http.post(BaseApi.URL + BaseApi.PATH.ADD_PROJECTS, payload);
 }
-getProjectList(payload: object) {
-  return this.http.post(BaseApi.URL + BaseApi.PATH.PROJECTS, payload).toPromise().then(res => {
-    // console.log(res.data);
-   return this.projects = res.data.map((item: any) => ({...item}));
-  });
+getProjectList(payload: object): Observable <any> {
+  return this.http.post(BaseApi.URL + BaseApi.PATH.PROJECTS, payload);
 }
   //  project type
   getProjectType(): Observable<any> {
-    return this.http.get(BaseApi.URL + BaseApi.PATH.PROJECT_TYPES);
+    return this.http.get(BaseApi.URL + BaseApi.PATH['PROJECT_TYPES']);
   }
   addProjectType(payload: object): Observable<any> {
-    return this.http.post(BaseApi.URL + BaseApi.PATH.PROJECT_TYPE_ADD, payload);
+    return this.http.post(BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_ADD'], payload);
   }
   updateProjectType(payload: object): Observable<any> {
-    return this.http.put(BaseApi.URL + BaseApi.PATH.PROJECT_TYPE_UPDATE, payload);
+    return this.http.put(BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_UPDATE'], payload);
+  }
+
+  deleteProjectType(id: number): Observable<any>{
+    return this.http.delete(`${BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_DELETE']}/${id}`);
   }
 
   fetchProjectType(id): Observable<any> {
-    return this.http.get(`${BaseApi.URL + BaseApi.PATH.PROJECT_TYPES}/${id}`);
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH['PROJECTS_RETRIEVE']}/${id}`);
+  }
+  // Status Type
+  getStatusList(): Observable<any> {
+    return this.http.get(BaseApi.URL + BaseApi.PATH['STATUS']);
+  }
+  updateStatus(payload: object): Observable<any> {
+    return this.http.put(BaseApi.URL + BaseApi.PATH['UPDATE_STATUS'], payload);
+  }
+  addStatus(payload: object): Observable<any> {
+    return this.http.post(BaseApi.URL + BaseApi.PATH['ADD_STATUS'], payload);
   }
 }

@@ -32,10 +32,10 @@ export class ProjectComponent implements OnInit {
   panelType: any;
   expandableData: any[];
   expandables = [
-    { title: 'Activities', description: 'working on activities', panelType: 'Activities'},
-    {title: 'Documents', description: 'Project Documents', panelType: 'Documents'},
+    { title: 'Activities', description: 'No Activity', panelType: 'Activities'},
+    {title: 'Documents', description: 'No Document attatched to Project', panelType: 'Documents'},
     {title: 'Team', description: 'Project Supervisors and Others', panelType: 'Team'},
-    { title: 'Gmail', description: 'working on activities', panelType: 'webHook'},
+    { title: 'Gmail', description: 'No mail recieved/sent', panelType: 'webHook'},
     {title: 'Skype', description: 'Project Skype messages', panelType: 'webHook'},
     {title: 'Slack', description: 'Project slack messages', panelType: 'webHook'},
     {title: 'Git', description: 'Project repo and branches', panelType: 'webHook'},
@@ -48,30 +48,26 @@ export class ProjectComponent implements OnInit {
   toggleExpand(id) {
     return this.panel = id;
   }
-  onCreate() {
+  // onCreate() {
 
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '55%';
-    this.dialog.open(CreateProjectModalComponent, dialogConfig).afterClosed().subscribe(
-      () => {
-        this.updateRecord();
-      }
-    ); 
-  }
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.width = '55%';
+  //   this.dialog.open(CreateProjectModalComponent, dialogConfig).afterClosed().subscribe(
+  //     () => {
+  //       this.updateRecord();
+  //     }
+  //   ); 
+  // }
   ngOnInit() {
     this.showSide = false;
-    this.updateRecord();
-    console.log(this.service.projects);
   }
 
   onClose() {
 
   }
-  updateRecord() {
-    this.service.getProjectList(this.queryParam);
-  }
+
   getExpandData($event) {
     console.log($event);
     const {showDrawer, data, panelType} = $event;

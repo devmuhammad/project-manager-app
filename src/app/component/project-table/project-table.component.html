@@ -1,13 +1,18 @@
-
-<mat-form-field class="search-form-field project-form-field item-search" floatLabel="never" >
-  <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search project"/>
-  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-      <mat-icon >close</mat-icon>
-  </button>
-  <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
-      <mat-icon >search</mat-icon>
-  </button>
-</mat-form-field>
+<div class="section-header" style="width: 100%;">
+    <mat-form-field class="search-form-field project-form-field item-search" floatLabel="never" >
+      <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search project"/>
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+          <mat-icon >close</mat-icon>
+      </button>
+      <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+          <mat-icon >search</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="button add">
+          
+        <button (click)="onCreate()" mat-button mat-raised-button>Create Project</button>
+      </div>
+</div>
 <div >
 <mat-table class="table" [dataSource]="dataSource" matSort >
     <!-- Position Column -->

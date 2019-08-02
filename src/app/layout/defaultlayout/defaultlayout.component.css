@@ -17,6 +17,12 @@ background: #eee8;
   color: var(--primaryColor);
 }
 
+.user-acc{
+  height: 40px;
+  width: 40px;
+  border-radius:50%; 
+  margin-right: 60px;
+}
 .navbar-profile{
   font-family: var(--primaryFont);
   color: var(--primaryColor);

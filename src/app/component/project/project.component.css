@@ -5,8 +5,10 @@
 .page-container{
   position: relative;
   color:var(--primaryColor);
-  padding: 5px;
+  padding: 2px;
+  margin-right: 10px;
   font-family: var(--primaryFont);
+  overflow-x: hidden;
 }
 .button{
 
@@ -47,6 +49,7 @@ mat-sidenav {
 display: flex;
 justify-content: center;
 flex-direction: column;
+margin-left: 5%;
 }
 
 .suggestion-title{
@@ -72,6 +75,13 @@ flex-direction: column;
 position: relative;
 width: 25%;
 
+}
+
+.teammate{
+  width: 30px;
+  height: 30px;
+border-radius: 50%;
+margin-right: 10px;
 }
 .card-front, .card-back{
 width: 80%;
@@ -124,6 +134,12 @@ mat-card-header mat-card-title{
   justify-content: space-between;
 }
 
+.childpanel{
+  width: 200px !important;
+}
+mat-expansion-panel-body{
+padding: 3px !important;
+}
  mat-card-header mat-card-title span button mat-icon{
   color: var(--lightColor);
    position: absolute;
@@ -190,8 +206,9 @@ text-align: start;
 
 .table-section{
   padding: 10px;
-  width: 95%;
+  width:100%;
   margin-top:2%;
+  margin-right:3%;
 }
 
 .item-container:hover .card-front{

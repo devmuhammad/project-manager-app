@@ -31,6 +31,7 @@ export const BaseApi = {
     PROJECT_TYPES: 'project/projecttypes',
     PROJECT_TYPE_ADD: 'project/projecttype/add',
     PROJECT_TYPE_UPDATE: 'project/projecttype/update',
+    PROJECT_TYPE_DELETE: 'project/projecttype/delete',
     // Tasks
     TASK_TYPE_ADD : 'project/tasktype/add',
     TASK_TYPE_UPDATE: 'project/tasktype/update',
@@ -43,11 +44,13 @@ export const BaseApi = {
 
     // STATUS
     ADD_STATUS: 'project/status/add',
-    UPDATE_STATUS: 'project/status/update'
-,    // DOCTYPE
+    UPDATE_STATUS: 'project/status/update',
+    STATUS: 'project/status',
+   // DOCTYPE
     DOC_TYPE : 'project/documenttype',
     DOC_TYPE_ADD : 'project/documenttype/add',
     DOC_TYPE_UPDATE : 'project/documenttype/update',
+    DOC_TYPE_DELETE : 'project/documenttype/delete',
     DOC_TYPE_RETRIEVE: 'project/documenttype/retrieve',
     // add clients
     ADD_CLIENTS: 'project/client/add',
@@ -56,4 +59,5 @@ export const BaseApi = {
     UPDATE_CLIENT: 'project/client/update',
     CLIENTS: 'project/clients'
   }
-}
+};
+
