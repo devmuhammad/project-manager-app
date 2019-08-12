@@ -16,7 +16,7 @@ const initalState ={
   {id: 8, name: 'Trade Manager', date: '11 Aug 2014', status: 'In Progress'},
   {id: 9, name: 'Portfolio site', date: '21 Dec 2013', status: 'Completed'},
   {id: 10, name: 'Web Game', date: '10 Oct 2019', status: 'To do'}],
-  projectList: []
+  projectList: [],
 }
 
 export const project = (state = initalState, action) => {
@@ -28,6 +28,7 @@ export const project = (state = initalState, action) => {
           ...state,
           projectList: action.payload
         };
+        
     default:
       return state;
   }

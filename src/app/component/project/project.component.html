@@ -194,6 +194,12 @@
   </mat-sidenav>
 <mat-sidenav-content>
     <div class="page-container">
+<!-- <p class="crumb">{{chrome.parent}} <span><mat-icon></mat-icon></span></p>  -->
+<ul class="breadcrumb">
+  <li><a href="#"><mat-icon class="icon ">folder_open</mat-icon><span>{{chrome.child}}</span></a></li>
+  <li><a href="#"><mat-icon class="icon ">folder</mat-icon><span>{{chrome.parent}} </span></a></li>
+  <li><a href="#"><mat-icon class="icon ">home</mat-icon><span>Home</span></a></li>
+</ul>
 
         <p class="page-tittle">
           Project

@@ -9,6 +9,8 @@
   margin-right: 10px;
   font-family: var(--primaryFont);
   overflow-x: hidden;
+  width: 100%;
+  margin: 0;
 }
 .button{
 
@@ -147,7 +149,9 @@ padding: 3px !important;
    top:50px;
   line-height: -3;
 }
-
+.crumb{
+  transform: translateY(10%);
+}
 mat-card-header mat-card-subtitle{
   font-size: 12px;
   text-transform: capitalize;
