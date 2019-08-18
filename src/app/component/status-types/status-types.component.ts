@@ -10,6 +10,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { CreateStatusModalComponent } from '../modals/create-status-modal/create-status-modal.component';
 import { UpdateStatusModalComponent } from '../modals/update-status-modal/update-status-modal.component';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class StatusTypesComponent implements OnInit {
               private dialog: MatDialog,
               private dropdownService: DropdownsService,
               private loadingBar: LoadingBarService,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private commonservice: DefaultlayoutService
    ) { }
 
  displayedColumns: string[] = ['#', 'code', 'description',  'actions'];
@@ -97,6 +99,7 @@ export class StatusTypesComponent implements OnInit {
  ngOnInit() {
   this.getTableData();
   this.fetchInstitutionList();
+  this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Status Type'});
  }
  onSearchClear() {
    this.searchKey = '';

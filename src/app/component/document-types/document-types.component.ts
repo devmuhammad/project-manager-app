@@ -8,6 +8,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ActivityService } from 'src/app/services/activity.service';
 import { CreateDocTypeModalComponent } from '../modals/create-doc-type-modal/create-doc-type-modal.component';
 import { UpdateDoctypeModalComponent } from '../modals/update-doctype-modal/update-doctype-modal.component';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-document-types',
@@ -20,6 +21,7 @@ export class DocumentTypesComponent implements OnInit {
   constructor(private service: ActivityService,
               private dialog: MatDialog,
               private loadingBar: LoadingBarService,
+              private commonservice: DefaultlayoutService,
               private snackBar: MatSnackBar
   ) { }
 
@@ -114,6 +116,7 @@ export class DocumentTypesComponent implements OnInit {
   }
   ngOnInit() {
     this.getTableData();
+    this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Doc. Type'});
   }
   onSearchClear() {
     this.searchKey = '';

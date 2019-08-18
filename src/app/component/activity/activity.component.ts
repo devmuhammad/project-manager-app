@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-activity',
@@ -10,7 +11,9 @@ export class ActivityComponent implements OnInit {
 
   scrollRight:boolean =false;
   scrollLeft:boolean = false;
-  constructor( private service: ProjectService) {
+  constructor( private service: ProjectService,
+    private commonservice:DefaultlayoutService,
+    ) {
     window.setInterval(() => {
       this.scrollRight && window.scrollBy(1,0);
       this.scrollLeft && window.scrollBy(-1, 0);
@@ -19,6 +22,7 @@ export class ActivityComponent implements OnInit {
 
   allProjects =[];
   ngOnInit() {
+    this.commonservice.handleBreadChrome({parent:'Project',child :'Activities'});
     // this.service.gettableData().subscribe(items=>{
     //   console.log(items);
     //  let projects =items.map(item=>{

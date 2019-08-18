@@ -64,6 +64,7 @@ import { ProjectTypeComponent } from './component/project-type/project-type.comp
 import { TaskTypeComponent } from './component/task-type/task-type.component';
 import { DocumentTypesComponent } from './component/document-types/document-types.component';
 import { StatusTypesComponent } from './component/status-types/status-types.component';
+import { BreadcrumblayoutComponent } from './layout/breadcrumblayout/breadcrumblayout.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -114,6 +115,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     TaskTypeComponent,
     DocumentTypesComponent,
     StatusTypesComponent,
+    BreadcrumblayoutComponent,
   ],
   imports: [
     BrowserModule,

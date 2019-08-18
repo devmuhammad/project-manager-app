@@ -1,25 +1,27 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import {MatTableDataSource, MatSort,MatPaginator} from '@angular/material'
 import {ServerService} from '../../services/server.service'
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 @Component({
   selector: 'app-server-details',
   templateUrl: './server-details.component.html',
   styleUrls: ['./server-details.component.css']
 })
 export class ServerDetailsComponent implements OnInit {
-  displayedAccountColumns: string[] = ['#', 'name',  'provider','charges','actions'];
+  displayedAccountColumns: string[] = ['#', 'name',  'provider', 'charges', 'actions'];
   displayedCredentialsColumns: string[] = ['#', 'username',  'password','ipAddress','OS','servername','Type','accountid','actions'];
-  displayedToolsColumns: string[] = ['#',  'Database','applicationserver','credentialid','actions'];
-  displayedApplications:string[] =['#','applicationname','utilid', 'actions'];
-  constructor(private service:ServerService) { }
-  @ViewChild(MatSort) sort:MatSort;
-  @ViewChild(MatPaginator)paginator :MatPaginator;
+  displayedToolsColumns: string[] = ['#',  'Database', 'applicationserver','credentialid','actions'];
+  displayedApplications: string[] =['#','applicationname', 'utilid', 'actions'];
+  constructor(private service: ServerService, private commonservice: DefaultlayoutService) { }
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator)paginator: MatPaginator;
 
-  accountdataSource:MatTableDataSource<any>
-  toolsdataSource:MatTableDataSource<any>
-  credentialsdataSource:MatTableDataSource<any>
-  applicationdataSource:MatTableDataSource<any>
+  accountdataSource: MatTableDataSource<any>
+  toolsdataSource: MatTableDataSource<any>
+  credentialsdataSource: MatTableDataSource<any>
+  applicationdataSource: MatTableDataSource<any>
   ngOnInit() {
+    this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Server Details'});
     /* account data table*/
     this.service.getSeverAccount()
     .subscribe((account)=>{

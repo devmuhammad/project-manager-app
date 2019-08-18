@@ -43,7 +43,7 @@ export const routes: Routes = [
 
   {
     path: 'settings', component: DefaultlayoutComponent, children: [
-      { path: '', component: SettingsComponent, data: { animation: 'isRight' } },
+      { path: '',  data: { animation: 'isRight' }, component: SettingsComponent },
       { path: 'server', component: ServerDetailsComponent },
       {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
       {path: 'task/types', component: TaskTypeComponent, data: {animation: 'isRight'}},

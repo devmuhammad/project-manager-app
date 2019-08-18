@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CreateClientComponent } from '../modals/create-client/create-client.component';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-clients',
@@ -9,9 +10,12 @@ import { CreateClientComponent } from '../modals/create-client/create-client.com
 })
 export class ClientsComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,
+    private commonservice: DefaultlayoutService,
+    ) { }
 
   ngOnInit() {
+this.commonservice.handleBreadChrome({parent:'Clients',child:'List'})
   }
 
   onCreate() {

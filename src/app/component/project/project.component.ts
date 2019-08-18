@@ -18,7 +18,6 @@ export class ProjectComponent implements OnInit {
     size: 20,
     startdate: '1567810800000'
   };
-  public chrome: object;
   sideData: object;
   constructor(
     private dialog: MatDialog,
@@ -49,14 +48,9 @@ export class ProjectComponent implements OnInit {
     return this.panel = id;
   }
 
-  async ngOnInit() {
+   ngOnInit() {
     this.showSide = false;
     this.commonservice.handleBreadChrome({parent: 'Project', child: 'Page'});
-    await this.commonservice.geteBreadChrome()
-     .subscribe(chrome => {
-      this.chrome = chrome;
-     });
-    console.log(this.chrome);
   }
 
   onClose() {

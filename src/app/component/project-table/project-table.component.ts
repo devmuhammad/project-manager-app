@@ -5,6 +5,7 @@ import { ProjectService } from '../../services/project.service';
 import { Subject } from 'rxjs';
 import { CreateProjectModalComponent } from '../create-project-modal/create-project-modal.component';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 
 
@@ -32,6 +33,7 @@ export class ProjectTableComponent implements OnInit {
   constructor(private service: ProjectService,
               private loadingBar: LoadingBarService,
               private snackBar: MatSnackBar,
+              private commonservice: DefaultlayoutService,
               private dialog: MatDialog
   ) { }
 
@@ -59,6 +61,7 @@ export class ProjectTableComponent implements OnInit {
   }
   async ngOnInit() {
     this.expand = false;
+    this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Project Type'});
     this.updateRecord();
   }
 

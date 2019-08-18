@@ -22,11 +22,14 @@ import { CreateProjectModalComponent } from 'src/app/component/create-project-mo
 })
 export class DefaultlayoutComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
-              private service: DefaultlayoutService,
-              private dialog: MatDialog,
-              private bottomSheet: MatBottomSheet) { }
+    private service: DefaultlayoutService,
+    private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet) { }
   name: '';
   alias: '';
+  selected: any;
+  pathname: string;
+  pathOrigin:string;
   // tslint:disable-next-line: member-ordering
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -44,11 +47,13 @@ export class DefaultlayoutComponent implements OnInit {
         { name: 'Activities', icon: 'work', link: '/project/activities' },
       ]
     },
-    { name: 'User Managment', icon: 'people', children: [
-      { name: 'Groups', icon: 'people', link: '/user/group' },
-      { name: 'Requests', icon: 'person_add', link: '/user/request' },
-      { name: 'Users', icon: 'people', link: '/user' },
-    ]},
+    {
+      name: 'User Managment', icon: 'people', children: [
+        { name: 'Groups', icon: 'people', link: '/user/group' },
+        { name: 'Requests', icon: 'person_add', link: '/user/request' },
+        { name: 'Users', icon: 'people', link: '/user' },
+      ]
+    },
     {
       name: 'Clients', icon: 'people_outlined', link: '/client'
     },
@@ -58,7 +63,7 @@ export class DefaultlayoutComponent implements OnInit {
         { name: 'ProjectTypes', icon: 'folder_open', link: '/settings/project/types' },
         { name: 'Status', icon: 'outlined_flag', link: '/settings/status/types' },
         { name: 'DocumentTypes', icon: 'file_copy', link: '/settings/document/types' },
-        { name: 'taskTypes', icon: 'sort', link: '/settings/task/types' },
+        { name: 'TaskTypes', icon: 'sort', link: '/settings/task/types' },
       ]
     },
   ];
@@ -69,8 +74,7 @@ export class DefaultlayoutComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width ="55%";
-    
+    dialogConfig.width = '55%';
     this.dialog.open(CreateProjectModalComponent, dialogConfig);
   }
   prepareRoute(outlet: RouterOutlet) {
@@ -85,25 +89,28 @@ export class DefaultlayoutComponent implements OnInit {
    * @param object and index
    * @returns navigation function
    *  */
-  setStep(item, index) {
-    if (item.children) {
-      if (this.step === index) {
-        return this.step = '';
-      }
-      return this.step = index;
-    }
 
-  
-    return this.service.navigateToPath(item.link);
+  async setStep(item, index) {
+    if (item.children) {
+      return (this.step === index) ?
+        this.step = '' :
+        this.step = index;
+    } else {
+      this.pathname = item.link;
+      this.selected = index;
+      return this.service.navigateToPath(item.link);
+
+    }
   }
 
-  getProfile({fullname,username}) {
+  getProfile({ fullname, username }) {
     console.log(fullname);
     this.name = fullname;
-    this.alias = username; 
+    this.alias = username;
   }
 
   ngOnInit() {
+this.pathOrigin = window.location.pathname;
     const authUser = localStorage.getItem('currentUser');
     if (!authUser) { return this.service.navigateToPath('/'); }
     this.getProfile(this.service.user);

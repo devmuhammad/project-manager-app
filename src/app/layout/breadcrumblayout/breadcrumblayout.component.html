@@ -1,0 +1,16 @@
+<!-- <ul class="breadcrumb">
+  <li><a href="#"><mat-icon class="icon ">folder_open</mat-icon><span>{{crumb.child}}</span></a></li>
+  <li><a href="#"><mat-icon class="icon ">folder</mat-icon><span>{{crumb.parent}} </span></a></li>
+  <li><a href="#"><mat-icon class="icon ">home</mat-icon><span>Home</span></a></li>
+</ul> -->
+
+
+<div id="crumbs">
+    <ul>
+      <li (click)="gotoPath('/dashboard')" ><a><mat-icon class="icon ">home</mat-icon></a></li>
+      <li  ><a><mat-icon class="icon ">chevron_right</mat-icon></a></li>
+      <li (click)="gotoPath('/crumb.parent')" ><a >{{crumb.parent}} </a></li>
+      <li  ><a><mat-icon class="icon ">chevron_right</mat-icon></a></li>
+      <li><a >{{crumb.child}}</a></li>        
+    </ul>
+</div>

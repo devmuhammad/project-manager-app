@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 import { UpdateUserModalComponent } from '../update-user-modal/update-user-modal.component';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
 import { UserDetailsComponent } from '../user-details/user-details.component';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-users',
@@ -25,6 +26,7 @@ export class UsersComponent implements OnInit {
     private dialog: MatDialog,
     private group: DropdownsService,
     private loaderService: LoadingBarService,
+    private commonservice: DefaultlayoutService,
     private userService: UsersService,
   ) { }
   @ViewChild(MatSort) sort: MatSort;
@@ -174,6 +176,7 @@ export class UsersComponent implements OnInit {
     this.fetchdata();
     this.getGroups();
     this.status = true;
+    this.commonservice.handleBreadChrome({parent:'Users',child :''});
   }
 
   onSearchClear() {
