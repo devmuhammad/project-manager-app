@@ -97,9 +97,10 @@ export class ProjectTableComponent implements OnInit {
         this.loadingBar.complete();
         this.snackBar.open('Network Failed', 'Dismiss', {
           panelClass: ['error'],
+          duration: 7000,
           verticalPosition: 'bottom',
           horizontalPosition: 'right'
-        })
+        });
       });
   }
   onSearchClear() {

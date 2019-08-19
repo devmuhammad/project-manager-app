@@ -82,9 +82,10 @@ export class AuthenticationComponent implements OnInit {
           console.log(localStorage.getItem('profile'));
           this.loadingBar.complete();
           this.btnloader.hideLoader();
-          return this.router.navigateByUrl('/project');
+          return this.router.navigateByUrl('/dashboard');
         } else {
           this.loadingBar.complete();
+          this.btnloader.hideLoader();
           return this.snackBar.open('Login Failed', 'Dismiss', {
             duration: 7000,
             verticalPosition: "bottom",

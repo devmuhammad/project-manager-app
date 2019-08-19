@@ -22,14 +22,14 @@ import { CreateProjectModalComponent } from 'src/app/component/create-project-mo
 })
 export class DefaultlayoutComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
-    private service: DefaultlayoutService,
-    private dialog: MatDialog,
-    private bottomSheet: MatBottomSheet) { }
+              private service: DefaultlayoutService,
+              private dialog: MatDialog,
+              private bottomSheet: MatBottomSheet) { }
   name: '';
   alias: '';
   selected: any;
   pathname: string;
-  pathOrigin:string;
+  pathOrigin: string;
   // tslint:disable-next-line: member-ordering
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -88,17 +88,19 @@ export class DefaultlayoutComponent implements OnInit {
    *  items is clicked
    * @param object and index
    * @returns navigation function
-   *  */
+   * */
 
-  async setStep(item, index) {
+   
+   setStep(item, index) {
     if (item.children) {
       return (this.step === index) ?
         this.step = '' :
         this.step = index;
     } else {
       this.pathname = item.link;
+      this.pathOrigin = item.link;
       this.selected = index;
-      return this.service.navigateToPath(item.link);
+      this.service.navigateToPath(item.link);
 
     }
   }
@@ -110,9 +112,9 @@ export class DefaultlayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-this.pathOrigin = window.location.pathname;
+    this.pathname = this.pathOrigin = window.location.pathname;
     const authUser = localStorage.getItem('currentUser');
-    if (!authUser) { return this.service.navigateToPath('/'); }
+    if (!authUser) { return this.service.navigateToPath('/login'); }
     this.getProfile(this.service.user);
   }
   handleLogOut() {

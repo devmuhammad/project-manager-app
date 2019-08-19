@@ -116,6 +116,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     DocumentTypesComponent,
     StatusTypesComponent,
     BreadcrumblayoutComponent,
+    
+
   ],
   imports: [
     BrowserModule,

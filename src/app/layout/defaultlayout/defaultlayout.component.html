@@ -27,7 +27,7 @@
             <mat-expansion-panel class="expansion" [expanded]="step===i">
 
   <ng-container  *ngFor="let child of item.children;let i = index" [attr.data-index]="i">
-    <a mat-list-item [ngClass]="(pathname===child.link && i === selected ) || pathOrigin===child.link? 'active': '' " (click)="setStep(child,i)">
+    <a mat-list-item [ngClass]="(pathname===child.link && i === selected ) || pathOrigin===item.link? 'active': '' " (click)="setStep(child,i)">
       <span class="link-icon">
         <mat-icon class="icon">{{child.icon}}</mat-icon>
       </span>

@@ -26,6 +26,9 @@ background: #eee8;
   color: var(--primaryColor) !important;
 }
 
+.in-active{
+  background-color:inherit;
+}
 
 .user-acc{
   height: 40px;
