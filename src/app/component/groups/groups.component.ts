@@ -9,6 +9,7 @@ import { DropdownsService } from 'src/app/services/dropdowns.service';
 import { NewGroupModalComponent } from '../modals/new-group-modal/new-group-modal.component';
 import { AngularButtonLoaderService } from 'angular-button-loader';
 import { UpdateGroupModalComponent } from '../update-group-modal/update-group-modal.component';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
@@ -20,6 +21,7 @@ export class GroupsComponent implements OnInit{
     private groupService: DropdownsService,
     private dialog: MatDialog,
     private btnLoader: AngularButtonLoaderService,
+    private commonservice:DefaultlayoutService,
     private loaderService: LoadingBarService,
     ) { }
   roleList: '';
@@ -123,6 +125,7 @@ getRoles() {
    ngOnInit() {
     this.fetchdata();
     this.getRoles();
+    this.commonservice.handleBreadChrome({parent:'Users',child :'Group'});
   }
 
   onSearchClear() {

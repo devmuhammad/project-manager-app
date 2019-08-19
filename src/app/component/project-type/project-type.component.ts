@@ -7,6 +7,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { CreateProjectTypeModalComponent } from '../modals/create-project-type-modal/create-project-type-modal.component';
 import { UpdateProjectTypeModalComponent } from '../modals/update-project-type-modal/update-project-type-modal.component';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ProjectTypeComponent implements OnInit {
   constructor( private service: ProjectService,
                private dialog: MatDialog,
                private loadingBar: LoadingBarService,
+               private commonservice: DefaultlayoutService,
                private snackBar: MatSnackBar
     ) { }
 
@@ -115,6 +117,7 @@ export class ProjectTypeComponent implements OnInit {
   }
   ngOnInit() {
    this.getTableData();
+   this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Project Type'});
   }
   onSearchClear() {
     this.searchKey = '';

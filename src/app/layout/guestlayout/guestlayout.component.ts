@@ -22,9 +22,11 @@ export class GuestlayoutComponent implements OnInit {
   }
   constructor(
     private routerHelper: DefaultlayoutService,
+    
   ) { }
 
   ngOnInit() {
+  
   }
 gotoPath(path: string) {
   this.routerHelper.navigateToPath(path);

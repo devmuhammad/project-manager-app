@@ -1,19 +1,85 @@
 .wrapper{
-  text-align: center;
+  /* width: 100vw !important; */
+  /* text-align: center; */
     display: flex;
-    flex-direction: column;
+   
     align-items: center;
-    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     /* background:linear-gradient(228.76deg,  #2E7D32 -34.42%, #E084F1 127.18%); */
   /* background:  #2E7D32; */
-background: url('../../../../assets/img/greenland.jpg') center no-repeat ;
-background-size: cover;
+/* background: url('../../../../assets/img/greenland.jpg') center no-repeat ; */
+/* background-size: cover; */
 /* background-color: rgba(3, 61, 22, 0.14); */
 min-height: 100vh;
 overflow: hidden !important;
 }
 .main-nav{
   position: fixed;
+}
+
+.loginWrapper{
+  display: grid;
+  grid-template-columns: 1fr .5fr 1fr;
+  grid-column-gap: 1fr;
+
+}
+ .slideSection{
+   position: relative;
+  margin:4rem 0 0px 40px ;
+ }
+ .slideSection .slidewrapper{
+   width: 40rem;
+   height: 300px;
+   border-radius:4px ;
+   box-shadow: 0 10px 30px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+   overflow: hidden;
+ }
+
+
+.slidewrapper .slideContainer{
+  display: grid;
+  animation: slide 15s ease infinite;
+  grid-template-columns: repeat(3,100%);
+  grid-column-gap:0;
+  padding: 0;
+  margin-right: 0 !important;
+  height: 100%;
+  
+}
+.slideSection #slide1{
+  background:url('../../../../assets/img/banner4.jpg');
+  background-size:cover;
+
+}
+.slideSection #slide2{
+  background:url('../../../../assets/img/banner2.jpg');
+  background-size:cover;
+}
+.slideSection #slide3{
+  background:url('../../../../assets/img/banner3.jpg');
+  background-size:cover;
+}
+.slideTitle{
+  text-align: left !important;
+  margin: 10px;
+  color: #f1fcf1;
+  letter-spacing: 2px;
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+}
+.slideSection .button-holder{
+  
+  position: absolute;
+  bottom: -8%;
+  left: 60%;
+}
+.slideSection .button-holder img{
+  display: inline-block;
+  height: 23px;
+  margin: 30px;
 }
 .alt-auth{
   text-align: center;
@@ -45,7 +111,8 @@ overflow: hidden !important;
   width: 350px;
   position: relative;
   height: 440px;
-  margin-top:30px;
+  margin: 30px 40px 0;
+  /* margin-top:30px; */
   align-items: center;
   justify-content: center;
   border-radius: 5px;
@@ -155,4 +222,25 @@ bottom:20px;
 .passwordicon{
   height: 18px;
   width:18px;
+}
+
+@keyframes slide{
+  0%{transform:translateX(0%)}
+  10%{transform:translateX(-100%)}
+  20%{transform:translateX(-100%)}
+  30%{transform:translateX(-100%)}
+  40%{transform:translateX(-200%)}
+  50%{transform:translateX(-200%)}
+  60%{transform:translateX(-200%)}
+  70%{transform:translateX(0%)}
+  80%{transform:translateX(0%)}
+  90%{transform:translateX(0%)}
+  100%{transform:translateX(0%)}
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .loginWrapper{
+    grid-template-columns: 1fr;
+    grid-column-gap: 0;
+  }
 }

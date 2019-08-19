@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
-import { CreateProjectModalComponent } from '../create-project-modal/create-project-modal.component';
-import { store } from 'src/app/store';
 import { ProjectService } from 'src/app/services/project.service';
-
+import {  DefaultlayoutService} from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-project',
@@ -24,6 +22,7 @@ export class ProjectComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private service: ProjectService,
+    private commonservice: DefaultlayoutService,
      ) { }
   showSide: boolean;
   panelOpenState = false;
@@ -48,20 +47,10 @@ export class ProjectComponent implements OnInit {
   toggleExpand(id) {
     return this.panel = id;
   }
-  // onCreate() {
 
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.width = '55%';
-  //   this.dialog.open(CreateProjectModalComponent, dialogConfig).afterClosed().subscribe(
-  //     () => {
-  //       this.updateRecord();
-  //     }
-  //   ); 
-  // }
-  ngOnInit() {
+   ngOnInit() {
     this.showSide = false;
+    this.commonservice.handleBreadChrome({parent: 'Project', child: 'Page'});
   }
 
   onClose() {

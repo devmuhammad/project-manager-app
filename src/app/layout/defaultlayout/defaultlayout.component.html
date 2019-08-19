@@ -12,7 +12,7 @@
         </mat-toolbar>
         <mat-nav-list class="nav-list">
           <ng-container *ngFor="let item of menuList; let i = index" [attr.data-index]="i">
-            <a mat-list-item (click)="setStep(item,i)">
+            <a mat-list-item [ngClass]="(pathname===item.link && i === selected) || pathOrigin ===item.link? 'active': '' " (click)="setStep(item,i)">
               <span class="link-icon">
                 <mat-icon class="icon dashboard-icon">{{item.icon}}</mat-icon>
               </span>
@@ -25,14 +25,19 @@
               </span>
             </a>
             <mat-expansion-panel class="expansion" [expanded]="step===i">
-              <ng-container *ngFor="let child of item.children">
-                <a mat-list-item (click)="setStep(child)">
-                  <span class="link-icon">
-                    <mat-icon class="icon">{{child.icon}}</mat-icon>
-                  </span>
-                  {{child.name}}
-                </a>
-              </ng-container>
+
+  <ng-container  *ngFor="let child of item.children;let i = index" [attr.data-index]="i">
+    <a mat-list-item [ngClass]="(pathname===child.link && i === selected ) || pathOrigin===item.link? 'active': '' " (click)="setStep(child,i)">
+      <span class="link-icon">
+        <mat-icon class="icon">{{child.icon}}</mat-icon>
+      </span>
+      {{child.name}}
+      <span >
+          <mat-icon style="margin-right: 20px" class="icon arrow-icon">keyboard_arrow_right</mat-icon>
+        </span>
+    </a>
+  </ng-container>
+
             </mat-expansion-panel>
           </ng-container>
         </mat-nav-list>
