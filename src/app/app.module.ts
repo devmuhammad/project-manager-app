@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { NgModule,ModuleWithProviders } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DefaultlayoutComponent } from './layout/defaultlayout/defaultlayout.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import {MaterialModule} from './material/material.module';
+import { MaterialModule} from './material/material.module';
 import { GuestlayoutComponent } from './layout/guestlayout/guestlayout.component';
 import { AuthenticationComponent } from './component/auth/authentication/authentication.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
