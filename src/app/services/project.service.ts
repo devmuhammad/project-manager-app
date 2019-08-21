@@ -49,8 +49,15 @@ getProjectList(payload: any): Observable <any> {
   getProjectType(): Observable<any> {
     return this.http.get(BaseApi.URL + BaseApi.PATH['PROJECT_TYPES']);
   }
+
+  getTaskType(): Observable<any> {
+    return this.http.get(BaseApi.URL + BaseApi.PATH['TASK_TYPES']);
+  }
   addProjectType(payload: object): Observable<any> {
     return this.http.post(BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_ADD'], payload);
+  }
+  updatTaskType(payload): Observable<any> {
+    return this.http.put(BaseApi.URL + BaseApi.PATH['TASK_TYPE_UPDATE'], payload);
   }
   updateProjectType(payload: object): Observable<any> {
     return this.http.put(BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_UPDATE'], payload);

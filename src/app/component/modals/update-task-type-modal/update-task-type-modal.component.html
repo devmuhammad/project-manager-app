@@ -27,19 +27,6 @@
             </mat-form-field>
         </div>
      
-          
-      <div class="formControl">
-        
-          <label>Institution</label>
-          <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-            <mat-select  class="select" formControlName="institution" placeholder="Institution" floatPlaceholder="never"
-            >
-              <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
-              </mat-option>
-            </mat-select>
-              <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
-            </mat-form-field>
-        </div>
        </div>
 </form>
 
