@@ -40,8 +40,10 @@ projects: [];
 addnewProject(payload: object): Observable<any> {
   return this.http.post(BaseApi.URL + BaseApi.PATH.ADD_PROJECTS, payload);
 }
-getProjectList(payload: object): Observable <any> {
-  return this.http.post(BaseApi.URL + BaseApi.PATH.PROJECTS, payload);
+getProjectList(payload: any): Observable <any> {
+  // tslint:disable-next-line: max-line-length
+  return this.http.get(`${BaseApi.URL + BaseApi.PATH.PROJECTS}?datefrom=${payload.datefrom}&dateto=${payload.dateto}&institutionId=${payload.institutionId}&page=${payload
+  .page}&sFilter=All&size=${payload.size}`);
 }
   //  project type
   getProjectType(): Observable<any> {

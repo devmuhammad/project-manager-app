@@ -10,15 +10,15 @@ import {  DefaultlayoutService} from 'src/app/services/defaultlayout.service';
 })
 export class ProjectComponent implements OnInit {
   public queryParam = {
-    datecreatedfrom: '1567810800000',
-    datecreatedto: '1567810800000',
-    enddate: '1567810800000',
-    page: 1,
+    datecreatedfrom: '',
+    datecreatedto: '',
+    enddate: '',
+    page: 0,
     sfielter: '',
     size: 20,
-    startdate: '1567810800000'
+    startdate: ''
   };
-  sideData: object;
+  sideData: any;
   constructor(
     private dialog: MatDialog,
     private service: ProjectService,
@@ -51,6 +51,7 @@ export class ProjectComponent implements OnInit {
    ngOnInit() {
     this.showSide = false;
     this.commonservice.handleBreadChrome({parent: 'Project', child: 'Page'});
+    
   }
 
   onClose() {
@@ -60,8 +61,15 @@ export class ProjectComponent implements OnInit {
   getExpandData($event) {
     console.log($event);
     const {showDrawer, data, panelType} = $event;
-    this.showSide = showDrawer;
-    this.sideData = data;
+    console.log(data);
+    if (this.showSide && this.sideData.projectId === data.projectId) {
+      this.showSide = false;
+    } else {
+      this.showSide = true;
+      this.sideData = data;
+    }
+
+    // this.showSide = showDrawer;
     this.expandableData = this.expandables.filter((item: any) => item.panelType === panelType);
   }
 }

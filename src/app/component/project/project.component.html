@@ -10,7 +10,7 @@
         [expanded]="panel===i" style="margin-bottom: 10px"
          [attr.data-index]="i">
         <mat-expansion-panel-header >
-        <span style="margin-right: 10px">{{sideData.projectactivitiesList.length}} </span>{{item.title}} 
+        <span style="margin-right: 10px">{{sideData.activityCounts}} </span>{{item.title}} 
         </mat-expansion-panel-header>
           <mat-panel-description>
          {{item.description}}
@@ -26,7 +26,7 @@
        [expanded]="panel===i" style="margin-bottom: 10px"
         [attr.data-index]="i">
        <mat-expansion-panel-header >
-       <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+       <span style="margin-right: 10px">{{sideData.documentCounts}} </span>{{item.title}} 
        </mat-expansion-panel-header>
          
             <mat-expansion-panel style="margin-bottom: 7px" >
@@ -54,7 +54,7 @@
       [expanded]="panel===i" style="margin-bottom: 10px"
        [attr.data-index]="i">
       <mat-expansion-panel-header >
-      <span style="margin-right: 10px">3  </span>{{item.title}} <span>Member(s)</span>
+      <span style="margin-right: 10px">{{item.teamMemberCounts}}  </span>{{item.title}} <span>Member(s)</span>
       </mat-expansion-panel-header>
        
          
@@ -123,7 +123,7 @@
        [expanded]="panel===i" style="margin-bottom: 10px"
         [attr.data-index]="i">
        <mat-expansion-panel-header >
-       <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+       <span style="margin-right: 10px">{{sideData.teamMemberCounts}} </span>{{item.title}} 
        </mat-expansion-panel-header>
          <mat-panel-description>
         {{item.description}}
@@ -137,7 +137,7 @@
        [expanded]="panel===i" style="margin-bottom: 10px"
         [attr.data-index]="i">
        <mat-expansion-panel-header >
-       <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+       <span style="margin-right: 10px">{{sideData.teamMemberCounts}} </span>{{item.title}} 
        </mat-expansion-panel-header>
          <mat-panel-description>
         {{item.description}}
@@ -151,7 +151,7 @@
       [expanded]="panel===i" style="margin-bottom: 10px"
        [attr.data-index]="i">
       <mat-expansion-panel-header >
-      <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+      <span style="margin-right: 10px">{{sideData.teamMemberCounts}} </span>{{item.title}} 
       </mat-expansion-panel-header>
         <mat-panel-description>
        {{item.description}}
@@ -165,7 +165,7 @@
      [expanded]="panel===i" style="margin-bottom: 10px"
       [attr.data-index]="i">
      <mat-expansion-panel-header >
-     <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+     <span style="margin-right: 10px">{{sideData.teamMemberCounts}} </span>{{item.title}} 
      </mat-expansion-panel-header>
        <mat-panel-description>
       {{item.description}}
@@ -180,7 +180,7 @@
     [expanded]="panel===i" style="margin-bottom: 10px"
      [attr.data-index]="i">
     <mat-expansion-panel-header >
-    <span style="margin-right: 10px">{{sideData.projectdocumentsList.length}} </span>{{item.title}} 
+    <span style="margin-right: 10px">{{sideData.teamMemberCounts}} </span>{{item.title}} 
     </mat-expansion-panel-header>
       <mat-panel-description>
      {{item.description}}

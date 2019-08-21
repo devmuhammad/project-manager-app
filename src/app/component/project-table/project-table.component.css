@@ -122,6 +122,10 @@ mat-form-field{
   width: 40%;
 }
 
+.active{
+  background: linear-gradient(228.76deg, rgb(75, 138, 163) -34.42%, rgb(220, 233, 229) 97.18%);
+  }
+
 .mat-form-field-underline {
   background-color: green;
   color: green;

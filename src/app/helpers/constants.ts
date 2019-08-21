@@ -47,11 +47,11 @@ export const BaseApi = {
     UPDATE_STATUS: 'project/status/update',
     STATUS: 'project/status',
    // DOCTYPE
-    DOC_TYPE : 'project/documenttype',
-    DOC_TYPE_ADD : 'project/documenttype/add',
-    DOC_TYPE_UPDATE : 'project/documenttype/update',
-    DOC_TYPE_DELETE : 'project/documenttype/delete',
-    DOC_TYPE_RETRIEVE: 'project/documenttype/retrieve',
+    DOC_TYPE : 'document/documenttypes',
+    DOC_TYPE_ADD : 'document/documenttype/add',
+    DOC_TYPE_UPDATE : 'document/documenttype/update',
+    DOC_TYPE_DELETE : 'document/documenttype/delete',
+    DOC_TYPE_RETRIEVE: 'document/documenttype/retrieve',
     // add clients
     ADD_CLIENTS: 'project/client/add',
     DELETE_CLIENT: 'project/client/delete',

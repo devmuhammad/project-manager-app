@@ -21,14 +21,16 @@ export class ProjectTableComponent implements OnInit {
 
 
   public queryParam = {
-    datecreatedfrom: '1567810800000',
-    datecreatedto: '1567810800000',
-    enddate: '1567810800000',
-    page: 1,
-    sfielter: '',
+    datefrom: '',
+    dateto: '',
+    enddate: '',
+    institutionId:'',
+    sFilter:'',
+    page: 0,
     size: 20,
-    startdate: '1567810800000'
   };
+
+  selectedrow = -1;
   // dataSource = new MatTableDataSource(tableData) ;
   constructor(private service: ProjectService,
               private loadingBar: LoadingBarService,
@@ -48,6 +50,7 @@ export class ProjectTableComponent implements OnInit {
 
 
   searchKey = '';
+
 
   toggleExpand(row, panel) {
     console.log(row);
@@ -80,7 +83,7 @@ export class ProjectTableComponent implements OnInit {
 
   updateRecord() {
     this.loadingBar.start();
-    this.service.getStatusList()
+    this.service.getStatusList();
     this.service.getProjectList(this.queryParam)
       .subscribe(response => {
         if (response.message === 'Success') {
