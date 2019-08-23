@@ -3,52 +3,52 @@
     Task manager
   </header>
   <mat-divider></mat-divider>
-  <form action="" class="form-section">
+  <form [formGroup]="form"  class="form-section">
      <div>
         <mat-grid-list cols="2" rowHeight="2:0.5">
             <mat-grid-tile>
-                <mat-form-field class="project-input">
-                    <mat-label>Project</mat-label>
-                    <mat-select class="input-select">
-                      <mat-option *ngFor="let project of projects" [value]="project.value">
-                        {{project.viewValue}}
+                <mat-form-field form class="project-input">
+                    <mat-label>{{projectLabel}}</mat-label>
+                    <mat-select formControlName="projectid" class="input-select">
+                      <mat-option *ngFor="let project of projectList" [value]="project.id">
+                        {{project.name}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="project-input">
-                    <mat-label>Task type</mat-label>
-                    <mat-select class="input-select">
-                      <mat-option *ngFor="let task of tasks" [value]="task.value">
-                        {{task.viewValue}}
+                    <mat-label>{{typeLabel}}</mat-label>
+                    <mat-select formControlName="tasksTypeid" class="input-select">
+                      <mat-option *ngFor="let task of tasksTypes" [value]="task.tasktypeid">
+                        {{task.description}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="project-input">
-                    <mat-label>Assigned to</mat-label>
-                    <mat-select class="input-select">
-                      <mat-option *ngFor="let project of projects" [value]="project.value">
-                        {{project.viewValue}}
+                    <mat-label>{{userLabel}}</mat-label>
+                    <mat-select formControlName="assignTo" class="input-select">
+                      <mat-option *ngFor="let user of userList" [value]="user.id">
+                        {{user.fullname}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
-                    <button  mat-raised-button class="attach-button">
-                      <mat-icon style="font-size: 18px;">cloud</mat-icon>
-                      Attach file
-                    </button>
+              <mat-form-field class="task-textarea">
+                <input type="text" formControlName="description" matInput placeholder="Description">
+              </mat-form-field>  
             </mat-grid-tile>
           </mat-grid-list>
           <mat-form-field class="task-textarea">
-              <textarea type="text" matInput placeholder="Summary"></textarea>
+              <input type="text" formControlName="comment" matInput placeholder="Comment">
             </mat-form-field>
 
             <div class="submit-button-section">
-                <button mat-raised-button class="attach-button">
+                <button [disabled]="form.invalid" buttonLoader [loaderColor]="'white'" (click)="addTask()" class="attach-button mat-raised-button mat-primary save">
+                  <span></span>
                     Create task
                   <mat-icon>
                     send

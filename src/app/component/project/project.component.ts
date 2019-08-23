@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import { ProjectService } from 'src/app/services/project.service';
 import {  DefaultlayoutService} from 'src/app/services/defaultlayout.service';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-project',
@@ -10,14 +11,11 @@ import {  DefaultlayoutService} from 'src/app/services/defaultlayout.service';
 })
 export class ProjectComponent implements OnInit {
   public queryParam = {
-    datecreatedfrom: '',
-    datecreatedto: '',
-    enddate: '',
     page: 0,
-    sfielter: '',
-    size: 20,
-    startdate: ''
+    size: 30,
+    projectid: 0 as number,
   };
+
   sideData: any;
   constructor(
     private dialog: MatDialog,
@@ -28,13 +26,17 @@ export class ProjectComponent implements OnInit {
   panelOpenState = false;
   expand: false;
   panel: number;
+  innerpane: number;
+  teamprofiles: any[];
+  projectActivities: any [];
   panelType: any;
   expandableData: any[];
+  searchKey = '';
   expandables = [
-    { title: 'Activities', description: 'No Activity', panelType: 'Activities'},
+    {title: 'Activities', description: 'No Activity', panelType: 'Activities'},
     {title: 'Documents', description: 'No Document attatched to Project', panelType: 'Documents'},
     {title: 'Team', description: 'Project Supervisors and Others', panelType: 'Team'},
-    { title: 'Gmail', description: 'No mail recieved/sent', panelType: 'webHook'},
+    {title: 'Gmail', description: 'No mail recieved/sent', panelType: 'webHook'},
     {title: 'Skype', description: 'Project Skype messages', panelType: 'webHook'},
     {title: 'Slack', description: 'Project slack messages', panelType: 'webHook'},
     {title: 'Git', description: 'Project repo and branches', panelType: 'webHook'},
@@ -42,7 +44,31 @@ export class ProjectComponent implements OnInit {
   ];
 
 
+async getTeamProfiles(id) {
+  this.service.getProjectTeamMembers(id).subscribe(({data}) => {
+    this.teamprofiles = data;
+    console.log(this.teamprofiles);
+  });
+}
 
+
+async getActivities(projectId) {
+  this.queryParam.projectid = projectId;
+  this.service.getProjectActivities(this.queryParam).subscribe(({data, message}) => {
+    console.log(data);
+    if (message === 'Success') { return  this.projectActivities = data;  }
+    this.projectActivities = [];
+  }, err => this.projectActivities = []);
+
+}
+
+toogleCollapse(id) {
+  this.innerpane = id;
+}
+
+closeSidePanel() {
+  this.showSide =false;
+}
 
   toggleExpand(id) {
     return this.panel = id;
@@ -51,7 +77,7 @@ export class ProjectComponent implements OnInit {
    ngOnInit() {
     this.showSide = false;
     this.commonservice.handleBreadChrome({parent: 'Project', child: 'Page'});
-    
+
   }
 
   onClose() {
@@ -61,15 +87,11 @@ export class ProjectComponent implements OnInit {
   getExpandData($event) {
     console.log($event);
     const {showDrawer, data, panelType} = $event;
-    console.log(data);
-    if (this.showSide && this.sideData.projectId === data.projectId) {
-      this.showSide = false;
-    } else {
-      this.showSide = true;
-      this.sideData = data;
-    }
-
-    // this.showSide = showDrawer;
+    this.sideData = data;
+    this.showSide = showDrawer;
     this.expandableData = this.expandables.filter((item: any) => item.panelType === panelType);
+    if (panelType === 'Team') { return this.getTeamProfiles(data.projectId); }
+    if (panelType === 'Activities') { return this.getActivities(data.projectId); }
+
   }
 }

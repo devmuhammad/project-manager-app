@@ -2,26 +2,84 @@
     <mat-sidenav #drawer class="sidenav" position="end" mode="push"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [(opened)]="showSide" [ngClass]="halfclose? 'halfClose':''">
-    <div class="side-content" *ngIf="showSide" style="padding: 10px">
+    <div class="side-content" *ngIf="showSide" style="padding: 0px">
+      <button (click)="closeSidePanel()" mat-button mat-icon-button>
+          <mat-icon style="font-size: 13px"  >close</mat-icon>
+      </button>
+        <mat-form-field style="margin: 5px;width:90%" class="search-form-field project-form-field item-search" floatLabel="never" >
+            <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search "/>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                <mat-icon >close</mat-icon>
+            </button>
+            <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+                <mat-icon >search</mat-icon>
+            </button>
+          </mat-form-field>
         <!-- <p class="sub-title">Project Info</p> -->
       <ng-container *ngFor="let item of expandableData;let i = index" >
-        <mat-expansion-panel *ngIf="item.title=== 'Activities' && sideData"
+        <mat-expansion-panel  class="panel-section"  [ngClass]="{
+          'todo' : sideData.projectstatus =='New',
+          'inprogress' : sideData.projectstatus =='string',
+          'completed' :sideData.projectstatus =='Completed'
+       }"  *ngIf="item.title=== 'Activities' && sideData"
          (click)="toggleExpand(i)"
         [expanded]="panel===i" style="margin-bottom: 10px"
          [attr.data-index]="i">
         <mat-expansion-panel-header >
         <span style="margin-right: 10px">{{sideData.activityCounts}} </span>{{item.title}} 
         </mat-expansion-panel-header>
-          <mat-panel-description>
-         {{item.description}}
-         <div>
+             
+              <ng-container *ngFor=" let activity of projectActivities;let idx = index">
+                  <mat-expansion-panel 
+                   (click)="toogleCollapse(idx)"
+                   [expanded]="innerpane===idx" 
+                   [attr.data-index]="idx"
+                   class="panel-child"
+                    style="margin-bottom: 10px"
+                   
+                   >  
+                      <mat-expansion-panel-header >
+                         <label  class="panel-label" for="">Activity Type:</label>
+                        <span  style="font-size: 12.5px;font-family: var(--primaryFont);color:var(--primaryColor);font-weight: 500">{{activity.actionflow}}</span>
+                        </mat-expansion-panel-header>
+                        
+                        <mat-panel-description>
+                          <div class="desc-container">
+                            <p matTooltip="Project Name" class="teammate-title" >{{activity.projectid.description}}</p>
+                            <!-- <span matTooltip="Current project status is {{activity.projectid.projectstatus}} " class="panel-status"  [ngClass]="{
+                              'todo' : activity.projectid.projectstatus =='New',
+                              'inprogress' : activity.projectid.projectstatus =='string',
+                              'completed' :activity.projectid.projectstatus =='Completed'
+                           }"></span> -->
+                            <ul style="margin-top:-5px " class="teammate-details">
+                              <li>
+                                <label for="">Type of Task Assigned :</label>
+                                <span>{{activity.tasktype}}</span>
+                              </li>
+                              <li>
+                                  <label for="">Assignee :</label>
+                                  <span>{{activity.assignedto.fullname}}</span>
+                                </li>
+                                <li>
+                                    <label for="">Assigned by :</label>
+                                    <span>{{activity.userid.fullname}}</span>
+                                  </li>
+                                  <li matTooltip="Additional  Comment">
+                                    <mat-divider></mat-divider>
+                                    <mat-icon style="font-size: 12px">insert_comment</mat-icon>
+                                      <label for="">{{activity.usercomment}}</label>
+                                    </li>
+                            </ul>
+                            
+                          </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel>
+                   </ng-container>
           
-         </div>
-          </mat-panel-description>
         </mat-expansion-panel>
         
 
-        <mat-expansion-panel *ngIf="item.title=== 'Documents' && sideData"
+        <mat-expansion-panel class="panel-section" *ngIf="item.title=== 'Documents' && sideData"
         (click)="toggleExpand(i)"
        [expanded]="panel===i" style="margin-bottom: 10px"
         [attr.data-index]="i">
@@ -49,65 +107,45 @@
                 
               </mat-expansion-panel>
        </mat-expansion-panel>
-       <mat-expansion-panel *ngIf="item.title=== 'Team' && sideData"
+       <mat-expansion-panel class="panel-section" *ngIf="item.title=== 'Team' && sideData"
        (click)="toggleExpand(i)"
       [expanded]="panel===i" style="margin-bottom: 10px"
        [attr.data-index]="i">
       <mat-expansion-panel-header >
-      <span style="margin-right: 10px">{{item.teamMemberCounts}}  </span>{{item.title}} <span>Member(s)</span>
+      <span style="margin-right: 10px"> {{sideData.teamMemberCounts}} </span> {{item.title}} <span>Member(s)</span>
       </mat-expansion-panel-header>
        
-         
-          <mat-expansion-panel style="margin-bottom: 7px" >
+
+    <ng-container *ngFor=" let teammate of teamprofiles;let idx = index">
+        <mat-expansion-panel style="margin-bottom: 7px"
+         (click)="toogleCollapse(idx)"
+         [expanded]="innerpane===idx" 
+         [attr.data-index]="idx"
+          style="margin-bottom: 10px"
+         >  
             <mat-expansion-panel-header >
                 <img class="teammate" src="../../../assets/img/avatar.png" />
-              <span style="font-size: 10px"> Muhammad</span>
+              <span style="font-size: 13px">{{teammate.fullname}}</span>
               </mat-expansion-panel-header>
+              
               <mat-panel-description>
                 <div>
-                    <mat-list>
-                        <mat-list-item >
-                            <p style="font-size: 15px" mat-line><span>Project Manager</span></p>
-                            <!-- <mat-divider></mat-divider> -->
-                        </mat-list-item>
-                      </mat-list>
+                  <!-- <p class="teammate-title" >Team Member Info</p> -->
+                  <ul style="margin-top:-20px " class="teammate-details">
+                    <li>
+                      <label for="">Designation :</label>
+                      <span>{{teammate.designation}}</span>
+                    </li>
+                    <li>
+                        <label for="">Email :</label>
+                        <span>{{teammate.emailaddress}}</span>
+                      </li>
+                  </ul>
+                  
                 </div>
               </mat-panel-description>
           </mat-expansion-panel>
-     
-          <mat-expansion-panel style="margin-bottom: 10px">
-              <mat-expansion-panel-header >
-                  <img class="teammate" src="../../../assets/img/avatar.png" />
-                <span style="font-size: 10px"> Aliyu</span>
-                </mat-expansion-panel-header>
-                <mat-panel-description>
-                  <div>
-                      <mat-list>
-                          <mat-list-item >
-                              <p style="font-size: 15px" mat-line><span>Supevisor</span></p>
-                              <!-- <mat-divider></mat-divider> -->
-                          </mat-list-item>
-                        </mat-list>
-                  </div>
-                </mat-panel-description>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel  style="margin-bottom: 10px">
-                <mat-expansion-panel-header >
-                    <img class="teammate" src="../../../assets/img/avatar.png" />
-                  <span style="font-size: 10px"> Bashir Ibrahim </span>
-                  </mat-expansion-panel-header>
-                  <mat-panel-description>
-                    <div>
-                        <mat-list>
-                            <mat-list-item >
-                                <p style="font-size: 15px" mat-line><span>Engineer</span></p>
-                                <!-- <mat-divider></mat-divider> -->
-                            </mat-list-item>
-                          </mat-list>
-                    </div>
-                  </mat-panel-description>
-              </mat-expansion-panel>
+         </ng-container>
       </mat-expansion-panel>
 
 
@@ -118,7 +156,7 @@
           <p class="sub-title">Web hooks</p>
           <mat-divider></mat-divider>
 </div>
-  <mat-expansion-panel *ngIf="item.title=== 'Skype' && sideData"
+  <mat-expansion-panel class="panel-section" *ngIf="item.title=== 'Skype' && sideData"
         (click)="toggleExpand(i)"
        [expanded]="panel===i" style="margin-bottom: 10px"
         [attr.data-index]="i">
@@ -132,7 +170,7 @@
         </div>
          </mat-panel-description>
        </mat-expansion-panel>
-       <mat-expansion-panel *ngIf="item.title=== 'Slack' && sideData"
+       <mat-expansion-panel class="panel-section" *ngIf="item.title=== 'Slack' && sideData"
         (click)="toggleExpand(i)"
        [expanded]="panel===i" style="margin-bottom: 10px"
         [attr.data-index]="i">
@@ -146,7 +184,7 @@
         </div>
          </mat-panel-description>
        </mat-expansion-panel>
-       <mat-expansion-panel *ngIf="item.title=== 'Git' && sideData"
+       <mat-expansion-panel class="panel-section" *ngIf="item.title=== 'Git' && sideData"
        (click)="toggleExpand(i)"
       [expanded]="panel===i" style="margin-bottom: 10px"
        [attr.data-index]="i">
@@ -160,7 +198,7 @@
        </div>
         </mat-panel-description>
       </mat-expansion-panel>
-      <mat-expansion-panel *ngIf="item.title === 'Gmail' && sideData"
+      <mat-expansion-panel class="panel-section" *ngIf="item.title === 'Gmail' && sideData"
       (click)="toggleExpand(i)"
      [expanded]="panel===i" style="margin-bottom: 10px"
       [attr.data-index]="i">
@@ -175,7 +213,7 @@
        </mat-panel-description>
      </mat-expansion-panel>
 
-     <mat-expansion-panel *ngIf="item.title=== 'Bug' && sideData"
+     <mat-expansion-panel class="panel-section" *ngIf="item.title=== 'Bug' && sideData"
      (click)="toggleExpand(i)"
     [expanded]="panel===i" style="margin-bottom: 10px"
      [attr.data-index]="i">

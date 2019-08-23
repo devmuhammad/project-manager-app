@@ -12,7 +12,10 @@
         </mat-toolbar>
         <mat-nav-list class="nav-list">
           <ng-container *ngFor="let item of menuList; let i = index" [attr.data-index]="i">
-            <a mat-list-item [ngClass]="(pathname===item.link && i === selected) || pathOrigin ===item.link? 'active': '' " (click)="setStep(item,i)">
+            <a mat-list-item
+              [ngClass]="(pathname===item.link && i === selected) || pathOrigin ===item.link? 'active': '' "
+              (click)="setStep(item,i)">
+
               <span class="link-icon">
                 <mat-icon class="icon dashboard-icon">{{item.icon}}</mat-icon>
               </span>
@@ -26,17 +29,19 @@
             </a>
             <mat-expansion-panel class="expansion" [expanded]="step===i">
 
-  <ng-container  *ngFor="let child of item.children;let i = index" [attr.data-index]="i">
-    <a mat-list-item [ngClass]="(pathname===child.link && i === selected ) || pathOrigin===item.link? 'active': '' " (click)="setStep(child,i)">
-      <span class="link-icon">
-        <mat-icon class="icon">{{child.icon}}</mat-icon>
-      </span>
-      {{child.name}}
-      <span >
-          <mat-icon style="margin-right: 20px" class="icon arrow-icon">keyboard_arrow_right</mat-icon>
-        </span>
-    </a>
-  </ng-container>
+              <ng-container *ngFor="let child of item.children;let i = index" [attr.data-index]="i">
+                <a mat-list-item
+                  [ngClass]="(pathname===child.link && i === selected ) || pathOrigin===item.link? 'active': '' "
+                  (click)="setStep(child,i)">
+                  <span class="link-icon">
+                    <mat-icon class="icon">{{child.icon}}</mat-icon>
+                  </span>
+                  {{child.name}}
+                  <span>
+                    <mat-icon style="margin-right: 20px" class="icon arrow-icon">keyboard_arrow_right</mat-icon>
+                  </span>
+                </a>
+              </ng-container>
 
             </mat-expansion-panel>
           </ng-container>
@@ -49,15 +54,11 @@
                 <span style="padding-left: 10px">Add Project</span>
               </button>
 
-              <button (click)="openBottomSheet()" matTooltipPosition="bottom" matTooltip="Add new task" mat-icon-button>
-                  <mat-icon style="font-size:30px" class="tool-icon">add_circle</mat-icon>
-                  <span style="padding-left: 10px">Add Task</span>
-                </button>
-              <button matTooltipPosition="right" matTooltip="quick search" mat-icon-button>
-                <mat-icon matBadge="8" matBadgePosition="after" matBadgeColor="warn" class="tool-icon">notifications
-                </mat-icon>
-                <span style="padding-left: 10px">Notification</span>
+              <button (click)="openBottomSheet()" matTooltipPosition="right" matTooltip="Add new task" mat-icon-button>
+                <mat-icon style="font-size:30px" class="tool-icon">add_circle</mat-icon>
+                <span style="padding-left: 10px">Add Task</span>
               </button>
+
               <!-- <button matTooltipPosition="right" matTooltip="Switch module" mat-icon-button>
                 <mat-icon class="tool-icon">list</mat-icon>
                 <span style="padding-left: 10px">Menu</span>
@@ -74,6 +75,7 @@
     <mat-sidenav-content>
       <mat-toolbar class="main-nav">
         <span>Project Manager</span>
+
         <div class="account">
           <span><button mat-icon-button [matMenuTriggerFor]="auth">
               <img class="user-acc" src="../../../assets/img/avatar.png" />
@@ -96,7 +98,66 @@
           <span *ngIf="!(isHandset$ | async)">{{name}}</span>
           <span *ngIf="(isHandset$ | async)">{{alias}}</span>
           <div class="mat-card-avatar"></div>
+
         </div>
+
+        <button class="notification-icon" [matMenuTriggerFor]="notification" matTooltipPosition="left"
+          matTooltip="notification" mat-icon-button>
+          <mat-icon matBadge="{{activityList.length}}" matBadgePosition="after" matBadgeColor="warn" class="tool-icon">
+            notifications_active
+          </mat-icon>
+        </button>
+        <mat-menu #notification="matMenu" yPosition="above">
+          <div class="notification-panel">
+            <div class="banner">
+              <p>
+                <mat-icon matBadgePosition="after" matBadgeColor="warn" class="tool-icon">notifications_active
+                </mat-icon>
+              </p>
+              <span>
+                Notifications
+              </span>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="notification-details" *ngIf="activityList">
+              <div class="notification-container" style="margin-bottom: auto" *ngFor="let item of activityList;">
+
+                <mat-card class="nwrapper">
+                  <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)">{{item.projectid.projectname}}</p>
+                    <div class="notification-header">
+                        <p class="actionflow"> <span  ></span> {{item.actionflow}}</p>
+                        <p style="color: var(--greyColor);font-size: 13px">Action: <span style="color: var(--primaryColor)">{{item.tasktype}}</span></p>
+                      </div>
+                      <div class="notification-body">
+                         <mat-icon style="font-size: 15px">assignment</mat-icon>
+                        <p>{{item.usercomment}}</p>
+                      </div>
+                      <div class="author">
+                        <p style="margin-right:10px"> {{item.userid.fullname}}</p>
+                        <span><img width="20px" src="../../../assets/img/avatar.png" alt="assignedby"></span>
+                    </div>
+                  </mat-card>
+                <!-- <mat-divider></mat-divider> -->
+              </div>
+              <!--end of container-->
+            </div>
+            <!-- <button style="margin: 0;text-align:center;width:100%;background:var(--primaryColor);color:#fff" class="mat-button primary"> See all</button> -->
+          </div>
+          <!-- <button class="menu-button" mat-menu-item >
+                <mat-icon >
+                  store
+                </mat-icon>
+                 <span>
+                   View Update
+                 </span>
+               </button>
+               <button class="menu-button" mat-menu-item >
+                  <mat-icon >store</mat-icon>
+                  <span>
+                    Repository
+                  </span>
+                </button> -->
+        </mat-menu>
         <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" aria-label="Toggle sidenav"
           mat-icon-button (click)="opened=!opened">
           <mat-icon *ngIf="opened">menu</mat-icon>

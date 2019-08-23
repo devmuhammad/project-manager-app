@@ -93,6 +93,9 @@ bottom:2%;
   margin-bottom: 8px;
 }
 
+.actionflow{
+  font-size: 12px !important;
+}
 .actions{
   display: flex;
   flex-direction: column;
@@ -248,3 +251,84 @@ a[mat-list-item]:hover .icon,a[mat-list-item]:hover .icon.arrow-icon{
 .toolbar-theme{
   background: linear-gradient(228.76deg, rgb(119, 18, 73) -34.42%, #E084F1 127.18%);
 }
+.banner{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  padding: 10px;
+  overflow: hidden;
+  font-family: var(--primaryFont);
+}
+.banner p {
+  color: #00000099;
+ 
+}
+.author{
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  justify-content:flex-end; 
+}
+.notification-header,.notification-body{
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  color: var(--primaryColor);
+}
+.notification-header{
+font-size:15px;
+margin: 5px 0 2px 0;
+
+}
+.notification-icon{
+  padding:10px;
+}
+
+div.notification-container{
+  display: grid;
+  grid-auto-columns: 1fr 3fr;
+ 
+  /* justify-content:space-between;  */
+}
+.notification-body{
+  color: var(--greyColor); 
+}
+.nwrapper{
+  padding:0 10px;
+  margin-bottom: 5px;
+}
+.nwrapper:hover{
+  background: linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(250, 255, 253) 127.18%);
+
+background-size: cover; 
+}
+div.notification-details{
+  color: #00000099;
+  font-family: var(--primaryFont);
+  font-size: 12px;
+  overflow: scroll;
+  max-height: 220px;
+  padding: 4px !important;
+}
+.banner span{
+ 
+  letter-spacing: .4px;
+}
+.notification-icon{
+  position: absolute;
+  right: 30%;
+}
+.notification-panel{
+  width: 280px;
+  max-height:100%;
+  padding-bottom: 0;
+  /* padding:12px; */
+}
+@media (min-width: 320px) and (max-width: 1007px) {
+  .notification-icon{
+   
+    right: 40%;
+  }
+  
+  }

@@ -54,7 +54,7 @@ export class ProjectTableComponent implements OnInit {
 
   toggleExpand(row, panel) {
     console.log(row);
-    this.expand = !this.expand;
+    this.expand = true;
     // this.rowData = {...row, expand: this.expand};
     console.log(this.expand);
     return this.getExpand.emit({ showDrawer: this.expand, panelType: panel, data: row });
