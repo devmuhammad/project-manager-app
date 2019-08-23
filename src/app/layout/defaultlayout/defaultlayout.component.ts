@@ -57,12 +57,12 @@ export class DefaultlayoutComponent implements OnInit {
     },
     {
       name: 'Activities', icon: 'business_center', children: [
-        { name: 'Activities', icon: 'work_outline', link: '/project/activities' },
+        { name: 'Project', icon: 'work_outline', link: '/activity/activities' },
       ]
     },
     {
       name: 'Documents', icon: 'list_alt', children: [
-        { name: 'Documents', icon: 'file_copy', link: '/project/activities' },
+        { name: 'Documents', icon: 'file_copy', link: '/activity/documents' },
       ]
     },
     {

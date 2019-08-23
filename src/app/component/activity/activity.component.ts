@@ -22,7 +22,7 @@ export class ActivityComponent implements OnInit {
 
   allProjects =[];
   ngOnInit() {
-    this.commonservice.handleBreadChrome({parent:'Activities',child :'Page'});
+    this.commonservice.handleBreadChrome({parent:'Activities',child :'Project'});
     // this.service.gettableData().subscribe(items=>{
     //   console.log(items);
     //  let projects =items.map(item=>{

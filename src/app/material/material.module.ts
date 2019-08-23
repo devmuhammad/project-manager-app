@@ -28,6 +28,7 @@ import { MatStepperModule} from '@angular/material/stepper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { FormsModule} from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   imports: [
     MatButtonModule,
@@ -55,7 +56,8 @@ import { FormsModule} from '@angular/forms';
       MatNativeDateModule,
       MatDialogModule,
       FormsModule,
-      MatStepperModule
+      MatStepperModule,
+      MatTabsModule
     ],
 
   exports: [
@@ -84,7 +86,8 @@ import { FormsModule} from '@angular/forms';
       MatBadgeModule,
       MatDialogModule,
       FormsModule,
-      MatDatepickerModule
+      MatDatepickerModule,
+      MatTabsModule,
     ],
 
 })

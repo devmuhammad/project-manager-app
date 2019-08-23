@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-activity-container',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivityContainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private commonservice: DefaultlayoutService
+  ) { }
 
   ngOnInit() {
+    this.commonservice.handleBreadChrome({parent:'Activity', child : 'Module'});
   }
 
 }
