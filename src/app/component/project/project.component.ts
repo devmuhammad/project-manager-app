@@ -8,6 +8,7 @@ import {  DefaultlayoutService} from 'src/app/services/defaultlayout.service';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
+
 export class ProjectComponent implements OnInit {
   public queryParam = {
     datecreatedfrom: '1567810800000',
@@ -31,24 +32,21 @@ export class ProjectComponent implements OnInit {
   panelType: any;
   expandableData: any[];
   expandables = [
-    { title: 'Activities', description: 'No Activity', panelType: 'Activities'},
+    {title: 'Activities', description: 'No Activity', panelType: 'Activities'},
     {title: 'Documents', description: 'No Document attatched to Project', panelType: 'Documents'},
     {title: 'Team', description: 'Project Supervisors and Others', panelType: 'Team'},
-    { title: 'Gmail', description: 'No mail recieved/sent', panelType: 'webHook'},
+    {title: 'Gmail', description: 'No mail recieved/sent', panelType: 'webHook'},
     {title: 'Skype', description: 'Project Skype messages', panelType: 'webHook'},
     {title: 'Slack', description: 'Project slack messages', panelType: 'webHook'},
     {title: 'Git', description: 'Project repo and branches', panelType: 'webHook'},
     {title: 'Bug', description: 'Project issues', panelType: 'webHook'},
   ];
 
-
-
-
   toggleExpand(id) {
     return this.panel = id;
   }
 
-   ngOnInit() {
+  ngOnInit() {
     this.showSide = false;
     this.commonservice.handleBreadChrome({parent: 'Project', child: 'Page'});
   }
