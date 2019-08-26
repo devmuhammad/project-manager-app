@@ -1,37 +1,63 @@
+<div class="loginWrapper">
+  <div class="slideSection">
+    <h3 class="slideTitle">CABSOL Pro.</h3>
+    <div class="slidewrapper">
+      <div style="margin-right: 30px" class="slideContainer">
+        <div id="slide1"> 
+            
+        </div>
+        <div id="slide2"> 
+            
+        </div>
+        <div id="slide3"> 
+            
+        </div>
+      </div>
+    </div>
+    <div class="button-holder">
+      <a href="http://www.facebook.com/comsoftltd" target="_blank" class="dots">
+        <img src="../../../../assets/img/facebook.png" alt="facebook">
+      </a>
+      <a href="http://www.twitter.com/comsoftltd" target="_blank"  class="dots">
+          <img src="../../../../assets/img/twitter.png" alt="twitter">
+      </a>
+      <a  href="http://www.instagram.com/comsoftltd" target="_blank"  class="dots">
+          <img src="../../../../assets/img/Instagram.png" alt="Instagram">
+      </a>
+    </div>
+  </div>
+<div>
 
-
-
+</div>
   <div class="card-wrapper">
     <div class="form-wrapper">
       <p>Login</p>
       <form [formGroup]="form" (submit)="getSignIn(form)">
         <div class="form-container">
-            <mat-form-field class="project-form-field auth-form-field" floatLabel="never" >
-                <input matInput
-                        placeholder="Username"
-                       formControlName="username"  floatPlaceholder="never">
-                       <button mat-button matSuffix mat-icon-button  (click)="doNothing()">
-                          <mat-icon >person</mat-icon>
-                       </button>
-                       <mat-error >Invalid username name</mat-error>
-            </mat-form-field>
-            <mat-form-field style="margin-top:20px" class="project-form-field auth-form-field" floatLabel="never" >
-                <input matInput
-                        placeholder="Password"
-                       formControlName="password" type="{{inputType}}" floatPlaceholder="never">
-                       <button mat-button matSuffix mat-icon-button >
-                          <mat-icon (click)="toggleView()" >
-                              <img *ngIf="view" class="passwordicon" src="../../../../assets/img/eye-open.png"/>
-                            <img *ngIf="!view" class="passwordicon" src="../../../../assets/img/show_hide_password.png"/>
-                          </mat-icon>
+          <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+            <input matInput placeholder="Username" formControlName="username" floatPlaceholder="never">
+            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+              <mat-icon>person</mat-icon>
+            </button>
+            <mat-error>Invalid username name</mat-error>
+          </mat-form-field>
+          <mat-form-field style="margin-top:20px" class="project-form-field auth-form-field" floatLabel="never">
+            <input matInput placeholder="Password" formControlName="password" type="{{inputType}}"
+              floatPlaceholder="never">
+            <button mat-button matSuffix mat-icon-button>
+              <mat-icon (click)="toggleView()">
+                <img *ngIf="view" class="passwordicon" src="../../../../assets/img/eye-open.png" />
+                <img *ngIf="!view" class="passwordicon" src="../../../../assets/img/show_hide_password.png" />
+              </mat-icon>
 
-                       </button>
-                       <mat-error >Invalid project name</mat-error>
-            </mat-form-field>
-            <div class="forgetpasswordwrapper">
-              <button mat-button class="ForgetPassword" (click)="gotoPath('/reset')">Forget Password ?</button>
-            </div>
-          <button [disabled]="!form.valid" buttonLoader [loaderColor]="'white'" [ngClass]="!form.valid?'disabled': '' "  class="mat-raised-button submit-button">
+            </button>
+            <mat-error>Invalid project name</mat-error>
+          </mat-form-field>
+          <div class="forgetpasswordwrapper">
+            <button mat-button class="ForgetPassword" (click)="gotoPath('/reset')">Forget Password ?</button>
+          </div>
+          <button [disabled]="!form.valid" buttonLoader [loaderColor]="'white'" [ngClass]="!form.valid?'disabled': '' "
+            class="mat-raised-button submit-button">
             <span></span>
             Sign in
           </button>
@@ -39,18 +65,18 @@
             <p class="alt-label">Or login with</p>
             <div class="alt-auth">
               <div>
-                <img alt="google-logo" class="alt-items" src="../../../../assets/img/google.png"/>
+                <img alt="google-logo" class="alt-items" src="../../../../assets/img/google.png" />
               </div>
               <div>
-                  <img alt="git-logo" class="alt-items" src="../../../../assets/img/git.png"/>
-                </div>
+                <img alt="git-logo" class="alt-items" src="../../../../assets/img/git.png" />
+              </div>
             </div>
             <!-- <ngx-ui-loader fgsSize="45" [fgsType]="SPINNER.wanderingCubes"></ngx-ui-loader> -->
           </div>
           <div>
-            
-            <button (click)="gotoPath('/signup')"  mat-button   class="sign-up">
-              
+
+            <button (click)="gotoPath('/signup')" mat-button class="sign-up">
+
               Sign Up
             </button>
           </div>
@@ -59,4 +85,4 @@
       </form>
     </div>
   </div>
-
+</div>

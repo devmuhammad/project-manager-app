@@ -25,8 +25,8 @@ export class UpdateUserModalComponent implements OnInit {
     contactemail: '',
     supervisor: '',
     status: true,
-    institutionid: '',
-    designationid: '',
+    institutionid: 2 as number,
+    designationid: 1 as number,
     phone: '',
     groups: [],
   };

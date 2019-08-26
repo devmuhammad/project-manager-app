@@ -99,7 +99,7 @@ export class RequestTableComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
     dialogConfig.height = '400px';
-    dialogConfig.data = {details: row, users: this.allUsers, group: this.groupList};
+    dialogConfig.data = {details: row, users: this.allUsers, activities: false,  group: this.groupList};
     this.dialog.open(UserDetailsComponent, dialogConfig);
   }
   fetchdata() {

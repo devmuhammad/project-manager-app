@@ -11,17 +11,19 @@ data: any;
 supervisor: any;
 spvsrName: string;
 groups: any;
+activities: boolean;
 emptyGrp: string;
   constructor(
     @Inject(MAT_DIALOG_DATA) private row: any,
     private dialogref: MatDialogRef<UserDetailsComponent>
   ) {
     this.data = row.details;
+    this.activities = row.activities;
+   
   }
 
   ngOnInit() {
-    console.log(this.data);
-
+  
     this.supervisor   = this.row.users.filter((user: any) => user.id === this.data.supervisor);
     console.log(this.supervisor);
     if (this.supervisor === undefined || this.supervisor.length == 0) {

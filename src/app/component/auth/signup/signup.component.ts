@@ -131,7 +131,7 @@ toggleShow() {
       this.btnLoader.displayLoader();
       this.loadingBar.start();
       this.signupData.fullname = this.form.get('fullname').value;
-      this.signupData.username = this.form.get('username').value;
+      this.signupData.username = this.form.get('contactemail').value;
       this.signupData.institutionId = this.form.get('institutionId').value;
       this.signupData.password = this.form.get('password').value;
       this.signupData.designationid = this.form.get('designationId').value;

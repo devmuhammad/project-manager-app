@@ -24,10 +24,11 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSortModule} from '@angular/material/sort';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
-import { MatStepperModule} from '@angular/material/stepper'
-import {
-  FormsModule,
-} from '@angular/forms'
+import { MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { FormsModule} from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   imports: [
     MatButtonModule,
@@ -36,6 +37,7 @@ import {
       MatIconModule,
       MatSnackBarModule,
       MatSidenavModule,
+      MatDatepickerModule,
       MatFormFieldModule,
       MatCardModule,
       MatDividerModule,
@@ -51,9 +53,11 @@ import {
       MatMenuModule,
       MatBottomSheetModule,
       MatBadgeModule,
+      MatNativeDateModule,
       MatDialogModule,
       FormsModule,
-      MatStepperModule
+      MatStepperModule,
+      MatTabsModule
     ],
 
   exports: [
@@ -75,13 +79,15 @@ import {
       MatSortModule,
       MatListModule,
       MatExpansionModule,
+      MatNativeDateModule,
       MatTooltipModule,
       MatMenuModule,
       MatBottomSheetModule,
       MatBadgeModule,
       MatDialogModule,
       FormsModule,
-
+      MatDatepickerModule,
+      MatTabsModule,
     ],
 
 })

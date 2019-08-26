@@ -39,8 +39,8 @@ export class AuthenticationComponent implements OnInit {
   redirectRoute() {
     const authUser = JSON.parse(localStorage.getItem('profile'));
     console.log(authUser);
-    if(authUser){ return this.routerHelper.navigateToPath('/project');}
-    console.log("couldnt route");
+    if (authUser) { return this.routerHelper.navigateToPath('/project');}
+    console.log('couldnt route');
   }
   gotoPath(path: string) {
     // tslint:disable-next-line: deprecation
@@ -82,12 +82,13 @@ export class AuthenticationComponent implements OnInit {
           console.log(localStorage.getItem('profile'));
           this.loadingBar.complete();
           this.btnloader.hideLoader();
-          return this.router.navigateByUrl('/project');
+          return this.router.navigateByUrl('/dashboard');
         } else {
           this.loadingBar.complete();
+          this.btnloader.hideLoader();
           return this.snackBar.open('Login Failed', 'Dismiss', {
             duration: 7000,
-            verticalPosition: "bottom",
+            verticalPosition: 'bottom',
             horizontalPosition: 'left',
             panelClass: ['error']
           });

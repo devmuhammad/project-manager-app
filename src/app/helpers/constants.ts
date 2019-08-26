@@ -22,5 +22,56 @@ export const BaseApi = {
     // dropdowns
     INSTITUTIONS: 'users/institutions',
     DESIGNATIONS: 'users/designations',
+    // Projects
+    ADD_PROJECTS: 'project/add',
+    PROJECTS: 'project/list',
+    PROJECT_UPDATE: 'project/update',
+    PROJECTS_RETRIEVE: 'project/retrieve',
+    // PROJECT TYPES
+    PROJECT_TYPES: 'project/projecttypes',
+    PROJECT_TYPE_ADD: 'project/projecttype/add',
+    PROJECT_TYPE_UPDATE: 'project/projecttype/update',
+    PROJECT_TYPE_DELETE: 'project/projecttype/delete',
+    // Activity
+    ASSIGNEE_ACTIVITIES: 'activities/assignee',
+    // Tasks Type
+    TASK_TYPE_ADD : 'project/tasktype/add',
+    TASK_TYPE_UPDATE: 'project/tasktype/update',
+    TASK_TYPES: 'project/tasktypes',
+    // Tasks
+    TASK_ADD: 'task/add',
+    TASK_LIST: 'task/list',
+    TASK_INITIATOR: 'task/initiator',
+    TASK_DOCUMENT: 'task/documents',
+    TASK_HISTORY: 'task/history',
+    TASK_ASSIGNEE: 'task/assignee',
+    // Documents
+    Documents: 'project/documents',
+    DOC_UPDATE: 'project/document/update',
+    DOC_RETRIEVE: 'project/document/retrieve',
+    DOC_ADD: 'project/document/add',
+    // STATUS
+    ADD_STATUS: 'project/status/add',
+    UPDATE_STATUS: 'project/status/update',
+    STATUS: 'project/status',
+   // DOCTYPE
+    DOC_TYPE : 'document/documenttypes',
+    DOC_TYPE_ADD : 'document/documenttype/add',
+    DOC_TYPE_UPDATE : 'document/documenttype/update',
+    DOC_TYPE_DELETE : 'document/documenttype/delete',
+    DOC_TYPE_RETRIEVE: 'document/documenttype/retrieve',
+    // add clients
+    ADD_CLIENTS: 'project/client/add',
+    DELETE_CLIENT: 'project/client/delete',
+    RETRIEVE_CLIENT: 'project/client/retrieve',
+    UPDATE_CLIENT: 'project/client/update',
+    CLIENTS: 'project/clients',
+
+    // Team Members
+    TEAM_MEMBERS: 'project/teammembers',
+    // PROJECT ACTIVITY
+    PROJECT_ACTIVITY: 'project/activities'
+
   }
-}
+};
+

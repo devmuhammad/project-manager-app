@@ -1,0 +1,40 @@
+<div style="width: 100%">
+  <h2 mat-dialog-title>Update Task Type</h2>
+</div>
+<mat-dialog-content >
+<form  [formGroup]="form">
+ 
+    <div class="form-container">
+          
+      <div class="formControl">
+        <label>Description</label>
+        <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
+            <input matInput placeholder="Description" formControlName="description" floatPlaceholder="never">
+            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+              <mat-icon>business</mat-icon>
+            </button>
+            <!-- <mat-error class="validation-error" *ngIf="name.invalid && (name.dirty || name.touched)">Invalid name</mat-error> -->
+          </mat-form-field>
+      </div>
+      <div class="formControl">
+          <label>Code</label>
+          <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
+              <input matInput placeholder="Project code" formControlName="code" floatPlaceholder="never">
+              <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                <mat-icon>scatter_plot</mat-icon>
+              </button>
+              <!-- <mat-error class="validation-error" *ngIf="name.invalid && (name.dirty || name.touched)">Invalid name</mat-error> -->
+            </mat-form-field>
+        </div>
+     
+       </div>
+</form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+  <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" (click)="save()">
+    <span></span>
+    Update Project Type 
+  </button>
+</mat-dialog-actions>

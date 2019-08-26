@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {fader, slider} from './router-animations/router-animations.module'
 
 
@@ -11,8 +11,11 @@ import {fader, slider} from './router-animations/router-animations.module'
     slider,
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'projectmanager';
+ 
+ngOnInit(){
 
+}
 }
 

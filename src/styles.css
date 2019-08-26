@@ -8,7 +8,8 @@
 }
 :root{
   --primaryFont:'Open Sans',sans-serif;
-  --primaryColor:#2E7D32;
+  /* --primaryColor:#2E7D32; */
+  --primaryColor:#325774;
   --lightColor:#fff;
   --fontSize:16px;
   --dangerColor:#dd2b34;
@@ -20,6 +21,16 @@
 *{
   margin: 0;
   padding: 0;
+}
+input.ng-dirty.ng-invalid{
+  border-color: red;
+}
+.validation-error{
+  position: absolute;
+  top:0;
+  color:var(--warningColor);
+  font-family: var(--primaryFont);
+  font-size: 12px;
 }
 .section-header{
   color: var(--darkColor);
@@ -67,7 +78,7 @@ color: #2E7D32;
   background: #2196F3;
 }
 .success {
-  background:var(--primaryColor);
+  background:#2E7D32;
   color: var(--lightColor);
 
 }
@@ -176,6 +187,20 @@ mat-dialog-actions .save{
   flex-direction: column;
   justify-content: space-evenly;
 }
+/* 
+section{
+  margin:20px;
+  overflow-x: none;
+} */
+
+
+
+/* 
+#crumbs {
+  transform: scale(.5);
+  text-align: left !important;
+} */
+
 mat-row:nth-child(even){
   background: linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(250, 255, 253) 127.18%);
                 }

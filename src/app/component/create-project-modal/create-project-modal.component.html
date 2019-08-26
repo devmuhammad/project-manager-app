@@ -2,61 +2,97 @@
 <div style="width: 100%">
   <h2 mat-dialog-title>Create Project</h2>
   <!-- <mat-divider style="margin-top: 0px;width: 100%"></mat-divider> -->
-  <form [formGroup]="service.form" class="project-form">
+  <form [formGroup]="form" class="project-form">
 <div class="input-container">
-  <input type="hidden" formControlName="$key">
-  <input type="hidden" formControlName="createdAt" value="{{currentDate}}">
-  <mat-form-field class="project-form-field" floatLabel="never" >
-      <input matInput
-              placeholder="Name"
-             formControlName="name"  floatPlaceholder="never" required>
-             <button mat-button matSuffix mat-icon-button aria-label="Clear">
-                <mat-icon >folder </mat-icon>
-             </button>
-             <mat-error >Invalid project name</mat-error>
-  </mat-form-field>
-  <mat-form-field class="project-form-field" style="width: 15%" floatLabel="never" >
-      <input matInput
-              placeholder="Alias"
-             formControlName="alias"  floatPlaceholder="never" required>
-             <button mat-button matSuffix mat-icon-button aria-label="Clear">
-                <mat-icon >folder </mat-icon>
-             </button>
-             <mat-error>Invalid alias</mat-error>
-  </mat-form-field>
-  <mat-form-field floatLabel="never"  class="project-form-field" style="margin-top: 20px">
-      <mat-select class="select"formControlName="type"  placeholder="Project type"
-        floatPlaceholder="never" required>
-        <mat-option *ngFor="let item of types" [value]="item.name">{{item.name}}</mat-option>
-      </mat-select>
-
+ 
+  <div class="form-control" >
+    <label for="name">Name</label>
+    <mat-form-field class="project-form-field" floatLabel="never" >
+        <input matInput
+                placeholder="Name"
+               formControlName="name"  floatPlaceholder="never" required>
+               <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon >folder </mat-icon>
+               </button>
+               <mat-error >Invalid project name</mat-error>
     </mat-form-field>
-    <mat-form-field floatLabel="never" class="project-form-field" style="margin-top: 20px">
-        <mat-select class="select" formControlName="status" [value]="status[1][name]" placeholder="Project Status"
+  </div>
+  <div class="form-control halfing" >
+    <label for="alias">Alias</label>
+    <mat-form-field class="project-form-field halfing"   floatLabel="never" >
+        <input matInput
+                placeholder="Alias"
+               formControlName="code"  floatPlaceholder="never" required>
+               <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon >folder </mat-icon>
+               </button>
+               <mat-error>Invalid alias</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-control halfing" >
+      <label style="width: 100%" for="type">{{typeLabel}}</label>
+      <mat-form-field floatLabel="never"   class="project-form-field halfing">
+          <mat-select class="select"formControlName="type"  placeholder="Project type"
           floatPlaceholder="never" required>
-          <mat-option *ngFor="let item of status" [value]="item.name">{{item.name}}</mat-option>
+          <mat-option *ngFor="let item of types" [value]="item.projecttypeId">{{item.description}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="project-form-field" style="margin-top: 20px" floatLabel="never" >
-          <input matInput
-                  placeholder="Repository Link"
-                 formControlName="repository"  floatPlaceholder="never" required>
-                 <button mat-button matSuffix mat-icon-button aria-label="Clear">
-                    <mat-icon >link </mat-icon>
-                 </button>
+    </div>
+   
+    
+  <div class="form-control block" style="display: block;margin-bottom: 20px" >
+      <label for="description">Description</label>
+      <mat-form-field class="project-form-field description" style="margin-top: 10px;" floatLabel="never" >
+          <textarea matInput
+          placeholder="Description"
+          formControlName="description"  floatPlaceholder="never" >
+        </textarea>
       </mat-form-field>
+      
+    </div>
+    <div class="form-control" style="margin-top:20px " >
+        <label for="name">Start date</label>
+          <mat-form-field class="project-form-field" floatLabel="never" >
+              <input matInput formControlName="startdate" [matDatepicker]="picker" placeholder="DD-MM-YY">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="form-control" style="margin-top:20px " >
+        <label for="name">End date</label>
+        <mat-form-field class="project-form-field" floatLabel="never" >
+            <input matInput formControlName="enddate" [matDatepicker]="enddate" placeholder="DD-MM-YY">
+            <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+            <mat-datepicker #enddate></mat-datepicker>
+      </mat-form-field>
+    </div>
+      <mat-divider style="margin-top: 10px;width: 100%"></mat-divider>
+      <h2 class="client-section" mat-dialog-title>Add client</h2>
+    
+      <div class="form-control">
+        <label for="client">Project client</label>
+        <mat-form-field floatLabel="never" class="project-form-field">
+            <mat-select class="select" formControlName="client"  placeholder="Project Client"
+              floatPlaceholder="never" required>
+              <mat-option *ngFor="let item of clientsList" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      
+      <div class="form-control">
+          <label for="client">ProjectManager</label>
+          <mat-form-field floatLabel="never" class="project-form-field">
+              <mat-select class="select" formControlName="projectmanager"  placeholder="Project Manager"
+                floatPlaceholder="never" required>
+                <mat-option *ngFor="let item of clientsList" [value]="item.id">{{item.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
 
 </div>
-<mat-divider style="margin-top: 20px;width: 100%"></mat-divider>
-<mat-form-field class="project-form-field" style="margin-top: 20px;width: 95%" floatLabel="never" >
-    <textarea matInput
-            placeholder="Description"
-           formControlName="description"  floatPlaceholder="never" >
-           </textarea>
-</mat-form-field>
 
-<div class="input-container">
-    <mat-form-field class="project-form-field" style="margin-top: 20px" floatLabel="never" >
+<!-- <div class="input-container">
+    <mat-form-field class="project-form-field"  floatLabel="never" >
         <input matInput
                 placeholder="Staging Server"
                formControlName="repository"  floatPlaceholder="never" required>
@@ -72,7 +108,7 @@
                   <mat-icon >link </mat-icon>
                </button>
     </mat-form-field>
-  </div>
+  </div> -->
 <!--
 
             <mat-grid-tile>
@@ -92,7 +128,9 @@
 
   <mat-dialog-actions>
       <button class="mat-raised-button"(click)="close()">Close</button>
-      <button [disabled]="service.form.invalid" class="mat-raised-button mat-primary save"  (click)="save()">Save</button>
+      <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" (click)="save()">
+        <span></span>
+        Save</button>
   </mat-dialog-actions>
 </form>
 </div>

@@ -33,8 +33,8 @@ export class NewUserModalComponent implements OnInit {
     contactemail: '',
     supervisor: '',
     status: true,
-    institutionid: '',
-    designationid: '',
+    institutionid: 2 as number,
+    designationid: 1 as number,
     phone: '',
     groups: [],
   };
@@ -92,9 +92,10 @@ export class NewUserModalComponent implements OnInit {
     this.loadingBar.start();
     this.btnLoader.displayLoader();
     this.inputFields.fullname = this.form.get('fullname').value;
-    this.inputFields.username = this.form.get('username').value;
-    // this.inputFields.institution = this.form.get('institution').value;
-    // this.inputFields.designation = this.form.get('designation').value;
+    this.inputFields.username = this.form.get('contactemail').value;
+    // this.inputFields.username = this.form.get('username').value;
+    // this.inputFields.institutionid = 0
+    // this.inputFields.designationid = 1
     this.inputFields.supervisor = this.form.get('supervisor').value;
     this.inputFields.phone = this.form.get('phone').value;
     this.inputFields.contactemail = this.form.get('contactemail').value;
@@ -110,7 +111,8 @@ export class NewUserModalComponent implements OnInit {
         return this.snackbar.open(`${message } ${data}`, 'Dismiss', {
           panelClass: ['error'],
           duration: 7000,
-          direction: 'rtl'
+          horizontalPosition:'right',
+          verticalPosition:'bottom',
         });
       }
       if (message === 'Success' || 'Operation Successful') {
@@ -120,7 +122,8 @@ export class NewUserModalComponent implements OnInit {
         this.snackbar.open('New user added Successful', 'Dismiss', {
           panelClass: ['success'],
           duration: 7000,
-          direction: 'rtl'
+          horizontalPosition:'right',
+          verticalPosition:'bottom',
         });
         return this.dialogref.close();
       } else {
@@ -129,7 +132,8 @@ export class NewUserModalComponent implements OnInit {
         return this.snackbar.open('Failed to create new user', 'Dismiss', {
           panelClass: ['error'],
           duration: 7000,
-          direction: 'rtl'
+          horizontalPosition:'right',
+          verticalPosition:'bottom',
         });
       }
     }, err => {
@@ -138,7 +142,8 @@ export class NewUserModalComponent implements OnInit {
       return this.snackbar.open(' Failed to create a new user please check input and try again', 'Dismiss', {
         panelClass: ['error'],
         duration: 7000,
-        direction: 'rtl'
+        horizontalPosition:'right',
+          verticalPosition:'bottom',
       });
     });
   }

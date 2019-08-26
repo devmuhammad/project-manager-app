@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 import { UpdateUserModalComponent } from '../update-user-modal/update-user-modal.component';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
 import { UserDetailsComponent } from '../user-details/user-details.component';
+import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
 @Component({
   selector: 'app-users',
@@ -25,6 +26,7 @@ export class UsersComponent implements OnInit {
     private dialog: MatDialog,
     private group: DropdownsService,
     private loaderService: LoadingBarService,
+    private commonservice: DefaultlayoutService,
     private userService: UsersService,
   ) { }
   @ViewChild(MatSort) sort: MatSort;
@@ -33,6 +35,7 @@ export class UsersComponent implements OnInit {
   searchKey = "";
   groupList: any;
   allUsers: any;
+  status: boolean;
   onCreate() {
     console.log(this.groupList)
     const dialogConfig = new MatDialogConfig();
@@ -85,7 +88,7 @@ export class UsersComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
     dialogConfig.height = '400px';
-    dialogConfig.data = {data:row, group: this.groupList};
+    dialogConfig.data = {data:row,  group: this.groupList};
     this.dialog.open(UpdateUserModalComponent, dialogConfig).afterClosed().subscribe(
       () => {
         this.fetchdata();
@@ -103,7 +106,7 @@ export class UsersComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
     dialogConfig.height = '400px';
-    dialogConfig.data = {details: row, users: this.allUsers, group: this.groupList};
+    dialogConfig.data = {details: row, users: this.allUsers, activities: this.status, group: this.groupList};
     this.dialog.open(UserDetailsComponent, dialogConfig);
   }
  
@@ -172,7 +175,8 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.fetchdata();
     this.getGroups();
-
+    this.status = true;
+    this.commonservice.handleBreadChrome({parent:'Users',child :''});
   }
 
   onSearchClear() {

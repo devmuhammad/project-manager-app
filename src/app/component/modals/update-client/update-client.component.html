@@ -1,0 +1,75 @@
+<div style="width: 100%">
+    <h2 mat-dialog-title>Update Client</h2>
+  </div>
+  <mat-dialog-content >
+  <form  [formGroup]="form">
+    <div>
+  
+      <div class="form-container">
+            
+        <div class="formControl">
+          <label>Fullname</label>
+          <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
+              <input matInput placeholder="Fullname" formControlName="name" floatPlaceholder="never">
+              <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                <mat-icon>person</mat-icon>
+              </button>
+              <!-- <mat-error class="validation-error" *ngIf="name.invalid && (name.dirty || name.touched)">Invalid name</mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="formControl">
+            <label>Phone</label>
+            <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+                <input matInput placeholder="Designation" formControlName="contactphone" floatPlaceholder="never">
+                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                  <mat-icon>phone</mat-icon>
+                </button>
+                <!-- <mat-error *ngIf="phone.errors && (phone.dirty || phone.touched)">Invalid Phone</mat-error> -->
+              </mat-form-field>
+          </div>
+        <div class="formControl">
+          <label>Contact Email</label>
+          <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+            <input matInput placeholder="Email" formControlName="contactemail" floatPlaceholder="never">
+              <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                <mat-icon>email</mat-icon>
+              </button>
+              <!-- <mat-error *ngIf="email.errors && (email.dirty || email.touched)">Invalid email address</mat-error> -->
+            </mat-form-field>
+        </div>
+            
+        <div class="formControl">
+            <label>Web Url</label>
+            <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+                <input matInput placeholder="weburl" formControlName="weburl" floatPlaceholder="never">
+                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                  <mat-icon>language</mat-icon>
+                </button>
+                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+              </mat-form-field>
+          </div>
+        <div class="formControl">
+            <label>Contact Person </label>
+            <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+              <input matInput placeholder="Contact Person" formControlName="contactperson" floatPlaceholder="never">
+                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                  <mat-icon>person_outlined</mat-icon>
+                </button>
+                <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+              </mat-form-field>
+          </div>
+         </div>
+    </div>
+  </form>
+  
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Close</button>
+  
+    <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" (click)="save()">
+      <span></span>
+  
+      Update Client
+    </button>
+  </mat-dialog-actions>
+  

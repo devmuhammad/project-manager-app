@@ -1,24 +1,30 @@
-<mat-form-field class="search-form-field" floatLabel="never" >
-  <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search project"/>
-  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-      <mat-icon >close</mat-icon>
-  </button>
-  <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
-      <mat-icon >search</mat-icon>
-  </button>
-</mat-form-field>
-<div class="mat-elevation-z8">
-<mat-table [dataSource]="dataSource" matSort >
+<div class="section-header" style="width: 100%;">
+    <mat-form-field class="search-form-field project-form-field item-search" floatLabel="never" >
+      <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search project"/>
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+          <mat-icon >close</mat-icon>
+      </button>
+      <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+          <mat-icon >search</mat-icon>
+      </button>
+    </mat-form-field>
+    <div style="margin-right: 10px" class="button add">
+          
+        <button (click)="onCreate()" mat-button mat-raised-button>Create Project</button>
+      </div>
+</div>
+<div >
+<mat-table class="table" [dataSource]="dataSource" matSort >
     <!-- Position Column -->
-    <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
-      <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell colspan="1" *matCellDef="let element"> {{element.id}} </mat-cell>
+    <ng-container colspan="2" matColumnDef="alias" style="padding: 0 0 0 10px">
+      <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> Alias</mat-header-cell>
+      <mat-cell class="code" colspan="1" *matCellDef="let element"> {{element.code}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.projectname}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
@@ -26,55 +32,84 @@
       <mat-header-cell class="status-column" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
       <mat-cell class="status-cell"  *matCellDef="let element"
       [ngClass]="{
-        'todo' : element.status =='To do',
-        'inprogress' : element.status =='In Progress',
-        'completed' : element.status =='Completed'
+        'todo' : element.projectstatus =='New',
+        'inprogress' : element.projectstatus =='string',
+        'completed' : element.projectstatus =='Completed'
      }"
       >
-      <span class="status-span">{{element.status}}</span></mat-cell>
+      <span class="status-span">{{element.projectstatus}}</span></mat-cell>
     </ng-container>
-
+    
     <!-- Symbol Column -->
     <ng-container matColumnDef="date">
       <mat-header-cell class="status-column" *matHeaderCellDef> Created At</mat-header-cell>
-      <mat-cell *matCellDef="let element"> <span class="status-span">{{element.date}}</span> </mat-cell>
+      <mat-cell *matCellDef="let element"> <span class="status-span">{{element.startdate | date}}</span> </mat-cell>
     </ng-container>
      <!-- Symbol Column -->
-     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let row">
-      <button mat-icon-button>
-        <mat-icon style="color:var(--blueColor)">
-          launch
-        </mat-icon>
-      </button>
-      <button mat-icon-button>
-          <mat-icon style="color: var(--dangerColor)">
-            delete_outlined
+     <ng-container matColumnDef="activities">
+        <mat-header-cell *matHeaderCellDef>Activities</mat-header-cell>
+        <mat-cell *matCellDef="let row;">
+        <button (click)="toggleExpand(row,'Activities')" mat-icon-button>
+          <mat-icon style="color:var(--darkColor)" matBadge="{{row.activityCounts}}" matBadgePosition="after" class="tool-icon">
+              transfer_within_a_station
           </mat-icon>
         </button>
+        </mat-cell>
+      </ng-container>
+     <ng-container matColumnDef="teams">
+      <mat-header-cell *matHeaderCellDef> Team</mat-header-cell>
+      <mat-cell *matCellDef="let row;">
+      <button (click)="toggleExpand(row,'Team')" mat-icon-button>
+        <mat-icon style="color:var(--darkColor)" matBadge="{{row.teamMemberCounts}}"  matBadgePosition="after" matBadgeColor="info" class="tool-icon">
+          group
+        </mat-icon>
+      </button>
+     
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="document">
+        <mat-header-cell *matHeaderCellDef> Documents</mat-header-cell>
+        <mat-cell   *matCellDef="let row;">
+        <button (click)="toggleExpand(row,'Documents')" mat-icon-button>
+          <mat-icon style="color:var(--darkColor)" matBadge="{{row.documentCounts}}" matBadgePosition="after" matBadgeColor="info" class="tool-icon">
+            folder
+          </mat-icon>
+        </button>
+       
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="webhooks">
+          <mat-header-cell *matHeaderCellDef> Web Hooks</mat-header-cell>
+          <mat-cell *matCellDef="let row;">
+          <button (click)="toggleExpand(row,'webHook')" mat-icon-button>
+            <mat-icon style="color:var(--darkColor)">
+              web
+            </mat-icon>
+          </button>
+         
+          </mat-cell>
+        </ng-container>
+
      <!-- Weight Column -->
-     <ng-container matColumnDef="more">
-        <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+     <ng-container  matColumnDef="more">
+        <mat-header-cell *matHeaderCellDef >More</mat-header-cell>
         <mat-cell *matCellDef="let element">
             <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
             <mat-menu #moreMenu="matMenu" yPosition="below">
                 <button class="menu-button" mat-menu-item>
-                  <mat-icon >list
+                  <mat-icon >timer
                   </mat-icon>
                    <span>
-                     Details
+                     Set Duration
                    </span>
                  </button>
                  <button class="menu-button" mat-menu-item>
                     <mat-icon >
-                      store
+                      router
                     </mat-icon>
                     <span>
-                      Activities
+                      Server Credentials
                     </span>
                   </button>
                   <button class="menu-button" mat-menu-item>
@@ -89,7 +124,7 @@
            </mat-cell>
       </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row;columns: displayedColumns;" [ngClass]="{'active':row ===selectedrow}" (click)="selectedrow = row" ></mat-row>
     <!-- <mat-footer-row *matFooterRowDef="['noData']"></mat-footer-row> -->
   </mat-table>
 <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>

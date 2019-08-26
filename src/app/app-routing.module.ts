@@ -14,6 +14,12 @@ import { ResetuserpasswordComponent } from './component/auth/resetuserpassword/r
 import { UserRequestComponent } from './component/user-request/user-request.component';
 import { GroupsComponent } from './component/groups/groups.component';
 import { UsersComponent } from './component/users/users.component';
+import { ClientsComponent } from './component/clients/clients.component';
+import { ProjectTypeComponent } from './component/project-type/project-type.component';
+import { TaskTypeComponent } from './component/task-type/task-type.component';
+import { DocumentTypesComponent } from './component/document-types/document-types.component';
+import { StatusTypesComponent } from './component/status-types/status-types.component';
+import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
 
 export const routes: Routes = [
   {
@@ -25,15 +31,34 @@ export const routes: Routes = [
   },
   {
     path: 'project', component: DefaultlayoutComponent, children: [
-      { path: '', component: ProjectComponent },
-      { path: 'activities', component: ActivityComponent },
+      { path: '', component: ProjectComponent, data: { animation: 'isRight' } },
+      // { path: 'activities', component: ActivityComponent },
+    ]
+  },
+  {
+    path: 'activity', component: DefaultlayoutComponent, children: [
+      { path: '', component: ActivityComponent, data: { animation: 'isRight' } },
+      { path: 'activities', data: { animation: 'isRight' }, component: ActivityComponent },
+      { path: 'documents', component: ActivityContainerComponent },
+    ]
+  },
+  
+  {
+    path: 'client', component: DefaultlayoutComponent, children: [
+      { path: '', component: ClientsComponent, data: { animation: 'isRight' } },
+  
     ]
   },
 
   {
     path: 'settings', component: DefaultlayoutComponent, children: [
-      { path: '', component: SettingsComponent, data: { animation: 'isRight' } },
+      { path: '',  data: { animation: 'isRight' }, component: SettingsComponent },
       { path: 'server', component: ServerDetailsComponent },
+      {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
+      {path: 'task/types', component: TaskTypeComponent, data: {animation: 'isRight'}},
+      {path: 'document/types', component: DocumentTypesComponent, data: {animation: 'isRight'}},
+      {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
+      {path: 'status/types', component: StatusTypesComponent, data: {animation: 'isRight'}}
     ]
   },
   {
@@ -43,7 +68,7 @@ export const routes: Routes = [
   },
   {
     path: 'user', component: DefaultlayoutComponent, children: [
-      {path: '', component:UsersComponent,data:{animation: 'isRight'}},
+      {path: '', component: UsersComponent, data: {animation: 'isRight'}},
       { path: 'request', component: UserRequestComponent },
       { path: 'group', component: GroupsComponent },
     ]

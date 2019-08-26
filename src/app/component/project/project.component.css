@@ -5,8 +5,13 @@
 .page-container{
   position: relative;
   color:var(--primaryColor);
-  padding: 5px;
+  padding: 2px;
+  margin-right: 10px;
   font-family: var(--primaryFont);
+  overflow-x: hidden;
+  width: 100%;
+  
+  margin: 0;
 }
 .button{
 
@@ -17,6 +22,45 @@
   /* bottom:10px; */
 
 
+}
+/* .mat-expansion-panel{
+  width: 230px;
+} */
+mat-sidenav {
+  width: 250px;
+}
+.mat-drawer-container, .mat-drawer{
+  background-color: transparent;
+}
+
+.sub-title{
+  color:var(--primaryColor);
+  padding: 5px;
+  font-family: var(--primaryFont);
+  font-size: 15px;
+}
+
+
+.teammate-details{
+  padding: 10px;
+  text-align: left;
+  font-family: var(--primaryFont);
+  width: 100%;
+}
+.teammate-details li{
+list-style: none;
+margin: 3px 5px;
+font-family: var(--primaryFont);
+}
+.teammate-details li label{
+  font-size: 10px;
+  font-family: var(--primaryFont);
+  color:#00000099;
+}
+.teammate-details  li span{
+  font-size: 12px;
+  font-family: var(--primaryFont);
+  color:var(--primaryColor);
 }
 .add button{
   font-size: 16px;
@@ -30,6 +74,7 @@
 display: flex;
 justify-content: center;
 flex-direction: column;
+margin-left: 5%;
 }
 
 .suggestion-title{
@@ -39,7 +84,11 @@ flex-direction: column;
   margin-bottom: 15px;
   margin-top: 20px;
 }
-
+.side-icon{
+  color:var(--darkColor);
+  margin-inline-start: 25%;
+  font-size:14px;
+}
 .suggestion-items{
   display:flex;
   width: 100%;
@@ -52,6 +101,13 @@ position: relative;
 width: 25%;
 
 }
+
+.teammate{
+  width: 30px;
+  height: 30px;
+border-radius: 50%;
+margin-right: 10px;
+}
 .card-front, .card-back{
 width: 80%;
 height: 70%;
@@ -63,6 +119,77 @@ text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 2px;
 
+}
+
+.desc-container{
+  position: relative;
+}
+.panel-status{
+  position: absolute;
+  left: 15%;
+  top:0;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50%;
+  border:.5px solid #00000099;
+}
+label.panel-label{
+  color: #00000099 !important;
+  letter-spacing: .5px;
+  font-family: var(--primaryFont) !important;
+  font-size:12.5px;
+}
+/* .todo{
+  background: var(--dangerColor);
+  color:var(--lightColor) !important;
+  align-items: center;
+text-align: center;
+} */
+/* .mat-header-cell{
+text-align: center !important;
+width: 100%;
+} */
+/* .completed{
+  background: var(--primaryColor);
+  color:var(--lightColor) !important;
+  align-items: center;
+text-align: center;
+} */
+/* .inprogress{
+  background: var(--warningColor) !important;
+  color:var(--lightColor);
+  align-items: center !important;
+text-align: center !important;
+} */
+.panel-section{
+  width: 100%;
+  margin-right:0; 
+}
+.panel-section /deep/ div.mat-expansion-panel-body{
+  padding: 5px !important;
+  
+  }
+
+  .panel-section.todo  /deep/ div.mat-expansion-panel-body{
+    border-bottom:4px solid var(--dangerColor);
+    }
+
+    .panel-section.inprogress /deep/ div.mat-expansion-panel-body{
+      border-bottom:4px solid var(--warningColor);
+      }
+
+      .panel-section.completed /deep/ div.mat-expansion-panel-body{
+        border-bottom:4px solid var(--primaryColor);
+        }
+    
+        .panel-child  /deep/ div.mat-expansion-panel-body{
+          border-bottom:none;
+          }
+.teammate-title{
+  color: #00000099;
+  text-align: center !important;
+  letter-spacing: 1px;
+  font-family: var(--primaryFont);
 }
 .card-front{
   border-top: 5px solid var(--primaryColor);
@@ -103,6 +230,12 @@ mat-card-header mat-card-title{
   justify-content: space-between;
 }
 
+.childpanel{
+  width: 200px !important;
+}
+mat-expansion-panel-body{
+padding: 3px !important;
+}
  mat-card-header mat-card-title span button mat-icon{
   color: var(--lightColor);
    position: absolute;
@@ -110,7 +243,9 @@ mat-card-header mat-card-title{
    top:50px;
   line-height: -3;
 }
-
+.crumb{
+  transform: translateY(10%);
+}
 mat-card-header mat-card-subtitle{
   font-size: 12px;
   text-transform: capitalize;
@@ -169,8 +304,9 @@ text-align: start;
 
 .table-section{
   padding: 10px;
-  width: 95%;
+  width:100%;
   margin-top:2%;
+  margin-right:2%;
 }
 
 .item-container:hover .card-front{

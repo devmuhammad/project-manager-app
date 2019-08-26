@@ -23,7 +23,7 @@
             <mat-error>Invalid name</mat-error>
           </mat-form-field>
         </div>
-        <div class="form-control "style="width:45%;margin-left:5px; display:inline-block">
+        <div class="form-control ">
           <label for="email">Contact Email</label>
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
             <input matInput placeholder="Email" formControlName="contactemail" floatPlaceholder="never">
@@ -33,7 +33,7 @@
             <mat-error>Invalid email address</mat-error>
           </mat-form-field>
         </div>
-        <div class="form-control " style="width:45%;margin-left: -5px; display:inline-block">
+        <div class="form-control ">
           <label for="phone">Phone number</label>
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
             <input matInput placeholder="Phone"  formControlName="phone" floatPlaceholder="never">
@@ -43,7 +43,7 @@
             <mat-error>Invalid phone number</mat-error>
           </mat-form-field>
         </div>
-        <div class="form-control">
+        <!-- <div class="form-control">
           <label for="username">Username</label>
           <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
             <input matInput placeholder="username" formControlName="username" floatPlaceholder="never">
@@ -52,7 +52,7 @@
             </button>
             <mat-error>Invalid  username</mat-error>
           </mat-form-field>
-        </div>
+        </div> -->
         <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
           <label for="password">Password</label>
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
@@ -83,10 +83,10 @@
             <mat-error *ngIf="form.hasError('notSame')">Password Missmatch</mat-error>
           </mat-form-field>
         </div>
-        <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
+        <!-- <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
           <label for="">Institution</label>
           <mat-form-field floatLabel="never" class="project-form-field auth-form-field ">
-            <mat-select class="select" formControlName="institutionId" placeholder="Institution" floatPlaceholder="never"
+            <mat-select [disabled]="true" class="select" formControlName="institutionId" placeholder="Institution" floatPlaceholder="never"
             >
               <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
               </mat-option>
@@ -97,13 +97,13 @@
         <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
           <label for="">Designation</label>
             <mat-form-field floatLabel="never" class="project-form-field auth-form-field ">   
-              <mat-select class="select" formControlName="designationId" placeholder="Designation" floatPlaceholder="never"
+              <mat-select [disabled]="true" class="select" formControlName="designationId" placeholder="Designation" floatPlaceholder="never"
                 >
                 <mat-option *ngFor="let item of designationList" [value]="item.designationid">{{item.description}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </div>
+          </div> -->
         <div>
           <button [disabled]="form.invalid" [ngClass]="form.valid?'': 'disabled' " 
             class="mat-raised-button submit-button save" buttonLoader [loaderColor]="'white'" >
