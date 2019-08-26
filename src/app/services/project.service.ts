@@ -19,7 +19,8 @@ import { BaseApi } from '../helpers/constants';
 export class ProjectService {
 
   constructor(private http: HttpClient) { }
-projects: [];
+  projects: [];
+  // Tas
   // form: FormGroup = new FormGroup({
   //   name: new FormControl('', Validators.required),
   //   type: new FormControl('', Validators.required),
@@ -37,24 +38,51 @@ projects: [];
     return Observable.of(projectList);
   }
   // Projects
-addnewProject(payload: object): Observable<any> {
-  return this.http.post(BaseApi.URL + BaseApi.PATH.ADD_PROJECTS, payload);
-}
-getProjectList(payload: object): Observable <any> {
-  return this.http.post(BaseApi.URL + BaseApi.PATH.PROJECTS, payload);
-}
+  addnewProject(payload: object): Observable<any> {
+    return this.http.post(BaseApi.URL + BaseApi.PATH.ADD_PROJECTS, payload);
+  }
+  // Team members
+  getProjectTeamMembers(projectId): Observable<any> {
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH['TEAM_MEMBERS']}/${projectId}`);
+  }
+
+  // PROJECT ACTIVITY
+  getProjectActivities(param): Observable<any> {
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.PROJECT_ACTIVITY}?page=${param.page}
+    &projectid=${param.projectid}&size=${param.size}`);
+  }
+  getProjectList(payload: any): Observable<any> {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.PROJECTS}?datefrom=${payload.datefrom}&dateto=${payload.dateto}&institutionId=${payload.institutionId}&page=${payload
+      .page}&sFilter=All&size=${payload.size}`);
+  }
   //  project type
   getProjectType(): Observable<any> {
     return this.http.get(BaseApi.URL + BaseApi.PATH['PROJECT_TYPES']);
   }
+  addTaskToProject(payload): Observable<any> {
+    return this.http.post(BaseApi.URL + BaseApi.PATH['TASK_ADD'], payload);
+  }
+  getTaskType(): Observable<any> {
+    return this.http.get(BaseApi.URL + BaseApi.PATH['TASK_TYPES']);
+  }
   addProjectType(payload: object): Observable<any> {
     return this.http.post(BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_ADD'], payload);
+  }
+
+  // Task
+  addNewTask(payload): Observable<any> {
+    return this.http.post(BaseApi.URL + BaseApi.PATH['TASK_ADD'], payload);
+  }
+  updatTaskType(payload): Observable<any> {
+    return this.http.put(BaseApi.URL + BaseApi.PATH['TASK_TYPE_UPDATE'], payload);
   }
   updateProjectType(payload: object): Observable<any> {
     return this.http.put(BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_UPDATE'], payload);
   }
 
-  deleteProjectType(id: number): Observable<any>{
+
+  deleteProjectType(id: number): Observable<any> {
     return this.http.delete(`${BaseApi.URL + BaseApi.PATH['PROJECT_TYPE_DELETE']}/${id}`);
   }
 

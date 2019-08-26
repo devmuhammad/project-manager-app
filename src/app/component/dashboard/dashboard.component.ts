@@ -63,7 +63,7 @@ renderInforInDonut(){
   this.Doughnut = new Chart('doughnut', {
     type: 'doughnut',
     data: {
-      labels: [ 'Rejected', 'Accepted', 'Undecided'],
+      labels: [ 'Excellent', 'Good', 'Fair'],
       datasets: [{
           label: '# of Staff',
           data: [ 5, 20, 10],
@@ -107,8 +107,6 @@ radarInfoChart(){
        data: [1, 3, 4,5,4,6],
        backgroundColor:'rgba(255,99,132,.2)',
        borderColor:'rgba(255,99,132,1)',
-          
-       
        borderWidth: 1
    },{
     label: 'CAPSOLE Project',

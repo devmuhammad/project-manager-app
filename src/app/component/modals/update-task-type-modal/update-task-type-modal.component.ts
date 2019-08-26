@@ -23,7 +23,7 @@ export class UpdateTaskTypeModalComponent implements OnInit {
   public inputFields = {
     code: '',
     description: '',
-    statustypeid: '',
+    tasktypeid: '',
     institutionid: '',
   };
   constructor(
@@ -36,6 +36,7 @@ export class UpdateTaskTypeModalComponent implements OnInit {
     private btnLoader: AngularButtonLoaderService,
     private dialogref: MatDialogRef<UpdateTaskTypeModalComponent>) {
     this.formData = this.row.data;
+    console.log(this.formData);
     this.institutionList = this.row.institutions;
     // this.groupData = this.row.details;
     this.form = this.fb.group({
@@ -59,18 +60,18 @@ this.fetchInstitutionList();
     this.loadingBar.start();
     this.btnLoader.displayLoader();
     this.inputFields.code = this.form.get('code').value;
-    this.inputFields.statustypeid = this.formData.statustypeid;
+    this.inputFields.tasktypeid = this.formData.tasktypeid;
     this.inputFields.description = this.form.get('description').value;
-    this.inputFields.institutionid = this.form.get('institution').value;
+    // this.inputFields.institutionid = this.form.get('institution').value;
     console.log(this.inputFields);
-    return this.status.updateProjectType(this.inputFields)
+    return this.status.updatTaskType(this.inputFields)
     .subscribe(({ message, data}) => {
       console.log(message);
       console.log(data);
       if (message === 'Success' || 'Operation Successful') {
         this.loadingBar.complete();
         this.btnLoader.hideLoader();
-        this.snackbar.open('Project Updated Successful', 'Dismiss', {
+        this.snackbar.open('Task Type Updated Successful', 'Dismiss', {
           panelClass: ['success'],
           duration: 7000,
           verticalPosition: 'bottom',
@@ -80,7 +81,7 @@ this.fetchInstitutionList();
       } else {
         this.loadingBar.complete();
         this.btnLoader.hideLoader();
-        return this.snackbar.open('Project Type Updated Failed', 'Dismiss', {
+        return this.snackbar.open('Task Type Updated Failed', 'Dismiss', {
           panelClass: ['error'],
           duration: 7000,
           verticalPosition: 'bottom',

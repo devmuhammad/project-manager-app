@@ -33,7 +33,7 @@ export class TaskTypeComponent implements OnInit {
 
  getTableData() {
    this.loadingBar.start();
-   this.service.getProjectType()
+   this.service.getTaskType()
    .subscribe((response) => {
      if(response.message === 'Success'){
        this.loadingBar.complete();

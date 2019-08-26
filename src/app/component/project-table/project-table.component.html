@@ -8,7 +8,7 @@
           <mat-icon >search</mat-icon>
       </button>
     </mat-form-field>
-    <div class="button add">
+    <div style="margin-right: 10px" class="button add">
           
         <button (click)="onCreate()" mat-button mat-raised-button>Create Project</button>
       </div>
@@ -48,9 +48,9 @@
      <!-- Symbol Column -->
      <ng-container matColumnDef="activities">
         <mat-header-cell *matHeaderCellDef>Activities</mat-header-cell>
-        <mat-cell *matCellDef="let row">
+        <mat-cell *matCellDef="let row;">
         <button (click)="toggleExpand(row,'Activities')" mat-icon-button>
-          <mat-icon style="color:var(--darkColor)" matBadgeSize="small" matBadge="{{row.projectactivitiesList.length}}" matBadgePosition="after" class="tool-icon">
+          <mat-icon style="color:var(--darkColor)" matBadge="{{row.activityCounts}}" matBadgePosition="after" class="tool-icon">
               transfer_within_a_station
           </mat-icon>
         </button>
@@ -58,9 +58,9 @@
       </ng-container>
      <ng-container matColumnDef="teams">
       <mat-header-cell *matHeaderCellDef> Team</mat-header-cell>
-      <mat-cell *matCellDef="let row">
+      <mat-cell *matCellDef="let row;">
       <button (click)="toggleExpand(row,'Team')" mat-icon-button>
-        <mat-icon style="color:var(--darkColor)" matBadge="2" matBadgeSize="small" matBadgePosition="after" matBadgeColor="info" class="tool-icon">
+        <mat-icon style="color:var(--darkColor)" matBadge="{{row.teamMemberCounts}}"  matBadgePosition="after" matBadgeColor="info" class="tool-icon">
           group
         </mat-icon>
       </button>
@@ -70,9 +70,9 @@
 
     <ng-container matColumnDef="document">
         <mat-header-cell *matHeaderCellDef> Documents</mat-header-cell>
-        <mat-cell *matCellDef="let row">
+        <mat-cell   *matCellDef="let row;">
         <button (click)="toggleExpand(row,'Documents')" mat-icon-button>
-          <mat-icon style="color:var(--darkColor)" matBadge="{{row.projectdocumentsList.length}}" matBadgePosition="after" matBadgeColor="info" class="tool-icon">
+          <mat-icon style="color:var(--darkColor)" matBadge="{{row.documentCounts}}" matBadgePosition="after" matBadgeColor="info" class="tool-icon">
             folder
           </mat-icon>
         </button>
@@ -81,7 +81,7 @@
       </ng-container>
       <ng-container matColumnDef="webhooks">
           <mat-header-cell *matHeaderCellDef> Web Hooks</mat-header-cell>
-          <mat-cell *matCellDef="let row">
+          <mat-cell *matCellDef="let row;">
           <button (click)="toggleExpand(row,'webHook')" mat-icon-button>
             <mat-icon style="color:var(--darkColor)">
               web
@@ -92,7 +92,7 @@
         </ng-container>
 
      <!-- Weight Column -->
-     <ng-container matColumnDef="more">
+     <ng-container  matColumnDef="more">
         <mat-header-cell *matHeaderCellDef >More</mat-header-cell>
         <mat-cell *matCellDef="let element">
             <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
@@ -124,7 +124,7 @@
            </mat-cell>
       </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row;columns: displayedColumns;" [ngClass]="{'active':row ===selectedrow}" (click)="selectedrow = row" ></mat-row>
     <!-- <mat-footer-row *matFooterRowDef="['noData']"></mat-footer-row> -->
   </mat-table>
 <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>

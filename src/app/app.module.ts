@@ -65,6 +65,8 @@ import { TaskTypeComponent } from './component/task-type/task-type.component';
 import { DocumentTypesComponent } from './component/document-types/document-types.component';
 import { StatusTypesComponent } from './component/status-types/status-types.component';
 import { BreadcrumblayoutComponent } from './layout/breadcrumblayout/breadcrumblayout.component';
+import { NotificationsComponent } from './component/modals/notifications/notifications.component';
+import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -116,6 +118,9 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     DocumentTypesComponent,
     StatusTypesComponent,
     BreadcrumblayoutComponent,
+    NotificationsComponent,
+    ActivityContainerComponent,
+  
     
 
   ],
@@ -159,7 +164,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     CreateStatusModalComponent,
     CreateProjectTypeModalComponent,
     CreateTaskTypeModalComponent,
-    CreateDocTypeModalComponent
+    CreateDocTypeModalComponent,
+    NotificationsComponent,
   ],
   providers: [ProjectService, MatDatepickerModule],
   bootstrap: [AppComponent]
