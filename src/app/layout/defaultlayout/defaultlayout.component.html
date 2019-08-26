@@ -23,12 +23,11 @@
               <span *ngIf="item.children">
                 <mat-icon class="icon arrow-icon">{{step===i?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
               </span>
-              <span *ngIf="!item.children">
+              <!-- <span *ngIf="!item.children">
                 <mat-icon class="icon arrow-icon">keyboard_arrow_right</mat-icon>
-              </span>
+              </span> -->
             </a>
             <mat-expansion-panel class="expansion" [expanded]="step===i">
-
               <ng-container *ngFor="let child of item.children;let i = index" [attr.data-index]="i">
                 <a mat-list-item
                   [ngClass]="(pathname===child.link && i === selected ) || pathOrigin===item.link? 'active': '' "
@@ -42,7 +41,6 @@
                   </span>
                 </a>
               </ng-container>
-
             </mat-expansion-panel>
           </ng-container>
         </mat-nav-list>

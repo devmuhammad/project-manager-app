@@ -15,11 +15,7 @@ import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
   styleUrls: ['./project-table.component.css']
 })
 
-
-
 export class ProjectTableComponent implements OnInit {
-
-
   public queryParam = {
     datefrom: '',
     dateto: '',
@@ -47,7 +43,6 @@ export class ProjectTableComponent implements OnInit {
   @Output() public getExpand = new EventEmitter();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
 
   searchKey = '';
 

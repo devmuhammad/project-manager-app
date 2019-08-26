@@ -51,19 +51,16 @@ export class DefaultlayoutComponent implements OnInit {
   menuList = [
     { name: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
     {
-      name: 'Project', icon: 'folder', children: [
-        { name: 'Projects', icon: 'folder_outline', link: '/project' },
-      ]
+      name: 'Project', icon: 'folder', link: '/project'
     },
     {
-      name: 'Activities', icon: 'business_center', children: [
-        { name: 'Project', icon: 'work_outline', link: '/activity/activities' },
-      ]
+      name: 'Activities', icon: 'business_center', link: '/activity/documents' 
     },
     {
-      name: 'Documents', icon: 'list_alt', children: [
-        { name: 'Documents', icon: 'file_copy', link: '/activity/documents' },
-      ]
+      name: 'Documents', icon: 'list_alt', link: '/activity/activities'
+    },
+    {
+      name: 'Clients', icon: 'people_outlined', link: '/client'
     },
     {
       name: 'User Managment', icon: 'people', children: [
@@ -72,9 +69,7 @@ export class DefaultlayoutComponent implements OnInit {
         { name: 'Users', icon: 'people', link: '/user' },
       ]
     },
-    {
-      name: 'Clients', icon: 'people_outlined', link: '/client'
-    },
+  
     {
       name: 'Settings', icon: 'settings', children: [
         { name: 'Server', icon: 'network_check', link: '/settings/server' },
