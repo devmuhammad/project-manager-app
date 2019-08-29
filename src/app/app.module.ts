@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import { NgModule,ModuleWithProviders } from '@angular/core';
+import { NgModule,ModuleWithProviders,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DefaultlayoutComponent } from './layout/defaultlayout/defaultlayout.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -67,6 +67,8 @@ import { StatusTypesComponent } from './component/status-types/status-types.comp
 import { BreadcrumblayoutComponent } from './layout/breadcrumblayout/breadcrumblayout.component';
 import { NotificationsComponent } from './component/modals/notifications/notifications.component';
 import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
+import { DocumentContainerComponent } from './component/document-container/document-container.component';
+import { DragDropDirective } from './component/drag-drop.directive';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -120,7 +122,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     BreadcrumblayoutComponent,
     NotificationsComponent,
     ActivityContainerComponent,
-  
+    DocumentContainerComponent,
+    DragDropDirective
     
 
   ],
@@ -167,6 +170,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     CreateDocTypeModalComponent,
     NotificationsComponent,
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [ProjectService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })

@@ -264,6 +264,9 @@ a[mat-list-item]:hover .icon,a[mat-list-item]:hover .icon.arrow-icon{
   color: #00000099;
  
 }
+.content{
+  overflow: auto;
+}
 .author{
   display: flex;
   flex-direction: row;

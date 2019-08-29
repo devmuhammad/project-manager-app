@@ -46,10 +46,15 @@ export const BaseApi = {
     TASK_HISTORY: 'task/history',
     TASK_ASSIGNEE: 'task/assignee',
     // Documents
-    Documents: 'project/documents',
-    DOC_UPDATE: 'project/document/update',
-    DOC_RETRIEVE: 'project/document/retrieve',
-    DOC_ADD: 'project/document/add',
+    DOC_UPDATE: 'document/update',
+    DOC_RETRIEVE: 'document/retrieve',
+    DOC_PREVIEW: 'document/preview',
+    DOC_ADD: 'document/add',
+    DOCLIST:'document/list',
+    DOC_UPLOAD: 'document/fileupload',
+    DOC_DOWNLOAD:'document/filedownload',
+
+
     // STATUS
     ADD_STATUS: 'project/status/add',
     UPDATE_STATUS: 'project/status/update',

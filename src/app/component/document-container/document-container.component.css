@@ -1,0 +1,210 @@
+.docWrapper{
+    position: relative;
+    padding:5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    overflow-x: hidden
+}
+.edgeButton{
+    position: fixed;
+    background: #fff;
+    bottom: 3%;
+    text-align: center;
+    right: 2%;
+}
+.layerText{
+    font-size: 14px;
+  color:#333;
+  text-underline-position: below;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  margin-top: 20px;
+}
+.addButton{
+    color: linear-gradient(228.76deg,  #2E7D32 -34.42%, #E084F1 127.18%) !important;
+    /* font-size: 30px; */
+    padding-top:-10px;
+}
+.listContainer{
+    position: relative;
+}
+
+.listContainer img{
+    transform: scale(.7);
+    margin-bottom: 10px;
+}
+.listContainer .docurl{
+    font-family: var(--primaryFont);
+    color: var(--primaryColor);
+    font-size: 13px;
+    text-transform: lowercase ;
+}
+.listContainer .footer{
+    display: block;
+    position: absolute;
+    height: 20%;
+    max-width: 100%;
+   background: #4444442e;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 10px;
+    bottom: 0;
+    left:0;
+    right:0;
+}
+.firstLayerContainer{
+   
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+width: 100%;
+}
+
+table, th , td {
+    
+    border-collapse: collapse;
+    padding: 5px;
+  }
+ tr {
+    border-bottom: .5px solid gray;
+  }
+
+  table{
+      border-bottom: none !important;
+  }
+
+.files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+   
+    overflow: auto;
+    margin: 5px auto;
+    background:transparent;
+    border-bottom: .5px solid;
+    padding: 2px;
+    color:var(--greyColor);
+}
+.fileListContainer{
+   display:flex;
+
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+    width: 350%;
+    margin: auto;
+}
+.dragdrop{
+    position: relative;
+    background-color:transparent;
+    border: 2px dashed #1C8ADB;
+    /* border: 3px dashed linear-gradient(228.76deg,  rgb(17, 136, 216) -34.42%, rgb(213, 195, 216) 127.18%) !important; */
+    width: 80%;
+    margin-top:20px !important;
+    padding: 10px;
+    border-radius: 4px ;
+    height: 120px;
+    margin: auto;
+    
+    
+}
+.docxbtn{
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    color: #333;
+}
+.fileListContainer .filetablelist{
+    
+    display: block;
+    width: 60%;
+    max-height:150px;
+    overflow: auto;
+}
+.filelistLabel{
+    position: absolute;
+    top:10px;
+    left: 40%;
+    width: 43%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left:5% ; 
+    color:var(--primaryColor);
+    font-family:  var(--primaryFont);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size:14px;
+    font-family: var(--primaryFont);
+}
+
+.files-list .delete-file img {
+    width: 20px;
+}
+
+.uploadButton{
+    /* margin-top: 4px; */
+    background-color: var(--primaryColor);
+    opacity: .8;
+    width:90%;
+    text-align: center;
+    margin-top: 20px;
+    margin-left:15px !important;
+    color: var(--lightColor);
+    letter-spacing: 1px;
+    font-weight: 200;
+}
+.toggleGrid{
+    position: absolute;
+    right:5px ;
+    top:-40px;
+    color: #444444;
+}
+.ng-hide{
+    display: hidden;
+}
+.firstLayerContainer .layerContent {
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+}
+.firstLayerContainer .layerContent .doCards div{
+    
+    border-radius: 4px ;
+    border:1px solid slategray;
+    width:25%;
+    height: 250px;
+    margin-inline-end: 5px;
+    margin-inline-start: 10px;
+}
+.fileListContainer .layerContent div:hover{}
+label{
+    cursor: pointer;
+}
+label .buttontext{
+    font-family: var(--primaryFont);
+    font-size: 13px;
+    color:var(--primaryColor);
+}
+.sideActionBar{
+height: 80vh;
+width: 30%;
+}
+
+.firstLayerContainer .layerContent .doCards{
+    display: flex;
+    margin-top:0px;
+    width:98%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding:5px;
+}

@@ -20,6 +20,7 @@ import { TaskTypeComponent } from './component/task-type/task-type.component';
 import { DocumentTypesComponent } from './component/document-types/document-types.component';
 import { StatusTypesComponent } from './component/status-types/status-types.component';
 import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
+import { DocumentContainerComponent } from './component/document-container/document-container.component';
 
 export const routes: Routes = [
   {
@@ -38,11 +39,15 @@ export const routes: Routes = [
   {
     path: 'activity', component: DefaultlayoutComponent, children: [
       { path: '', component: ActivityComponent, data: { animation: 'isRight' } },
-      { path: 'activities', data: { animation: 'isRight' }, component: ActivityComponent },
       { path: 'documents', component: ActivityContainerComponent },
     ]
   },
-  
+  // { path: 'documents/activity', data: { animation: 'isRight' }, component: ActivityComponent },
+  {
+    path: 'documents', component: DefaultlayoutComponent, children: [
+      { path: '', data: { animation: 'isRight' }, component: DocumentContainerComponent },
+    ]
+  },
   {
     path: 'client', component: DefaultlayoutComponent, children: [
       { path: '', component: ClientsComponent, data: { animation: 'isRight' } },

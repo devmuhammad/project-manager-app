@@ -54,10 +54,10 @@ export class DefaultlayoutComponent implements OnInit {
       name: 'Project', icon: 'folder', link: '/project'
     },
     {
-      name: 'Activities', icon: 'business_center', link: '/activity/documents' 
+      name: 'Activities', icon: 'business_center', link: '/activity/documents',
     },
     {
-      name: 'Documents', icon: 'list_alt', link: '/activity/activities'
+      name: 'Documents', icon: 'list_alt', link: '/documents'
     },
     {
       name: 'Clients', icon: 'people_outlined', link: '/client'

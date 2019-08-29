@@ -1,0 +1,220 @@
+<app-breadcrumblayout></app-breadcrumblayout>
+<div class="docWrapper">
+  <!-- <div class="layerText">
+    <p>Recent Documents</p>
+  </div> -->
+  <div class="firstLayerContainer">
+
+    <!-- <p style="margin-left:20%">All Documents</p> -->
+    <div class="layerContent">
+
+    <button class="toggleGrid" (click)="grid =!grid" mat-icon-button>
+      <mat-icon matTooltip="List View" *ngIf="grid">list</mat-icon>
+      <mat-icon matTooltip="Grid View" *ngIf="!grid">table</mat-icon>
+    </button>
+      <div *ngIf="!grid" class="doCards">
+      <div class="listContainer" *ngFor="let docx of documentList">
+        <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100%" height="150">
+        <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100%" height="150">
+        <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100%"
+          height="150">
+        <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100%" height="150">
+        <article class="footer">
+          <p class="docurl">{{docx.name}}</p>
+          <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
+            {{docx.datecreated | date}}</p>
+            <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn"><mat-icon>more_vert</mat-icon></button>
+            <mat-menu #docxbtn="matMenu" >
+                <button class="menu-button" mat-menu-item>
+                  <mat-icon >store
+                  </mat-icon>
+                   <span>
+                     View Update
+                   </span>
+                 </button>
+                 <button class="menu-button" mat-menu-item>
+                    <mat-icon >store</mat-icon>
+                    <span>
+                      Repository
+                    </span>
+                  </button>
+            </mat-menu>
+        </article>
+      </div>
+    </div>
+    <div>
+      
+    </div>
+    <section style="width: 98%" *ngIf="grid">
+        <div class="section-header" style="width: 100%;">
+        
+            <div  class="section-header">
+              
+              <div class="title"><p>Documents Table</p></div>
+            </div>
+           
+        <mat-form-field class="search-form-field project-form-field item-search" style="margin-bottom: 10px" floatLabel="never" >
+            <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search user"/>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                <mat-icon >close</mat-icon>
+            </button>
+            <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+                <mat-icon >search</mat-icon>
+            </button>
+          </mat-form-field>
+        
+          </div>
+          
+          
+            <div >
+          <mat-table [dataSource]="dataSource"  matSort >
+              <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
+                  <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+                  <mat-cell colspan="1" *matCellDef="let element"> {{element.documentid}} </mat-cell>
+                </ng-container>
+            
+            
+              <ng-container matColumnDef="url">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Document Name </mat-header-cell>
+                <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="doctype">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Document Type </mat-header-cell>
+                  <mat-cell class="cell-name" style="color: var(--primaryColor)" style="text-transform: uppercase" *matCellDef="let element"> {{element.fileExt.substring(1)}} </mat-cell>
+                </ng-container>
+        
+        
+              <ng-container matColumnDef="createdat">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Created At</mat-header-cell>
+                <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.datecreated | date}} </mat-cell>
+            </ng-container>
+              
+              <ng-container matColumnDef="sender">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Sender </mat-header-cell>
+                <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.receivedfrom}} </mat-cell>
+            </ng-container>
+        
+        <ng-container matColumnDef="reciever">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Reciever</mat-header-cell>
+          <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.receivedby}} </mat-cell>
+        </ng-container>
+             
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                <button  [matMenuTriggerFor]="actionMenu" mat-icon-button>
+                  <mat-icon style="color:var(--darkColor)">
+                    settings
+                  </mat-icon>
+                </button>
+                <mat-menu  #actionMenu="matMenu" yPosition="below">
+                    <button (click)="userApproval(element.id)" class="menu-button" mat-menu-item>
+                        <mat-icon >how_to_reg
+                        </mat-icon>
+                         <span>
+                           Approve
+                         </span>
+                       </button>
+                       <button class="menu-button" mat-menu-item>
+                          <mat-icon >
+                            person_add_disabled
+                          </mat-icon>
+                          <span>
+                            Decline
+                          </span>
+                        </button>
+                        <button (click)="showDetails(element)" class="menu-button" mat-menu-item>
+                          <mat-icon>
+                            visibility
+                          </mat-icon>
+                          <span>
+                            View more
+                          </span>
+                        </button>
+                  </mat-menu>
+                </mat-cell>
+              </ng-container>
+             
+             
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+              </div> 
+              </section>
+    </div>
+    <mat-card class="sideActionBar">
+      <header>Drag File here:</header>
+      <div class="dragdrop" (click)="fileInput.click()" appDragDrop (onFileDropped)="attatchFile($event)"
+        style="text-align: center">
+        <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple
+          type="file" />
+        <label style="margin-top: 50px;" for="input-file-id">
+          <mat-icon
+            style="font-size: 80px;color:var(--primaryColor);transform: translateY(-700%);transform: translateX(-100%)">
+            backup_outlined
+          </mat-icon>
+          <p class="buttontext">Drag your file(s)</p>
+        </label>
+      </div>
+      <button *ngIf="files.length" (click)="uploadfiles()" mat-button class="uploadButton">Upload File(s)</button>
+      <div  style="margin-top: 30px" class="">
+          <p class=""><span>Attached Files List</span></p>    
+          <div *ngIf="files.length" class="files-list">
+              <p *ngFor="let file of files;let i= index">
+                <span>{{ resizeName(file)}}</span>
+                <span> <button class="delete-file" (click)="deleteAttachment(i)">
+                    <img src="../../../assets/img/Recycle_Bin_Full.png">
+                  </button></span>
+                </p>
+            </div>
+         
+        </div>
+    </mat-card>
+    <!-- <div  class="fileListContainer">
+        <div  class="dragdrop" (click)="fileInput.click()" appDragDrop (onFileDropped)="attatchFile($event)" style="text-align: center">
+            <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple  type="file" />
+          <label style="margin-top: 50px;" for="input-file-id">
+            <mat-icon style="font-size: 80px;color:var(--primaryColor);transform: translateY(-700%);transform: translateX(-100%)">
+              backup_outlined
+            </mat-icon>
+            <p class="buttontext">Drag your file(s)</p>
+         
+          </label>
+        
+        </div>
+      <div class="filetablelist">
+        <p class="filelistLabel"><span>Attached Files List</span> <span><button *ngIf="files.length" (click)="uploadfiles()" mat-button  class="uploadButton">Upload File(s)</button></span></p>    
+        <table *ngIf="files.length" class="files-list">
+            <tr *ngFor="let file of files;let i= index">
+              <td>{{ file}}</td>
+              <td> <button class="delete-file" (click)="deleteAttachment(i)">
+                  <img src="../../../assets/img/Recycle_Bin_Full.png">
+                </button></td>
+            </tr>
+          </table>
+       
+      </div>
+    </div> -->
+   
+  </div>
+
+  <div class="secondLayerContainer">
+      
+  </div>
+  <button class="edgeButton" mat-fab>
+    <mat-icon style="color: var(--primaryColor)" class="addButton">add</mat-icon>
+  </button>
+</div>
+
+
+<!-- <div  class="files-list" *ngFor="let file of files;let i= index">
+          <p> {{ file }} </p>
+          <button class="delete-file" (click)="deleteAttachment(i)">
+            <img src="../../../assets/img/Recycle_Bin_Full.png">
+          </button>
+          <button (click)="upload(i)" mat-icon-button>
+            <mat-icon>cloud_upload</mat-icon>
+          </button>
+       </div> -->
