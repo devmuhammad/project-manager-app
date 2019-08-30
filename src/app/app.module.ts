@@ -67,9 +67,11 @@ import { StatusTypesComponent } from './component/status-types/status-types.comp
 import { BreadcrumblayoutComponent } from './layout/breadcrumblayout/breadcrumblayout.component';
 import { NotificationsComponent } from './component/modals/notifications/notifications.component';
 import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
+import { ConversationComponent } from './component/conversation/conversation.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,9 +122,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     BreadcrumblayoutComponent,
     NotificationsComponent,
     ActivityContainerComponent,
-  
-    
-
+    ConversationComponent
   ],
   imports: [
     BrowserModule,
@@ -170,6 +170,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
   providers: [ProjectService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
     constructor(ngRedux: NgRedux<IAppState>) {
       ngRedux.provideStore(store);

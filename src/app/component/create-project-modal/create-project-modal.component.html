@@ -4,13 +4,12 @@
   <!-- <mat-divider style="margin-top: 0px;width: 100%"></mat-divider> -->
   <form [formGroup]="form" class="project-form">
 <div class="input-container">
- 
   <div class="form-control" >
     <label for="name">Name</label>
     <mat-form-field class="project-form-field" floatLabel="never" >
         <input matInput
                 placeholder="Name"
-               formControlName="name"  floatPlaceholder="never" required>
+               formControlName="name" floatPlaceholder="never" required>
                <button mat-button matSuffix mat-icon-button aria-label="Clear">
                   <mat-icon >folder </mat-icon>
                </button>
@@ -42,7 +41,8 @@
     
   <div class="form-control block" style="display: block;margin-bottom: 20px" >
       <label for="description">Description</label>
-      <mat-form-field class="project-form-field description" style="margin-top: 10px;" floatLabel="never" >
+      <mat-form-field class="project-form-field description" style="margin-top: 10px;" 
+      floatLabel="never">
           <textarea matInput
           placeholder="Description"
           formControlName="description"  floatPlaceholder="never" >
@@ -128,7 +128,10 @@
 
   <mat-dialog-actions>
       <button class="mat-raised-button"(click)="close()">Close</button>
-      <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" (click)="save()">
+      <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" 
+      buttonLoader 
+      [loaderColor]="'white'" 
+      (click)="save()">
         <span></span>
         Save</button>
   </mat-dialog-actions>
