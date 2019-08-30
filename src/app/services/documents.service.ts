@@ -14,13 +14,18 @@ export class DocumentsService {
   getDocumentList(credentials):Observable<any>{
     const {page,institutionId,size,sFilter,dateto,datefrom} = credentials;
     // tslint:disable-next-line: max-line-length
-    return this.http.get(`${BaseApi.URL + BaseApi.PATH.DOCLIST}?institutionId=${institutionId}&page=${page}&size=${size}&dateto=${dateto}&datefrom=${datefrom}`);
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.DOCLIST}?  institutionId=${institutionId}&page=${page}&size=${size}&dateto=${dateto}&datefrom=${datefrom}`);
   }
 
   updateDocument(payload):Observable <any>{
     return this.http.put(BaseApi.URL + BaseApi.PATH.DOC_UPDATE, payload);
   }
-
+  deleteDocx(id):Observable<any>{
+    return this.http.delete(`${BaseApi.URL + BaseApi.PATH.DOC_DELETE}/${id}`);
+  }
+  addDocument(credentials):Observable<any> {
+    return this.http.post(`${BaseApi.URL + BaseApi.PATH.DOC_ADD}`, credentials)
+  }
   uploadDocument(uploadfile):Observable<any> {
     return this.http.post(`${BaseApi.URL + BaseApi.PATH.DOC_UPLOAD}`, uploadfile)
   }

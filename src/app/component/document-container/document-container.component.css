@@ -3,7 +3,7 @@
     padding:5px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
     overflow-x: hidden
 }
@@ -74,11 +74,16 @@ table, th , td {
   table{
       border-bottom: none !important;
   }
+  .tableSection{
+      display: block;
+      max-height:300px !important;
+      overflow-y: auto;
+  }
 
 .files-list {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 150%;
    
     overflow: auto;
     margin: 5px auto;
@@ -141,12 +146,12 @@ table, th , td {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size:14px;
+    font-size:12px;
     font-family: var(--primaryFont);
 }
 
 .files-list .delete-file img {
-    width: 20px;
+    width: 15px;
 }
 
 .uploadButton{
@@ -155,7 +160,7 @@ table, th , td {
     opacity: .8;
     width:90%;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left:15px !important;
     color: var(--lightColor);
     letter-spacing: 1px;
@@ -163,8 +168,10 @@ table, th , td {
 }
 .toggleGrid{
     position: absolute;
-    right:5px ;
-    top:-40px;
+    right:12px ;
+    top:-3px;
+    z-index: 500000;
+    transform: translateX(20%);
     color: #444444;
 }
 .ng-hide{
@@ -176,13 +183,16 @@ table, th , td {
     width: 100%;
 }
 .firstLayerContainer .layerContent .doCards div{
-    
+    display: block;
     border-radius: 4px ;
     border:1px solid slategray;
-    width:25%;
-    height: 250px;
+    width:20%;
+
+    min-width: 20%;
+    height: 220px;
     margin-inline-end: 5px;
     margin-inline-start: 10px;
+    margin-bottom:10px; 
 }
 .fileListContainer .layerContent div:hover{}
 label{
@@ -194,6 +204,8 @@ label .buttontext{
     color:var(--primaryColor);
 }
 .sideActionBar{
+    display: block;
+    overflow: auto;
 height: 80vh;
 width: 30%;
 }
@@ -201,10 +213,36 @@ width: 30%;
 .firstLayerContainer .layerContent .doCards{
     display: flex;
     margin-top:0px;
-    width:98%;
+  
+    width: 98%;
+    margin-top: 30px;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     align-content: flex-start;
     padding:5px;
+}
+
+.formControl{
+    position: relative;
+    margin: 10px 0 0px 0;
+    padding:10px;
+    
+}
+.formControl label{
+    position: absolute;
+    top: -10px;
+    color: var(--primaryColor);
+    font-size: 13px;
+
+    font-weight: 300;
+    font-family: var(--primaryFont);
+    color: var()
+}
+.auth-form-field{
+    width: 95%;
+}
+.form-container{
+    width: 100%;
 }

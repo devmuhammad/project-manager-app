@@ -51,6 +51,7 @@ export const BaseApi = {
     DOC_PREVIEW: 'document/preview',
     DOC_ADD: 'document/add',
     DOCLIST:'document/list',
+    DOC_DELETE:'document/delete',
     DOC_UPLOAD: 'document/fileupload',
     DOC_DOWNLOAD:'document/filedownload',
 
