@@ -47,8 +47,7 @@ export const routes: Routes = [
     path: 'documents', component: DefaultlayoutComponent, children: [
       { path: '', data: { animation: 'isRight' }, component: DocumentContainerComponent },
     ]
-  },
-  {
+  },  {
     path: 'client', component: DefaultlayoutComponent, children: [
       { path: '', component: ClientsComponent, data: { animation: 'isRight' } },
   

@@ -147,7 +147,7 @@ export class DocumentContainerComponent implements OnInit {
         }
       }, err => {
         this.loadingBar.complete();
-        this.snackBar.open(err.message, 'Dismiss',
+        this.snackBar.open('Network Failed: You are offline', 'Dismiss',
           {
             duration: 7000,
             verticalPosition: 'bottom',

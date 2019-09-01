@@ -7,10 +7,14 @@
 
 <div id="crumbs">
     <ul>
-      <li (click)="gotoPath('/dashboard')" ><a><mat-icon class="icon ">home</mat-icon></a></li>
+      <li  ><a><mat-icon class="icon ">home</mat-icon></a></li>
       <li  ><a><mat-icon class="icon ">chevron_right</mat-icon></a></li>
-      <li (click)="gotoPath('/crumb.parent')" ><a >{{crumb.parent}} </a></li>
+      <li ><a >{{crumb.parent}} </a></li>
       <li  ><a><mat-icon class="icon ">chevron_right</mat-icon></a></li>
       <li><a >{{crumb.child}}</a></li>        
     </ul>
 </div>
+
+<!-- (click)="gotoPath('/crumb.parent')"  -->
+
+<!-- (click)="gotoPath('/dashboard')" -->

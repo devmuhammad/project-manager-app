@@ -1,0 +1,45 @@
+<div class="chat-wrapper">
+  <div class="chat-sidebar">
+    <mat-list>
+      <h3 mat-subheader>Projects</h3>
+      <mat-list-item button *ngFor="let project of projects">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4 mat-line>{{project.projectname}}</h4>
+      </mat-list-item>
+      <!-- <mat-divider></mat-divider>
+      <h3 mat-subheader>Direct Messages</h3>
+      <mat-list-item *ngFor="let user of users">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <h4 mat-line>{{user.name}}</h4>
+      </mat-list-item> -->
+    </mat-list>
+  </div>
+
+  <div class="chat-content">
+    <div>
+      <h3>James</h3>
+      <p>Hello is it me you looking for? I can see it in your eyes, i can see it in your nose</p>
+    </div>
+
+    <div>
+      <h3>James</h3>
+      <p>Hello is it me you looking for? I can see it in your eyes, i can see it in your nose</p>
+    </div>
+
+
+    <div class="chat-input">
+      <div class="form-control" >
+        <mat-form-field class="project-form-field" floatLabel="never" >
+            <input matInput
+              placeholder="Write your message" floatPlaceholder="never" 
+              required>
+              <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                <mat-icon >send</mat-icon>
+              </button>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+  </div>
+</div>

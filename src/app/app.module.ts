@@ -20,7 +20,6 @@ import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.comp
 import { NgReduxModule,NgRedux} from '@angular-redux/store';
 import {ReactiveFormsModule} from '@angular/forms';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
-// import { LoadingBarHttpModule } from '@ngx-loading-bar/http';
 import rootReducer from './reducer';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +37,6 @@ import { GroupsComponent } from './component/groups/groups.component';
 import { UsersComponent } from './component/users/users.component';
 import { NewUserModalComponent } from './component/new-user-modal/new-user-modal.component';
 import { ApprovalModalComponent } from './component/approval-modal/approval-modal.component';
-// import { NewGroupModalComponent } from './component/new-group-modal/new-group-modal.component';
 import { UpdateGroupModalComponent } from './component/update-group-modal/update-group-modal.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { UpdateUserModalComponent } from './component/update-user-modal/update-user-modal.component';
@@ -69,9 +67,11 @@ import { NotificationsComponent } from './component/modals/notifications/notific
 import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
 import { DocumentContainerComponent } from './component/document-container/document-container.component';
 import { DragDropDirective } from './component/drag-drop.directive';
+import { ConversationComponent } from './component/conversation/conversation.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,9 +123,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     NotificationsComponent,
     ActivityContainerComponent,
     DocumentContainerComponent,
-    DragDropDirective
-    
-
+    DragDropDirective,
+    ConversationComponent
   ],
   imports: [
     BrowserModule,
@@ -174,6 +173,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
   providers: [ProjectService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
     constructor(ngRedux: NgRedux<IAppState>) {
       ngRedux.provideStore(store);
