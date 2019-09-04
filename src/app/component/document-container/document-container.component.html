@@ -24,26 +24,43 @@
           <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
             {{docx.datecreated | date}}</p>
             <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn"><mat-icon>more_vert</mat-icon></button>
-            <mat-menu #docxbtn="matMenu" >
-                <button class="menu-button" mat-menu-item>
-                  <mat-icon >store
+            <mat-menu #docxbtn="matMenu" yPosition="above">
+                <button style="height: 40px;" mat-menu-item class="menu-button">
+                  <mat-icon >note_add
                   </mat-icon>
                    <span>
-                     View Update
+                     Add Documents
                    </span>
                  </button>
-                 <button class="menu-button" (click)="deleteDocx(docx.documentid)" mat-menu-item>
-                    <mat-icon >delete</mat-icon>
+                 <button  style="height: 40px;" mat-menu-item class="menu-button">
+                    <mat-icon >cloud_download
+                    </mat-icon>
+                     <span>
+                       Download
+                     </span>
+                   </button>
+                 <button (click)="getUpdateDocx(docx)" style="height: 40px;" mat-menu-item class="menu-button">
+                    <mat-icon >update</mat-icon>
                     <span>
-                      Delete
+                      Update Document Info
                     </span>
                   </button>
+                  <button  (click)="deleteDocx(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                      <mat-icon >delete</mat-icon>
+                      <span>
+                        Remove Document
+                      </span>
+                    </button>
             </mat-menu>
         </article>
       </div>
     </div>
     <div>
       
+
+        
+
+
     </div>
     <section style="width: 98%" *ngIf="grid">
         <div class="section-header" style="width: 100%;">
@@ -156,7 +173,10 @@
                     </tr>
                     <tr class="files-list" *ngFor="let file of files;let i= index">
                         <td style="text-align: left;font-size: 13px">
-                            {{ resizeName(file)}}
+                          
+                            {{ resizeName(file.name)}}
+                            <span>(Size {{file.size| number}}) bytes</span>
+                          
                         </td>
                         <td style="text-align: right" (click)="deleteAttachment(i)" class="delete-file">
                             <img src="../../../assets/img/Recycle_Bin_Full.png">
@@ -181,7 +201,7 @@
         </label>
       </div>
       <div>
-        <form action="" [formGroup]="form">
+        <form action="" [formGroup]="form" enctype="multipart/form-data">
             <div class="formControl">
                 <label>Activity</label>
                 <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
@@ -226,14 +246,25 @@
                       </mat-form-field>
                   </div>
                   <div class="formControl">
-                      <label>Document Receiver</label>
-                      <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                        <input matInput placeholder="Receiver" formControlName="receivedby" floatPlaceholder="never">
-                          <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-                            <mat-icon>receipt</mat-icon>
-                          </button>
-                          <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                      <label>Task</label>
+                      <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+                        <mat-select  class="select" formControlName="activityid" placeholder="Select Task" floatPlaceholder="never"
+                        >
+                          <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                          </mat-option>
+                        </mat-select>
+                          <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
                         </mat-form-field>
+                    </div>
+                  <div class="formControl">
+                      <label>Document Received from</label>
+                      <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+                          <input matInput placeholder="Received from" formControlName="receivedfrom" floatPlaceholder="never">
+                            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                              <mat-icon>person</mat-icon>
+                            </button>
+                            <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                          </mat-form-field>
                     </div>
           <button *ngIf="files.length" (click)="uploadfiles()"   buttonLoader [loaderColor]="'white'" class="uploadButton mat-button">
               <span></span>
@@ -244,31 +275,7 @@
         
     
     </mat-card>
-    <!-- <div  class="fileListContainer">
-        <div  class="dragdrop" (click)="fileInput.click()" appDragDrop (onFileDropped)="attatchFile($event)" style="text-align: center">
-            <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple  type="file" />
-          <label style="margin-top: 50px;" for="input-file-id">
-            <mat-icon style="font-size: 80px;color:var(--primaryColor);transform: translateY(-700%);transform: translateX(-100%)">
-              backup_outlined
-            </mat-icon>
-            <p class="buttontext">Drag your file(s)</p>
-         
-          </label>
-        
-        </div>
-      <div class="filetablelist">
-        <p class="filelistLabel"><span>Attached Files List</span> <span><button *ngIf="files.length" (click)="uploadfiles()" mat-button  class="uploadButton">Upload File(s)</button></span></p>    
-        <table *ngIf="files.length" class="files-list">
-            <tr *ngFor="let file of files;let i= index">
-              <td>{{ file}}</td>
-              <td> <button class="delete-file" (click)="deleteAttachment(i)">
-                  <img src="../../../assets/img/Recycle_Bin_Full.png">
-                </button></td>
-            </tr>
-          </table>
-       
-      </div>
-    </div> -->
+ 
    
   </div>
 

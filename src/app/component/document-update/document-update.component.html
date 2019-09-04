@@ -1,0 +1,126 @@
+<div>
+<h2 mat-dialog-title>Update Document</h2>
+</div>
+<mat-dialog-content >
+  <div class="docx-container">
+    <div class="docxForm">
+   
+
+        <form action="" [formGroup]="form">
+            <!-- <div class="formControl">
+                <label>Activity</label>
+                <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+                  <mat-select  class="select" formControlName="activityid" placeholder="Institution" floatPlaceholder="never"
+                  >
+                    <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                    </mat-option>
+                  </mat-select>
+                     <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> 
+                  </mat-form-field>
+              </div> -->
+              <div class="formControl">
+                  <label>Document Type</label>
+                  <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+                    <mat-select  class="select" formControlName="documenttypeid" placeholder="Document Type" floatPlaceholder="never"
+                    >
+                      <mat-option *ngFor="let item of docTypeList" [value]="item.documentypeid">{{item.description}}
+                      </mat-option>
+                    </mat-select>
+                      <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="formControl">
+                    <label>Project </label>
+                    <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+                      <mat-select  class="select" formControlName="projectid" placeholder="Select Project" floatPlaceholder="never"
+                      >
+                        <mat-option *ngFor="let item of projectList" [value]="item.projectId">{{item.projectname}}
+                        </mat-option>
+                      </mat-select>
+
+                        <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+                      </mat-form-field>
+                  </div>
+                <div class="formControl">
+                    <label>Description</label>
+                    <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+                      <input matInput placeholder=" description" formControlName="description" floatPlaceholder="never">
+                        <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                          <mat-icon>description</mat-icon>
+                        </button>
+                        <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                      </mat-form-field>
+                  </div>
+                  <div class="formControl">
+                      <label>Document Uploader</label>
+                      <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+                        <input matInput placeholder="Receiver" formControlName="receivedby" floatPlaceholder="never">
+                          <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                            <mat-icon>person</mat-icon>
+                          </button>
+                          <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                        </mat-form-field>
+                    </div>
+                  <div class="formControl">
+                      <label>Document Sender</label>
+                      <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+                        <input matInput placeholder="Sender" formControlName="receivedfrom" floatPlaceholder="never">
+                          <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                            <mat-icon>person</mat-icon>
+                          </button>
+                          <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                        </mat-form-field>
+                    </div>
+      
+        </form>
+
+    </div>
+    <div class="uploadSection">
+        <div class="dragdrop"  appDragDrop (onFileDropped)="attatchFile($event)"
+        style="text-align: center">
+        <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple
+          type="file" />
+        <label style="margin-top: 50px;" for="input-file-id">
+          <mat-icon
+            style="font-size: 80px;color:var(--primaryColor);transform: translateY(-700%);transform: translateX(-100%)">
+            backup_outlined
+          </mat-icon>
+          <p class="buttontext">Drag your file(s)</p>
+        </label>
+      </div>
+      <div  style="margin-top: 30px" style="width: 100%" class="">
+          <!-- <p class=""><span>Attached Files List</span></p>     -->
+          <div class="tableSection" style="width: 100%" *ngIf="files.length" >
+            <table style="width: 100%">
+                <tr>
+                    <th  style="font-size: 13px;color:gray;margin-top:10px;font-style:var(--primaryFont);font-weight: 200" *ngFor="let col of fileColumns">
+                      {{col}}
+                    </th>
+                  </tr>
+                  <tr class="files-list" *ngFor="let file of files;let i= index">
+                      <td style="text-align: left;font-size: 13px">
+                      <a [href]="file.url" target="_blank" >
+                        {{ file.name }}
+                        <span>Size: {{file.size |number}} bytes</span>
+                      </a>
+                      </td>
+                      <td style="text-align: right" (click)="deleteAttachment(i)" class="delete-file">
+                          <img src="../../../assets/img/Recycle_Bin_Full.png">
+                      </td>
+                    </tr>
+            </table>
+            
+            </div>
+         
+        </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="close()">Close</button>
+    <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'" (click)="update()">
+      <span></span>
+      Update Document
+    </button>
+  </mat-dialog-actions>
+  

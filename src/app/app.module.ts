@@ -68,6 +68,8 @@ import { ActivityContainerComponent } from './component/activity-container/activ
 import { DocumentContainerComponent } from './component/document-container/document-container.component';
 import { DragDropDirective } from './component/drag-drop.directive';
 import { ConversationComponent } from './component/conversation/conversation.component';
+import { DocumentUpdateComponent } from './component/document-update/document-update.component';
+import { DocumentAddComponent } from './component/document-add/document-add.component';
 
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -124,7 +126,9 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     ActivityContainerComponent,
     DocumentContainerComponent,
     DragDropDirective,
-    ConversationComponent
+    ConversationComponent,
+    DocumentUpdateComponent,
+    DocumentAddComponent
   ],
   imports: [
     BrowserModule,
@@ -162,6 +166,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     UpdateProjectModalComponent,
     UpdateProjectTypeModalComponent,
     UpdateStatusModalComponent,
+    DocumentUpdateComponent,
     UpdateTaskTypeModalComponent,
     CreateStatusModalComponent,
     CreateProjectTypeModalComponent,

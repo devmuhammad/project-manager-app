@@ -20,18 +20,7 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
   projects: [];
-  // Tas
-  // form: FormGroup = new FormGroup({
-  //   name: new FormControl('', Validators.required),
-  //   type: new FormControl('', Validators.required),
-  //   description: new FormControl(''),
-  //   // stagingSeverUrl: new FormControl(''),
-  //   // productionServerUrl: new FormControl(''),
-  //   // repository: new FormControl('', Validators.required),
-  //   alias: new FormControl('',Validators.required),
-  //   client: new FormControl('',Validators.required),
-  //   projectmanager: new FormControl('',Validators.required),
-  // });
+ 
   gettableData(): Observable<any[]> {
     const { projectList } = store.getState().project;
     console.log(projectList);
@@ -45,7 +34,11 @@ export class ProjectService {
   getProjectTeamMembers(projectId): Observable<any> {
     return this.http.get(`${BaseApi.URL + BaseApi.PATH['TEAM_MEMBERS']}/${projectId}`);
   }
-
+// project document
+getProjectDocx(param):Observable<any>{
+  return this.http.get(`${BaseApi.URL + BaseApi.PATH['PROJECT_DOCX']}?page=${param.page}
+  &projectid=${param.projectid}&size=${param.size}`);
+}
   // PROJECT ACTIVITY
   getProjectActivities(param): Observable<any> {
     return this.http.get(`${BaseApi.URL + BaseApi.PATH.PROJECT_ACTIVITY}?page=${param.page}

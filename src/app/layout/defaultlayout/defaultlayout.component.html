@@ -108,10 +108,7 @@
         <mat-menu #notification="matMenu" yPosition="above">
           <div class="notification-panel">
             <div class="banner">
-              <p>
-                <mat-icon matBadgePosition="after" matBadgeColor="warn" class="tool-icon">notifications_active
-                </mat-icon>
-              </p>
+              
               <span>
                 Notifications
               </span>
@@ -119,18 +116,20 @@
             <mat-divider></mat-divider>
             <div class="notification-details" *ngIf="activityList">
               <div class="notification-container" style="margin-bottom: auto" *ngFor="let item of activityList;">
-
+                  
                 <mat-card class="nwrapper">
-                  <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)">{{item.projectid.projectname}}</p>
+                   
+                    <h4 style="color: var(--greyColor);font-size: 15px;margin-bottom: 20px"> <span style="color: var(--primaryColor)">{{item.usercomment}}</span></h4>
+                  <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)">{{item.projectid.projectname}}</p> -->
                     <div class="notification-header">
-                        <p class="actionflow"> <span  ></span> {{item.actionflow}}</p>
+                        <p class="actionflow"> <span style="color: var(--greyColor);font-size: 13px" >Action flow</span> {{item.actionflow}}</p>
                         <p style="color: var(--greyColor);font-size: 13px">Action: <span style="color: var(--primaryColor)">{{item.tasktype}}</span></p>
                       </div>
-                      <div class="notification-body">
-                         <mat-icon style="font-size: 15px">assignment</mat-icon>
-                        <p>{{item.usercomment}}</p>
-                      </div>
+                      
                       <div class="author">
+                          <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)"><span style="color: var(--greyColor);font-size: 13px" >Project name</span>{{item.projectid.projectname}}</p>  -->
+
+                        <span  style="color: var(--greyColor);font-size: 13px;margin-right: 10px">Assigned By </span>
                         <p style="margin-right:10px"> {{item.userid.fullname}}</p>
                         <span><img width="20px" src="../../../assets/img/avatar.png" alt="assignedby"></span>
                     </div>

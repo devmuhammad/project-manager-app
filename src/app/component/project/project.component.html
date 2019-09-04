@@ -87,25 +87,63 @@
        <span style="margin-right: 10px">{{sideData.documentCounts}} </span>{{item.title}} 
        </mat-expansion-panel-header>
          
-            <mat-expansion-panel style="margin-bottom: 7px" >
-                <mat-expansion-panel-header >
-                    <mat-icon style="font-size: 16px;">folder_open</mat-icon>
-                  <span style="font-size: 10px;margin-right: 1.5px"> Project Description</span>
-                  </mat-expansion-panel-header>
-                 
-                    <div>
-                        <mat-list>
-                            <mat-list-item >
-                              <div>
-                                <p>
-                                  Timeline Info
-                                </p>
-                              </div>
-                            </mat-list-item>
-                          </mat-list>
-                    </div>
-                
-              </mat-expansion-panel>
+       <ng-container *ngFor= "let document of projectDocx;let i  =index">
+         <mat-expansion-panel class="docxexpand"
+         (click)="toogleCollapse(i)"
+         [expanded]="innerpane===i" 
+         [attr.data-index]="i"
+          style="margin-bottom: 10px">
+             <mat-expansion-panel-header  matTooltip="{{document.docurl}}">
+                 <mat-icon style="font-size: 16px;">folder_open</mat-icon>
+               <span style="font-size: 12px;text-transform: capitalize; margin-right: 1.5px">{{resizeName(document.docurl)}}</span>
+               </mat-expansion-panel-header>
+               <button mat-icon-button  [matMenuTriggerFor]="docxmenu" class="docx-more" >
+                 <mat-icon>more_horizontal</mat-icon>
+                 </button>
+                 <mat-menu #docxmenu="matMenu" yPosition="above">
+                    <button style="height: 40px;" mat-menu-item class="menu-button">
+                      <mat-icon >note_add
+                      </mat-icon>
+                       <span>
+                         Add Documents
+                       </span>
+                     </button>
+                     <button  style="height: 40px;" mat-menu-item class="menu-button">
+                        <mat-icon >cloud_download
+                        </mat-icon>
+                         <span>
+                           Download
+                         </span>
+                       </button>
+                     <button (click)="getUpdateDocx(document)" style="height: 40px;" mat-menu-item class="menu-button">
+                        <mat-icon >update</mat-icon>
+                        <span>
+                          Update Document Info
+                        </span>
+                      </button>
+                      <button  (click)="deleteDocx(document.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                          <mat-icon >delete</mat-icon>
+                          <span>
+                            Remove Document
+                          </span>
+                        </button>
+                </mat-menu>
+               <p style="font-size: 10px;font-family:var(--primaryFont);padding: 5px;">Description: {{document.description}}</p>
+            <div class="docbody">
+              <div class="imageDiv">
+                  <img *ngIf="document.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" height="50">
+                  <img *ngIf="document.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg"  height="50">
+                  <img *ngIf="document.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" height="50">
+                  <img *ngIf="document.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg"  height="50">
+              </div>
+              <div class="docContent">
+                  <p><span class="contentLabel">Date Created:</span>{{document.datecreated | date}}</p>
+                  <p><span class="contentLabel">Received From:</span>{{document.receivedfrom}}</p>
+                  <p><span  class="contentLabel">Received By:</span>{{document.receivedby}}</p>
+              </div>
+            </div>
+           </mat-expansion-panel>
+       </ng-container>
        </mat-expansion-panel>
        <mat-expansion-panel class="panel-section" *ngIf="item.title=== 'Team' && sideData"
        (click)="toggleExpand(i)"

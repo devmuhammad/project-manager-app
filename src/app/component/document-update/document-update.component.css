@@ -1,0 +1,119 @@
+h2{
+    font-family: var(--primaryFont);
+  
+  }
+
+  .form-container{
+      width: 100%;
+  }
+
+  .passwordicon{
+    height: 18px;
+    width:18px;
+  }
+
+  mat-dialog-content{
+    max-height:350px;
+    overflow-x: hidden !important;
+}
+
+.formControl{
+    position: relative;
+    margin: 10px 0 0px 0;
+    padding:10px;
+    
+}
+.formControl label{
+    position: absolute;
+    top: -10px;
+    color: var(--primaryColor);
+    font-size: 13px;
+
+    font-weight: 300;
+    font-family: var(--primaryFont);
+    color: var()
+}
+.auth-form-field{
+    width: 95%;
+}
+.form-container{
+    width: 100%;
+}
+.wrapper{
+display: flex;
+flex-direction: row;
+width: 100%;
+}
+.wrapper div{
+    width: 100%;
+}
+
+.docx-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.docx-container .docxForm{
+    display: block;
+    width: 60%;
+}
+.dragdrop{
+    position: relative;
+    background-color:transparent;
+    border: 2px dashed #1C8ADB;
+    /* border: 3px dashed linear-gradient(228.76deg,  rgb(17, 136, 216) -34.42%, rgb(213, 195, 216) 127.18%) !important; */
+    width: 80%;
+    margin-top:20px !important;
+    padding: 10px;
+    border-radius: 4px ;
+    height: 200px;
+    margin: auto;  
+}
+.docx-container .uploadSection{
+    display:block;
+    width: 40%;
+}
+
+
+table, th , td {
+    
+    border-collapse: collapse;
+    padding: 5px;
+  }
+ tr {
+    border-bottom: .5px solid gray;
+  }
+
+  table{
+      border-bottom: none !important;
+  }
+  .tableSection{
+      display: block;
+      max-height:300px !important;
+      overflow-y: auto;
+  }
+
+.files-list {
+    display: flex;
+    justify-content: space-around;
+    width: 150%;
+   
+    overflow: auto;
+    margin: 5px auto;
+    background:transparent;
+    border-bottom: .5px solid;
+    padding: 2px;
+    color:var(--greyColor);
+}
+.files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size:12px;
+    font-family: var(--primaryFont);
+}
+
+.files-list .delete-file img {
+    width: 15px;
+}

@@ -3,11 +3,13 @@ import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 import { DocumentsService } from 'src/app/services/documents.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AngularButtonLoaderService } from 'angular-button-loader';
-import { MatSnackBar, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatSnackBar, MatTableDataSource, MatPaginator, MatSort, MatDialogConfig, MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DropdownsService } from 'src/app/services/dropdowns.service';
 import { ActivityService } from 'src/app/services/activity.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { UsersService } from 'src/app/services/users.service';
+import { DocumentUpdateComponent } from '../document-update/document-update.component';
 
 @Component({
   selector: 'app-document-container',
@@ -23,20 +25,23 @@ export class DocumentContainerComponent implements OnInit {
   displayedColumns: string[] = ['#', 'url', 'doctype', 'createdat', 'reciever', 'sender', 'action'];
   fileColumns = ['File Name', 'Actions'];
   constructor(private commonservice: DefaultlayoutService,
-    private loadingBar: LoadingBarService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private dropdownService: DropdownsService,
-    private btnLoader: AngularButtonLoaderService,
-    private activityservice: ActivityService,
-    private projectservice: ProjectService,
-    private documentservice: DocumentsService) {
+              private loadingBar: LoadingBarService,
+              private fb: FormBuilder,
+              private snackBar: MatSnackBar,
+              private dropdownService: DropdownsService,
+              private btnLoader: AngularButtonLoaderService,
+              private activityservice: ActivityService,
+              private projectservice: ProjectService,
+              private dialog: MatDialog,
+              private users: UsersService,
+              private documentservice: DocumentsService) {
     this.form = this.fb.group({
       activityid: ['', Validators.required],
       documenttypeid: ['', Validators.required],
       projectid: ['', Validators.required],
+      receivedfrom: ['', Validators.required],
       description: ['', Validators.required],
-      receivedby: ['', Validators.required],
+      taskid: ['', Validators.required],
     });
   }
   public credentials = {
@@ -53,9 +58,11 @@ export class DocumentContainerComponent implements OnInit {
     size: 20,
   };
   public inputFields = {
-    receivedby: '',
+    userid: '',
     receivedfrom: '',
-    docurl: '',
+    file: '',
+    parentid: 0 as number,
+    taskid: '',
     description: '',
     projectid: 0 as number,
     activityid: '',
@@ -68,27 +75,30 @@ export class DocumentContainerComponent implements OnInit {
   institutionList: any;
   form: FormGroup;
   getFile: any;
+  allusers: any;
   files: any = [];
   documentList = [];
   dataSource: MatTableDataSource<any>;
   searchKey: '';
   projectList: '';
   resizeName = (initialName) => {
-    const length = 20;
-    const append = '..';
-    let newName = initialName;
-    if (typeof newName === 'string') {
-      if (newName.length > length) {
-        return newName = initialName.substring(0, length - append.length) + append;
-      } else {
-        return newName;
-      }
+    if (initialName) {
+      const length = 20;
+      const append = '..';
+      let newName = initialName;
+      if (typeof newName === 'string') {
+        if (newName.length > length) {
+          return newName = initialName.substring(0, length - append.length) + append;
+        } else {
+          return newName;
+        }
 
-    } else {
-      if (Object.keys(newName).length > length) {
-        return newName = initialName.substring(0, length - append.length) + append;
       } else {
-        return newName;
+        if (Object.keys(newName).length > length) {
+          return newName = initialName.substring(0, length - append.length) + append;
+        } else {
+          return newName;
+        }
       }
     }
 
@@ -136,7 +146,7 @@ export class DocumentContainerComponent implements OnInit {
         if (res.message === 'Success') {
           this.loadingBar.complete();
           this.documentList = res.data.map((item: any) => {
-            const fileExt = this.getFileExt(item.docurl);
+            const fileExt = this.getFileExt(item.docurl ? item.docurl : 'picture.png');
             const name = this.resizeName(item.docurl);
             // console.log({ ...item, fileExt });
             return { ...item, fileExt, name };
@@ -158,8 +168,10 @@ export class DocumentContainerComponent implements OnInit {
       });
   }
   ngOnInit() {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     this.getList(this.credentials);
     this.fetchInstitutionList();
+    this.getUsers(profile.id);
     this.getDocType();
     this.getProjectList();
     this.commonservice.handleBreadChrome({ parent: 'Document', child: 'Activities' });
@@ -186,28 +198,39 @@ export class DocumentContainerComponent implements OnInit {
       panelClass: ['success']
     });
   }
-  attatchFile(event) {
+  attatchFile(event : FileList) {
     console.log(event);
+    // let temp = event.item(0);
+    // console.log(temp)
     // tslint:disable-next-line: prefer-for-of
     for (let index = 0; index < event.length; index++) {
       const element = event[index];
-      this.files.push(element.name);
+      console.log(element);
+      this.files.push(element);
     }
   }
 
   uploadIteratedfiles(payload) {
     console.log(payload);
-    this.documentservice.addDocument(payload)
+    this.documentservice.uploadDocument(payload)
       .subscribe(res => {
-        if (res.message === 'Success') { this.flag = 1; }
-      }, err => { this.flag = 0; });
-    if (this.flag == 1) {
-      this.getList(this.credentials);
-      return this.getSuccessNotified('New Document Added');
-    }
-    if (this.flag == 0) {
-      return this.getErrorNotified(`File failed to upload`);
-    }
+        if (res.message === 'Success') {return this.getSuccessNotified('New Document Added') }
+      }, err => {
+        console.log(err.error)
+         const error = err.error.error;
+       return this.getErrorNotified(`File failed to upload ${error}`);
+      });
+    console.log(this.flag);
+  }
+
+  getUsers(id: number) {
+    return this.users.userList(id)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.allusers = res.data.map((item: any) => ({
+          ...item
+        }));
+      });
   }
 
   uploadfiles() {
@@ -216,18 +239,40 @@ export class DocumentContainerComponent implements OnInit {
     const profile = JSON.parse(localStorage.getItem('profile'));
     if (this.files.length) {
       for (const item of this.files) {
-        // console.log(item);
+        console.log(item);
         this.inputFields.activityid = this.form.get('activityid').value;
         this.inputFields.description = this.form.get('description').value;
         this.inputFields.documenttypeid = this.form.get('documenttypeid').value;
-        this.inputFields.docurl = item;
-        this.inputFields.receivedfrom = profile.fullname;
-        this.inputFields.receivedby = this.form.get('receivedby').value;
+        this.inputFields.taskid = this.form.get('taskid').value;
+        this.inputFields.file = item;
+        this.inputFields.receivedfrom = this.form.get('receivedfrom').value;
+        this.inputFields.userid = profile.id;
         this.inputFields.projectid = this.form.get('projectid').value;
         this.uploadIteratedfiles(this.inputFields);
       }
+      // if (this.flag == 1) {
+      //   this.getList(this.credentials);
+      //   return this.getSuccessNotified('New Document Added');
+      // }
+      // if (this.flag == 0) {
+      //   return this.getErrorNotified(`File failed to upload`);
+      // }
 
     }
+  }
+
+  getUpdateDocx(row) {
+    console.log(row);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '30%';
+    dialogConfig.data = { data: row };
+    this.dialog.open(DocumentUpdateComponent, dialogConfig).afterClosed().subscribe(
+      () => {
+        this.getList(this.credentials);
+      }
+    );
   }
 
   deleteAttachment(index) {

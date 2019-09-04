@@ -25,6 +25,7 @@ export const BaseApi = {
     // Projects
     ADD_PROJECTS: 'project/add',
     PROJECTS: 'project/list',
+    PROJECT_DOCX: 'project/documents',
     PROJECT_UPDATE: 'project/update',
     PROJECTS_RETRIEVE: 'project/retrieve',
     // PROJECT TYPES
