@@ -28,11 +28,12 @@
     padding-top:-10px;
 }
 .listContainer{
+    transform :scale(.9);
     position: relative;
 }
 
 .listContainer img{
-    transform: scale(.7);
+    transform: scale(.5);
     margin-bottom: 10px;
 }
 .listContainer .docurl{
@@ -188,9 +189,9 @@ table, th , td {
 
     min-width: 20%;
     height: 220px;
-    margin-inline-end: 5px;
+    /* margin-inline-end: 5px;
     margin-inline-start: 10px;
-    margin-bottom:10px; 
+    margin-bottom:10px;  */
 }
 .fileListContainer .layerContent div:hover{}
 label{

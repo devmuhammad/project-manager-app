@@ -98,6 +98,9 @@ export class CreateTaskTypeModalComponent implements OnInit {
     }
   }
 
+  deleteType(id){
+
+  }
  
   saveAndAdd() {
     if(this.form.valid){
@@ -114,7 +117,7 @@ export class CreateTaskTypeModalComponent implements OnInit {
         return this.snackbar.open(`${message } `, 'Dismiss', {
           panelClass: ['success'],
           duration: 7000,
-          horizontalPosition:'left',
+          horizontalPosition: 'left',
         verticalPosition: 'bottom',
         });
       }

@@ -72,8 +72,29 @@ export class StatusTypesComponent implements OnInit {
    );
  }
 
- getDeleteClient(id){
-   console.log(id);
+ getDeleteType(id){
+  this.service.getDeleteStatus(id)
+  .subscribe(res=> {
+    if(res.message ==='Success') {
+      this.getTableData()
+      this.snackBar.open('Status Deleted', 'Dismiss',
+      {
+        duration: 7000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right',
+        panelClass: ['success']
+      }
+      );
+    }
+  },err=>{
+    this.snackBar.open('Failed to Deleted Status', 'Dismiss',
+    {
+      duration: 7000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+      panelClass: ['error']
+    });
+  });
  }
 
  fetchInstitutionList() {

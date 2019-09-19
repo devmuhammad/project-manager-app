@@ -102,13 +102,13 @@
                  </button>
                  <mat-menu #docxmenu="matMenu" yPosition="above">
                     <button style="height: 40px;" mat-menu-item class="menu-button">
-                      <mat-icon >note_add
+                      <mat-icon >file_eye
                       </mat-icon>
                        <span>
-                         Add Documents
+                         Preview
                        </span>
                      </button>
-                     <button  style="height: 40px;" mat-menu-item class="menu-button">
+                     <button (click)="fileDownload(document.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
                         <mat-icon >cloud_download
                         </mat-icon>
                          <span>

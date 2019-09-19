@@ -25,14 +25,14 @@
             {{docx.datecreated | date}}</p>
             <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn"><mat-icon>more_vert</mat-icon></button>
             <mat-menu #docxbtn="matMenu" yPosition="above">
-                <button style="height: 40px;" mat-menu-item class="menu-button">
-                  <mat-icon >note_add
+                <button (click)="filePreview(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                  <mat-icon >file_eye_outline
                   </mat-icon>
                    <span>
-                     Add Documents
+                     Preview
                    </span>
                  </button>
-                 <button  style="height: 40px;" mat-menu-item class="menu-button">
+                 <button (click)="fileDownload(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
                     <mat-icon >cloud_download
                     </mat-icon>
                      <span>
@@ -120,36 +120,39 @@
               <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                <button  [matMenuTriggerFor]="actionMenu" mat-icon-button>
+                <button (click)="filePreview(docx.documentid)" [matMenuTriggerFor]="docxbtn" mat-icon-button>
                   <mat-icon style="color:var(--darkColor)">
                     settings
                   </mat-icon>
                 </button>
-                <mat-menu  #actionMenu="matMenu" yPosition="below">
-                    <button (click)="userApproval(element.id)" class="menu-button" mat-menu-item>
-                        <mat-icon >how_to_reg
+                <mat-menu #docxbtn="matMenu" yPosition="above">
+                    <button style="height: 40px;" mat-menu-item class="menu-button">
+                      <mat-icon >file_eye
+                      </mat-icon>
+                       <span>
+                         Preview
+                       </span>
+                     </button>
+                     <button (click)="fileDownload(element.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                        <mat-icon >cloud_download
                         </mat-icon>
                          <span>
-                           Approve
+                           Download
                          </span>
                        </button>
-                       <button (click)="deleteDocx(element.documentid)" class="menu-button" mat-menu-item>
-                          <mat-icon >
-                            delete
-                          </mat-icon>
+                     <button (click)="getUpdateDocx(element)" style="height: 40px;" mat-menu-item class="menu-button">
+                        <mat-icon >update</mat-icon>
+                        <span>
+                          Update Document Info
+                        </span>
+                      </button>
+                      <button  (click)="deleteDocx(element.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                          <mat-icon >delete</mat-icon>
                           <span>
-                            Delete
+                            Remove Document
                           </span>
                         </button>
-                        <button (click)="showDetails(element)" class="menu-button" mat-menu-item>
-                          <mat-icon>
-                            visibility
-                          </mat-icon>
-                          <span>
-                            View more
-                          </span>
-                        </button>
-                  </mat-menu>
+                </mat-menu>
                 </mat-cell>
               </ng-container>
              
@@ -188,7 +191,7 @@
            
           </div>
       <header>Drag File here:</header>
-      <div class="dragdrop" (click)="fileInput.click()" appDragDrop (onFileDropped)="attatchFile($event)"
+      <div class="dragdrop"  appDragDrop (onFileDropped)="attatchFile($event)"
         style="text-align: center">
         <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple
           type="file" />
@@ -201,7 +204,10 @@
         </label>
       </div>
       <div>
-        <form action="" [formGroup]="form" enctype="multipart/form-data">
+        
+      </div>
+      <div>
+        <form [formGroup]="form" enctype="multipart/form-data">
             <div class="formControl">
                 <label>Activity</label>
                 <mat-form-field class="project-form-field auth-form-field " floatLabel="never">

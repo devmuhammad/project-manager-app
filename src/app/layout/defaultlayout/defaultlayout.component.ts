@@ -10,6 +10,8 @@ import { RouterOutlet } from '@angular/router';
 import { CreateProjectModalComponent } from 'src/app/component/create-project-modal/create-project-modal.component';
 import { NotificationsComponent } from 'src/app/component/modals/notifications/notifications.component';
 import { ActivityService } from 'src/app/services/activity.service';
+import { store } from 'src/app/store';
+
 
 @Component({
   selector: 'app-defaultlayout',
@@ -140,7 +142,6 @@ export class DefaultlayoutComponent implements OnInit {
 
   ngOnInit() {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    console.log(profile.id);
     this.fetchOwnnotifications(profile.id);
     this.pathname = this.pathOrigin = window.location.pathname;
     const authUser = localStorage.getItem('currentUser');
@@ -151,10 +152,16 @@ export class DefaultlayoutComponent implements OnInit {
   handleLogOut() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('profile');
+    store.dispatch({type:'LOGOUT'});
     return this.service.navigateToPath('/login');
   }
   openBottomSheet() {
-    this.bottomSheet.open(BottomSheetComponent);
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    this.bottomSheet.open(BottomSheetComponent).afterDismissed().subscribe(
+      ()=>{
+        this.fetchOwnnotifications(profile.id);
+      }
+    );
   }
 
 

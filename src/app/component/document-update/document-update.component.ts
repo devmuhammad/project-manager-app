@@ -136,7 +136,7 @@ export class DocumentUpdateComponent implements OnInit {
     this.formInputs.description = this.form.get('description').value;
     this.formInputs.documentid = this.docxData.documentid;
     this.formInputs.projectid = this.form.get('projectid').value;
-    this.formInputs.docurl = this.files ? this.files[0].name : this.form.get('docurl').value;
+    this.formInputs.docurl = this.files ? this.files[0].url : this.form.get('docurl').value;
     this.formInputs.receivedfrom = this.form.get('receivedfrom').value;
     this.formInputs.receivedby = this.form.get('receivedby').value;
     this.formInputs.documenttypeid = this.form.get('documenttypeid').value;

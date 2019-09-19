@@ -86,6 +86,11 @@ getProjectDocx(param):Observable<any>{
   getStatusList(): Observable<any> {
     return this.http.get(BaseApi.URL + BaseApi.PATH['STATUS']);
   }
+  // delete status
+  getDeleteStatus(id): Observable<any>{
+    return this.http.delete(`${BaseApi.URL + BaseApi.PATH.DELETE_STATUS}/${id}`)
+  }
+
   updateStatus(payload: object): Observable<any> {
     return this.http.put(BaseApi.URL + BaseApi.PATH['UPDATE_STATUS'], payload);
   }

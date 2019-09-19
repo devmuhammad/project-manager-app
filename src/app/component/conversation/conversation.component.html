@@ -1,45 +1,76 @@
 <div class="chat-wrapper">
   <div class="chat-sidebar">
     <mat-list>
+
+      <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4 mat-line>General</h4>
+      </mat-list-item>
       <h3 mat-subheader>Projects</h3>
-      <mat-list-item button *ngFor="let project of projects">
+      <mat-list-item [ngClass]="idx === i? 'focus':'' " (click)="showProjectChart(projects[i],i)" class="litem" button
+        *ngFor="let project of projects;let i = index">
         <mat-icon mat-list-icon>folder</mat-icon>
         <h4 mat-line>{{project.projectname}}</h4>
       </mat-list-item>
-      <!-- <mat-divider></mat-divider>
-      <h3 mat-subheader>Direct Messages</h3>
-      <mat-list-item *ngFor="let user of users">
-        <mat-icon mat-list-icon>note</mat-icon>
-        <h4 mat-line>{{user.name}}</h4>
-      </mat-list-item> -->
     </mat-list>
   </div>
 
   <div class="chat-content">
-    <div>
-      <h3>James</h3>
-      <p>Hello is it me you looking for? I can see it in your eyes, i can see it in your nose</p>
+    <div #scrollMe id="cArea" style="overflow-y: scroll" *ngIf="activityList.length" class="chatArea">
+      <div class="chatContent" *ngFor="let chat of activityList;let i = index">
+        <div class="actions">
+          <button (click)="fetchDeleteChat(i,chat.activityid)" mat-icon-button>
+            <mat-icon style="color: red;transform:scale(.8)">delete_outline</mat-icon>
+          </button>
+          <button (click)="replyChat()" mat-icon-button>
+              <mat-icon style="color: var(--primaryColor);transform:scale(.8)">reply</mat-icon>
+            </button>
+        </div>
+        <div *ngIf="delete && dltIndex=== i">
+            <div class="lds-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        <div class="designation">
+         
+          <img height="30px" src="../../../assets/img/avatar2p.png" alt="">
+          <h3 style="margin-left: 10px;transform: translateY(20%)">James</h3>
+        </div>
+        <p>{{chat.usercomment}}</p>
+      </div>
+     
     </div>
-
-    <div>
-      <h3>James</h3>
-      <p>Hello is it me you looking for? I can see it in your eyes, i can see it in your nose</p>
+    <div style="transform: translateY(70%)" *ngIf="!chartIsloading && !activityList.length">
+      <p style="text-align: center"> Start Conversion!</p>
     </div>
-
-
+    <div *ngIf="posted || (chartIsloading && !activityList.length)" style="width: 100%;text-align:center">
+        <div class="lds-facebook">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     <div class="chat-input">
-      <div class="form-control" >
-        <mat-form-field class="project-form-field" floatLabel="never" >
-            <input matInput
-              placeholder="Write your message" floatPlaceholder="never" 
-              required>
-              <button mat-button matSuffix mat-icon-button aria-label="Clear">
-                <mat-icon >send</mat-icon>
-              </button>
+      <div class="form-control">
+        <mat-form-field class="project-form-field" floatLabel="never">
+          <input matInput [(ngModel)]="comment" placeholder="Write your message"
+            floatPlaceholder="never" required>
+          <button (click)="adduserComment()" mat-button matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>send</mat-icon>
+          </button>
         </mat-form-field>
       </div>
     </div>
-
-
   </div>
 </div>

@@ -98,6 +98,7 @@ bottom:2%;
 }
 .actions{
   display: flex;
+  z-index: 989;
   flex-direction: column;
   justify-content: space-evenly;
 }
@@ -122,6 +123,8 @@ bottom:2%;
 }
 .expansion{
   box-shadow:none;
+  max-height: 100px;
+  overflow-y: auto;
    /* border-right:4px solid #fff; */
    border-radius: 0;
 padding-right: 0;
@@ -152,13 +155,26 @@ margin-right: 0;
 }
 .toggleIcon{
   color:var(--primaryColor);
-  align-self:right;
-  position: absolute;
-  right: 10px;
   background: transparent !important;
 
-}
+} 
 
+.navbar-items{
+  position: fixed;
+  right: -5%;
+  width: 30%;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-end;
+ align-self: right;
+  /* margin-right: 20%; */
+  
+}
+::ng-deep .main-nav{
+  z-index: 998;
+
+  position: fixed !important;
+}
 .toolbar-item{
   display:flex;
   width: 100%;
@@ -249,7 +265,7 @@ a[mat-list-item]:hover .icon,a[mat-list-item]:hover .icon.arrow-icon{
   color: var(--primaryColor);
 }
 .toolbar-theme{
-  background: linear-gradient(228.76deg, rgb(119, 18, 73) -34.42%, #E084F1 127.18%);
+  background: linear-gradient(228.76deg, rgba(25, 90, 86, 0.203) -34.42%, rgba(23, 43, 77, 0.319) 127.18%);
 }
 .banner{
   display: flex;
@@ -266,6 +282,7 @@ a[mat-list-item]:hover .icon,a[mat-list-item]:hover .icon.arrow-icon{
 }
 .content{
   overflow: auto;
+  margin-top: 5%;
 }
 .author{
   display: flex;
@@ -318,10 +335,10 @@ div.notification-details{
  
   letter-spacing: .4px;
 }
-.notification-icon{
+/* .notification-icon{
   position: absolute;
   right: 24%;
-}
+} */
 .notification-panel{
   width: 280px;
   max-height:100%;

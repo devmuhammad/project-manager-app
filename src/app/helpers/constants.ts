@@ -28,6 +28,7 @@ export const BaseApi = {
     PROJECT_DOCX: 'project/documents',
     PROJECT_UPDATE: 'project/update',
     PROJECTS_RETRIEVE: 'project/retrieve',
+    PROJECT_ACTIVITY: 'project/activities',
     // PROJECT TYPES
     PROJECT_TYPES: 'project/projecttypes',
     PROJECT_TYPE_ADD: 'project/projecttype/add',
@@ -35,6 +36,9 @@ export const BaseApi = {
     PROJECT_TYPE_DELETE: 'project/projecttype/delete',
     // Activity
     ASSIGNEE_ACTIVITIES: 'activities/assignee',
+    LIST_ACTIVITIES:'activities/list',
+    ADD_ACTIVITIES:'activities/add',
+    DELETE_ACTIVITIES:'activities/delete/',
     // Tasks Type
     TASK_TYPE_ADD : 'project/tasktype/add',
     TASK_TYPE_UPDATE: 'project/tasktype/update',
@@ -61,6 +65,7 @@ export const BaseApi = {
     ADD_STATUS: 'project/status/add',
     UPDATE_STATUS: 'project/status/update',
     STATUS: 'project/status',
+      DELETE_STATUS:'project/status/delete',
    // DOCTYPE
     DOC_TYPE : 'document/documenttypes',
     DOC_TYPE_ADD : 'document/documenttype/add',
@@ -77,7 +82,7 @@ export const BaseApi = {
     // Team Members
     TEAM_MEMBERS: 'project/teammembers',
     // PROJECT ACTIVITY
-    PROJECT_ACTIVITY: 'project/activities'
+   
 
   }
 };

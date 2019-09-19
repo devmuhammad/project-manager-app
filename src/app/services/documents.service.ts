@@ -8,7 +8,31 @@ import 'rxjs/add/observable/of';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DocumentsService {
+
+  toFormData( formValue) {
+    const formData = new FormData();
+
+    for ( const key of Object.keys(formValue) ) {
+      const value = formValue[key];
+      formData.append(key, value);
+    }
+
+    return formData;
+  }
+
+  // userId: '',
+  // receivedfrom: '',
+  // file: '',
+  // parentId: 0 as number,
+  // taskId: '',
+  // description: '',
+  // projectId: 0 as number,
+  // activityId: '',
+  // doctypeId: 0 as number,
+
 
   constructor(private http: HttpClient) { }
   getDocumentList(credentials): Observable<any> {
@@ -26,16 +50,28 @@ export class DocumentsService {
   addDocument(credentials): Observable<any> {
     return this.http.post(`${BaseApi.URL + BaseApi.PATH.DOC_ADD}`, credentials);
   }
-  uploadDocument(uploadfile): Observable<any> {
- console.log(uploadfile);
- return this.http.post(`${BaseApi.URL + BaseApi.PATH.DOC_UPLOAD}`, uploadfile, {
+  uploadDocument(requestpayload): Observable<any> {
+  
+   const formData = new FormData();
+   formData.append('userId',requestpayload.userId);
+   formData.append('receivedfrom', requestpayload.receivedfrom);
+   formData.append('file',requestpayload.file);
+   formData.append('parentId',requestpayload.parentId);
+   formData.append('taskId', requestpayload.taskId);
+   formData.append('description',requestpayload.description);
+   formData.append('projectId',requestpayload.projectId);
+   formData.append('activityId',requestpayload.activityId);
+   formData.append('doctypeId',requestpayload.doctypeId);
+   console.log(formData);
+   return this.http.post(`${BaseApi.URL + BaseApi.PATH.DOC_UPLOAD}`, formData, {
       headers : new HttpHeaders({
-        'Content-Type' : uploadfile.file.type
+        // 'Content-Type' : uploadfile.file.type
+        'Content-Type': 'application/json'
       })});
   }
   downloadfile(filepayload): Observable <any> {
-    const {documntId, userId} = filepayload;
-    return this.http.get(`${BaseApi.URL + BaseApi.PATH.DOC_DOWNLOAD}/${documntId}/${userId}`);
+    const {documentId, userId} = filepayload;
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.DOC_DOWNLOAD}/${documentId}/${userId}`);
   }
   DocumentPreview(filepayload): Observable <any> {
     const {documntId, userId} = filepayload;

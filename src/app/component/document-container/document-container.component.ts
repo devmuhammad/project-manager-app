@@ -58,19 +58,19 @@ export class DocumentContainerComponent implements OnInit {
     size: 20,
   };
   public inputFields = {
-    userid: '',
+    userId: '',
     receivedfrom: '',
-    file: '',
-    parentid: 0 as number,
-    taskid: '',
+    file: null,
+    parentId: 0 as number,
+    taskId: '',
     description: '',
-    projectid: 0 as number,
-    activityid: '',
-    documenttypeid: 0 as number,
+    projectId: 0 as number,
+    activityId: '',
+    doctypeId: 0 as number,
 
 
   };
-  flag = -1;
+  flag = null;
   docTypeList: any;
   institutionList: any;
   form: FormGroup;
@@ -199,15 +199,9 @@ export class DocumentContainerComponent implements OnInit {
     });
   }
   attatchFile(event : FileList) {
-    console.log(event);
-    // let temp = event.item(0);
-    // console.log(temp)
-    // tslint:disable-next-line: prefer-for-of
-    for (let index = 0; index < event.length; index++) {
-      const element = event[index];
-      console.log(element);
-      this.files.push(element);
-    }
+    this.inputFields.file = event.item(0);
+    console.log(event.item(0))
+    this.files.push(event.item(0));
   }
 
   uploadIteratedfiles(payload) {
@@ -215,10 +209,13 @@ export class DocumentContainerComponent implements OnInit {
     this.documentservice.uploadDocument(payload)
       .subscribe(res => {
         if (res.message === 'Success') {return this.getSuccessNotified('New Document Added') }
+        this.getErrorNotified("Something went wrong");
+        this.flag =1;
       }, err => {
         console.log(err.error)
-         const error = err.error.error;
-       return this.getErrorNotified(`File failed to upload ${error}`);
+        this.flag =0;
+        const error = err.error.error;
+        return this.getErrorNotified(`File failed to upload ${error}`);
       });
     console.log(this.flag);
   }
@@ -237,19 +234,18 @@ export class DocumentContainerComponent implements OnInit {
     this.btnLoader.displayLoader();
     this.loadingBar.start();
     const profile = JSON.parse(localStorage.getItem('profile'));
-    if (this.files.length) {
-      for (const item of this.files) {
-        console.log(item);
-        this.inputFields.activityid = this.form.get('activityid').value;
-        this.inputFields.description = this.form.get('description').value;
-        this.inputFields.documenttypeid = this.form.get('documenttypeid').value;
-        this.inputFields.taskid = this.form.get('taskid').value;
-        this.inputFields.file = item;
-        this.inputFields.receivedfrom = this.form.get('receivedfrom').value;
-        this.inputFields.userid = profile.id;
-        this.inputFields.projectid = this.form.get('projectid').value;
-        this.uploadIteratedfiles(this.inputFields);
-      }
+    // if (this.files) {
+      // for (const item of this.files) {
+        // console.log(item);
+    this.inputFields.activityId = this.form.get('activityid').value;
+    this.inputFields.description = this.form.get('description').value;
+    this.inputFields.doctypeId = this.form.get('documenttypeid').value;
+    this.inputFields.taskId = this.form.get('taskid').value;
+    this.inputFields.receivedfrom = this.form.get('receivedfrom').value;
+    this.inputFields.userId = profile.id;
+    this.inputFields.projectId = this.form.get('projectid').value;
+    this.uploadIteratedfiles(this.inputFields);
+      // }
       // if (this.flag == 1) {
       //   this.getList(this.credentials);
       //   return this.getSuccessNotified('New Document Added');
@@ -258,9 +254,43 @@ export class DocumentContainerComponent implements OnInit {
       //   return this.getErrorNotified(`File failed to upload`);
       // }
 
-    }
+    // }
   }
 
+  filePreview(id: number){
+    this.loadingBar.start();
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const credential ={documentId:id, userId:profile.id};
+    this.documentservice.DocumentPreview(credential)
+    .subscribe(res=>{
+      if(res.message === 'Success') {return this.getSuccessNotified(' Document Previewed')};
+
+      this.getErrorNotified("Something went wrong");
+      this.loadingBar.complete();
+    }, error => {
+      this.loadingBar.complete(); 
+      console.log(error)
+      const err = error.error.error;
+      return this.getErrorNotified(`File failed  ${err}`);
+    });
+  }
+  fileDownload(id: number){
+    this.loadingBar.start();
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const credential ={documentId:id, userId:profile.id};
+    this.documentservice.downloadfile(credential)
+    .subscribe(res=>{
+      if(res.message === 'Success') {return this.getSuccessNotified(' Document Downloaded')};
+
+      this.getErrorNotified("Something went wrong");
+      this.loadingBar.complete();
+    }, error => {
+      this.loadingBar.complete(); 
+      console.log(error)
+      const err = error.error.error;
+      return this.getErrorNotified(`File failed to download ${err}`);
+    });
+  }
   getUpdateDocx(row) {
     console.log(row);
     const dialogConfig = new MatDialogConfig();
@@ -299,3 +329,12 @@ export class DocumentContainerComponent implements OnInit {
   }
 
 }
+
+
+  // console.log(temp)
+    // tslint:disable-next-line: prefer-for-of
+    // for (let index = 0; index < event.length; index++) {
+    //   const element = event[index];
+    //   console.log(element);
+    //   this.files.push(element);
+    // }

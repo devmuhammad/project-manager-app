@@ -40,7 +40,6 @@ export class AuthenticationComponent implements OnInit {
     const authUser = JSON.parse(localStorage.getItem('profile'));
     console.log(authUser);
     if (authUser) { return this.routerHelper.navigateToPath('/project');}
-    console.log('couldnt route');
   }
   gotoPath(path: string) {
     // tslint:disable-next-line: deprecation
@@ -72,8 +71,9 @@ export class AuthenticationComponent implements OnInit {
       this.btnloader.displayLoader();
       this.loginData.username = this.form.get('username').value;
       this.loginData.password = this.form.get('password').value;
-      console.log(this.loginData);
+      // console.log(this.loginData);
       return this.service.login(this.loginData).subscribe(response => {
+        // console.log(response);
         if (response && response.message === 'Success') {
           console.log(response);
           store.dispatch({ type: 'GET_PROFILE', payload: response.data });
@@ -83,16 +83,27 @@ export class AuthenticationComponent implements OnInit {
           this.loadingBar.complete();
           this.btnloader.hideLoader();
           return this.router.navigateByUrl('/dashboard');
-        } else {
+        }
+        if(response.message === 'Falied'){
           this.loadingBar.complete();
           this.btnloader.hideLoader();
-          return this.snackBar.open('Login Failed', 'Dismiss', {
+          return this.snackBar.open(response.data, 'Dismiss', {
             duration: 7000,
             verticalPosition: 'bottom',
             horizontalPosition: 'left',
             panelClass: ['error']
           });
         }
+      },err=>{
+        console.log(err);
+        this.loadingBar.complete();
+        this.btnloader.hideLoader();
+        return this.snackBar.open('Login Failed', 'Dismiss', {
+          duration: 7000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'left',
+          panelClass: ['error']
+        });
       });
     } else {
       this.snackBar.open('Invalid Username Or password', 'Dismiss', {

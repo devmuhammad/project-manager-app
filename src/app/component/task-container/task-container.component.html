@@ -1,0 +1,90 @@
+<div class="taskSection">
+  <div class="taskList-Container">
+    <div class="task-body-header">
+      <div class="t-title">
+        <p>Task List</p>
+      </div>
+      <div class="add-task-action">
+        <button (click)="addTaskss()" mat-button>
+          <mat-icon>add</mat-icon>
+          <span>Add Task</span>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="task-body">
+      <div class="t-items" *ngFor="let task of taskList; let i = index">
+        <div class="t-item-main">
+
+          <div style="width: 50%">
+            <div style="margin-bottom: 10px;">
+              <h3>{{task.tasktype}}</h3>
+              <p style="font-size: 12px;text-transform:lowercase">{{task.usercomment}}</p>
+            </div>
+            <div style="font-size: 13px;">
+              <p>Project Name: <span style="color:var(--primaryColor)">{{task.projectid.projectname}}</span></p>
+            </div>
+          </div>
+          <div style="width: 30%;;transform: translateY(30%)">
+            <div class="t-status-text">
+              <p>{{task.projectid.projectstatus}} </p>
+              <button class="edit-status" [matMenuTriggerFor]="statusoptions" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+              <mat-menu  #statusoptions="matMenu" class="s-menu" yPosition="above">
+                  <button (click)="updateStatus(s, taskList[i])" *ngFor="let s of status" class="menu-button statusBtn" mat-menu-item>
+                      {{s.description}}
+                  </button>
+                </mat-menu>
+            </div>
+            <div [ngClass]="{
+          'Created' : task.projectid.projectstatus =='New',
+          'ongoing' : task.projectid.projectstatus =='string',
+          'completed' : task.projectid.projectstatus =='Completed'
+       }" class="t-status"></div>
+          </div>
+          <div style="width: 20%; text-align: center;">
+            <button mat-icon-button>
+              <mat-icon style="font-size: 30px">attach_file</mat-icon>
+            </button>
+            <p style="padding: 5px;font-size:12px;color:var(--greyColor)">0 file(s) attached</p>
+          </div>
+
+        </div>
+        <div class="t-item-footer">
+          <div style="width:50%;transform: translateY(10%);color:var(--greyColor);font-size: 15px">
+            <mat-icon style="transform: translateY(20%);">calendar_today</mat-icon> 23rd Sept 2019
+          </div>
+          <div style="width:40%;transform: translateY(30%);font-size: 13px">
+            Assigned by:
+            <span *ngIf="task.userid.id!==self" style="color:var(--primaryColor)"> {{task.userid.fullname}}</span>
+            <span *ngIf="task.userid.id===self" style="color:var(--primaryColor)">Self</span>
+          </div>
+          <div style="width:10%">
+            <button [matMenuTriggerFor]="options" mat-icon-button>
+              <mat-icon style="font-size: 18px">settings</mat-icon>
+            </button>
+            <mat-menu #options="matMenu" yPosition="above">
+              <button class="menu-button" mat-menu-item>
+                <mat-icon>
+                </mat-icon>
+                <span>
+                  View Update
+                </span>
+              </button>
+              <button class="menu-button" mat-menu-item>
+                <mat-icon>store</mat-icon>
+                <span>
+                  Repository
+                </span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

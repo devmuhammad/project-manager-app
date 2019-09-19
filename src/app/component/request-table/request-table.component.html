@@ -84,33 +84,7 @@
         </mat-cell>
       </ng-container>
      
-      <!-- <ng-container matColumnDef="institution">
-        <mat-header-cell *matHeaderCellDef >More</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
-            <mat-menu  #moreMenu="matMenu" yPosition="below">
-              <p style="color:var(--greyColor);margin-left:5px;text-align:center;font-family: var(--primaryFont)">Institution</p>
-                <button  class="menu-button" mat-menu-item>
-                  Name:
-                   <span>
-                     {{element.institution.institutionName}}
-                   </span>
-                 </button>
-                 <button class="menu-button" mat-menu-item>
-                    Code:
-                    <span>
-                      {{element.institution.institutionCode}}
-                    </span>
-                  </button>
-                  <button class="menu-button" mat-menu-item>
-                      Type Name:
-                      <span>
-                          {{element.institution.institutionType.institutionTypeName}}
-                      </span>
-                    </button>
-                    </mat-menu>
-           </mat-cell>
-      </ng-container> -->
+     
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
