@@ -22,6 +22,7 @@ export class DocumentContainerComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['#', 'url', 'doctype', 'createdat', 'reciever', 'sender', 'action'];
   fileColumns = ['File Name', 'Actions'];
   constructor(private commonservice: DefaultlayoutService,
@@ -78,7 +79,6 @@ export class DocumentContainerComponent implements OnInit {
   allusers: any;
   files: any = [];
   documentList = [];
-  dataSource: MatTableDataSource<any>;
   searchKey: '';
   projectList: '';
   resizeName = (initialName) => {

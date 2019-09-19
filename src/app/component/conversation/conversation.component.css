@@ -50,21 +50,41 @@
     width: 90%;
 }
 
+.author{
+  margin-left: 10px;
+  transform: translateY(20%);
+  font-size: 18px;
+  font-family: var(--primaryFont);
+  color:linear-gradient(228.76deg,  #2E7D32 -34.42%, #E084F1 127.18%);
+  font-weight: 400;
+}
 .chatContent{
     position: relative;
     width: 100%;
     margin: 10px 0;
+    border-bottom: .5px solid #8888885f;
     padding: 10px;
-    border-left: 5px solid #358484;
+    /* border-left: 5px solid #358484; */
+}
+
+.chart-comment{
+  font-size: 14px;
+  font-family: var(--primaryFont);
+  color:#00000999;
+  font-weight: 200;
+  margin-top: px;
 }
 
 .actions{
     display: none;
 }
+.chatContent:hover{
+  padding-left: 10px;
+}
 .chatContent:hover .actions{
     position: absolute;
     display: block;
-    left: 40%;
+    left: -20px;
     top: 10px;
 }
 

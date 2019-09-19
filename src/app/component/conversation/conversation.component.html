@@ -22,11 +22,11 @@
           <button (click)="fetchDeleteChat(i,chat.activityid)" mat-icon-button>
             <mat-icon style="color: red;transform:scale(.8)">delete_outline</mat-icon>
           </button>
-          <button (click)="replyChat()" mat-icon-button>
+          <!-- <button (click)="replyChat()" mat-icon-button>
               <mat-icon style="color: var(--primaryColor);transform:scale(.8)">reply</mat-icon>
-            </button>
+            </button> -->
         </div>
-        <div *ngIf="delete && dltIndex=== i">
+        <!-- <div *ngIf="delete && dltIndex=== i">
             <div class="lds-spinner">
               <div></div>
               <div></div>
@@ -41,15 +41,15 @@
               <div></div>
               <div></div>
             </div>
-          </div>
+          </div> -->
         <div class="designation">
          
           <img height="30px" src="../../../assets/img/avatar2p.png" alt="">
-          <h3 style="margin-left: 10px;transform: translateY(20%)">James</h3>
+          <h3 class="author">James</h3>
         </div>
-        <p>{{chat.usercomment}}</p>
+        <p class="chart-comment">{{chat.usercomment}}</p>
+       
       </div>
-     
     </div>
     <div style="transform: translateY(70%)" *ngIf="!chartIsloading && !activityList.length">
       <p style="text-align: center"> Start Conversion!</p>
