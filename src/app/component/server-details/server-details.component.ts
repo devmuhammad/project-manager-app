@@ -21,7 +21,7 @@ export class ServerDetailsComponent implements OnInit {
   credentialsdataSource: MatTableDataSource<any>
   applicationdataSource: MatTableDataSource<any>
   ngOnInit() {
-    this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Server Details'});
+    this.commonservice.handleBreadChrome({parent: 'Sertings', child: 'Server'});
     /* account data table*/
     this.service.getSeverAccount()
     .subscribe((account)=>{

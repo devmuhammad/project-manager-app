@@ -5,7 +5,7 @@
         <p>Task List</p>
       </div>
       <div class="add-task-action">
-        <button (click)="addTaskss()" mat-button>
+        <button  [disabled]="userRole" (click)="addTaskss()" mat-button>
           <mat-icon>add</mat-icon>
           <span>Add Task</span>
         </button>
@@ -62,23 +62,19 @@
             <span *ngIf="task.userid.id===self" style="color:var(--primaryColor)">Self</span>
           </div>
           <div style="width:10%">
-            <button [matMenuTriggerFor]="options" mat-icon-button>
+            <button [disabled]="userRole" [matMenuTriggerFor]="options" mat-icon-button>
               <mat-icon style="font-size: 18px">settings</mat-icon>
             </button>
             <mat-menu #options="matMenu" yPosition="above">
-              <button class="menu-button" mat-menu-item>
-                <mat-icon>
+              <button style="color: var(--dangerColor)" (click)="deletetask()" class="menu-button" mat-menu-item>
+                <mat-icon style="color: inherit">
+                  delete_outline
                 </mat-icon>
-                <span>
-                  View Update
+                <span style="color: inherit;font-size: 14px;font-family: var(--primaryFont)">
+                  Delete Task
                 </span>
               </button>
-              <button class="menu-button" mat-menu-item>
-                <mat-icon>store</mat-icon>
-                <span>
-                  Repository
-                </span>
-              </button>
+            
             </mat-menu>
           </div>
         </div>

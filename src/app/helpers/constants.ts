@@ -1,3 +1,5 @@
+
+
 export const BaseApi = {
   URL: 'http://comsoftltd.net:9090/projappapi/',
   PATH: {
@@ -87,3 +89,13 @@ export const BaseApi = {
   }
 };
 
+
+
+export const ROLES = {
+ADMIN: 'ADMIN',
+TRUST: 'TRUST',
+USER: 'USER',
+NOTIFICATION: 'Notification',
+CLIENT: 'CLIENT',
+SUPERVISOR: 'SUPERVISOR'
+}

@@ -5,6 +5,8 @@ import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ActivityService } from 'src/app/services/activity.service';
 import { UsersService } from 'src/app/services/users.service';
+import { async } from '@angular/core/testing';
+// import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser_adapter';
 
 @Component({
   selector: 'app-conversation',
@@ -12,7 +14,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./conversation.component.css']
 })
 export class ConversationComponent implements OnInit {
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  @ViewChild('scrollMe') elementView: ElementRef;
 idx: -1;
 public param = {
   size: 20,
@@ -28,6 +30,8 @@ public addChat = {
   tasktypeid: 0,
   userid: 0
 };
+chartArea: any;
+shouldScroll: any;
 chartIsloading: boolean;
 comment: '';
   BASEACTIVITYTYPE: 'COMMENT';
@@ -43,8 +47,10 @@ List = [];
     size: 20,
   };
   prjctID = 0;
+  self: number;
   projects: any = [];
 userList: any;
+myDOM: Object;
 posted: boolean;
 delete: boolean;
 dltIndex: number;
@@ -54,22 +60,39 @@ dltIndex: number;
               private userService: UsersService,
               private activityServices: ActivityService,
               private commonservice: DefaultlayoutService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+
+              }
 
   ngOnInit() {
+    const {id} = JSON.parse(localStorage.getItem('profile'));
+    this.self = id;
     this.getProjects();
     this.getGenChat(this.param);
     this.idx = -1;
+
   }
 
-fetchProjectComments(id) {
+  scrolltoBottom() {
+    const l = this.elementView.nativeElement.offsetHeight;
+    this.elementView.nativeElement.scrollTop = l;
+  }
+
+  ngAfterViewInit() {
+    console.log('afterinit');
+    setTimeout(() => {
+    this.scrolltoBottom();
+    }, 3000);
+  }
+
+async fetchProjectComments(id) {
   this.activityServices.getProjectActivity(id)
   .subscribe(res => {
     if (res.message === 'Success') {
       this.activityList = res.data.filter(item => item.actionflow == 'COMMENT');
-      this.scrollToBottom();
       this.chartIsloading = false;
       this.posted = false;
+   
     }
   }, err => {
     this.chartIsloading = false;
@@ -77,7 +100,7 @@ fetchProjectComments(id) {
     this.activityList = [];
     console.log(err);
   });
-
+  if (this.activityList.length > 0) {  this.scrolltoBottom(); }
 }
 
   showProjectChart(project, index) {
@@ -112,10 +135,12 @@ fetchDeleteChat(index, id: number) {
       horizontalPosition: 'right'
     });
   });
+  return this.scrolltoBottom();
 }
 
   getAllUsers() {
     const profile = JSON.parse(localStorage.getItem('profile'));
+
     this.userService.userList(profile.id)
     .subscribe(res => {
       if (res.message === 'Success') {
@@ -125,12 +150,10 @@ fetchDeleteChat(index, id: number) {
       }
     });
   }
-  scrollToBottom(): void {
-    try {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }           
-}
+
   adduserComment() {
+    const l = document.getElementsByClassName('chatArea').length;
+    document.getElementsByClassName('chatArea')[l - 1].scrollIntoView();
     this.posted = true;
     const profile = JSON.parse(localStorage.getItem('profile'));
     console.log(this.comment);
@@ -145,8 +168,8 @@ fetchDeleteChat(index, id: number) {
         if (res.message === 'Success') {
           this.idx >= 1 ? this.fetchProjectComments(this.prjctID) : this.getGenChat(this.param) ;
           this.comment = '';
-          // const elem = document.getElementById('cArea');
-          // elem.scrollIntoView = elem.scrollTo;
+          // const chartArea = document.getElementById('cArea');
+          // return chartArea.scrollTop = chartArea.scrollHeight;
         }
       }, err => {
         this.posted = false;
@@ -158,16 +181,19 @@ fetchDeleteChat(index, id: number) {
         });
       });
     }
+    return this.scrolltoBottom();
   }
-  getGenChat(param) {
-    this.activityServices.getActivitiesList(param)
+
+
+ async getGenChat  (param) {
+   this.activityServices.getActivitiesList(param)
     .subscribe(res => {
       if (res.message === 'Success' ) {
         this.List = res.data.map((item: any) => ({...item}));
-        this.activityList = this.List.filter(item => item.activityType == 'COMMENT' && item.projectid == null);
+        this.activityList  = this.List.filter(item => item.activityType == 'COMMENT' && item.projectid == null);
         console.log(this.List);
-        this.scrollToBottom();
         this.getAllUsers();
+
       }
     }, err => {
       this.activityList = [];
@@ -178,6 +204,8 @@ fetchDeleteChat(index, id: number) {
         horizontalPosition: 'right'
       });
     });
+
+  if (this.activityList.length > 0) this.scrolltoBottom(); 
   }
   showGeneral() {
     // this.activityList =[];

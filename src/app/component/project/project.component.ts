@@ -43,6 +43,7 @@ export class ProjectComponent implements OnInit {
   expandableData: any[];
   currentId: any;
   searchKey = '';
+  SuggestedProject: any[];
   expandables = [
     {title: 'Activities', description: 'No Activity', panelType: 'Activities'},
     {title: 'Documents', description: 'No Document attatched to Project', panelType: 'Documents'},
@@ -53,8 +54,8 @@ export class ProjectComponent implements OnInit {
     {title: 'Git', description: 'Project repo and branches', panelType: 'webHook'},
     {title: 'Bug', description: 'Project issues', panelType: 'webHook'},
   ];
-resizeName = (initialName) => {
-    const length = 20;
+resizeName = (initialName, size) => {
+    const length = size;
     const append = '..';
     let newName = initialName;
     if (typeof newName === 'string') {
@@ -96,6 +97,27 @@ resizeName = (initialName) => {
     });
   }
 
+
+  getSuggestedProject(){
+    const queryParam = {
+      datefrom: '',
+      dateto: '',
+      enddate: '',
+      institutionId:'',
+      sFilter:'',
+      page: 0,
+      size: 4,
+    };
+
+    this.service.getProjectList(queryParam)
+    .subscribe(response => {
+      if (response.message === 'Success') {
+        this.SuggestedProject = response.data.map(item => {
+          return { ...item };
+        });
+      }
+  });
+}
 
   deleteDocx(id: number) {
     this.loadingBar.start();
@@ -176,7 +198,7 @@ closeSidePanel() {
   ngOnInit() {
     this.showSide = false;
     this.commonservice.handleBreadChrome({parent: 'Project', child: 'Page'});
-
+    this.getSuggestedProject();
   }
 
   onClose() {

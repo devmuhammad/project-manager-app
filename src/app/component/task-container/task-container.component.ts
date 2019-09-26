@@ -4,6 +4,10 @@ import { ActivityService } from 'src/app/services/activity.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { MatSnackBar, MatBottomSheet } from '@angular/material';
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
+import { ROLES } from 'src/app/helpers/constants';
+import { getRoles } from 'src/app/helpers/roles.helpers';
+
+
 
 @Component({
   selector: 'app-task-container',
@@ -18,6 +22,7 @@ export class TaskContainerComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private loadingBar: LoadingBarService,
   ) { }
+  userRole: boolean;
   status: [];
   activityList: [];
   taskList: any[];
@@ -46,7 +51,7 @@ export class TaskContainerComponent implements OnInit {
     this.self = profile.id;
     this.projectStatus();
     this.fetchOwntaskList(this.self);
-
+    this.userRole = !getRoles(ROLES.TRUST);
   }
 
   attatchFile(event) {
@@ -89,39 +94,39 @@ export class TaskContainerComponent implements OnInit {
       this.addChat.parentid = task.activityid;
       this.addChat.activityType = 'TASK';
       this.activityService.getAddActivities(this.addChat)
-      .subscribe(res => {
-        this.posted = false;
-        if (res.message === 'Success') {
-          console.log(res)
-          this.fetchOwntaskList(profile.id);
-          this.comment = '';
-          this.snackBar.open('comment added' , 'Dismiss', {
-            panelClass: ['success'],
+        .subscribe(res => {
+          this.posted = false;
+          if (res.message === 'Success') {
+            console.log(res);
+            this.fetchOwntaskList(profile.id);
+            this.comment = '';
+            this.snackBar.open('comment added', 'Dismiss', {
+              panelClass: ['success'],
+              duration: 7000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'right'
+            });
+            // const elem = document.getElementById('cArea');
+            // elem.scrollIntoView = elem.scrollTo;
+          }
+        }, err => {
+          this.posted = false;
+          this.snackBar.open('Failed to add chat', 'Dismiss', {
+            panelClass: ['error'],
             duration: 7000,
             verticalPosition: 'bottom',
             horizontalPosition: 'right'
           });
-          // const elem = document.getElementById('cArea');
-          // elem.scrollIntoView = elem.scrollTo;
-        }
-      }, err => {
-        this.posted = false;
-        this.snackBar.open('Failed to add chat' , 'Dismiss', {
-          panelClass: ['error'],
-          duration: 7000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right'
         });
-      });
     }
 
   }
 
   addTaskss() {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    console.log(profile);
+
     this.bottomSheet.open(BottomSheetComponent).afterDismissed().subscribe(
-      ()=>{
+      () => {
         this.fetchOwntaskList(profile.id);
       }
     );

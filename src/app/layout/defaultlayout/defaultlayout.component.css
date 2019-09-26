@@ -282,7 +282,7 @@ a[mat-list-item]:hover .icon,a[mat-list-item]:hover .icon.arrow-icon{
 }
 .content{
   overflow: auto;
-  margin-top: 5%;
+  margin-top: 6%;
 }
 .author{
   display: flex;

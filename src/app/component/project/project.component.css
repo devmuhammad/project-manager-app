@@ -150,7 +150,7 @@ text-transform: uppercase;
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 
 }
 
@@ -334,7 +334,9 @@ text-align: start;
   font-family: var(--primaryFont);
 }
 
-
+.item-container .card-back .mat-card-title{
+  /* max-height: 40px; */
+}
 .table-section{
   padding: 10px;
   width:100%;

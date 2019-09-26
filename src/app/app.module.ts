@@ -71,10 +71,11 @@ import { ConversationComponent } from './component/conversation/conversation.com
 import { DocumentUpdateComponent } from './component/document-update/document-update.component';
 import { DocumentAddComponent } from './component/document-add/document-add.component';
 import { TaskContainerComponent } from './component/task-container/task-container.component';
-
+import { AuthGuard } from './guards/auth.guard';
+// import { persistStore } from 'redux-persist';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
-
+// const persistor = persistStore(store);
 @NgModule({
   declarations: [
     AppComponent,
@@ -177,12 +178,14 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     NotificationsComponent,
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ProjectService, MatDatepickerModule],
+  providers: [ProjectService, MatDatepickerModule,AuthGuard],
   bootstrap: [AppComponent]
 })
 
+
 export class AppModule {
-    constructor(ngRedux: NgRedux<IAppState>) {
+    constructor(ngRedux: NgRedux<any>) {
       ngRedux.provideStore(store);
     }
+    // this.ngRedux.provideStore(store);
 }

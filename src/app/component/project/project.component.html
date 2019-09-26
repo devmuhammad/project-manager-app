@@ -95,7 +95,7 @@
           style="margin-bottom: 10px">
              <mat-expansion-panel-header  matTooltip="{{document.docurl}}">
                  <mat-icon style="font-size: 16px;">folder_open</mat-icon>
-               <span style="font-size: 12px;text-transform: capitalize; margin-right: 1.5px">{{resizeName(document.docurl)}}</span>
+               <span style="font-size: 12px;text-transform: capitalize; margin-right: 1.5px">{{resizeName(document.docurl,20)}}</span>
                </mat-expansion-panel-header>
                <button mat-icon-button  [matMenuTriggerFor]="docxmenu" class="docx-more" >
                  <mat-icon>more_horizontal</mat-icon>
@@ -279,25 +279,25 @@
         <div class="suggestions">
           <p class="suggestion-title">Suggested projects</p>
           <div class="suggestion-items">
-              <div class="item-container">
+              <div *ngFor="let project of SuggestedProject" class="item-container">
                   <mat-card class="card-front">
-                   POS
+                    {{project.code}}
                   </mat-card>
                   <mat-card class="card-back">
                     <mat-card-header>
-                     <mat-card-title>
+                     <mat-card-title matTooltip="{{project.projectname}}">
                         <!-- <button mat-icon-button ngClass="pin ? 'pin':'' " (click)="pin=!pin">
                             <mat-icon class="auth-user">notes</mat-icon>
                           </button> -->
                        <!-- <span><mat-icon >folder</mat-icon></span> -->
                        <span>
-                       Auto Payment
+                       {{resizeName(project.projectname,15)}}
                      </span>
                     </mat-card-title>
                       <mat-card-subtitle>Software Project</mat-card-subtitle>
                     </mat-card-header>
                       <mat-card-actions>
-                          <button mat-icon-button>Oct 13 2017</button>
+                          <button mat-icon-button>{{project.startdate | date}}</button>
                           <button id="file" mat-icon-button [matMenuTriggerFor]="payment"><mat-icon>more_vert</mat-icon></button>
                           <mat-menu #payment="matMenu" yPosition="above">
                               <button class="menu-button" mat-menu-item>
@@ -317,122 +317,7 @@
                       </mat-card-actions>
                   </mat-card>
                 </div>
-                <div class="item-container">
-                    <mat-card class="card-front">
-                     Sales Management Solution
-                    </mat-card>
-                    <mat-card class="card-back">
-                      <mat-card-header>
-                       <mat-card-title>
-                         <!-- <span><mat-icon >folder</mat-icon></span> -->
-                         <span>
-                         Sales Tracker
-                       </span>
-                      </mat-card-title>
-                        <mat-card-subtitle>Software Project</mat-card-subtitle>
-                      </mat-card-header>
-                        <mat-card-actions>
-                            <button  matTooltip="Date Created"
-                             mat-icon-button>Jan 01 2019</button>
-                            <button id="file"  mat-icon-button [matMenuTriggerFor]="comsoft"><mat-icon>more_vert</mat-icon></button>
-                                <mat-menu #comsoft="matMenu" yPosition="above">
-                                    <button mat-menu-item class="menu-button">
-                                      <mat-icon >store
-                                      </mat-icon>
-                                       <span>
-                                         View Update
-                                       </span>
-                                     </button>
-                                     <button mat-menu-item class="menu-button">
-                                        <mat-icon >store</mat-icon>
-                                        <span>
-                                          Repository
-                                        </span>
-                                      </button>
-                                </mat-menu>
-                        </mat-card-actions>
-                    </mat-card>
-                  </div>
-            <div class="item-container">
-              <mat-card class="card-front">
-               Sales Management Solution
-              </mat-card>
-              <mat-card class="card-back">
-                <mat-card-header>
-                 <mat-card-title>
-                   <!-- <span><mat-icon >folder</mat-icon></span> -->
-                   <span>
-                   Sales Tracker
-                 </span>
-                </mat-card-title>
-                  <mat-card-subtitle>Software Project</mat-card-subtitle>
-                </mat-card-header>
-                  <mat-card-actions>
-                      <button mat-icon-button>May 20 2019</button>
-                      <button id="file" mat-icon-button [matMenuTriggerFor]="software"><mat-icon>more_vert</mat-icon></button>
-                          <mat-menu #software="matMenu" yPosition="above">
-                              <button class="menu-button" mat-menu-item >
-                                <mat-icon >
-                                  store
-                                </mat-icon>
-                                 <span>
-                                   View Update
-                                 </span>
-                               </button>
-                               <button class="menu-button" mat-menu-item >
-                                  <mat-icon >store</mat-icon>
-                                  <span>
-                                    Repository
-                                  </span>
-                                </button>
-                          </mat-menu>
-                  </mat-card-actions>
-              </mat-card>
-            </div>
-            <div id="second" class="item-container">
-                <mat-card class="card-front">
-                  File Mechanics
-                </mat-card>
-                <mat-card class="card-back">
-                  <mat-card-header>
-                   <mat-card-title>
-                    <button></button>
-                     <span>
-                     File Mechanics
-                   </span>
-                  </mat-card-title>
-                    <mat-card-subtitle>Software Project</mat-card-subtitle>
-                  </mat-card-header>
-                    <mat-card-actions>
-      
-                        <button mat-icon-button>Feb 11 2015</button>
-                        <button id="file" mat-icon-button [matMenuTriggerFor]="file"><mat-icon>more_vert</mat-icon></button>
-                          <mat-menu #file="matMenu" yPosition="above">
-                              <button mat-menu-item class="menu-button">
-                                <mat-icon >timer
-                                </mat-icon>
-                                 <span>
-                                   Set Duration
-                                 </span>
-                               </button>
-                               <button mat-menu-item class="menu-button">
-                                <mat-icon >
-                                  router
-                                </mat-icon>
-                                 <span>
-                                   Server credentials
-                                 </span>
-                               </button>
-                               <button mat-menu-item class="menu-button">
-                                  <mat-icon >store</mat-icon>
-                                  <span>
-                                    Repository
-                                  </span>
-                                </button>
-                          </mat-menu>
-                    </mat-card-actions>
-                </mat-card>
-              </div>
+              
           </div>
         </div>
         <div class="table-section">

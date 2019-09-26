@@ -21,6 +21,8 @@ import { DocumentTypesComponent } from './component/document-types/document-type
 import { StatusTypesComponent } from './component/status-types/status-types.component';
 import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
 import { DocumentContainerComponent } from './component/document-container/document-container.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ROLES } from './helpers/constants';
 
 export const routes: Routes = [
   {
@@ -55,7 +57,11 @@ export const routes: Routes = [
   },
 
   {
-    path: 'settings', component: DefaultlayoutComponent, children: [
+    path: 'settings',
+     component: DefaultlayoutComponent,
+     canActivate:[AuthGuard],
+     data:[ROLES.ADMIN],
+     children: [
       { path: '',  data: { animation: 'isRight' }, component: SettingsComponent },
       { path: 'server', component: ServerDetailsComponent },
       {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
