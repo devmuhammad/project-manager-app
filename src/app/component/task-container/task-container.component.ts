@@ -51,7 +51,7 @@ export class TaskContainerComponent implements OnInit {
     this.self = profile.id;
     this.projectStatus();
     this.fetchOwntaskList(this.self);
-    this.userRole = !getRoles(ROLES.TRUST);
+    this.userRole = !getRoles(ROLES.ADMIN);
   }
 
   attatchFile(event) {
@@ -122,7 +122,7 @@ export class TaskContainerComponent implements OnInit {
 
   }
 
-  addTaskss() {
+  addTasks() {
     const profile = JSON.parse(localStorage.getItem('profile'));
 
     this.bottomSheet.open(BottomSheetComponent).afterDismissed().subscribe(

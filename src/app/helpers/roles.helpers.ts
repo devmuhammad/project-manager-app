@@ -7,6 +7,7 @@ import { store } from 'src/app/store';
  */
 
 const profile = JSON.parse(localStorage.getItem('profile'));
+
 export const getRoles = (userRole: string) => {
     const previlages = [];
     // const { groups } = store.getState().auth.data;
@@ -23,3 +24,7 @@ export const getRoles = (userRole: string) => {
       }
     }
   };
+
+export const getAccess = roles => {
+  const {groups} = profile;
+}

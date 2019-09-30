@@ -59,8 +59,14 @@ export const routes: Routes = [
   {
     path: 'settings',
      component: DefaultlayoutComponent,
-     canActivate:[AuthGuard],
-     data:[ROLES.ADMIN],
+    //  canActivate:[AuthGuard],
+    //  data:{
+    //    allowedRoles:[
+    //      "ADMIN",
+    //      "Notification",
+    //      "TRUST"
+    //    ]
+    //  },
      children: [
       { path: '',  data: { animation: 'isRight' }, component: SettingsComponent },
       { path: 'server', component: ServerDetailsComponent },
