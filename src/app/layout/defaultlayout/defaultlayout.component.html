@@ -2,7 +2,7 @@
   <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [(opened)]="opened" [ngClass]="halfclose? 'halfClose':''">
+      [(opened)]="opened" >
       <div class="side-content">
         <mat-toolbar class="toolbar-theme">
           <div class="toolbar-item">

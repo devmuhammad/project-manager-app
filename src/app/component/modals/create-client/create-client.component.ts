@@ -51,6 +51,10 @@ export class CreateClientComponent implements OnInit {
 
   ngOnInit() {
   }
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
 
   save() {
     if(this.form.valid){

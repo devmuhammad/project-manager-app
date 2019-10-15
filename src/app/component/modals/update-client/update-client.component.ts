@@ -98,6 +98,11 @@ export class UpdateClientComponent implements OnInit {
       });
     });
   }
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
+
   close() {
     this.dialogref.close();
   }

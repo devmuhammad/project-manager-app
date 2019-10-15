@@ -29,7 +29,7 @@ export class ProjectComponent implements OnInit {
     private snackBar: MatSnackBar,
     private commonservice: DefaultlayoutService,
      ) { }
-
+     isHandset$:any;
   showSide: boolean;
   panelOpenState = false;
   expand: false;

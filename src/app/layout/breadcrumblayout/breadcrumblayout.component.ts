@@ -7,7 +7,7 @@ import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
   styleUrls: ['./breadcrumblayout.component.css']
 })
 export class BreadcrumblayoutComponent implements OnInit {
-  public crumb: object;
+  public crumb: any;
   constructor(private commonservice: DefaultlayoutService) { }
 
  async ngOnInit() {

@@ -69,6 +69,11 @@ export class UpdateUserModalComponent implements OnInit {
       }
       );
   }
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
+
   save() {
     this.loadingBar.start();
     this.btnLoader.displayLoader();

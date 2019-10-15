@@ -33,6 +33,11 @@ export class ResetuserpasswordComponent implements OnInit {
     // });
   }
 
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
+
   resetpassword() {
     if (this.form.valid) {
       console.log(this.form.invalid);

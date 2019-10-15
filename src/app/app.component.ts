@@ -7,8 +7,8 @@ import {fader, slider} from './router-animations/router-animations.module'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations:[
-    fader,
-    slider,
+    // fader,
+    // slider,
   ]
 })
 export class AppComponent implements OnInit {

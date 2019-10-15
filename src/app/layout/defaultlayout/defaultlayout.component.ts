@@ -18,10 +18,10 @@ import { store } from 'src/app/store';
   templateUrl: './defaultlayout.component.html',
   styleUrls: ['./defaultlayout.component.css'],
   animations: [
-    fader,
-    slider,
-    stepper,
-    transformer
+    // fader,
+    // slider,
+    // stepper,
+    // transformer
   ]
 })
 export class DefaultlayoutComponent implements OnInit {

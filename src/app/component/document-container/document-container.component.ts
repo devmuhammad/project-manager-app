@@ -77,6 +77,7 @@ export class DocumentContainerComponent implements OnInit {
   form: FormGroup;
   getFile: any;
   allusers: any;
+  grid: any;
   files: any = [];
   documentList = [];
   searchKey: '';
@@ -133,6 +134,12 @@ export class DocumentContainerComponent implements OnInit {
         }
       });
   }
+
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
+
   getFileExt(file) {
     const extToArray = [...file];
     const extension = file.substring(extToArray.indexOf('.'));

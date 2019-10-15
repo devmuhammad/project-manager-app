@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
     <mat-sidenav #drawer class="sidenav" position="end" mode="push"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [(opened)]="showSide" [ngClass]="halfclose? 'halfClose':''">
+    [(opened)]="showSide" >
     <div class="side-content" *ngIf="showSide" style="padding: 0px">
       <button (click)="closeSidePanel()" mat-button mat-icon-button>
           <mat-icon style="font-size: 13px"  >close</mat-icon>

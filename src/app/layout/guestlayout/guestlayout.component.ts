@@ -8,12 +8,12 @@ import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
   templateUrl: './guestlayout.component.html',
   styleUrls: ['./guestlayout.component.css'],
   animations:[
-    fader,
-    slider,
-    stepper,
-    transformer,
-    sliderGuest,
-    guestfader
+    // fader,
+    // slider,
+    // stepper,
+    // transformer,
+    // sliderGuest,
+    // guestfader
   ]
 })
 export class GuestlayoutComponent implements OnInit {

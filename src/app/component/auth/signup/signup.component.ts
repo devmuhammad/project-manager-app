@@ -103,7 +103,10 @@ export class SignupComponent implements OnInit {
   gotoPath() {
     this.routerHelper.navigateToPath('/login');
   }
-
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
   const pass = group.controls.password.value;
   const confirmPass = group.controls.verifyPassword.value;

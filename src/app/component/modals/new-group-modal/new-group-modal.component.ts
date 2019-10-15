@@ -39,6 +39,11 @@ export class NewGroupModalComponent implements OnInit {
       });
      }
 
+     doNothing() {
+      // tslint:disable-next-line: deprecation
+      event.preventDefault();
+    }
+  
   ngOnInit() {
     this.inputType = this.vpasswordType = 'password';
   }

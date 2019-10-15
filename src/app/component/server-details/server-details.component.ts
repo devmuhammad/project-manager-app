@@ -15,7 +15,7 @@ export class ServerDetailsComponent implements OnInit {
   constructor(private service: ServerService, private commonservice: DefaultlayoutService) { }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator)paginator: MatPaginator;
-
+  searchKey: '';
   accountdataSource: MatTableDataSource<any>
   toolsdataSource: MatTableDataSource<any>
   credentialsdataSource: MatTableDataSource<any>

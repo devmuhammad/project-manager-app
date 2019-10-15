@@ -69,7 +69,6 @@ import { DocumentContainerComponent } from './component/document-container/docum
 import { DragDropDirective } from './component/drag-drop.directive';
 import { ConversationComponent } from './component/conversation/conversation.component';
 import { DocumentUpdateComponent } from './component/document-update/document-update.component';
-import { DocumentAddComponent } from './component/document-add/document-add.component';
 import { TaskContainerComponent } from './component/task-container/task-container.component';
 import { AuthGuard } from './guards/auth.guard';
 // import { persistStore } from 'redux-persist';
@@ -130,7 +129,6 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     DragDropDirective,
     ConversationComponent,
     DocumentUpdateComponent,
-    DocumentAddComponent,
     TaskContainerComponent
   ],
   imports: [

@@ -32,7 +32,7 @@
   <div class="card-wrapper">
     <div class="form-wrapper">
       <p>Login</p>
-      <form [formGroup]="form" (submit)="getSignIn(form)">
+      <form [formGroup]="form" (submit)="getSignIn()">
         <div class="form-container">
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
             <input matInput placeholder="Username" formControlName="username" floatPlaceholder="never">

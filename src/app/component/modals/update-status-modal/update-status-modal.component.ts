@@ -100,6 +100,11 @@ this.fetchInstitutionList();
       });
     });
   }
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
+
   close() {
     this.dialogref.close();
   }

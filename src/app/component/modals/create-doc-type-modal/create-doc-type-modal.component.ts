@@ -142,6 +142,11 @@ export class CreateDocTypeModalComponent implements OnInit {
     });
   }
 }
+doNothing() {
+  // tslint:disable-next-line: deprecation
+  event.preventDefault();
+}
+
 
   close() {
     this.dialogRef.close();

@@ -19,7 +19,9 @@ export class ActivityComponent implements OnInit {
       this.scrollLeft && window.scrollBy(-1, 0);
      })
   }
-
+  getNextbar(e){
+    
+  }
   allProjects =[];
   ngOnInit() {
     this.commonservice.handleBreadChrome({parent:'Activities',child :'Project'});

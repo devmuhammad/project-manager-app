@@ -52,6 +52,10 @@ export class CreateProjectTypeModalComponent implements OnInit {
   ngOnInit() {
     this.fetchInstitutionList();
   }
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
 
   save() {
     if (this.form.valid) {

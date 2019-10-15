@@ -73,6 +73,12 @@ export class DocumentUpdateComponent implements OnInit {
         }
       });
   }
+
+  doNothing() {
+    // tslint:disable-next-line: deprecation
+    event.preventDefault();
+  }
+
   getProjectList() {
     this.projectservice.getProjectList(this.queryParam)
       .subscribe(response => {
