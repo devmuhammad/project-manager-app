@@ -141,12 +141,12 @@ export class DefaultlayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    const profile = JSON.parse(localStorage.getItem('profile'));
-    this.fetchOwnnotifications(profile.id);
-    this.pathname = this.pathOrigin = window.location.pathname;
     const authUser = localStorage.getItem('currentUser');
     if (!authUser) { return this.service.navigateToPath('/login'); }
     this.getProfile(this.service.user);
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    this.fetchOwnnotifications(profile.id);
+    this.pathname = this.pathOrigin = window.location.pathname;
   }
 
   handleLogOut() {

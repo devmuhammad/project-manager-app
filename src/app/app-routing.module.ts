@@ -27,7 +27,7 @@ import { ROLES } from './helpers/constants';
 export const routes: Routes = [
   {
     path: '',  component: GuestlayoutComponent, children: [
-      { path: 'login', data: { animation: 'isRight' }, component: AuthenticationComponent },
+      { path: 'login',  component: AuthenticationComponent },
       { path: 'signup',  component: SignupComponent },
       {path: 'reset', component: ResetuserpasswordComponent}
     ]

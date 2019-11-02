@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { stepper,slider,transformer,fader, sliderGuest, guestfader } from 'src/app/router-animations/router-animations.module';
+// import { stepper,slider,transformer,fader, sliderGuest, guestfader } from 'src/app/router-animations/router-animations.module';
 import { RouterOutlet } from '@angular/router';
 import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 
@@ -26,7 +26,10 @@ export class GuestlayoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  
+  // this.gotoPath('/login');
+  const authUser = localStorage.getItem('currentUser');
+  if (!authUser) { return this.gotoPath('/login'); }
+  return this.gotoPath('/dashboard');
   }
 gotoPath(path: string) {
   this.routerHelper.navigateToPath(path);

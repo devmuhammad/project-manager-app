@@ -23,6 +23,16 @@
             <mat-error>Invalid name</mat-error>
           </mat-form-field>
         </div>
+        <div class="form-control">
+          <label for="username">Username</label>
+          <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
+            <input matInput placeholder="username" formControlName="username" floatPlaceholder="never">
+            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+              <mat-icon>person</mat-icon>
+            </button>
+            <mat-error>Invalid  username</mat-error>
+          </mat-form-field>
+        </div>
         <div class="form-control ">
           <label for="email">Contact Email</label>
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
@@ -43,16 +53,7 @@
             <mat-error>Invalid phone number</mat-error>
           </mat-form-field>
         </div>
-        <!-- <div class="form-control">
-          <label for="username">Username</label>
-          <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-            <input matInput placeholder="username" formControlName="username" floatPlaceholder="never">
-            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-              <mat-icon>person</mat-icon>
-            </button>
-            <mat-error>Invalid  username</mat-error>
-          </mat-form-field>
-        </div> -->
+       
         <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
           <label for="password">Password</label>
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
@@ -64,9 +65,9 @@
                 <img *ngIf="!view" class="passwordicon" src="../../../../assets/img/show_hide_password.png" />
               </mat-icon>
             </button>
-            <mat-error *ngIf="form.hasError('required', 'password')">
+            <!-- <mat-error *ngIf="form.hasError('required', 'password')">
               Please enter your newpassword
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
         </div>
         <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
@@ -80,7 +81,7 @@
                 <img *ngIf="!show" class="passwordicon" src="../../../../assets/img/show_hide_password.png" />
               </mat-icon>
             </button>
-            <mat-error *ngIf="form.hasError('notSame')">Password Missmatch</mat-error>
+            <!-- <mat-error *ngIf="form.hasError('notSame')">Password Missmatch</mat-error> -->
           </mat-form-field>
         </div>
         <!-- <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
