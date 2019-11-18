@@ -1,13 +1,13 @@
 <div class="maindiv">
   <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'side' : 'over'"
       [(opened)]="opened" >
       <div class="side-content">
         <mat-toolbar class="toolbar-theme">
           <div class="toolbar-item">
             <mat-icon>account_balance</mat-icon>
-            <h2>CABSOL PRO</h2>
+            <h2>CABSOL PROJECT</h2>
           </div>
         </mat-toolbar>
         <mat-nav-list class="nav-list">
@@ -70,10 +70,50 @@
     </mat-sidenav>
     <mat-sidenav-content  >
       <mat-toolbar  class="main-nav">
-        <span>Project Manager</span>
+        <span>
+            <div style="width:10%;padding: 30px; display: inline ">
+                <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" aria-label="Toggle sidenav"
+                  mat-icon-button (click)="opened=!opened">
+                  <mat-icon *ngIf="opened">cancel</mat-icon>
+                  <mat-icon *ngIf="!opened">menu</mat-icon>
+                </button>
+
+                <span>Project Manager</span>
+              </div>
+
+              
+        </span>
         <div class="navbar-items">
 
-           <div style="width: 25%;text-align: center;border-right:1px solid #d8d2d2;padding: 10px">
+            <div style="display: flex;margin-left: 20%;width: 40%;border-left:1px solid #d8d2d2;padding: 10px;">
+                <button mat-icon-button [matMenuTriggerFor]="auth">
+                    <img class="user-acc" src="../../../assets/img/avatar.png" />
+                  </button>
+                  <mat-menu #auth="matMenu" yPosition="above">
+                    <button class="navbar-profile" mat-menu-item>
+                      <mat-icon>person
+                      </mat-icon>
+                      <span>
+                        Profile
+                      </span>
+                    </button>
+                    <button (click)="handleLogOut()" class="navbar-profile" mat-menu-item>
+                      <mat-icon style="color:var(--dangerColor)">logout</mat-icon>
+                      <span>
+                        Logout
+                      </span>
+                    </button>
+                  </mat-menu>
+  
+                <div style="transform: translateY(10%);margin-left: 10px;font-size: 16px" *ngIf="!(isHandset$ | async)">{{name}}</div>
+                <div  style="transform: translateY(10%);margin-left: 10px;font-size: 16px"*ngIf="(isHandset$ | async)">{{alias}}</div>
+      
+            </div>
+          
+  
+          
+  
+            <div style="text-align: center;padding: 10px">
               <button class="notification-icon" [matMenuTriggerFor]="notification" matTooltipPosition="left"
             matTooltip="notification" mat-icon-button>
             <mat-icon matBadge="{{activityList.length}}" matBadgePosition="after" matBadgeColor="warn" class="tool-icon">
@@ -119,50 +159,9 @@
           
           </mat-menu>
            </div>
-           
-          <div style="display: flex;width: 40%;padding: 10px;">
-              <button mat-icon-button [matMenuTriggerFor]="auth">
-                  <img class="user-acc" src="../../../assets/img/avatar.png" />
-                </button>
-                <mat-menu #auth="matMenu" yPosition="above">
-                  <button class="navbar-profile" mat-menu-item>
-                    <mat-icon>person
-                    </mat-icon>
-                    <span>
-                      Profile
-                    </span>
-                  </button>
-                  <button (click)="handleLogOut()" class="navbar-profile" mat-menu-item>
-                    <mat-icon style="color:var(--dangerColor)">logout</mat-icon>
-                    <span>
-                      Logout
-                    </span>
-                  </button>
-                </mat-menu>
-
-              <div style="transform: translateY(10%);margin-left: 10px;font-size: 16px" *ngIf="!(isHandset$ | async)">{{name}}</div>
-              <div  style="transform: translateY(10%);margin-left: 10px;font-size: 16px"*ngIf="(isHandset$ | async)">{{alias}}</div>
-    
+  
           </div>
-        
 
-         
-
-          <div style="width:30%;padding: 10px ">
-                <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" aria-label="Toggle sidenav"
-              mat-icon-button (click)="opened=!opened">
-              <mat-icon *ngIf="opened">menu</mat-icon>
-              <mat-icon *ngIf="!opened">cancel</mat-icon>
-            </button>
-             </div>
-
-       
-
-        </div>
-        
-       
-
-      
       </mat-toolbar>
       <div class="content" [@routeAnimations]="prepareRoute(outlet)" fxFlex>
         <router-outlet #outlet="outlet"></router-outlet>
