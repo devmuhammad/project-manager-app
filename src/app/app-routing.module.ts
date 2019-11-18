@@ -23,6 +23,7 @@ import { ActivityContainerComponent } from './component/activity-container/activ
 import { DocumentContainerComponent } from './component/document-container/document-container.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ROLES } from './helpers/constants';
+import { UserContainerComponent } from './component/user-container/user-container.component';
 
 export const routes: Routes = [
   {
@@ -83,12 +84,19 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'user', component: DefaultlayoutComponent, children: [
-      {path: '', component: UsersComponent, data: {animation: 'isRight'}},
-      { path: 'request', component: UserRequestComponent },
-      { path: 'group', component: GroupsComponent },
+    path: 'user/management', component: DefaultlayoutComponent, children: [
+      {
+        path: '', component: UserContainerComponent, data: {animation: 'isRight'}
+      }
     ]
   },
+  // {
+  //   path: 'user', component: DefaultlayoutComponent, children: [
+  //     {path: '', component: UsersComponent, data: {animation: 'isRight'}},
+  //     { path: 'request', component: UserRequestComponent },
+  //     { path: 'group', component: GroupsComponent },
+  //   ]
+  // },
   {
     path: 'report', component: DefaultlayoutComponent, children: [
       { path: '', component: RecordsComponent }

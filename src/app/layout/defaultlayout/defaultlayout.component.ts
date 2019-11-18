@@ -48,7 +48,7 @@ export class DefaultlayoutComponent implements OnInit {
     );
 
   step = '';
-  opened = true;
+  opened = false;
 
   menuList = [
     { name: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
@@ -65,11 +65,12 @@ export class DefaultlayoutComponent implements OnInit {
       name: 'Clients', icon: 'people_outlined', link: '/client'
     },
     {
-      name: 'User Managment', icon: 'people', children: [
-        { name: 'Groups', icon: 'people', link: '/user/group' },
-        { name: 'Requests', icon: 'person_add', link: '/user/request' },
-        { name: 'Users', icon: 'people', link: '/user' },
-      ]
+      name: 'User Managment', icon: 'people', link: 'user/management'
+      // children: [
+      //   { name: 'Groups', icon: 'people', link: '/user/group' },
+      //   { name: 'Requests', icon: 'person_add', link: '/user/request' },
+      //   { name: 'Users', icon: 'people', link: '/user' },
+      // ]
     },
   
     {

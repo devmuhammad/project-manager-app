@@ -71,6 +71,7 @@ import { ConversationComponent } from './component/conversation/conversation.com
 import { DocumentUpdateComponent } from './component/document-update/document-update.component';
 import { TaskContainerComponent } from './component/task-container/task-container.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UserContainerComponent } from './component/user-container/user-container.component';
 // import { persistStore } from 'redux-persist';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -129,7 +130,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     DragDropDirective,
     ConversationComponent,
     DocumentUpdateComponent,
-    TaskContainerComponent
+    TaskContainerComponent,
+    UserContainerComponent
   ],
   imports: [
     BrowserModule,

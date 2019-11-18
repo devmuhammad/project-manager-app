@@ -1,7 +1,8 @@
 <div class="maindiv">
   <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
+      [mode]="(isHandset$ | async) ? 'side' : 'over'"
       [(opened)]="opened" >
       <div class="side-content">
         <mat-toolbar class="toolbar-theme">
@@ -70,57 +71,18 @@
     </mat-sidenav>
     <mat-sidenav-content  >
       <mat-toolbar  class="main-nav">
-        <span>Project Manager</span>
+          <div style="width: 15%; padding: 10px">
+              <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" aria-label="Toggle sidenav"
+            mat-icon-button (click)="opened=!opened">
+            <mat-icon *ngIf="opened">cancel</mat-icon>
+            <mat-icon *ngIf="!opened">menu</mat-icon>
+          </button>
+        </div>
+
+        <span style="text-align: center">Project Manager</span>
         <div class="navbar-items">
 
-           <div style="width: 25%;text-align: center;border-right:1px solid #d8d2d2;padding: 10px">
-              <button class="notification-icon" [matMenuTriggerFor]="notification" matTooltipPosition="left"
-            matTooltip="notification" mat-icon-button>
-            <mat-icon matBadge="{{activityList.length}}" matBadgePosition="after" matBadgeColor="warn" class="tool-icon">
-              notifications_active
-            </mat-icon>
-          </button>
-          <mat-menu #notification="matMenu" yPosition="above">
-            <div class="notification-panel">
-              <div class="banner">
-                
-                <span>
-                  Notifications
-                </span>
-              </div>
-              <mat-divider></mat-divider>
-              <div class="notification-details" *ngIf="activityList">
-                <div class="notification-container" style="margin-bottom: auto" *ngFor="let item of activityList;">
-                    
-                  <div class="nwrapper">
-                     
-                      <h4 style="color: var(--greyColor);font-size: 15px;margin-bottom: 20px"> <span style="color: var(--primaryColor)">{{item.usercomment}}</span></h4>
-                    <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)">{{item.projectid.projectname}}</p> -->
-                      <div class="notification-header">
-                          <p class="actionflow"> <span style="color: var(--greyColor);font-size: 13px" >Action flow</span> {{item.actionflow}}</p>
-                          <p style="color: var(--greyColor);font-size: 13px">Action: <span style="color: var(--primaryColor)">{{item.tasktype}}</span></p>
-                        </div>
-                        
-                        <div class="author">
-                            <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)"><span style="color: var(--greyColor);font-size: 13px" >Project name</span>{{item.projectid.projectname}}</p>  -->
-  
-                          <span  style="color: var(--greyColor);font-size: 13px;margin-right: 10px">Assigned By </span>
-                          <p style="margin-right:10px"> {{item.userid.fullname}}</p>
-                          <span><img width="20px" src="../../../assets/img/avatar.png" alt="assignedby"></span>
-                      </div>
-                    </div>
-                    <mat-divider></mat-divider>
-                  <!-- <mat-divider></mat-divider> -->
-                </div>
-                <!--end of container-->
-              </div>
-              <!-- <button style="margin: 0;text-align:center;width:100%;background:var(--primaryColor);color:#fff" class="mat-button primary"> See all</button> -->
-            </div>
-          
-          </mat-menu>
-           </div>
-           
-          <div style="display: flex;width: 40%;padding: 10px;">
+          <div style="display: flex;margin-left: 20%;width: 40%;border-left:1px solid #d8d2d2;padding: 10px;">
               <button mat-icon-button [matMenuTriggerFor]="auth">
                   <img class="user-acc" src="../../../assets/img/avatar.png" />
                 </button>
@@ -146,17 +108,54 @@
           </div>
         
 
-         
+        
 
-          <div style="width:30%;padding: 10px ">
-                <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" aria-label="Toggle sidenav"
-              mat-icon-button (click)="opened=!opened">
-              <mat-icon *ngIf="opened">menu</mat-icon>
-              <mat-icon *ngIf="!opened">cancel</mat-icon>
-            </button>
-             </div>
+          <div style="text-align: center;padding: 10px">
+            <button class="notification-icon" [matMenuTriggerFor]="notification" matTooltipPosition="left"
+          matTooltip="notification" mat-icon-button>
+          <mat-icon matBadge="{{activityList.length}}" matBadgePosition="after" matBadgeColor="warn" class="tool-icon">
+            notifications_active
+          </mat-icon>
+        </button>
+        <mat-menu #notification="matMenu" yPosition="above">
+          <div class="notification-panel">
+            <div class="banner">
+              
+              <span>
+                Notifications
+              </span>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="notification-details" *ngIf="activityList">
+              <div class="notification-container" style="margin-bottom: auto" *ngFor="let item of activityList;">
+                  
+                <div class="nwrapper">
+                   
+                    <h4 style="color: var(--greyColor);font-size: 15px;margin-bottom: 20px"> <span style="color: var(--primaryColor)">{{item.usercomment}}</span></h4>
+                  <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)">{{item.projectid.projectname}}</p> -->
+                    <div class="notification-header">
+                        <p class="actionflow"> <span style="color: var(--greyColor);font-size: 13px" >Action flow</span> {{item.actionflow}}</p>
+                        <p style="color: var(--greyColor);font-size: 13px">Action: <span style="color: var(--primaryColor)">{{item.tasktype}}</span></p>
+                      </div>
+                      
+                      <div class="author">
+                          <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)"><span style="color: var(--greyColor);font-size: 13px" >Project name</span>{{item.projectid.projectname}}</p>  -->
 
-       
+                        <span  style="color: var(--greyColor);font-size: 13px;margin-right: 10px">Assigned By </span>
+                        <p style="margin-right:10px"> {{item.userid.fullname}}</p>
+                        <span><img width="20px" src="../../../assets/img/avatar.png" alt="assignedby"></span>
+                    </div>
+                  </div>
+                  <mat-divider></mat-divider>
+                <!-- <mat-divider></mat-divider> -->
+              </div>
+              <!--end of container-->
+            </div>
+            <!-- <button style="margin: 0;text-align:center;width:100%;background:var(--primaryColor);color:#fff" class="mat-button primary"> See all</button> -->
+          </div>
+        
+        </mat-menu>
+         </div>
 
         </div>
         

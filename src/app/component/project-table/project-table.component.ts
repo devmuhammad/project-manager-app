@@ -35,7 +35,7 @@ export class ProjectTableComponent implements OnInit {
               private dialog: MatDialog
   ) { }
 
-  displayedColumns: string[] = ['alias', 'name', 'status', 'date', 'activities', 'teams', 'document', 'webhooks', 'more'];
+  displayedColumns: string[] = ['alias', 'name', 'status', 'date', 'activities', 'teams', 'document', 'action'];
   message = 'hello';
   rowData: any;
   expand: boolean;
