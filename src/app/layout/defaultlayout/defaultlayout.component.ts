@@ -49,6 +49,7 @@ export class DefaultlayoutComponent implements OnInit {
 
   step = '';
   opened = false;
+  status = true;
 
   menuList = [
     { name: 'Dashboard', icon: 'dashboard', link: '/dashboard' },

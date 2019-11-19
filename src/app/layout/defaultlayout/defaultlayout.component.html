@@ -1,13 +1,18 @@
 <div class="maindiv">
   <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
-    <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    <mat-sidenav *ngIf="opened" #drawer class="sidenav" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
-      [mode]="(isHandset$ | async) ? 'side' : 'over'"
-      [(opened)]="opened" >
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [(opened)]="status" >
       <div class="side-content">
         <mat-toolbar class="toolbar-theme">
           <div class="toolbar-item">
-            <mat-icon>account_balance</mat-icon>
+            <mat-icon 
+              (click)="opened=!opened" 
+              aria-label="Toggle sidenav"
+              mat-icon-button
+            >
+            account_balance</mat-icon>
             <h2>CABSOL PRO</h2>
           </div>
         </mat-toolbar>
@@ -69,15 +74,39 @@
         </div>
       </div>
     </mat-sidenav>
+
+    <mat-sidenav *ngIf="!opened" #drawer class="sidenav" style="width: fit-content" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [(opened)]="status" >
+      <div class="side-content">
+        <mat-toolbar class="toolbar-theme">
+          <div class="toolbar-item">
+            <mat-icon 
+              (click)="opened=!opened" 
+              mat-icon-button
+            >
+            account_balance</mat-icon>
+          </div>
+        </mat-toolbar>
+        <mat-nav-list class="nav-list">
+          <ng-container *ngFor="let item of menuList; let i = index" [attr.data-index]="i">
+            <a mat-list-item
+              [ngClass]="(pathname===item.link && i === selected) || pathOrigin ===item.link? 'active': '' "
+              (click)="setStep(item,i)">
+
+              <span class="link-icon">
+                <mat-icon class="icon dashboard-icon">{{item.icon}}</mat-icon>
+              </span>
+            
+            </a>
+          </ng-container>
+        </mat-nav-list>
+        
+      </div>
+    </mat-sidenav>
     <mat-sidenav-content  >
       <mat-toolbar  class="main-nav">
-          <div style="width: 15%; padding: 10px">
-              <button [ngClass]="isHandset$ ? 'success' : 'danger'" class="toggle-menu toggleIcon" aria-label="Toggle sidenav"
-            mat-icon-button (click)="opened=!opened">
-            <mat-icon *ngIf="opened">cancel</mat-icon>
-            <mat-icon *ngIf="!opened">menu</mat-icon>
-          </button>
-        </div>
 
         <span style="text-align: center">Project Manager</span>
         <div class="navbar-items">
