@@ -3,10 +3,10 @@
   <h2 mat-dialog-title>Create Project</h2>
   <!-- <mat-divider style="margin-top: 0px;width: 100%"></mat-divider> -->
   <form [formGroup]="form" class="project-form">
-<div class="input-container">
-  <div class="form-control" >
-    <label for="name">Name</label>
-    <mat-form-field class="project-form-field" floatLabel="never" >
+    <div class="input-container" style="overflow: hidden;">
+      <div class="form-control">
+        <!-- <label for="name">Name</label> -->
+        <!-- <mat-form-field class="project-form-field" floatLabel="never" >
         <input matInput
                 placeholder="Name"
                formControlName="name" floatPlaceholder="never" required>
@@ -14,84 +14,86 @@
                   <mat-icon >folder </mat-icon>
                </button>
                <mat-error >Invalid project name</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="form-control halfing" >
-    <label for="alias">Alias</label>
-    <mat-form-field class="project-form-field halfing"   floatLabel="never" >
-        <input matInput
-                placeholder="Alias"
-               formControlName="code"  floatPlaceholder="never" required>
-               <button mat-button matSuffix mat-icon-button aria-label="Clear">
-                  <mat-icon >folder </mat-icon>
-               </button>
-               <mat-error>Invalid alias</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="form-control halfing" >
-      <label style="width: 100%" for="type">{{typeLabel}}</label>
-      <mat-form-field floatLabel="never"   class="project-form-field halfing">
-          <mat-select class="select"formControlName="type"  placeholder="Project type"
-          floatPlaceholder="never" required>
-          <mat-option *ngFor="let item of types" [value]="item.projecttypeId">{{item.description}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-   
-    
-  <div class="form-control block" style="display: block;margin-bottom: 20px" >
-      <label for="description">Description</label>
-      <mat-form-field class="project-form-field description" style="margin-top: 10px;" 
-      floatLabel="never">
-          <textarea matInput
-          placeholder="Description"
-          formControlName="description"  floatPlaceholder="never" >
-        </textarea>
-      </mat-form-field>
-      
-    </div>
-    <div class="form-control" style="margin-top:20px " >
-        <label for="name">Start date</label>
-          <mat-form-field class="project-form-field" floatLabel="never" >
-              <input matInput formControlName="startdate" [matDatepicker]="picker" placeholder="DD-MM-YY">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> -->
+        <mat-form-field class="example-full-width-2">
+          <input matInput placeholder="Name" value="" formControlName="name" floatPlaceholder="never" required>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>folder </mat-icon>
+          </button>
+          <mat-error>Invalid project name</mat-error>
         </mat-form-field>
-    </div>
-    <div class="form-control" style="margin-top:20px " >
+      </div>
+      <div class="form-control halfing">
+        <!-- <label for="alias">Alias</label> -->
+        <mat-form-field>
+          <input matInput placeholder="Alias" formControlName="code" floatPlaceholder="never" required>
+          <button mat-button matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>folder </mat-icon>
+          </button>
+          <mat-error>Invalid alias</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-control halfing">
+        <!-- <label style="width: 100%" for="type">{{typeLabel}}</label> -->
+        <mat-form-field>
+          <mat-select class="select" formControlName="type" placeholder="Project type" floatPlaceholder="never"
+            required>
+            <mat-option *ngFor="let item of types" [value]="item.projecttypeId">{{item.description}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-control block" style="display: block;margin-bottom: 20px">
+        <!-- <label for="description">Description</label> -->
+        <mat-form-field style="margin-top: 10px; width: 95%;">
+          <textarea matInput placeholder="Description" formControlName="description">
+        </textarea>
+        </mat-form-field>
+
+      </div>
+      <div class="form-control" style="margin-top:20px ">
+        <label for="name">Start date</label>
+        <mat-form-field floatLabel="never">
+          <input matInput formControlName="startdate" [matDatepicker]="picker" placeholder="dd-mm-yy">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-control" style="margin-top:20px ">
         <label for="name">End date</label>
-        <mat-form-field class="project-form-field" floatLabel="never" >
-            <input matInput formControlName="enddate" [matDatepicker]="enddate" placeholder="DD-MM-YY">
-            <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
-            <mat-datepicker #enddate></mat-datepicker>
-      </mat-form-field>
-    </div>
+        <mat-form-field floatLabel="never">
+          <input matInput formControlName="enddate" [matDatepicker]="enddate" placeholder="dd-mm-yy">
+          <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+          <mat-datepicker #enddate></mat-datepicker>
+        </mat-form-field>
+      </div>
       <mat-divider style="margin-top: 10px;width: 100%"></mat-divider>
       <h2 class="client-section" mat-dialog-title>Add client</h2>
-    
+
       <div class="form-control">
         <label for="client">Project client</label>
-        <mat-form-field floatLabel="never" class="project-form-field">
-            <mat-select class="select" formControlName="client"  placeholder="Project Client"
-              floatPlaceholder="never" required>
-              <mat-option *ngFor="let item of clientsList" [value]="item.id">{{item.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field style="width: 45%;">
+          <mat-select class="select" formControlName="client" placeholder="Project Client" floatPlaceholder="never"
+            required>
+            <mat-option *ngFor="let item of clientsList" [value]="item.id">{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      
+
       <div class="form-control">
-          <label for="client">ProjectManager</label>
-          <mat-form-field floatLabel="never" class="project-form-field">
-              <mat-select class="select" formControlName="projectmanager"  placeholder="Project Manager"
-                floatPlaceholder="never" required>
-                <mat-option *ngFor="let item of clientsList" [value]="item.id">{{item.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-        </div>
+        <label for="client">ProjectManager</label>
+        <mat-form-field style="width: 45%;">
+          <mat-select class="select" formControlName="projectmanager" placeholder="Project Manager"
+            floatPlaceholder="never" required>
+            <mat-option *ngFor="let item of clientsList" [value]="item.id">{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-</div>
+    </div>
 
-<!-- <div class="input-container">
+    <!-- <div class="input-container">
     <mat-form-field class="project-form-field"  floatLabel="never" >
         <input matInput
                 placeholder="Staging Server"
@@ -109,7 +111,7 @@
                </button>
     </mat-form-field>
   </div> -->
-<!--
+    <!--
 
             <mat-grid-tile>
                 <div class="form-container">
@@ -118,7 +120,7 @@
               </mat-grid-tile>
         </mat-grid-list> -->
 
-      <!-- <mat-form-field>
+    <!-- <mat-form-field>
           <input matInput
                   placeholder="Course Description"
                  formControlName="description">
@@ -126,16 +128,12 @@
 
 
 
-  <mat-dialog-actions>
-      <button class="mat-raised-button"(click)="close()">Close</button>
-      <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" 
-      buttonLoader 
-      [loaderColor]="'white'" 
-      (click)="save()">
+    <mat-dialog-actions>
+      <button class="mat-raised-button" (click)="close()">Close</button>
+      <button [disabled]="form.invalid" class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'"
+        (click)="save()">
         <span></span>
         Save</button>
-  </mat-dialog-actions>
-</form>
+    </mat-dialog-actions>
+  </form>
 </div>
-
-
