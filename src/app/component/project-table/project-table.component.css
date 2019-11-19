@@ -70,10 +70,11 @@ align-items: center;
 /* font-style: italic; */
 }
 .todo{
-  background: var(--dangerColor);
-  color:var(--lightColor) !important;
+  background: transparent;
+  color:var(--dangerColor) !important;
   align-items: center;
 text-align: center;
+font-weight: bold;
 }
 /* .mat-header-cell{
 text-align: center !important;
@@ -86,10 +87,11 @@ width: 100%;
 text-align: center;
 }
 .inprogress{
-  background: var(--warningColor) !important;
-  color:var(--lightColor);
+  background: transparent !important;
+  color:var(--warningColor);
   align-items: center !important;
 text-align: center !important;
+font-weight: bold;
 }
 mat-cell:first-of-type {
   padding-left: 15px !important;
