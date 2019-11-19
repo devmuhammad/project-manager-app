@@ -49,10 +49,7 @@ export class DefaultlayoutComponent implements OnInit {
 
   step = '';
   opened = false;
-<<<<<<< HEAD
-=======
   status = true;
->>>>>>> 7495177205ff76cfd30861cf6557182a0a09f06e
 
   menuList = [
     { name: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
@@ -69,13 +66,8 @@ export class DefaultlayoutComponent implements OnInit {
       name: 'Clients', icon: 'people_outlined', link: '/client'
     },
     {
-<<<<<<< HEAD
-      name: 'User Managment', icon: 'people', link: '/user/management'
-      //  children: [
-=======
       name: 'User Managment', icon: 'people', link: 'user/management'
       // children: [
->>>>>>> 7495177205ff76cfd30861cf6557182a0a09f06e
       //   { name: 'Groups', icon: 'people', link: '/user/group' },
       //   { name: 'Requests', icon: 'person_add', link: '/user/request' },
       //   { name: 'Users', icon: 'people', link: '/user' },
