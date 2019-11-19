@@ -24,6 +24,7 @@ import { DocumentContainerComponent } from './component/document-container/docum
 import { AuthGuard } from './guards/auth.guard';
 import { ROLES } from './helpers/constants';
 import { UserContainerComponent } from './component/user-container/user-container.component';
+import { SettingsContainerComponent } from './component/settings-container/settings-container.component';
 
 export const routes: Routes = [
   {
@@ -58,26 +59,30 @@ export const routes: Routes = [
   },
 
   {
-    path: 'settings',
-     component: DefaultlayoutComponent,
+    path: 'settings/server', component: DefaultlayoutComponent, children:[
+      { path: '', component: SettingsContainerComponent, data: {animation: 'isRight'}}
+    ]
+  },   
     //  canActivate:[AuthGuard],
     //  data:{
-    //    allowedRoles:[
+    //    allowedRoles:[s
     //      "ADMIN",
     //      "Notification",
     //      "TRUST"
     //    ]
     //  },
-     children: [
-      { path: '',  data: { animation: 'isRight' }, component: SettingsComponent },
-      { path: 'server', component: ServerDetailsComponent },
-      {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
-      {path: 'task/types', component: TaskTypeComponent, data: {animation: 'isRight'}},
-      {path: 'document/types', component: DocumentTypesComponent, data: {animation: 'isRight'}},
-      {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
-      {path: 'status/types', component: StatusTypesComponent, data: {animation: 'isRight'}}
-    ]
-  },
+
+    /////////////////////////////////////////////////////////////////
+    //  children: [
+    //   { path: '',  data: { animation: 'isRight' }, component: SettingsComponent },
+    //   { path: 'server', component: ServerDetailsComponent },
+    //   {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
+    //   {path: 'task/types', component: TaskTypeComponent, data: {animation: 'isRight'}},
+    //   {path: 'document/types', component: DocumentTypesComponent, data: {animation: 'isRight'}},
+    //   {path: 'project/types', component: ProjectTypeComponent, data: {animation: 'isRight'}},
+    //   {path: 'status/types', component: StatusTypesComponent, data: {animation: 'isRight'}}
+    // ]
+    
   {
     path: 'dashboard', component: DefaultlayoutComponent, children: [
       { path: '', component: DashboardComponent }

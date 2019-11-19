@@ -110,6 +110,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { SettingsContainerComponent } from './component/settings-container/settings-container.component';
 // import { persistStore } from 'redux-persist';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -169,7 +170,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     ConversationComponent,
     DocumentUpdateComponent,
     TaskContainerComponent,
-    UserContainerComponent
+    UserContainerComponent,
+    SettingsContainerComponent
   ],
   imports: [
     BrowserModule,

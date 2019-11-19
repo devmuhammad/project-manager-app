@@ -184,11 +184,9 @@ table, th , td {
 .firstLayerContainer .layerContent .doCards div{
     display: block;
     border-radius: 4px ;
-    border:1px solid slategray;
     width:20%;
-
     min-width: 20%;
-    height: 220px;
+    height: 170px;
     /* margin-inline-end: 5px;
     margin-inline-start: 10px;
     margin-bottom:10px;  */
