@@ -32,7 +32,9 @@ mat-sidenav {
 .mat-drawer-container, .mat-drawer{
   background-color: transparent;
 }
-
+.mat-drawer-container {
+  overflow: hidden !important;
+}
 .sub-title{
   color:var(--primaryColor);
   padding: 5px;
@@ -173,11 +175,11 @@ label.panel-label{
   font-size:12.5px;
 }
 /* .todo{
-  background: var(--dangerColor);
-  color:var(--lightColor) !important;
+  background: var(--lightColor);
+  color: var(--dangerColor) !important;
   align-items: center;
 text-align: center;
-} */
+}  */
 /* .mat-header-cell{
 text-align: center !important;
 width: 100%;
