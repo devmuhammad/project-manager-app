@@ -79,7 +79,7 @@
        
         </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="webhooks">
+      <!-- <ng-container matColumnDef="webhooks">
           <mat-header-cell *matHeaderCellDef> Web Hooks</mat-header-cell>
           <mat-cell *matCellDef="let row;">
           <button (click)="toggleExpand(row,'webHook')" mat-icon-button>
@@ -89,12 +89,12 @@
           </button>
          
           </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
      <!-- Weight Column -->
-     <ng-container  matColumnDef="more">
-        <mat-header-cell *matHeaderCellDef >More</mat-header-cell>
-        <mat-cell *matCellDef="let element">
+     <ng-container  matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef >Action</mat-header-cell>
+        <mat-cell *matCellDef="let row">
             <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
             <mat-menu #moreMenu="matMenu" yPosition="below">
                 <button class="menu-button" mat-menu-item>
@@ -120,6 +120,14 @@
                       <span>
                         Repository
                       </span>
+                    </button>
+                    <button class="menu-button" (click)="toggleExpand(row,'webHook')" mat-menu-item>
+                        <mat-icon style="color:var(--darkColor)">
+                          web
+                        </mat-icon>
+                        <span>
+                          Web Hook
+                        </span>
                     </button>
                     </mat-menu>
            </mat-cell>

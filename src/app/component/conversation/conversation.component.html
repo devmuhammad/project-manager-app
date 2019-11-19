@@ -1,19 +1,4 @@
 <div class="chat-wrapper">
-  <div class="chat-sidebar">
-    <mat-list>
-
-      <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
-        <mat-icon mat-list-icon>folder</mat-icon>
-        <h4 mat-line>General</h4>
-      </mat-list-item>
-      <h3 mat-subheader>Projects</h3>
-      <mat-list-item [ngClass]="idx === i? 'focus':'' " (click)="showProjectChart(projects[i],i)" class="litem" button
-        *ngFor="let project of projects;let i = index">
-        <mat-icon mat-list-icon>folder</mat-icon>
-        <h4 mat-line>{{project.projectname}}</h4>
-      </mat-list-item>
-    </mat-list>
-  </div>
 
   <div class="chat-content">
       <div #scrollMe id="cArea" style="overflow-y: scroll" *ngIf="activityList.length" class="chatArea">
@@ -60,6 +45,22 @@
               
               </div>
   </div>
+
+  <div class="chat-sidebar">
+      <mat-list>
+  
+        <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <h4 mat-line>General</h4>
+        </mat-list-item>
+        <h3 mat-subheader>Projects</h3>
+        <mat-list-item [ngClass]="idx === i? 'focus':'' " (click)="showProjectChart(projects[i],i)" class="litem" button
+          *ngFor="let project of projects;let i = index">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <h4 mat-line>{{project.projectname}}</h4>
+        </mat-list-item>
+      </mat-list>
+    </div>
 </div>
 
 <!-- *ngIf="dltIndex ===i && delete"  -->

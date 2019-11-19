@@ -87,11 +87,18 @@ export const routes: Routes = [
   {
     path: 'user/management', component: DefaultlayoutComponent, children: [
       {
+<<<<<<< HEAD
         path:'', component: UserContainerComponent, data: {animation: 'isRight'},
       }
     ] 
   },
 
+=======
+        path: '', component: UserContainerComponent, data: {animation: 'isRight'}
+      }
+    ]
+  },
+>>>>>>> 7495177205ff76cfd30861cf6557182a0a09f06e
   // {
   //   path: 'user', component: DefaultlayoutComponent, children: [
   //     {path: '', component: UsersComponent, data: {animation: 'isRight'}},
