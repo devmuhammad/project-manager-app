@@ -19,9 +19,9 @@ mat-cell:first-of-type {
   .item-search{
       width: 25%;
       margin-bottom: 10px;
+      margin-right: 10px;
       border:1px solid var(--primaryColor) !important; 
   }
-
   .small-cell {
     flex: 0 0 7% !important;
   }
