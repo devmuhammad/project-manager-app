@@ -46,7 +46,6 @@ input.ng-dirty.ng-invalid{
  section{
   padding: 5px;
   /* margin-left:10px; */
-  width: 100%;
 }
 
 .form-wrapper ul{

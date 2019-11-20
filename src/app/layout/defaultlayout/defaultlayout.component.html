@@ -3,7 +3,7 @@
     <mat-sidenav *ngIf="opened" #drawer class="sidenav" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [(opened)]="status" >
+      [(opened)]="opened" >
       <div class="side-content">
         <mat-toolbar class="toolbar-theme">
           <div class="toolbar-item">

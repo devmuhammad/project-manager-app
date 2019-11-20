@@ -1,4 +1,5 @@
-<div style="width: 100%">
+<div class="container">
+  <div style="width: 100%">
     <h2 mat-dialog-title>Add New Group</h2>
 </div>
 
@@ -6,10 +7,9 @@
  
   <form action="" [formGroup]="form">
     <div>
-        <div class="formControl">
-            <label>Group name</label>
-            <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                <input matInput placeholder="Enter group name" formControlName="name" floatPlaceholder="never">
+        <div >
+            <mat-form-field class="auth-form-field" >
+                <input matInput placeholder="Enter group name" formControlName="name" >
                 <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                   <mat-icon>group</mat-icon>
                 </button>
@@ -31,3 +31,4 @@
       Add 
     </button>
 </mat-dialog-actions>
+</div>
