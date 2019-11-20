@@ -191,6 +191,7 @@ margin-right: 0;
   font-size: 24px;
 }
 .toolbar-item mat-icon{
+  cursor: pointer;
   font-size: 32px;
 }
 .companylogo{

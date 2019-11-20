@@ -7,9 +7,8 @@
       <div class="form-container">
             
         <div class="formControl">
-          <label>Description</label>
-          <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
-              <input matInput placeholder="Description" formControlName="description" floatPlaceholder="never">
+          <mat-form-field class="auth-form-field ">
+              <input matInput placeholder="Description" formControlName="description">
               <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                 <mat-icon>business</mat-icon>
               </button>
@@ -17,8 +16,7 @@
             </mat-form-field>
         </div>
         <div class="formControl">
-            <label>code</label>
-            <mat-form-field class="project-form-field auth-form-field "  floatLabel="never">
+            <mat-form-field class="auth-form-field ">
                 <input matInput placeholder="Status code" formControlName="code" floatPlaceholder="never">
                 <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                   <mat-icon>scatter_plot</mat-icon>
@@ -29,10 +27,8 @@
        
             
         <div class="formControl">
-          
-            <label>Institution</label>
-            <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-              <mat-select  class="select" formControlName="institution" placeholder="Institution" floatPlaceholder="never"
+            <mat-form-field class="auth-form-field ">
+              <mat-select  class="select" formControlName="institution" placeholder="Institution"
               >
                 <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
                 </mat-option>

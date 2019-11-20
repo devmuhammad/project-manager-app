@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
-    <mat-sidenav #drawer class="sidenav" position="end" mode="push"
+    <mat-sidenav #drawer class="sidenav custom" position="end" mode="push"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [(opened)]="showSide" >
     <div class="side-content" *ngIf="showSide" style="padding: 0px">
