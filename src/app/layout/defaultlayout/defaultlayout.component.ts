@@ -75,13 +75,14 @@ export class DefaultlayoutComponent implements OnInit {
     },
   
     {
-      name: 'Settings', icon: 'settings', children: [
-        { name: 'Server', icon: 'network_check', link: '/settings/server' },
-        { name: 'ProjectTypes', icon: 'folder_open', link: '/settings/project/types' },
-        { name: 'Status', icon: 'outlined_flag', link: '/settings/status/types' },
-        { name: 'DocumentTypes', icon: 'file_copy', link: '/settings/document/types' },
-        { name: 'TaskTypes', icon: 'sort', link: '/settings/task/types' },
-      ]
+      name: 'Settings', icon: 'settings', link: 'settings/server'
+      // children: [
+      //   { name: 'Server', icon: 'network_check', link: '/settings/server' },
+      //   { name: 'ProjectTypes', icon: 'folder_open', link: '/settings/project/types' },
+      //   { name: 'Status', icon: 'outlined_flag', link: '/settings/status/types' },
+      //   { name: 'DocumentTypes', icon: 'file_copy', link: '/settings/document/types' },
+      //   { name: 'TaskTypes', icon: 'sort', link: '/settings/task/types' },
+      // ]
     },
   ];
 
