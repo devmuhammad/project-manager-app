@@ -16,6 +16,14 @@
 .button{
 
 }
+
+.custom {
+  position: fixed;
+  top: 10%;
+  padding-top: 10px;
+  right: 0;
+}
+
 .add{
   position: absolute;
   right: 5px;
