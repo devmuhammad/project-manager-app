@@ -5,6 +5,10 @@ table {
   tr.example-detail-row {
     height: 0;
   }
+
+  .small-cell {
+    flex: 0 0 7% !important;
+  }
   
   tr.example-element-row:not(.example-expanded-row):hover {
     background: #777;

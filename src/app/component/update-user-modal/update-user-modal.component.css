@@ -1,13 +1,17 @@
 mat-dialog-content{
     max-height: 260px;
 }
-
 .formControl{
     position: relative;
-    margin: 10px 0 0px 0;
-    padding:10px;
-    
+    margin: 0;
+    padding: 0;
 }
+
+.options {
+    margin: 10px 0 0 0;
+    padding: 10px;
+}
+
 .formControl label{
     position: absolute;
     top: -10px;

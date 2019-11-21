@@ -59,7 +59,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'settings/server', component: DefaultlayoutComponent, children:[
+    path: 'settings', component: DefaultlayoutComponent, children:[
       { path: '', component: SettingsContainerComponent, data: {animation: 'isRight'}}
     ]
   },   

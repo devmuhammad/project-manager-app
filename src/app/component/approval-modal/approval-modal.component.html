@@ -10,9 +10,8 @@
   <form  [formGroup]="form" >
   <div>
     <div class="formControl">
-        <label>Role Types</label>
-    <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-        <mat-select  formControlName="roletypes"  placeholder="User role type" floatPlaceholder="never">
+    <mat-form-field class="auth-form-field" >
+        <mat-select  formControlName="roletypes"  placeholder="User role type">
           <mat-option value="All">All</mat-option>
           <mat-option value="Authorizer">Authorizer</mat-option>
           <mat-option value="Initiator">Initiator</mat-option>

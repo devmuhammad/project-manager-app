@@ -17,3 +17,7 @@
 .auth-form-field{
     width: 100%;
 }
+
+mat-dialog-content {
+    max-height: 250px;
+}

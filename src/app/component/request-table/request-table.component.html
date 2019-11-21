@@ -23,8 +23,8 @@
 <div class="mat-elevation-z8">
   <mat-table [dataSource]="dataSource"  matSort >
       <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
-          <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
-          <mat-cell colspan="1" *matCellDef="let element"> {{element.id}} </mat-cell>
+          <mat-header-cell class="small-cell" colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell class="small-cell" colspan="1" *matCellDef="let element"> {{element.id}} </mat-cell>
         </ng-container>
     
     
