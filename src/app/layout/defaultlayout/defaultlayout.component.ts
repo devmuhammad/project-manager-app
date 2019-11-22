@@ -57,7 +57,7 @@ export class DefaultlayoutComponent implements OnInit {
       name: 'Project', icon: 'folder', link: '/project'
     },
     {
-      name: 'Activities', icon: 'business_center', link: '/activity/documents',
+      name: 'Activities', icon: 'business_center', link: '/activity',
     },
     {
       name: 'Documents', icon: 'list_alt', link: '/documents'

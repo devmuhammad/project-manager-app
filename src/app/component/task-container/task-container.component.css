@@ -33,7 +33,6 @@ margin:20px;
 
 .task-body{
     padding: 30px;
-    max-height: 67vh;
     overflow-y: auto;
 }
 
