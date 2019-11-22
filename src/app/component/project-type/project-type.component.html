@@ -22,7 +22,7 @@
       </button>
     </mat-form-field>
   </div>
-  
+  <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>
       <!-- Id Column -->
       <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
@@ -79,5 +79,5 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
-  
+  </div>
 </section>
