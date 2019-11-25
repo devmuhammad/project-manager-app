@@ -57,7 +57,7 @@ export class DefaultlayoutComponent implements OnInit {
       name: 'Project', icon: 'folder', link: '/project'
     },
     {
-      name: 'Activities', icon: 'business_center', link: '/activity/documents',
+      name: 'Activities', icon: 'business_center', link: '/activity',
     },
     {
       name: 'Documents', icon: 'list_alt', link: '/documents'
@@ -66,7 +66,7 @@ export class DefaultlayoutComponent implements OnInit {
       name: 'Clients', icon: 'people_outlined', link: '/client'
     },
     {
-      name: 'User Managment', icon: 'people', link: 'user/management'
+      name: 'User Managment', icon: 'people', link: '/user/management'
       // children: [
       //   { name: 'Groups', icon: 'people', link: '/user/group' },
       //   { name: 'Requests', icon: 'person_add', link: '/user/request' },
@@ -75,7 +75,7 @@ export class DefaultlayoutComponent implements OnInit {
     },
   
     {
-      name: 'Settings', icon: 'settings', link: 'settings/server'
+      name: 'Settings', icon: 'settings', link: '/settings'
       // children: [
       //   { name: 'Server', icon: 'network_check', link: '/settings/server' },
       //   { name: 'ProjectTypes', icon: 'folder_open', link: '/settings/project/types' },

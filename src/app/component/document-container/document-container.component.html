@@ -165,123 +165,116 @@
               </section>
     </mat-card>
     <mat-card class="sideActionBar">
-        <div  style="margin-top: 30px" class="">
-            <!-- <p class=""><span>Attached Files List</span></p>     -->
-            <div class="tableSection" *ngIf="files.length" >
-              <table>
-                  <tr>
-                      <th  *ngFor="let col of fileColumns">
-                        {{col}}
-                      </th>
-                    </tr>
-                    <tr class="files-list" *ngFor="let file of files;let i= index">
-                        <td style="text-align: left;font-size: 13px">
-                          
-                            {{ resizeName(file.name)}}
-                            <span>(Size {{file.size| number}}) bytes</span>
-                          
-                        </td>
-                        <td style="text-align: right" (click)="deleteAttachment(i)" class="delete-file">
-                            <img src="../../../assets/img/Recycle_Bin_Full.png">
-                        </td>
+        <div class = "cont">
+          <div  style="margin-top: 10px" class="">
+              <!-- <p class=""><span>Attached Files List</span></p>     -->
+              <div class="tableSection" *ngIf="files.length" >
+                <table>
+                    <tr>
+                        <th  *ngFor="let col of fileColumns">
+                          {{col}}
+                        </th>
                       </tr>
-              </table>
-              
-              </div>
-           
-          </div>
-      <header>Drag File here:</header>
-      <div class="dragdrop"  appDragDrop (onFileDropped)="attatchFile($event)"
-        style="text-align: center">
-        <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple
-          type="file" />
-        <label style="margin-top: 50px;" for="input-file-id">
-          <mat-icon
-            style="font-size: 80px;color:var(--primaryColor);transform: translateY(-700%);transform: translateX(-100%)">
-            backup_outlined
-          </mat-icon>
-          <p class="buttontext">Drag your file(s)</p>
-        </label>
-      </div>
-      <div>
-        
-      </div>
-      <div>
-        <form [formGroup]="form" enctype="multipart/form-data">
-            <div class="formControl">
-                <label>Activity</label>
-                <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-                  <mat-select  class="select" formControlName="activityid" placeholder="Institution" floatPlaceholder="never"
-                  >
-                    <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
-                    </mat-option>
-                  </mat-select>
-                    <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
-                  </mat-form-field>
-              </div>
+                      <tr class="files-list" *ngFor="let file of files;let i= index">
+                          <td style="text-align: left;font-size: 13px">
+                            
+                              {{ resizeName(file.name)}}
+                              <span>(Size {{file.size| number}}) bytes</span>
+                            
+                          </td>
+                          <td style="text-align: right" (click)="deleteAttachment(i)" class="delete-file">
+                              <img src="../../../assets/img/Recycle_Bin_Full.png">
+                          </td>
+                        </tr>
+                </table>
+                
+                </div>
+             
+            </div>
+        <header>Drag File here:</header>
+        <div class="dragdrop"  appDragDrop (onFileDropped)="attatchFile($event)"
+          style="text-align: center">
+          <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple
+            type="file" />
+          <label style="margin-top: 50px;" for="input-file-id">
+            <mat-icon
+              style="font-size: 80px;color:var(--primaryColor);transform: translateY(-700%);transform: translateX(-100%)">
+              backup_outlined
+            </mat-icon>
+            <p class="buttontext">Drag your file(s)</p>
+          </label>
+        </div>
+        <div>
+          
+        </div>
+        <div>
+          <form [formGroup]="form" enctype="multipart/form-data">
               <div class="formControl">
-                  <label>Document Type</label>
-                  <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-                    <mat-select  class="select" formControlName="documenttypeid" placeholder="Document Type" floatPlaceholder="never"
+                  <mat-form-field class="auth-form-field " >
+                    <mat-select  class="select" formControlName="activityid" placeholder="Institution"
                     >
-                      <mat-option *ngFor="let item of docTypeList" [value]="item.documentypeid">{{item.description}}
+                      <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
                       </mat-option>
                     </mat-select>
                       <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
                     </mat-form-field>
                 </div>
                 <div class="formControl">
-                    <label>Project </label>
-                    <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-                      <mat-select  class="select" formControlName="projectid" placeholder="Select Project" floatPlaceholder="never"
+                    <mat-form-field class="auth-form-field ">
+                      <mat-select  class="select" formControlName="documenttypeid" placeholder="Document Type"
                       >
-                        <mat-option *ngFor="let item of projectList" [value]="item.projectId">{{item.projectname}}
+                        <mat-option *ngFor="let item of docTypeList" [value]="item.documentypeid">{{item.description}}
                         </mat-option>
                       </mat-select>
                         <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
                       </mat-form-field>
                   </div>
-                <div class="formControl">
-                    <label>Description</label>
-                    <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                      <input matInput placeholder="Describe Document" formControlName="description" floatPlaceholder="never">
-                        <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-                          <mat-icon>description</mat-icon>
-                        </button>
-                        <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
-                      </mat-form-field>
-                  </div>
                   <div class="formControl">
-                      <label>Task</label>
-                      <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-                        <mat-select  class="select" formControlName="activityid" placeholder="Select Task" floatPlaceholder="never"
+                      <mat-form-field class="auth-form-field " >
+                        <mat-select  class="select" formControlName="projectid" placeholder="Select Project"
                         >
-                          <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                          <mat-option *ngFor="let item of projectList" [value]="item.projectId">{{item.projectname}}
                           </mat-option>
                         </mat-select>
                           <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
                         </mat-form-field>
                     </div>
                   <div class="formControl">
-                      <label>Document Received from</label>
-                      <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                          <input matInput placeholder="Received from" formControlName="receivedfrom" floatPlaceholder="never">
-                            <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-                              <mat-icon>person</mat-icon>
-                            </button>
-                            <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
-                          </mat-form-field>
+                      <mat-form-field class="auth-form-field">
+                        <input matInput placeholder="Describe Document" formControlName="description">
+                          <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                            <mat-icon>description</mat-icon>
+                          </button>
+                          <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                        </mat-form-field>
                     </div>
-          <button *ngIf="files.length" (click)="uploadfiles()"   buttonLoader [loaderColor]="'white'" class="uploadButton mat-button">
-              <span></span>
-            Upload File(s)
-          </button>
-        </form>
+                    <div class="formControl">
+                        <mat-form-field class="auth-form-field ">
+                          <mat-select  class="select" formControlName="activityid" placeholder="Select Task"
+                          >
+                            <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                            </mat-option>
+                          </mat-select>
+                            <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+                          </mat-form-field>
+                      </div>
+                    <div class="formControl">
+                        <mat-form-field class="auth-form-field" >
+                            <input matInput placeholder="Received from" formControlName="receivedfrom" >
+                              <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                                <mat-icon>person</mat-icon>
+                              </button>
+                              <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+                            </mat-form-field>
+                      </div>
+            <button *ngIf="files.length" (click)="uploadfiles()"   buttonLoader [loaderColor]="'white'" class="uploadButton mat-button">
+                <span></span>
+              Upload File(s)
+            </button>
+          </form>
+        </div>
       </div>
-        
-    
     </mat-card>
- 
    
   </div>
 

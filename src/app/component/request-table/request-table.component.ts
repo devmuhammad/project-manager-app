@@ -49,7 +49,6 @@ export class RequestTableComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
-    dialogConfig.height = '430px';
     dialogConfig.data = {user: id, group: this.groupList};
     this.dialog.open(ApprovalModalComponent, dialogConfig).afterClosed().subscribe(
       () => {
@@ -98,7 +97,6 @@ export class RequestTableComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    dialogConfig.height = '400px';
     dialogConfig.data = {details: row, users: this.allUsers, activities: false,  group: this.groupList};
     this.dialog.open(UserDetailsComponent, dialogConfig);
   }

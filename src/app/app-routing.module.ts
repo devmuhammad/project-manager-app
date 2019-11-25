@@ -42,8 +42,7 @@ export const routes: Routes = [
   },
   {
     path: 'activity', component: DefaultlayoutComponent, children: [
-      { path: '', component: ActivityComponent, data: { animation: 'isRight' } },
-      { path: 'documents', component: ActivityContainerComponent },
+      { path: '', component: ActivityContainerComponent, data: { animation: 'isRight' } }
     ]
   },
   // { path: 'documents/activity', data: { animation: 'isRight' }, component: ActivityComponent },
@@ -59,7 +58,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'settings/server', component: DefaultlayoutComponent, children:[
+    path: 'settings', component: DefaultlayoutComponent, children:[
       { path: '', component: SettingsContainerComponent, data: {animation: 'isRight'}}
     ]
   },   

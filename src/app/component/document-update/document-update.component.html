@@ -19,9 +19,8 @@
                   </mat-form-field>
               </div> -->
               <div class="formControl">
-                  <label>Document Type</label>
-                  <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-                    <mat-select  class="select" formControlName="documenttypeid" placeholder="Document Type" floatPlaceholder="never"
+                  <mat-form-field class="auth-form-field " >
+                    <mat-select  class="select" formControlName="documenttypeid" placeholder="Document Type"
                     >
                       <mat-option *ngFor="let item of docTypeList" [value]="item.documentypeid">{{item.description}}
                       </mat-option>
@@ -30,10 +29,8 @@
                     </mat-form-field>
                 </div>
                 <div class="formControl">
-                    <label>Project </label>
-                    <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
-                      <mat-select  class="select" formControlName="projectid" placeholder="Select Project" floatPlaceholder="never"
-                      >
+                    <mat-form-field class="auth-form-field " >
+                      <mat-select  class="select" formControlName="projectid" placeholder="Select Project" >
                         <mat-option *ngFor="let item of projectList" [value]="item.projectId">{{item.projectname}}
                         </mat-option>
                       </mat-select>
@@ -42,9 +39,8 @@
                       </mat-form-field>
                   </div>
                 <div class="formControl">
-                    <label>Description</label>
-                    <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                      <input matInput placeholder=" description" formControlName="description" floatPlaceholder="never">
+                    <mat-form-field class="auth-form-field" >
+                      <input matInput placeholder=" description" formControlName="description">
                         <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                           <mat-icon>description</mat-icon>
                         </button>
@@ -52,9 +48,8 @@
                       </mat-form-field>
                   </div>
                   <div class="formControl">
-                      <label>Document Uploader</label>
-                      <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                        <input matInput placeholder="Receiver" formControlName="receivedby" floatPlaceholder="never">
+                      <mat-form-field class="auth-form-field" >
+                        <input matInput placeholder="Receiver" formControlName="receivedby">
                           <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                             <mat-icon>person</mat-icon>
                           </button>
@@ -62,9 +57,8 @@
                         </mat-form-field>
                     </div>
                   <div class="formControl">
-                      <label>Document Sender</label>
-                      <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                        <input matInput placeholder="Sender" formControlName="receivedfrom" floatPlaceholder="never">
+                      <mat-form-field class="auth-form-field">
+                        <input matInput placeholder="Sender" formControlName="receivedfrom">
                           <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                             <mat-icon>person</mat-icon>
                           </button>

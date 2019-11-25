@@ -38,7 +38,6 @@ export class GroupsComponent implements OnInit{
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '320px';
-    dialogConfig.height = '200px';
     this.dialog.open(NewGroupModalComponent, dialogConfig).afterClosed().subscribe(
       () => {
         this.fetchdata();
@@ -78,7 +77,6 @@ export class GroupsComponent implements OnInit{
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '420px';
-    dialogConfig.height = '450px';
     dialogConfig.data = {roles: this.roleList, details: row};
     this.dialog.open(UpdateGroupModalComponent, dialogConfig).afterClosed().subscribe(
       () => {

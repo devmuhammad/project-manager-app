@@ -202,10 +202,17 @@ label .buttontext{
 }
 .sideActionBar{
     display: block;
+    width: 30%;
+    height: 75vh;
+    padding: 20px;
+    padding-right: 5px;
+}
+
+.cont {
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-height: 80vh;
-width: 30%;
+    height: 75vh;
 }
 
 .firstLayerContainer .layerContent .doCards{
@@ -224,8 +231,8 @@ width: 30%;
 
 .formControl{
     position: relative;
-    margin: 10px 0 0px 0;
-    padding:10px;
+    margin: 0;
+    padding: 0;
     
 }
 .formControl label{

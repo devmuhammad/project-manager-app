@@ -1,5 +1,5 @@
 <div class="taskSection">
-  <div class="taskList-Container">
+  <div class="taskList-Container" >
     <div class="task-body-header">
       <div class="t-title">
         <p>Task List</p>
@@ -14,19 +14,26 @@
     </div>
 
     <div class="task-body">
-      <div class="t-items" *ngFor="let task of taskList; let i = index">
-        <div class="t-item-main">
+      <mat-expansion-panel class="t-items" *ngFor="let task of taskList; let i = index" style="position: relative; border: none">
+        <mat-expansion-panel-header class="t-item-main">
+          <mat-panel-title>
+            <div style="width: 50%">
+              <div style="margin-bottom: 10px;">
+                <h3>{{task.tasktype}}</h3>
+                <p style="font-size: 12px;text-transform:lowercase">{{task.usercomment}}</p>
+              </div>
+            </div>
+          </mat-panel-title>
+          <mat-panel-description>
+            <div style="width: 50%">
+              <div style="font-size: 13px;">
+                <p>Project Name: <span style="color:var(--primaryColor)">{{task.projectid.projectname}}</span></p>
+              </div>
+            </div>            
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-          <div style="width: 50%">
-            <div style="margin-bottom: 10px;">
-              <h3>{{task.tasktype}}</h3>
-              <p style="font-size: 12px;text-transform:lowercase">{{task.usercomment}}</p>
-            </div>
-            <div style="font-size: 13px;">
-              <p>Project Name: <span style="color:var(--primaryColor)">{{task.projectid.projectname}}</span></p>
-            </div>
-          </div>
-          <div style="width: 30%;;transform: translateY(30%)">
+        <div style="width: 30%;;transform: translateY(30%); position: absolute; bottom: 43%; left: 2%">
             <div class="t-status-text">
               <p>{{task.projectid.projectstatus}} </p>
               <button class="edit-status" [matMenuTriggerFor]="statusoptions" mat-icon-button>
@@ -42,44 +49,42 @@
           'Created' : task.projectid.projectstatus =='New',
           'ongoing' : task.projectid.projectstatus =='string',
           'completed' : task.projectid.projectstatus =='Completed'
-       }" class="t-status"></div>
-          </div>
-          <div style="width: 20%; text-align: center;">
-            <button mat-icon-button>
-              <mat-icon style="font-size: 30px">attach_file</mat-icon>
-            </button>
-            <p style="padding: 5px;font-size:12px;color:var(--greyColor)">0 file(s) attached</p>
-          </div>
-
+         }" class="t-status"></div>
+        </div>
+        <div style="width: 185%; text-align: center; position: inherit; bottom: 19%; height: 69px">
+          <button mat-icon-button>
+            <mat-icon style="font-size: 30px">attach_file</mat-icon>
+          </button>
+          <p style="padding: 5px;font-size:12px;color:var(--greyColor)">0 file(s) attached</p>
         </div>
         <div class="t-item-footer">
-          <div style="width:50%;transform: translateY(10%);color:var(--greyColor);font-size: 15px">
-            <mat-icon style="transform: translateY(20%);">calendar_today</mat-icon> 23rd Sept 2019
-          </div>
-          <div style="width:40%;transform: translateY(30%);font-size: 13px">
-            Assigned by:
-            <span *ngIf="task.userid.id!==self" style="color:var(--primaryColor)"> {{task.userid.fullname}}</span>
-            <span *ngIf="task.userid.id===self" style="color:var(--primaryColor)">Self</span>
-          </div>
-          <div style="width:10%">
-            <button [disabled]="userRole" [matMenuTriggerFor]="options" mat-icon-button>
-              <mat-icon style="font-size: 18px">settings</mat-icon>
-            </button>
-            <mat-menu #options="matMenu" yPosition="above">
-              <button style="color: var(--dangerColor)" (click)="deletetask()" class="menu-button" mat-menu-item>
-                <mat-icon style="color: inherit">
-                  delete_outline
-                </mat-icon>
-                <span style="color: inherit;font-size: 14px;font-family: var(--primaryFont)">
-                  Delete Task
-                </span>
+            <div style="width:50%;transform: translateY(10%);color:var(--greyColor);font-size: 15px">
+              <mat-icon style="transform: translateY(20%);">calendar_today</mat-icon> 23rd Sept 2019
+            </div>
+            <div style="width:40%;transform: translateY(30%);font-size: 13px">
+              Assigned by:
+              <span *ngIf="task.userid.id!==self" style="color:var(--primaryColor)"> {{task.userid.fullname}}</span>
+              <span *ngIf="task.userid.id===self" style="color:var(--primaryColor)">Self</span>
+            </div>
+            <div style="width:10%">
+              <button [disabled]="userRole" [matMenuTriggerFor]="options" mat-icon-button>
+                <mat-icon style="font-size: 18px">settings</mat-icon>
               </button>
-            
-            </mat-menu>
+              <mat-menu #options="matMenu" yPosition="above">
+                <button style="color: var(--dangerColor)" (click)="deletetask()" class="menu-button" mat-menu-item>
+                  <mat-icon style="color: inherit">
+                    delete_outline
+                  </mat-icon>
+                  <span style="color: inherit;font-size: 14px;font-family: var(--primaryFont)">
+                    Delete Task
+                  </span>
+                </button>
+              
+              </mat-menu>
+            </div>
           </div>
-        </div>
-
-      </div>
+    
+      </mat-expansion-panel>
     </div>
 
   </div>

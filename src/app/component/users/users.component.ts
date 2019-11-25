@@ -42,7 +42,6 @@ export class UsersComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    dialogConfig.height = '500px';
     dialogConfig.data = {group: this.groupList};
     this.dialog.open(NewUserModalComponent, dialogConfig).afterClosed().subscribe(
       () => {
@@ -87,7 +86,6 @@ export class UsersComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    dialogConfig.height = '400px';
     dialogConfig.data = {data:row,  group: this.groupList};
     this.dialog.open(UpdateUserModalComponent, dialogConfig).afterClosed().subscribe(
       () => {
@@ -105,7 +103,6 @@ export class UsersComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    dialogConfig.height = '400px';
     dialogConfig.data = {details: row, users: this.allUsers, activities: this.status, group: this.groupList};
     this.dialog.open(UserDetailsComponent, dialogConfig);
   }

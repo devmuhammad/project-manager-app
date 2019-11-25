@@ -14,3 +14,7 @@
       margin-bottom: 10px;
       border:1px solid var(--primaryColor) !important; 
   }
+
+  .small-cell {
+    flex: 0 0 7% !important;
+  }

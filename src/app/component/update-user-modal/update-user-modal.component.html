@@ -1,4 +1,5 @@
-<div style="width: 100%">
+<div class="container">
+  <div style="width: 100%">
     <h2 mat-dialog-title>Update New User</h2>
 </div>
 
@@ -8,9 +9,8 @@
       <div class="form-container">
         
         <div class="formControl">
-          <label>Fullname</label>
-          <mat-form-field class="project-form-field auth-form-field half" floatLabel="never">
-              <input matInput placeholder="Fullname" formControlName="fullname" floatPlaceholder="never">
+          <mat-form-field class="auth-form-field half">
+              <input matInput placeholder="Fullname" formControlName="fullname">
               <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                 <mat-icon>person</mat-icon>
               </button>
@@ -18,9 +18,8 @@
             </mat-form-field>
         </div>
         <div class="formControl">
-            <label>Designation</label>
-            <mat-form-field class="project-form-field auth-form-field half" floatLabel="never">
-                <input matInput placeholder="Designation" formControlName="designation" floatPlaceholder="never">
+            <mat-form-field class="auth-form-field half">
+                <input matInput placeholder="Designation" formControlName="designation">
                 <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                   <mat-icon>title</mat-icon>
                 </button>
@@ -28,9 +27,8 @@
               </mat-form-field>
           </div>
         <div class="formControl">
-          <label>Contact Email</label>
-          <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-            <input matInput placeholder="Email" formControlName="contactemail" floatPlaceholder="never">
+          <mat-form-field class="auth-form-field">
+            <input matInput placeholder="Email" formControlName="contactemail" >
               <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                 <mat-icon>email</mat-icon>
               </button>
@@ -38,9 +36,8 @@
             </mat-form-field>
         </div>
         <div class="formControl">
-            <label>Phone </label>
-            <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-              <input matInput placeholder="Phone" formControlName="phone" floatPlaceholder="never">
+            <mat-form-field class="auth-form-field" >
+              <input matInput placeholder="Phone" formControlName="phone" >
                 <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                   <mat-icon>phone</mat-icon>
                 </button>
@@ -48,9 +45,8 @@
               </mat-form-field>
           </div>
           <div class="formControl">
-              <label>Institution </label>
-              <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                <input matInput placeholder="Institution" formControlName="institution" floatPlaceholder="never">
+              <mat-form-field class="auth-form-field" >
+                <input matInput placeholder="Institution" formControlName="institution" >
                   <button mat-button matSuffix mat-icon-button (click)="doNothing()">
                     <mat-icon>business</mat-icon>
                   </button>
@@ -58,10 +54,10 @@
                 </mat-form-field>
             </div>
             
-          <div class="formControl">
-              <label *ngIf="!isLoading">Supervisor </label>
-              <label style="color:var(--warningColor)" *ngIf="isLoading">{{fetchmessage}}</label>
-              <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
+          <div class="formControl options">
+              <!-- <label *ngIf="!isLoading">Supervisor </label>
+              <label style="color:var(--warningColor)" *ngIf="isLoading">{{fetchmessage}}</label> -->
+              <mat-form-field class="auth-form-field">
                   <mat-select formControlName="supervisor"  placeholder="Supervisor">
                       <mat-option [value]="user.id" *ngFor="let user of userList">
                         {{user.fullname}}
@@ -72,10 +68,10 @@
             </div>
 
 
-            <div class="formControl">
-                <label>Role Types</label>
-            <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-                <mat-select  formControlName="roletypes"  placeholder="User role type" floatPlaceholder="never">
+            <div class="formControl options">
+                <!-- <label>Role Types</label> -->
+            <mat-form-field class="auth-form-field">
+                <mat-select  formControlName="roletypes"  placeholder="User role type">
                   <mat-option value="All">All</mat-option>
                   <mat-option value="Authorizer">Authorizer</mat-option>
                   <mat-option value="Initiator">Initiator</mat-option>
@@ -108,3 +104,4 @@
       Save
     </button>
 </mat-dialog-actions>
+</div>
