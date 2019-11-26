@@ -1,7 +1,17 @@
 <section>
   <div class="section-header" style="width: 100%;">
 
-    <div class="button add">
+    <mat-form-field class="search-form-field" style="padding-right: 10px;">
+      <input [(ngModel)]="accountsearchKey" (keyup)="applyAccountFilter()" matInput  placeholder="Search Server Account"/>
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="accountsearchKey" (click)="onAccountSearchClear()">
+          <mat-icon >close</mat-icon>
+      </button>
+      <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+          <mat-icon >search</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="button add" style="padding-top: 10px;">
       <button (click)="onCreate()" mat-raised-button>
         <mat-icon>
           add
@@ -9,16 +19,6 @@
         Add new Client
       </button>
     </div>
-
-    <mat-form-field class="search-form-field project-form-field item-search" floatLabel="never">
-      <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput placeholder="Search client" />
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-        <mat-icon>close</mat-icon>
-      </button>
-      <button mat-button matSuffix mat-icon-button *ngIf="!searchKey">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
   </div>
   <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>

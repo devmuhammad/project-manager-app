@@ -4,26 +4,26 @@
 
     <div class="section-header">
 
-      <div class="button add">
-        <button (click)="onCreate()" mat-raised-button>
-          <mat-icon>
-            add
-          </mat-icon>
-          Add New User
-        </button>
-      </div>
+      
     </div>
 
-    <mat-form-field class="search-form-field project-form-field item-search" floatLabel="never">
-      <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput placeholder="Search user" />
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-        <mat-icon>close</mat-icon>
+    <mat-form-field class="search-form-field" style="padding-right: 10px;">
+      <input [(ngModel)]="accountsearchKey" (keyup)="applyAccountFilter()" matInput  placeholder="Search Server Account"/>
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="accountsearchKey" (click)="onAccountSearchClear()">
+          <mat-icon >close</mat-icon>
       </button>
-      <button mat-button matSuffix mat-icon-button *ngIf="!searchKey">
-        <mat-icon>search</mat-icon>
+      <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+          <mat-icon >search</mat-icon>
       </button>
     </mat-form-field>
-
+    <div class="button add" style="padding-top: 10px;">
+      <button (click)="onCreate()" mat-raised-button>
+        <mat-icon>
+          add
+        </mat-icon>
+        Add New User
+      </button>
+    </div>
   </div>
 
 

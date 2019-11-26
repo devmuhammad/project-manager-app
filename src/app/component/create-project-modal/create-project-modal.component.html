@@ -15,7 +15,7 @@
                </button>
                <mat-error >Invalid project name</mat-error>
         </mat-form-field> -->
-        <mat-form-field class="example-full-width-2">
+        <mat-form-field class="example-full-width-2" style="width: 45%;">
           <input matInput placeholder="Name" value="" formControlName="name" floatPlaceholder="never" required>
           <button mat-button matSuffix mat-icon-button aria-label="Clear">
             <mat-icon>folder </mat-icon>
@@ -25,7 +25,7 @@
       </div>
       <div class="form-control halfing">
         <!-- <label for="alias">Alias</label> -->
-        <mat-form-field>
+        <mat-form-field style="width: 45%;">
           <input matInput placeholder="Alias" formControlName="code" floatPlaceholder="never" required>
           <button mat-button matSuffix mat-icon-button aria-label="Clear">
             <mat-icon>folder </mat-icon>
@@ -33,41 +33,41 @@
           <mat-error>Invalid alias</mat-error>
         </mat-form-field>
       </div>
+
+      <div class="form-control" style="margin-top:20px ">
+        <!-- <label for="name">Start date</label> -->
+        <mat-form-field  style="width: 45%;">
+          <input matInput formControlName="startdate" [matDatepicker]="picker" placeholder="Start date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-control" style="margin-top:20px ">
+        <!-- <label for="name">End date</label> -->
+        <mat-form-field style="width: 45%;" >
+          <input matInput formControlName="enddate" [matDatepicker]="enddate" placeholder="End date">
+          <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+          <mat-datepicker #enddate></mat-datepicker>
+        </mat-form-field>
+      </div>
       <div class="form-control halfing">
         <!-- <label style="width: 100%" for="type">{{typeLabel}}</label> -->
-        <mat-form-field>
+        <mat-form-field style="width: 45%;">
           <mat-select class="select" formControlName="type" placeholder="Project type" floatPlaceholder="never"
             required>
             <mat-option *ngFor="let item of types" [value]="item.projecttypeId">{{item.description}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-
-
-      <div class="form-control block" style="display: block;margin-bottom: 20px">
+      <div class="form-control block" style="margin-bottom: 20px">
         <!-- <label for="description">Description</label> -->
-        <mat-form-field style="margin-top: 10px; width: 95%;">
+        <mat-form-field style="margin-top: 10px; width: 45%;">
           <textarea matInput placeholder="Description" formControlName="description">
         </textarea>
         </mat-form-field>
 
       </div>
-      <div class="form-control" style="margin-top:20px ">
-        <label for="name">Start date</label>
-        <mat-form-field floatLabel="never">
-          <input matInput formControlName="startdate" [matDatepicker]="picker" placeholder="dd-mm-yy">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="form-control" style="margin-top:20px ">
-        <label for="name">End date</label>
-        <mat-form-field floatLabel="never">
-          <input matInput formControlName="enddate" [matDatepicker]="enddate" placeholder="dd-mm-yy">
-          <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
-          <mat-datepicker #enddate></mat-datepicker>
-        </mat-form-field>
-      </div>
+
       <mat-divider style="margin-top: 10px;width: 100%"></mat-divider>
       <h2 class="client-section" mat-dialog-title>Add client</h2>
 
