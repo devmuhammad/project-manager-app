@@ -1,5 +1,5 @@
 <div class="maindiv">
-  <mat-sidenav-container class="sidenav-container" style="overflow: hidden">
+  <mat-sidenav-container class="sidenav-container" style="overflow: hidden;border-right: none">
     <mat-sidenav *ngIf="opened" #drawer class="sidenav" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -75,7 +75,7 @@
       </div>
     </mat-sidenav>
 
-    <mat-sidenav *ngIf="!opened" #drawer class="sidenav" style="width: fit-content" fixedInViewport="true"
+    <mat-sidenav *ngIf="!opened" #drawer class="sidenav" style="width: fit-content;border-right: none" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [(opened)]="status" >

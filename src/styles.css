@@ -233,7 +233,8 @@ mat-row:nth-child(even){
                 }
                 
                 mat-cell{
-                  font-size: 11.5px !important;
+                  font-size: 15px !important;
+                  text-transform: capitalize;
                 }
 
                 @media (min-width: 320px) and (max-width: 480px) {

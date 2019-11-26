@@ -109,7 +109,7 @@ bottom:2%;
   font-weight: 200;
 }
 .sidenav {
-
+  border-right: none;
   width: 250px;
   padding-right:0 !important;
   /* background: linear-gradient(to right, #4caf50, #52c234); */

@@ -58,12 +58,15 @@ opacity: .5;
 }
 
 .submit-button-section{
-  width: 100%;
+  /* width: 100%; */
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
 }
 .submit-button-section button{
   color: var(--lightColor);
   text-transform: uppercase;
-  width: 100%;
+  /* width: 100%; */
   font-family: var(--primaryFont);
   letter-spacing: 2.5px;
   font-size: 16px;
