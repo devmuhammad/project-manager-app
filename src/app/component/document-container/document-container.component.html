@@ -10,7 +10,8 @@
       <!-- <button style="position: absolute;top:-30px;right:20px;z-index: 100000;" mat-icon-button (click)="grid =!grid">heoo</button> -->
       <button class="toggleGrid" (click)="grid =!grid" mat-icon-button>
       <mat-icon matTooltip="List View" *ngIf="grid">view_module</mat-icon>
-      <mat-icon matTooltip="Grid View" *ngIf="!grid">list_alt</mat-icon>
+      <mat-icon matTooltip="Grid View" *ngIf="!grid">list_alt</mat-icon>  
+      
     </button>
       <div *ngIf="!grid" class="doCards">
       <div class="listContainer" *ngFor="let docx of documentList">
