@@ -1,13 +1,15 @@
 <div class="section-header" style="width: 100%;">
-    <mat-form-field class="search-form-field project-form-field item-search" floatLabel="never" >
-      <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search project"/>
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-          <mat-icon >close</mat-icon>
-      </button>
-      <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
-          <mat-icon >search</mat-icon>
-      </button>
-    </mat-form-field>
+  <mat-form-field class="search-form-field" style="padding-right: 10px;">
+    <input [(ngModel)]="accountsearchKey" (keyup)="applyAccountFilter()" matInput
+      placeholder="Search Project" />
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="accountsearchKey"
+      (click)="onAccountSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-button matSuffix mat-icon-button *ngIf="!searchKey">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
     <div style="margin-right: 15px" class="button add">
           
         <button (click)="onCreate()" mat-button mat-raised-button>Create Project</button>
@@ -50,7 +52,7 @@
         <mat-header-cell *matHeaderCellDef>Activities</mat-header-cell>
         <mat-cell *matCellDef="let row;">
         <button (click)="toggleExpand(row,'Activities')" mat-icon-button>
-          <mat-icon style="color:var(--darkColor)" matBadge="{{row.activityCounts}}" matBadgePosition="after" class="tool-icon">
+          <mat-icon style="color:#325774" matBadge="{{row.activityCounts}}" matBadgePosition="after" class="tool-icon">
               transfer_within_a_station
           </mat-icon>
         </button>
@@ -60,7 +62,7 @@
       <mat-header-cell *matHeaderCellDef> Team</mat-header-cell>
       <mat-cell *matCellDef="let row;">
       <button (click)="toggleExpand(row,'Team')" mat-icon-button>
-        <mat-icon style="color:var(--darkColor)" matBadge="{{row.teamMemberCounts}}"  matBadgePosition="after" matBadgeColor="info" class="tool-icon">
+        <mat-icon style="color:#325774" matBadge="{{row.teamMemberCounts}}"  matBadgePosition="after" matBadgeColor="info" class="tool-icon">
           group
         </mat-icon>
       </button>
@@ -72,7 +74,7 @@
         <mat-header-cell *matHeaderCellDef> Documents</mat-header-cell>
         <mat-cell   *matCellDef="let row;">
         <button (click)="toggleExpand(row,'Documents')" mat-icon-button>
-          <mat-icon style="color:var(--darkColor)" matBadge="{{row.documentCounts}}" matBadgePosition="after" matBadgeColor="info" class="tool-icon">
+          <mat-icon style="color:#325774" matBadge="{{row.documentCounts}}" matBadgePosition="after" matBadgeColor="info" class="tool-icon">
             folder
           </mat-icon>
         </button>
