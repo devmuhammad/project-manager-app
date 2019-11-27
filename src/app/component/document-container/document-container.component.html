@@ -14,11 +14,11 @@
     </button>
       <div *ngIf="!grid" class="doCards">
       <div class="listContainer" *ngFor="let docx of documentList">
-        <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100%" height="150">
-        <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100%" height="150">
-        <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100%"
-          height="150">
-        <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100%" height="150">
+        <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100" height="100">
+        <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100" height="100">
+        <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100"
+          height="100">
+        <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100" height="100">
         <article class="footer">
           <p class="docurl">{{docx.name}}</p>
           <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
@@ -86,14 +86,14 @@
             <div >
           <mat-table [dataSource]="dataSource"  matSort >
               <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
-                  <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
-                  <mat-cell colspan="1" *matCellDef="let element"> {{element.documentid}} </mat-cell>
+                  <mat-header-cell class="small" colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+                  <mat-cell class="small" colspan="1" *matCellDef="let element"> {{element.documentid}} </mat-cell>
                 </ng-container>
             
             
               <ng-container matColumnDef="url">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Document Name </mat-header-cell>
-                <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}} </mat-cell>
+                <mat-header-cell class="smallCell" *matHeaderCellDef mat-sort-header> Document Name </mat-header-cell>
+                <mat-cell  class="cell-name smallCell" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="doctype">

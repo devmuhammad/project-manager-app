@@ -1,253 +1,265 @@
-.docWrapper{
-    position: relative;
-    padding:5px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    overflow-x: hidden
+.docWrapper {
+  position: relative;
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  overflow-x: hidden;
 }
-.edgeButton{
-    position: fixed;
-    background: #fff;
-    bottom: 3%;
-    text-align: center;
-    right: 2%;
+.edgeButton {
+  position: fixed;
+  background: #fff;
+  bottom: 3%;
+  text-align: center;
+  right: 2%;
 }
-.layerText{
-    font-size: 14px;
-  color:#333;
+.layerText {
+  font-size: 14px;
+  color: #333;
   text-underline-position: below;
   margin-bottom: 15px;
   letter-spacing: 1px;
   margin-top: 20px;
 }
-.addButton{
-    color: linear-gradient(228.76deg,  #2E7D32 -34.42%, #E084F1 127.18%) !important;
-    /* font-size: 30px; */
-    padding-top:-10px;
+.addButton {
+  color: linear-gradient(
+    228.76deg,
+    #2e7d32 -34.42%,
+    #e084f1 127.18%
+  ) !important;
+  /* font-size: 30px; */
+  padding-top: -10px;
 }
-.listContainer{
-    transform :scale(.9);
-    position: relative;
-}
-
-.listContainer img{
-    transform: scale(.5);
-    margin-bottom: 10px;
-}
-.listContainer .docurl{
-    font-family: var(--primaryFont);
-    color: var(--primaryColor);
-    font-size: 13px;
-    text-transform: lowercase ;
-}
-.listContainer .footer{
-    display: block;
-    position: absolute;
-    height: 20%;
-    max-width: 100%;
-   background: #4444442e;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    padding: 10px;
-    bottom: 0;
-    left:0;
-    right:0;
-}
-.firstLayerContainer{
-   
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-width: 100%;
+.listContainer {
+  transform: scale(0.9);
+  position: relative;
 }
 
-table, th , td {
-    
-    border-collapse: collapse;
-    padding: 5px;
-  }
- tr {
-    border-bottom: .5px solid gray;
-  }
+.listContainer img {
+  transform: scale(0.5);
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 45px;
+}
+.listContainer .docurl {
+  font-family: var(--primaryFont);
+  color: var(--primaryColor);
+  font-size: 13px;
+  text-transform: lowercase;
+}
+.listContainer .footer {
+  display: block;
+  position: absolute;
+  height: 20%;
+  max-width: 100%;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding: 10px;
+  bottom: 35px;
+  left: 0;
+  right: 0;
+}
+.firstLayerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
 
-  table{
-      border-bottom: none !important;
-  }
-  .tableSection{
-      display: block;
-      max-height:300px !important;
-      overflow-y: auto;
-  }
+table,
+th,
+td {
+  border-collapse: collapse;
+  padding: 5px;
+}
+tr {
+  border-bottom: 0.5px solid gray;
+}
+
+table {
+  border-bottom: none !important;
+}
+.tableSection {
+  display: block;
+  max-height: 300px !important;
+  overflow-y: auto;
+}
 
 .files-list {
-    display: flex;
-    justify-content: space-between;
-    width: 150%;
-   
-    overflow: auto;
-    margin: 5px auto;
-    background:transparent;
-    border-bottom: .5px solid;
-    padding: 2px;
-    color:var(--greyColor);
-}
-.fileListContainer{
-   display:flex;
+  display: flex;
+  justify-content: space-between;
+  width: 150%;
 
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-    width: 350%;
-    margin: auto;
+  overflow: auto;
+  margin: 5px auto;
+  background: transparent;
+  border-bottom: 0.5px solid;
+  padding: 2px;
+  color: var(--greyColor);
 }
-.dragdrop{
-    position: relative;
-    background-color:transparent;
-    border: 2px dashed #1C8ADB;
-    /* border: 3px dashed linear-gradient(228.76deg,  rgb(17, 136, 216) -34.42%, rgb(213, 195, 216) 127.18%) !important; */
-    width: 80%;
-    margin-top:20px !important;
-    padding: 10px;
-    border-radius: 4px ;
-    height: 120px;
-    margin: auto;  
+.fileListContainer {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350%;
+  margin: auto;
 }
-.docxbtn{
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    color: #333;
+.dragdrop {
+  position: relative;
+  background-color: transparent;
+  border: 2px dashed #1c8adb;
+  /* border: 3px dashed linear-gradient(228.76deg,  rgb(17, 136, 216) -34.42%, rgb(213, 195, 216) 127.18%) !important; */
+  width: 80%;
+  margin-top: 20px !important;
+  padding: 10px;
+  border-radius: 4px;
+  height: 120px;
+  margin: auto;
 }
-.fileListContainer .filetablelist{
-    
-    display: block;
-    width: 60%;
-    max-height:150px;
-    overflow: auto;
+.docxbtn {
+  position: absolute;
+  bottom: 80px;
+  right: 53px;
+  color: #333;
 }
-.filelistLabel{
-    position: absolute;
-    top:10px;
-    left: 40%;
-    width: 43%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left:5% ; 
-    color:var(--primaryColor);
-    font-family:  var(--primaryFont);
-    font-size: 14px;
-    letter-spacing: 1px;
+.fileListContainer .filetablelist {
+  display: block;
+  width: 60%;
+  max-height: 150px;
+  overflow: auto;
+}
+.filelistLabel {
+  position: absolute;
+  top: 10px;
+  left: 40%;
+  width: 43%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 5%;
+  color: var(--primaryColor);
+  font-family: var(--primaryFont);
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 .files-list .delete-file {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size:12px;
-    font-family: var(--primaryFont);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--primaryFont);
 }
 
 .files-list .delete-file img {
-    width: 15px;
+  width: 15px;
 }
 
-.uploadButton{
-    /* margin-top: 4px; */
-    background-color: var(--primaryColor);
-    opacity: .8;
-    width:90%;
-    text-align: center;
-    margin-top: 10px;
-    margin-left:15px !important;
-    color: var(--lightColor);
-    letter-spacing: 1px;
-    font-weight: 200;
+.uploadButton {
+  /* margin-top: 4px; */
+  background-color: var(--primaryColor);
+  opacity: 0.8;
+  width: 90%;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 15px !important;
+  color: var(--lightColor);
+  letter-spacing: 1px;
+  font-weight: 200;
 }
-.toggleGrid{
-    position: absolute;
-    right:12px ;
-    top:-3px;
-    z-index: 500000;
-    transform: translateX(20%);
-    color: #444444;
+.toggleGrid {
+  position: absolute;
+  right: 12px;
+  top: -3px;
+  z-index: 500000;
+  transform: translateX(20%);
+  color: #444444;
 }
-.ng-hide{
-    display: hidden;
+.ng-hide {
+  display: hidden;
 }
 .firstLayerContainer .layerContent {
-    position: relative;
-    flex-direction: column;
-    width: 100%;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
 }
-.firstLayerContainer .layerContent .doCards div{
-    display: block;
-    border-radius: 4px ;
-    width:20%;
-    min-width: 20%;
-    height: 170px;
-    /* margin-inline-end: 5px;
+.firstLayerContainer .layerContent .doCards div {
+  display: block;
+  border-radius: 4px;
+  width: 20%;
+  min-width: 20%;
+  height: 120px;
+  /* margin-inline-end: 5px;
     margin-inline-start: 10px;
     margin-bottom:10px;  */
 }
-.fileListContainer .layerContent div:hover{}
-label{
-    cursor: pointer;
+.fileListContainer .layerContent div:hover {
 }
-label .buttontext{
-    font-family: var(--primaryFont);
-    font-size: 13px;
-    color:var(--primaryColor);
+label {
+  cursor: pointer;
 }
-.sideActionBar{
-    display: block;
-    width: 30%;
-    height: 75vh;
-    padding: 20px;
-    padding-right: 5px;
+label .buttontext {
+  font-family: var(--primaryFont);
+  font-size: 13px;
+  color: var(--primaryColor);
+}
+.sideActionBar {
+  display: block;
+  width: 30%;
+  height: 75vh;
+  padding: 20px;
+  padding-right: 5px;
 }
 
 .cont {
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 75vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 75vh;
 }
 
-.firstLayerContainer .layerContent .doCards{
-    display: flex;
-    margin-top:0px;
-  
-    width: 98%;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-start;
-    padding:5px;
+.firstLayerContainer .layerContent .doCards {
+  display: flex;
+  margin-top: 0px;
+
+  width: 98%;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  padding: 5px;
 }
 
-.formControl{
-    position: relative;
-    margin: 0;
-    padding: 0;
-    
+.formControl {
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
-.formControl label{
-    position: absolute;
-    top: -10px;
-    color: var(--primaryColor);
-    font-size: 13px;
+.formControl label {
+  position: absolute;
+  top: -10px;
+  color: var(--primaryColor);
+  font-size: 13px;
 
-    font-weight: 300;
-    font-family: var(--primaryFont);
-    color: var()
+  font-weight: 300;
+  font-family: var(--primaryFont);
+  color: var();
 }
-.auth-form-field{
-    width: 95%;
+.auth-form-field {
+  width: 95%;
 }
-.form-container{
-    width: 100%;
+.form-container {
+  width: 100%;
+}
+
+.small {
+    flex: 0 0 7% !important;
+}
+
+.smallCell {
+    flex: 0 0 18% !important;
 }
