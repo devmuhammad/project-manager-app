@@ -14,11 +14,11 @@
       </button>
       <div *ngIf="!grid" class="doCards">
         <div class="listContainer" *ngFor="let docx of documentList">
-          <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100%" height="150">
-          <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100%" height="150">
-          <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100%"
-            height="150">
-          <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100%" height="150">
+          <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100" height="100">
+          <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100" height="100">
+          <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100"
+            height="100">
+          <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100" height="100">
           <article class="footer">
             <p class="docurl">{{docx.name}}</p>
             <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
