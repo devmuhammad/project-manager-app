@@ -85,7 +85,7 @@ export class DocumentContainerComponent implements OnInit {
   resizeName = (initialName) => {
     if (initialName) {
       const length = 20;
-      const append = '..';
+      const append = '...';
       let newName = initialName;
       if (typeof newName === 'string') {
         if (newName.length > length) {
