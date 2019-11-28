@@ -40,7 +40,7 @@
   transform: scale(0.5);
   margin-bottom: 10px;
   position: absolute;
-  bottom: 45px;
+  bottom: 30%;
 }
 .listContainer .docurl {
   font-family: var(--primaryFont);
@@ -121,8 +121,8 @@ table {
 }
 .docxbtn {
   position: absolute;
-  bottom: 80px;
-  right: 53px;
+  bottom: 180%;
+  right: 30%;
   color: #333;
 }
 .fileListContainer .filetablelist {
@@ -257,9 +257,9 @@ label .buttontext {
 }
 
 .small {
-    flex: 0 0 7% !important;
+  flex: 0 0 7% !important;
 }
 
 .smallCell {
-    flex: 0 0 18% !important;
+  flex: 0 0 18% !important;
 }

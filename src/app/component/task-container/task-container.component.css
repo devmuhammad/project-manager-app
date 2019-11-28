@@ -33,6 +33,7 @@ margin:20px;
 .task-body{
     padding: 30px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .t-items{
