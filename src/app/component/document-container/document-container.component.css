@@ -32,7 +32,6 @@
     position: relative;
 }
 
-<<<<<<< HEAD
 .listContainer img {
   transform: scale(0.5);
   margin-bottom: 10px;
@@ -41,7 +40,7 @@
 }
 .listContainer .docurl {
   font-family: var(--primaryFont);
-  color: var(--primaryColor);
+  color: var(--primaryColor); 
   font-size: 13px;
   text-transform: lowercase;
 }
@@ -62,7 +61,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-=======
+}
 .listContainer img{
     transform: scale(.5);
     margin-bottom: 10px;
@@ -92,7 +91,6 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 width: 100%;
->>>>>>> 72d63fa81ca5ce7ec7b3ad21feec0b2073cce19b
 }
 
 table, th , td {
@@ -128,51 +126,6 @@ table, th , td {
 .fileListContainer{
    display:flex;
 
-<<<<<<< HEAD
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 350%;
-  margin: auto;
-}
-.dragdrop {
-  position: relative;
-  background-color: transparent;
-  border: 2px dashed #1c8adb;
-  /* border: 3px dashed linear-gradient(228.76deg,  rgb(17, 136, 216) -34.42%, rgb(213, 195, 216) 127.18%) !important; */
-  width: 80%;
-  margin-top: 20px !important;
-  padding: 10px;
-  border-radius: 4px;
-  height: 120px;
-  margin: auto;
-}
-.docxbtn {
-  position: absolute;
-  bottom: 180%;
-  right: 30%;
-  color: #333;
-}
-.fileListContainer .filetablelist {
-  display: block;
-  width: 60%;
-  max-height: 150px;
-  overflow: auto;
-}
-.filelistLabel {
-  position: absolute;
-  top: 10px;
-  left: 40%;
-  width: 43%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 5%;
-  color: var(--primaryColor);
-  font-family: var(--primaryFont);
-  font-size: 14px;
-  letter-spacing: 1px;
-=======
    flex-direction: column;
    justify-content: center;
    align-items: center;
@@ -217,7 +170,6 @@ table, th , td {
     font-family:  var(--primaryFont);
     font-size: 14px;
     letter-spacing: 1px;
->>>>>>> 72d63fa81ca5ce7ec7b3ad21feec0b2073cce19b
 }
 .files-list .delete-file {
     background: transparent;
@@ -326,7 +278,6 @@ label .buttontext{
 .auth-form-field{
     width: 95%;
 }
-<<<<<<< HEAD
 
 .small {
   flex: 0 0 7% !important;
@@ -335,8 +286,6 @@ label .buttontext{
 .smallCell {
   flex: 0 0 18% !important;
 }
-=======
 .form-container{
     width: 100%;
 }
->>>>>>> 72d63fa81ca5ce7ec7b3ad21feec0b2073cce19b
