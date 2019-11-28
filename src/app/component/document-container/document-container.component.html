@@ -9,68 +9,71 @@
     <mat-card class="layerContent">
       <!-- <button style="position: absolute;top:-30px;right:20px;z-index: 100000;" mat-icon-button (click)="grid =!grid">heoo</button> -->
       <button class="toggleGrid" (click)="grid =!grid" mat-icon-button>
-      <mat-icon matTooltip="List View" *ngIf="grid">view_module</mat-icon>
-      <mat-icon matTooltip="Grid View" *ngIf="!grid">list_alt</mat-icon>  
-      
-    </button>
+        <mat-icon matTooltip="List View" *ngIf="grid">view_module</mat-icon>
+        <mat-icon matTooltip="Grid View" *ngIf="!grid">list_alt</mat-icon>
+      </button>
       <div *ngIf="!grid" class="doCards">
-      <div class="listContainer" *ngFor="let docx of documentList">
-        <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100" height="100">
-        <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100" height="100">
-        <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100"
-          height="100">
-        <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100" height="100">
-        <article class="footer">
-          <p class="docurl">{{docx.name}}</p>
-          <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
-            {{docx.datecreated | date}}</p>
-            <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn"><mat-icon>more_vert</mat-icon></button>
+        <div class="listContainer" *ngFor="let docx of documentList">
+          <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100%" height="150">
+          <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100%" height="150">
+          <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100%"
+            height="150">
+          <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100%" height="150">
+          <article class="footer">
+            <p class="docurl">{{docx.name}}</p>
+            <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
+              {{docx.datecreated | date}}</p>
+            <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn">
+              <mat-icon>more_vert</mat-icon>
+            </button>
             <mat-menu #docxbtn="matMenu" yPosition="above">
-                <button (click)="filePreview(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
-                  <mat-icon >file_eye_outline
-                  </mat-icon>
-                   <span>
-                     Preview
-                   </span>
-                 </button>
-                 <button (click)="fileDownload(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
-                    <mat-icon >cloud_download
-                    </mat-icon>
-                     <span>
-                       Download
-                     </span>
-                   </button>
-                 <button (click)="getUpdateDocx(docx)" style="height: 40px;" mat-menu-item class="menu-button">
-                    <mat-icon >update</mat-icon>
-                    <span>
-                      Update Document Info
-                    </span>
-                  </button>
-                  <button  (click)="deleteDocx(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
-                      <mat-icon >delete</mat-icon>
-                      <span>
-                        Remove Document
-                      </span>
-                    </button>
+              <button (click)="filePreview(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                <mat-icon>file_eye_outline
+                </mat-icon>
+                <span>
+                  Preview
+                </span>
+              </button>
+              <button (click)="fileDownload(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                <mat-icon>cloud_download
+                </mat-icon>
+                <span>
+                  Download
+                </span>
+              </button>
+              <button (click)="getUpdateDocx(docx)" style="height: 40px;" mat-menu-item class="menu-button">
+                <mat-icon>update</mat-icon>
+                <span>
+                  Update Document Info
+                </span>
+              </button>
+              <button (click)="deleteDocx(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                <mat-icon>delete</mat-icon>
+                <span>
+                  Remove Document
+                </span>
+              </button>
             </mat-menu>
-        </article>
+          </article>
+        </div>
       </div>
-    </div>
-    <div>
-      
-
-        
+      <div>
 
 
-    </div>
-    <section style="width: 98%" *ngIf="grid">
+
+
+
+      </div>
+      <section style="width: 98%" *ngIf="grid">
         <div class="section-header" style="width: 100%;">
-        
-            <div  class="section-header">
-              
-              <div class="title"><p>Documents Table</p></div>
+
+          <div class="section-header">
+
+            <div class="title">
+              <p>Documents Table</p>
             </div>
-<!--            
+          </div>
+          <!--            
         <mat-form-field class="search-form-field project-form-field item-search" style="margin-bottom: 10px" floatLabel="never" >
             <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search user"/>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
@@ -80,121 +83,128 @@
                 <mat-icon >search</mat-icon>
             </button>
           </mat-form-field> -->
-        
-          </div>
-          
-          
-            <div >
-          <mat-table [dataSource]="dataSource"  matSort >
-              <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
-                  <mat-header-cell class="small" colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
-                  <mat-cell class="small" colspan="1" *matCellDef="let element"> {{element.documentid}} </mat-cell>
-                </ng-container>
-            
-            
-              <ng-container matColumnDef="url">
-                <mat-header-cell class="smallCell" *matHeaderCellDef mat-sort-header> Document Name </mat-header-cell>
-                <mat-cell  class="cell-name smallCell" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}} </mat-cell>
-              </ng-container>
 
-              <ng-container matColumnDef="doctype">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Document Type </mat-header-cell>
-                  <mat-cell class="cell-name" style="color: var(--primaryColor)" style="text-transform: uppercase" *matCellDef="let element"> {{element.fileExt.substring(1)}} </mat-cell>
-                </ng-container>
-        
-        
-              <ng-container matColumnDef="createdat">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Created At</mat-header-cell>
-                <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.datecreated | date}} </mat-cell>
+        </div>
+
+
+        <div>
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container colspan="2" matColumnDef="#" style="padding: 0 0 0 10px">
+              <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+              <mat-cell colspan="1" *matCellDef="let element"> {{element.documentid}} </mat-cell>
             </ng-container>
-              
-              <ng-container matColumnDef="sender">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Sender </mat-header-cell>
-                <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.receivedfrom}} </mat-cell>
+
+
+            <ng-container matColumnDef="url">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Document Name </mat-header-cell>
+              <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}}
+              </mat-cell>
             </ng-container>
-        
-        <ng-container matColumnDef="reciever">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Reciever</mat-header-cell>
-          <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.receivedby}} </mat-cell>
-        </ng-container>
-             
-              <ng-container matColumnDef="action">
-                <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
-                <mat-cell *matCellDef="let element">
+
+            <ng-container matColumnDef="doctype">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Document Type </mat-header-cell>
+              <mat-cell class="cell-name" style="color: var(--primaryColor)" style="text-transform: uppercase; display: flex;
+              justify-content: center"
+                *matCellDef="let element"> {{element.fileExt.substring(1)}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="createdat">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Created At</mat-header-cell>
+              <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element">
+                {{element.datecreated | date}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="sender">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Sender </mat-header-cell>
+              <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element">
+                {{element.receivedfrom}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="reciever">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Reciever</mat-header-cell>
+              <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element">
+                {{element.receivedby}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
+              <mat-cell *matCellDef="let element">
                 <button (click)="filePreview(docx.documentid)" [matMenuTriggerFor]="docxbtn" mat-icon-button>
                   <mat-icon style="color:var(--darkColor)">
                     more_horizontal
                   </mat-icon>
                 </button>
                 <mat-menu #docxbtn="matMenu" yPosition="above">
-                    <button style="height: 40px;" mat-menu-item class="menu-button">
-                      <mat-icon >file_eye
-                      </mat-icon>
-                       <span>
-                         Preview
-                       </span>
-                     </button>
-                     <button (click)="fileDownload(element.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
-                        <mat-icon >cloud_download
-                        </mat-icon>
-                         <span>
-                           Download
-                         </span>
-                       </button>
-                     <button (click)="getUpdateDocx(element)" style="height: 40px;" mat-menu-item class="menu-button">
-                        <mat-icon >update</mat-icon>
-                        <span>
-                          Update Document Info
-                        </span>
-                      </button>
-                      <button  (click)="deleteDocx(element.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
-                          <mat-icon >delete</mat-icon>
-                          <span>
-                            Remove Document
-                          </span>
-                        </button>
+                  <button style="height: 40px;" mat-menu-item class="menu-button">
+                    <mat-icon>file_eye
+                    </mat-icon>
+                    <span>
+                      Preview
+                    </span>
+                  </button>
+                  <button (click)="fileDownload(element.documentid)" style="height: 40px;" mat-menu-item
+                    class="menu-button">
+                    <mat-icon>cloud_download
+                    </mat-icon>
+                    <span>
+                      Download
+                    </span>
+                  </button>
+                  <button (click)="getUpdateDocx(element)" style="height: 40px;" mat-menu-item class="menu-button">
+                    <mat-icon>update</mat-icon>
+                    <span>
+                      Update Document Info
+                    </span>
+                  </button>
+                  <button (click)="deleteDocx(element.documentid)" style="height: 40px;" mat-menu-item
+                    class="menu-button">
+                    <mat-icon>delete</mat-icon>
+                    <span>
+                      Remove Document
+                    </span>
+                  </button>
                 </mat-menu>
-                </mat-cell>
-              </ng-container>
-             
-             
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-              </mat-table>
-              <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
-              </div> 
-              </section>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+        </div>
+      </section>
     </mat-card>
     <mat-card class="sideActionBar">
-        <div class = "cont">
-          <div  style="margin-top: 10px" class="">
-              <!-- <p class=""><span>Attached Files List</span></p>     -->
-              <div class="tableSection" *ngIf="files.length" >
-                <table>
-                    <tr>
-                        <th  *ngFor="let col of fileColumns">
-                          {{col}}
-                        </th>
-                      </tr>
-                      <tr class="files-list" *ngFor="let file of files;let i= index">
-                          <td style="text-align: left;font-size: 13px">
-                            
-                              {{ resizeName(file.name)}}
-                              <span>(Size {{file.size| number}}) bytes</span>
-                            
-                          </td>
-                          <td style="text-align: right" (click)="deleteAttachment(i)" class="delete-file">
-                              <img src="../../../assets/img/Recycle_Bin_Full.png">
-                          </td>
-                        </tr>
-                </table>
-                
-                </div>
-             
-            </div>
+      <div class="cont">
+        <div style="margin-top: 10px" class="">
+          <!-- <p class=""><span>Attached Files List</span></p>     -->
+          <div class="tableSection" *ngIf="files.length">
+            <table>
+              <tr>
+                <th *ngFor="let col of fileColumns">
+                  {{col}}
+                </th>
+              </tr>
+              <tr class="files-list" *ngFor="let file of files;let i= index">
+                <td style="text-align: left;font-size: 13px">
+
+                  {{ resizeName(file.name)}}
+                  <span>(Size {{file.size| number}}) bytes</span>
+
+                </td>
+                <td style="text-align: right" (click)="deleteAttachment(i)" class="delete-file">
+                  <img src="../../../assets/img/Recycle_Bin_Full.png">
+                </td>
+              </tr>
+            </table>
+
+          </div>
+
+        </div>
         <header>Drag File here:</header>
-        <div class="dragdrop"  appDragDrop (onFileDropped)="attatchFile($event)"
-          style="text-align: center">
+        <div class="dragdrop" appDragDrop (onFileDropped)="attatchFile($event)" style="text-align: center">
           <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple
             type="file" />
           <label style="margin-top: 50px;" for="input-file-id">
@@ -206,84 +216,80 @@
           </label>
         </div>
         <div>
-          
+
         </div>
         <div>
           <form [formGroup]="form" enctype="multipart/form-data">
-              <div class="formControl">
-                  <mat-form-field class="auth-form-field " >
-                    <mat-select  class="select" formControlName="activityid" placeholder="Institution"
-                    >
-                      <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
-                      </mat-option>
-                    </mat-select>
-                      <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
-                    </mat-form-field>
-                </div>
-                <div class="formControl">
-                    <mat-form-field class="auth-form-field ">
-                      <mat-select  class="select" formControlName="documenttypeid" placeholder="Document Type"
-                      >
-                        <mat-option *ngFor="let item of docTypeList" [value]="item.documentypeid">{{item.description}}
-                        </mat-option>
-                      </mat-select>
-                        <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
-                      </mat-form-field>
-                  </div>
-                  <div class="formControl">
-                      <mat-form-field class="auth-form-field " >
-                        <mat-select  class="select" formControlName="projectid" placeholder="Select Project"
-                        >
-                          <mat-option *ngFor="let item of projectList" [value]="item.projectId">{{item.projectname}}
-                          </mat-option>
-                        </mat-select>
-                          <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
-                        </mat-form-field>
-                    </div>
-                  <div class="formControl">
-                      <mat-form-field class="auth-form-field">
-                        <input matInput placeholder="Describe Document" formControlName="description">
-                          <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-                            <mat-icon>description</mat-icon>
-                          </button>
-                          <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
-                        </mat-form-field>
-                    </div>
-                    <div class="formControl">
-                        <mat-form-field class="auth-form-field ">
-                          <mat-select  class="select" formControlName="activityid" placeholder="Select Task"
-                          >
-                            <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
-                            </mat-option>
-                          </mat-select>
-                            <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
-                          </mat-form-field>
-                      </div>
-                    <div class="formControl">
-                        <mat-form-field class="auth-form-field" >
-                            <input matInput placeholder="Received from" formControlName="receivedfrom" >
-                              <button mat-button matSuffix mat-icon-button (click)="doNothing()">
-                                <mat-icon>person</mat-icon>
-                              </button>
-                              <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
-                            </mat-form-field>
-                      </div>
-            <button *ngIf="files.length" (click)="uploadfiles()"   buttonLoader [loaderColor]="'white'" class="uploadButton mat-button">
-                <span></span>
+            <div class="formControl">
+              <mat-form-field class="auth-form-field ">
+                <mat-select class="select" formControlName="activityid" placeholder="Institution">
+                  <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="formControl">
+              <mat-form-field class="auth-form-field ">
+                <mat-select class="select" formControlName="documenttypeid" placeholder="Document Type">
+                  <mat-option *ngFor="let item of docTypeList" [value]="item.documentypeid">{{item.description}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="formControl">
+              <mat-form-field class="auth-form-field ">
+                <mat-select class="select" formControlName="projectid" placeholder="Select Project">
+                  <mat-option *ngFor="let item of projectList" [value]="item.projectId">{{item.projectname}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="formControl">
+              <mat-form-field class="auth-form-field">
+                <input matInput placeholder="Describe Document" formControlName="description">
+                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                  <mat-icon>description</mat-icon>
+                </button>
+                <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="formControl">
+              <mat-form-field class="auth-form-field ">
+                <mat-select class="select" formControlName="activityid" placeholder="Select Task">
+                  <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="formControl">
+              <mat-form-field class="auth-form-field">
+                <input matInput placeholder="Received from" formControlName="receivedfrom">
+                <button mat-button matSuffix mat-icon-button (click)="doNothing()">
+                  <mat-icon>person</mat-icon>
+                </button>
+                <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
+              </mat-form-field>
+            </div>
+            <button *ngIf="files.length" (click)="uploadfiles()" buttonLoader [loaderColor]="'white'"
+              class="uploadButton mat-button">
+              <span></span>
               Upload File(s)
             </button>
           </form>
         </div>
       </div>
     </mat-card>
-   
+
   </div>
 
   <div class="secondLayerContainer">
-      
+
   </div>
   <!-- <button class="edgeButton" mat-fab>
     <mat-icon style="color: var(--primaryColor)" class="addButton">add</mat-icon>
   </button> -->
 </div>
-

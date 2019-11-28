@@ -10,7 +10,7 @@
 .chat-sidebar{
     width:250px;
     height: 100%;
-    overflow-y:scroll; 
+    /* overflow-y:scroll;  */
    
 }
 
@@ -22,12 +22,17 @@
 }
 
 .litem{
+    display: flex;
+    /* justify-content: space-between; */
     cursor: pointer !important;
     background: #f1f2f1fc;
     padding:10px 0;
     border-bottom:.5px solid #358484;
+    padding-left: 10px;
     }
-
+.mat-list-text{
+  float: right !important;
+}
     .focus{
         background:var(--primaryColor) !important;
         color: #f1fcf1;
@@ -38,7 +43,8 @@
         justify-content: left;
     }
 .chat-content{
-    padding: 0 30px;
+    /* padding: 0 30px; */
+    padding-left: 30px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -160,9 +166,9 @@
       overflow-x: hidden;
   }
 
-  .chatContent:last-child { 
+  /* .chatContent:last-child { 
 
-  }
+  } */
 
   .lds-spinner {
     color: official;

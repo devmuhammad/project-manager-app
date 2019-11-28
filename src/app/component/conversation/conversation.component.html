@@ -1,54 +1,70 @@
 <div class="chat-wrapper">
 
   <div class="chat-content">
-      <div #scrollMe id="cArea" style="overflow-y: scroll" *ngIf="activityList.length" class="chatArea">
-          <div class="chatContent" *ngFor="let chat of activityList;let i = index">
-              <div  [ngClass]="self !== chat.userid? 'de-activate': '' " class="actions">
-                  <button style="transform: translateY(25%)" (click)="fetchDeleteChat(i,chat.activityid)" mat-icon-button>
-                    <mat-icon style="color: rgb(241, 193, 193);transform:scale(.8)">delete_outline</mat-icon>
-                  </button>
-                </div>
-              
-                  <img  height="30px" src="../../../assets/img/avatar2p.png" alt="">
-                  <span class="time-left">11:00</span>
-                    <div *ngIf="dltIndex ===i && delete" class="d-loader">
-                      <div style="transform: scale(.5)" class="lds-facebook">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
-                  <p>{{chat.usercomment}}</p> 
-            </div>
+    <div #scrollMe id="cArea" style="overflow-y: scroll" *ngIf="activityList.length" class="chatArea">
+      <div class="chatContent" *ngFor="let chat of activityList;let i = index">
+        <div [ngClass]="self !== chat.userid? 'de-activate': '' " class="actions">
+          <button style="transform: translateY(25%)" (click)="fetchDeleteChat(i,chat.activityid)" mat-icon-button>
+            <mat-icon style="color: rgb(241, 193, 193);transform:scale(.8)">delete_outline</mat-icon>
+          </button>
         </div>
-        <div style="transform: translateY(70%)" *ngIf="!chartIsloading && !activityList.length">
-            <div style="text-align: center"> Start Conversion!</div>
+
+        <img height="30px" src="../../../assets/img/avatar2p.png" alt="">
+        <span class="time-left">11:00</span>
+        <div *ngIf="dltIndex ===i && delete" class="d-loader">
+          <div style="transform: scale(.5)" class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
-          <div *ngIf="posted || (chartIsloading && !activityList.length)" style="width: 100%;text-align:center">
-              <div class="lds-facebook">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
-            <div class="chat-input">
-               
-                 <div>
-                   <textarea class="t-area" [(ngModel)]="comment" rows="2" placeholder="Write your message"
-                     floatPlaceholder="never" required></textarea>
-                     
-                         <button (click)="adduserComment()" mat-icon-button class="submit">
-                             <mat-icon style="font-size: inherit;color:ivory;color:var(--primaryColor)" >send</mat-icon>
-                         </button>
-                     
-                 </div>
-              
-              </div>
+        </div>
+        <p>{{chat.usercomment}}</p>
+      </div>
+    </div>
+    <div style="transform: translateY(70%)" *ngIf="!chartIsloading && !activityList.length">
+      <div style="text-align: center"> Start Conversion!</div>
+    </div>
+    <div *ngIf="posted || (chartIsloading && !activityList.length)" style="width: 100%;text-align:center">
+      <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="chat-input">
+
+      <div>
+        <textarea class="t-area" [(ngModel)]="comment" rows="2" placeholder="Write your message"
+          floatPlaceholder="never" required></textarea>
+
+        <button (click)="adduserComment()" mat-icon-button class="submit">
+          <mat-icon style="font-size: inherit;color:ivory;color:var(--primaryColor)">send</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
   </div>
 
   <div class="chat-sidebar">
-      <mat-list>
-  
+    <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
+      <h4 mat-line ><mat-icon mat-list-icon style="float: left;">chat</mat-icon> General</h4>
+    </mat-list-item>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Projects
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list-item [ngClass]="idx === i? 'focus':'' " (click)="showProjectChart(projects[i],i)" class="litem" button
+          *ngFor="let project of projects;let i = index">
+          <h4 mat-line><mat-icon mat-list-icon style="float: left;">chat</mat-icon> {{project.projectname}}</h4>
+        </mat-list-item>
+      </mat-expansion-panel>
+    </mat-accordion>
+      <!-- <mat-list>
         <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
           <mat-icon mat-list-icon>folder</mat-icon>
           <h4 mat-line>General</h4>
@@ -59,8 +75,8 @@
           <mat-icon mat-list-icon>folder</mat-icon>
           <h4 mat-line>{{project.projectname}}</h4>
         </mat-list-item>
-      </mat-list>
-    </div>
+      </mat-list> -->
+  </div>
 </div>
 
 <!-- *ngIf="dltIndex ===i && delete"  -->

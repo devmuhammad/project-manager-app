@@ -245,6 +245,17 @@ mat-list-item{
   top: 0;
   z-index: 1;
 }
+.mat-badge-medium .mat-badge-content {
+  width: 15px !important;
+  height: 15px !important;
+  line-height: 16px !important;
+}
+.mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
+  right: -7px !important;
+}
+.mat-badge-medium.mat-badge-above .mat-badge-content {
+  top: -7px !important;
+}
 /deep/ div.mat-expansion-panel-body{
 padding: 0;
 }

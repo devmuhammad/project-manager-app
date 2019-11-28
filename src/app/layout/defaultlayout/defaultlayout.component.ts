@@ -48,7 +48,7 @@ export class DefaultlayoutComponent implements OnInit {
     );
 
   step = '';
-  opened = false;
+  opened = true;
   status = true;
 
   menuList = [
