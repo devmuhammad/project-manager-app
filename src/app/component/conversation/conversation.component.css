@@ -48,16 +48,27 @@
     width: 100%;
     position: relative;
     overflow: hidden;
+    background-color: white;
+    border-right: 1px solid #325774;
+    border-bottom: 1px solid #325774;
+    border-left: 1px solid #325774;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding-bottom: 0em !important;
 }
 
 .chat-input{
     position:absolute;
     bottom: 0;
     /* border-top: .4px solid grey; */
-    padding:20px 0;
+    /* padding:20px 0; */
     width: 100%;
 }
-
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0px 0px !important;
+}
 .author{
   margin-left: 10px;
   transform: translateY(20%);
@@ -114,10 +125,10 @@
 
 .t-area{
   width: 75%;
-  border-radius: 10px;
-  border: 2px solid #76767a99;
+  /* border-radius: 10px; */
+  /* border: 2px solid #76767a99; */
   outline: 0;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 

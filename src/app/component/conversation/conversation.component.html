@@ -1,3 +1,10 @@
+<style>
+.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding: 0em !important;
+}
+.mat-form-field-label-wrapper{
+  top: 0 !important;
+}</style>
 <div class="chat-wrapper">
 
   <div class="chat-content">
@@ -32,17 +39,17 @@
       </div>
     </div>
     <div class="chat-input">
-
-      <div>
-        <textarea class="t-area" [(ngModel)]="comment" rows="2" placeholder="Write your message"
-          floatPlaceholder="never" required></textarea>
-
+      <div style="padding-top: 50px;" >
+        <!-- <textarea class="t-area" [(ngModel)]="comment" rows="2" placeholder="Write your message"
+          floatPlaceholder="never" required></textarea> -->
+          <mat-form-field class="t-area" floatLabel="never">
+            <textarea matInput [(ngModel)]="comment"  placeholder="Write your message"  ></textarea>
+          </mat-form-field>
         <button (click)="adduserComment()" mat-icon-button class="submit">
           <mat-icon style="font-size: inherit;color:ivory;color:var(--primaryColor)">send</mat-icon>
         </button>
 
       </div>
-
     </div>
   </div>
 
