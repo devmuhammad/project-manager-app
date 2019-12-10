@@ -11,7 +11,7 @@ import 'rxjs/add/observable/of';
 })
 
 export class SignupService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { } 
   headers = new HttpHeaders({'Access-Control-Allow-Origin' : '*'});
 
      signup(payload: object): Observable<any> {

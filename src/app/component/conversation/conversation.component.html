@@ -1,7 +1,7 @@
 <div class="chat-wrapper">
 
   <div class="chat-content">
-    <div #scrollMe id="cArea" style="overflow-y: scroll" *ngIf="activityList.length" class="chatArea">
+    <div #scrollMe id="cArea" style="overflow-y: auto" *ngIf="activityList.length" class="chatArea">
       <div class="chatContent" *ngFor="let chat of activityList;let i = index">
         <div [ngClass]="self !== chat.userid? 'de-activate': '' " class="actions">
           <button style="transform: translateY(25%)" (click)="fetchDeleteChat(i,chat.activityid)" mat-icon-button>

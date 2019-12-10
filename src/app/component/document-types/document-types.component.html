@@ -42,21 +42,39 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button (click)="getDelete(element.documentypeid)" mat-icon-button>
-            <mat-icon style="color:var(--dangerColor);margin-right: 20px">
-              delete_outlined
+          <button [matMenuTriggerFor]="actionMenu" mat-icon-button>
+            <mat-icon style="color:var(--darkColor)">
+              more_horizontal
             </mat-icon>
           </button>
-          <button (click)="getEditType(element)" mat-icon-button>
-            <mat-icon style="color:var(--primaryColor);margin-right: 20px">
-              edit
-            </mat-icon>
-          </button>
-          <button  mat-icon-button>
-            <mat-icon style="color:var(--primaryColor);margin-right: 20px">
-              visibility
-            </mat-icon>
-          </button>
+          <mat-menu #actionMenu="matMenu" yPosition="below">
+            <div style="padding: 5px">
+              <button (click)="getDelete(element.documentypeid)" class="menu-button red" mat-icon-button>
+                <mat-icon class="red" style="color:var(--dangerColor);margin-right: 20px">
+                  delete_outlined
+                </mat-icon>
+                <span class="red">
+                  Delete
+                </span>
+              </button>
+            </div>
+            <div style="padding: 5px">
+              <button (click)="getEditType(element)" class="menu-button" mat-icon-button>
+                <mat-icon style="color:var(--primaryColor);margin-right: 20px">
+                  edit
+                </mat-icon>
+                <span>Edit</span>
+              </button>
+            </div>
+            <div style="padding: 5px">
+              <button class="menu-button" mat-icon-button>
+                <mat-icon style="color:var(--primaryColor);margin-right: 20px">
+                  visibility
+                </mat-icon>
+                <span>View</span>
+              </button>
+            </div>
+          </mat-menu>
         </mat-cell>
       </ng-container>
       <!--more-->

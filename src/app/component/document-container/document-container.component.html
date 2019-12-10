@@ -13,17 +13,48 @@
         <mat-icon matTooltip="Grid View" *ngIf="!grid">list_alt</mat-icon>
       </button>
       <div *ngIf="!grid" class="doCards">
-        <div class="listContainer" *ngFor="let docx of documentList">
+        <div class="listContainer" *ngFor="let docx of documentList" style="display:flex; justify-content:space-around">
+            <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #docxbtn="matMenu" yPosition="above">
+                <button (click)="filePreview(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                  <mat-icon>file_eye_outline
+                  </mat-icon>
+                  <span>
+                    Preview
+                  </span>
+                </button>
+                <button (click)="fileDownload(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                  <mat-icon>cloud_download
+                  </mat-icon>
+                  <span>
+                    Download
+                  </span>
+                </button>
+                <button (click)="getUpdateDocx(docx)" style="height: 40px;" mat-menu-item class="menu-button">
+                  <mat-icon>update</mat-icon>
+                  <span>
+                    Update Document Info
+                  </span>
+                </button>
+                <button (click)="deleteDocx(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
+                  <mat-icon>delete</mat-icon>
+                  <span>
+                    Remove Document
+                  </span>
+                </button>
+              </mat-menu>
           <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100" height="100">
           <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100" height="100">
           <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100"
             height="100">
           <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100" height="100">
           <article class="footer">
-            <p class="docurl">{{docx.name}}</p>
+            <p class="docurl" style="text-align: center;">{{docx.name}}</p>
             <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
               {{docx.datecreated | date}}</p>
-            <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn">
+            <!-- <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #docxbtn="matMenu" yPosition="above">
@@ -53,7 +84,7 @@
                   Remove Document
                 </span>
               </button>
-            </mat-menu>
+            </mat-menu> -->
           </article>
         </div>
       </div>
