@@ -9,7 +9,10 @@
     font-weight: 300;
     padding:4px;
 }
-
+table {
+    width: 100%;
+  }
+  
 /deep/ .s-menu{
     background: transparent !important;
     box-shadow: none;
