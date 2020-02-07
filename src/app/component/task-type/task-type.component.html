@@ -1,7 +1,7 @@
 
 <section>
   <div class="section-header" style="width: 100%;margin-bottom: 20px">
-    <div class="button add">
+    <div class="button add" style="margin-right: 15px; margin-top: 15px;">
       <button (click)="onCreate()" mat-raised-button>
         <mat-icon>
           add
@@ -9,7 +9,7 @@
         Add Task Type
       </button>
     </div>
-    <mat-form-field class="search-form-field project-form-field item-search" style="width: 25%" floatLabel="never">
+    <mat-form-field class="search-form-field " style="width: 25%" floatLabel="never">
       <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput placeholder="Search Task Type" />
       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
         <mat-icon>close</mat-icon>

@@ -167,6 +167,4 @@ export class DefaultlayoutComponent implements OnInit {
     );
   }
 
-
-
 }
