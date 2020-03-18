@@ -19,7 +19,7 @@
               </button>
               <mat-menu #docxbtn="matMenu" yPosition="above">
                 <button (click)="filePreview(docx.documentid)" style="height: 40px;" mat-menu-item class="menu-button">
-                  <mat-icon>file_eye_outline
+                  <mat-icon>remove_red_eye
                   </mat-icon>
                   <span>
                     Preview
@@ -47,13 +47,13 @@
               </mat-menu>
           <img *ngIf="docx.fileExt == ('.xls'||'.xlsx')" src="../../../assets/img/xls.jpeg" width="100" height="100">
           <img *ngIf="docx.fileExt == '.xlsx'" src="../../../assets/img/xls.jpeg" width="100" height="100">
-          <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png.png" width="100"
+          <img *ngIf="docx.fileExt == ('.png'||'.jpeg'||'.jpg')" src="../../../assets/img/png1.png" width="100"
             height="100">
           <img *ngIf="docx.fileExt == '.pdf'" src="../../../assets/img/pdf.jpeg" width="100" height="100">
           <article class="footer">
             <p class="docurl" style="text-align: center;">{{docx.name}}</p>
-            <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
-              {{docx.datecreated | date}}</p>
+            <!-- <p class="docurl" style="text-align: start;color:var(--greyColor);text-transform: capitalize">
+              {{docx.datecreated | date}}</p> -->
             <!-- <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn">
               <mat-icon>more_vert</mat-icon>
             </button>
@@ -95,15 +95,15 @@
 
 
       </div>
-      <section style="width: 98%" *ngIf="grid">
-        <div class="section-header" style="width: 100%;">
+      <section *ngIf="grid">
+        <div class="section-header" style="width: 100%;justify-content:flex-start">
 
-          <div class="section-header">
+          <!-- <div class="section-header"> -->
 
             <div class="title">
               <p>Documents Table</p>
             </div>
-          </div>
+          <!-- </div> -->
           <!--            
         <mat-form-field class="search-form-field project-form-field item-search" style="margin-bottom: 10px" floatLabel="never" >
             <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput  placeholder="Search user"/>
@@ -209,7 +209,8 @@
     </mat-card>
     <mat-card class="sideActionBar">
       <div class="cont">
-        <div style="margin-top: 10px" class="">
+        <!-- <div style="margin-top: 10px" class=""> -->
+          <div>
           <!-- <p class=""><span>Attached Files List</span></p>     -->
           <div class="tableSection" *ngIf="files.length">
             <table>
@@ -225,7 +226,7 @@
                   <span>(Size {{file.size| number}}) bytes</span>
 
                 </td>
-                <td style="text-align: right" (click)="deleteAttachment(i)" class="delete-file">
+                <td style="flex:1; text-align: right" (click)="deleteAttachment(i)" class="delete-file">
                   <img src="../../../assets/img/Recycle_Bin_Full.png">
                 </td>
               </tr>
@@ -234,16 +235,16 @@
           </div>
 
         </div>
-        <header>Drag File here:</header>
+        <header>Add files:</header>
         <div class="dragdrop" appDragDrop (onFileDropped)="attatchFile($event)" style="text-align: center">
           <input class="ng-hide" (change)="attatchFile($event.target.files)" hidden id="input-file-id" multiple
             type="file" />
-          <label style="margin-top: 50px;" for="input-file-id">
+          <label for="input-file-id">
             <mat-icon
               style="font-size: 80px;color:var(--primaryColor);transform: translateY(-700%);transform: translateX(-100%)">
               backup_outlined
             </mat-icon>
-            <p class="buttontext">Drag your file(s)</p>
+            <p class="buttontext">Drag your file(s) here</p>
           </label>
         </div>
         <div>
@@ -252,7 +253,7 @@
         <div>
           <form [formGroup]="form" enctype="multipart/form-data">
             <div class="formControl">
-              <mat-form-field class="auth-form-field ">
+              <mat-form-field class="auth-form-field">
                 <mat-select class="select" formControlName="activityid" placeholder="Institution">
                   <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
                   </mat-option>
@@ -287,15 +288,15 @@
                 <!-- <mat-error *ngIf="contactperson.errors && (contactperson.dirty || contactperson.touched)">Invalid name</mat-error> -->
               </mat-form-field>
             </div>
-            <div class="formControl">
+            <!-- <div class="formControl">
               <mat-form-field class="auth-form-field ">
                 <mat-select class="select" formControlName="activityid" placeholder="Select Task">
-                  <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
+                  <mat-option *ngFor="let item of taskList" [value]="item.institutionId">{{item.institutionName}}
                   </mat-option>
                 </mat-select>
-                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
+                <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error>
               </mat-form-field>
-            </div>
+            </div> -->
             <div class="formControl">
               <mat-form-field class="auth-form-field">
                 <input matInput placeholder="Received from" formControlName="receivedfrom">

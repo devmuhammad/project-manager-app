@@ -20,28 +20,35 @@
 .custom {
   position: fixed;
   top: 10%;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   right: 0;
+  scrollbar-width: thin;
 }
 
 .add{
   position: absolute;
   right: 5px;
   /* bottom:10px; */
-
-
 }
 /* .mat-expansion-panel{
   width: 230px;
 } */
+
+.mat-drawer-inner-container {
+  scrollbar-width: thin !important;
+}
 mat-sidenav {
-  width: 250px;
+  width: 280px;
+  
 }
 .mat-drawer-container, .mat-drawer{
   background-color: transparent;
+  scrollbar-width: thin;
+
 }
 .mat-drawer-container {
   overflow: hidden !important;
+  scrollbar-width: thin;
 }
 .sub-title{
   color:var(--primaryColor);
@@ -351,7 +358,7 @@ text-align: start;
   padding: 10px;
   width:100%;
   margin-top:2%;
-  margin-right:2%;
+  /* margin-right:2%; */
 }
 
 .item-container:hover .card-front{

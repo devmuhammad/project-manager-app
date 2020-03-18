@@ -1,9 +1,16 @@
 <div class="loginWrapper">
   <div class="slideSection">
-    <h3 class="slideTitle">CABSOL Pro.</h3>
+    
     <div class="slidewrapper">
-      <div style="margin-right: 30px" class="slideContainer">
-        <div id="slide1"> 
+      <div class="slideContainer">
+        <div class="innerCont">
+        <!-- <h3 class="slideTitle"> -->
+          <img src="../../../assets/img/cabsol.png" width="90"  />
+          <span >CABPRM</span>
+          <mat-subtitle style="color:#fff; font-size:15px;">Cabsol enterprise project manager</mat-subtitle>
+        <!-- </h3> -->
+        </div>
+        <!-- <div id="slide1"> 
             
         </div>
         <div id="slide2"> 
@@ -11,10 +18,10 @@
         </div>
         <div id="slide3"> 
             
-        </div>
+        </div> -->
       </div>
     </div>
-    <div class="button-holder">
+    <!-- <div class="button-holder">
       <a href="http://www.facebook.com/comsoftltd" target="_blank" class="dots">
         <img src="../../../../assets/img/facebook.png" alt="facebook">
       </a>
@@ -24,14 +31,17 @@
       <a  href="http://www.instagram.com/comsoftltd" target="_blank"  class="dots">
           <img src="../../../../assets/img/Instagram.png" alt="Instagram">
       </a>
-    </div>
+    </div> -->
   </div>
-<div>
 
-</div>
   <div class="card-wrapper">
-    <div class="form-wrapper">
-      <p>Login</p>
+    <div class="wrapper-2">
+    <app-signup *ngIf="page === 'signup'" (changePage)="chngePage($event)"></app-signup>
+
+    <app-resetuserpassword *ngIf="page === 'resetpass'" (changePage)="chngePage($event)"></app-resetuserpassword>
+
+    <div *ngIf="page === 'login'" class="form-wrapper">
+      <p style="color: var(--primaryColor); font-weight:600"><mat-icon style="font-size: medium;">lock</mat-icon> Login</p>
       <form [formGroup]="form" (submit)="getSignIn()">
         <div class="form-container">
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
@@ -54,14 +64,21 @@
             <mat-error>Invalid project name</mat-error>
           </mat-form-field>
           <div class="forgetpasswordwrapper">
-            <button mat-button class="ForgetPassword" (click)="gotoPath('/reset')">Forget Password ?</button>
+            <button mat-button class="ForgetPassword" (click)="openPage('resetpass')">Forgot Password ?</button>
           </div>
           <button [disabled]="!form.valid" buttonLoader [loaderColor]="'white'" [ngClass]="!form.valid?'disabled': '' "
             class="mat-raised-button submit-button">
             <span></span>
             Sign in
           </button>
-          <div class="alt">
+          <!-- <div> -->
+
+            <button (click)="openPage('signup')" mat-button class="sign-up">
+
+              No Account ? Create an account
+            </button>
+          <!-- </div> -->
+          <!-- <div class="alt">
             <p class="alt-label">Or login with</p>
             <div class="alt-auth">
               <div>
@@ -71,18 +88,15 @@
                 <img alt="git-logo" class="alt-items" src="../../../../assets/img/git.png" />
               </div>
             </div>
-            <!-- <ngx-ui-loader fgsSize="45" [fgsType]="SPINNER.wanderingCubes"></ngx-ui-loader> -->
-          </div>
-          <div>
-
-            <button (click)="gotoPath('/signup')" mat-button class="sign-up">
-
-              Sign Up
-            </button>
-          </div>
+            <ngx-ui-loader fgsSize="45" [fgsType]="SPINNER.wanderingCubes"></ngx-ui-loader>
+          </div> -->
+          
         </div>
 
       </form>
     </div>
   </div>
+</div>
+<!-- <mat-divider [vertical]="true" style="color:var(--primaryColor)"></mat-divider> -->
+<!-- </div> -->
 </div>

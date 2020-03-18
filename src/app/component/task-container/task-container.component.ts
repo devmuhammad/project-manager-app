@@ -46,6 +46,8 @@ export class TaskContainerComponent implements OnInit {
   actionflow = 'TASK';
   posted: boolean;
   self: number;
+  taskcomplete = false;
+
   ngOnInit() {
     const profile = JSON.parse(localStorage.getItem('profile'));
     this.self = profile.id;
@@ -58,6 +60,15 @@ export class TaskContainerComponent implements OnInit {
     const item = event.item[0];
   }
 
+  setComplete(){
+    this.taskcomplete = !this.taskcomplete
+    // console.log(this.taskcomplete)
+  }
+   isCompleted(status){
+    if (status === 'Completed') return true
+    else return false
+  }
+
   async fetchOwntaskList(id) {
     this.loadingBar.start();
     this.param.assigntoid = id;
@@ -66,7 +77,7 @@ export class TaskContainerComponent implements OnInit {
         if (message === 'Success') {
           this.loadingBar.complete();
           this.activityList = data.map((item: any) => ({ ...item }));
-          console.log(this.activityList);
+          // console.log(this.activityList);
           this.taskList = this.activityList.filter((item: any) => item.actionflow === this.actionflow);
 
         } else {

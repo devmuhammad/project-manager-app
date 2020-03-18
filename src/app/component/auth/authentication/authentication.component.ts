@@ -27,6 +27,8 @@ export class AuthenticationComponent implements OnInit {
   form: FormGroup;
   formData: object[];
   MAT_SNACK_BAR_DATA;
+  page="login"
+
   public loginData = {
     username: '',
     password: '',
@@ -34,6 +36,14 @@ export class AuthenticationComponent implements OnInit {
   doNothing() {
     // tslint:disable-next-line: deprecation
     event.preventDefault();
+  }
+
+  openPage(pg){
+    this.page = pg
+  }
+  chngePage(pg){
+    // console.log(pg)
+    this.page= pg
   }
 
   redirectRoute() {

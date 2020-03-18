@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { UsersService } from 'src/app/services/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AngularButtonLoaderService } from 'angular-button-loader';
 export interface Project {
@@ -38,6 +38,7 @@ export class BottomSheetComponent implements OnInit {
     private snackBar: MatSnackBar,
     private loadingBar: LoadingBarService,
     private btnLoader: AngularButtonLoaderService,
+    private dialogRef: MatDialogRef<BottomSheetComponent>
   ) {
 this.form =   this.form = this.fb.group({
   assignTo: ['', Validators.required],
@@ -160,6 +161,10 @@ this.form =   this.form = this.fb.group({
     this.fetchTaskTypeList();
     this.fetchProjectsList(this.queryParam);
     this.fetchUserList(authUser.id);
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 
 }

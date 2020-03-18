@@ -4,8 +4,9 @@ $blue-gray              : #34495e;
 $blue-gray-darken   : #2c3e50;
 $blue                     : #3498db;
 $blue-darken            : #2980b9;
-$green                    : #1abc9c;
-$green-darken         : #16a085;
+$green                    : #16a085;
+$green-gray              : #547756;
+$green-darken         : #347137;
 
 *{
   margin: 0;
@@ -17,7 +18,7 @@ $green-darken         : #16a085;
 
 body{
   text-align: center;
-  background-color: $blue-gray;
+  background-color: $green-gray;
 }
 
 h1{
@@ -40,7 +41,7 @@ h1{
     a{
       color:#FFF;
       display:block;
-      background: $blue;
+      background: $green;
       text-decoration: none;
       position:relative;
       height: 40px;
@@ -51,14 +52,14 @@ h1{
     }
     &:nth-child(even){
       a{
-        background-color: $blue-darken;
+        background-color: $green-darken;
         
         &:before{
-          border-color:$blue-darken;
+          border-color:$green-darken;
           border-left-color:transparent;
          }
         &:after{
-          border-left-color:$blue-darken;
+          border-left-color:$green-darken;
         }
       }
     }
@@ -87,7 +88,7 @@ h1{
         content: "";
         position:absolute;
         top: 0;
-        border:0 solid $blue;
+        border:0 solid $green;
         border-width:20px 10px;
         width: 0;
         height: 0;
@@ -99,7 +100,7 @@ h1{
       &:after{
         left:100%;
         border-color:transparent;
-        border-left-color:$blue;
+        border-left-color:$green;
       }
       &:hover{
         background-color: $green;

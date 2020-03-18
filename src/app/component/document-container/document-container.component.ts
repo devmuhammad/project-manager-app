@@ -25,6 +25,8 @@ export class DocumentContainerComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['#', 'url', 'doctype', 'createdat', 'reciever', 'sender', 'action'];
   fileColumns = ['File Name', 'Actions'];
+  // activityService: any;
+  taskList: any;
   constructor(private commonservice: DefaultlayoutService,
               private loadingBar: LoadingBarService,
               private fb: FormBuilder,
@@ -63,7 +65,7 @@ export class DocumentContainerComponent implements OnInit {
     receivedfrom: '',
     file: null,
     parentId: 0 as number,
-    taskId: '',
+    // taskId: '',
     description: '',
     projectId: 0 as number,
     activityId: '',
@@ -135,6 +137,12 @@ export class DocumentContainerComponent implements OnInit {
       });
   }
 
+  public param = {
+    page: 0 as number,
+    assigntoid: 0 as number,
+    size: 20 as number,
+  };
+
   doNothing() {
     // tslint:disable-next-line: deprecation
     event.preventDefault();
@@ -179,10 +187,30 @@ export class DocumentContainerComponent implements OnInit {
     this.getList(this.credentials);
     this.fetchInstitutionList();
     this.getUsers(profile.id);
+    // this.fetchOwntaskList(profile.id);
     this.getDocType();
     this.getProjectList();
     this.commonservice.handleBreadChrome({ parent: 'Document', child: 'Activities' });
   }
+
+  async fetchOwntaskList(id) {
+    this.loadingBar.start();
+    this.param.assigntoid = id;
+    await this.activityservice.getAssigneeActivities(this.param)
+      .subscribe(({ message, data }) => {
+        if (message === 'Success') {
+          this.loadingBar.complete();
+          const activityList = data.map((item: any) => ({ ...item }));
+          // console.log(this.activityList);
+          this.taskList = activityList.filter((item: any) => item.actionflow === 'TASK');
+
+      } 
+      err => {
+        console.log(err);
+        // return this.activityList = [];
+      };
+  })
+}
 
   getErrorNotified(message) {
     this.btnLoader.hideLoader();
@@ -247,7 +275,7 @@ export class DocumentContainerComponent implements OnInit {
     this.inputFields.activityId = this.form.get('activityid').value;
     this.inputFields.description = this.form.get('description').value;
     this.inputFields.doctypeId = this.form.get('documenttypeid').value;
-    this.inputFields.taskId = this.form.get('taskid').value;
+    // this.inputFields.taskId = this.form.get('taskid').value;
     this.inputFields.receivedfrom = this.form.get('receivedfrom').value;
     this.inputFields.userId = profile.id;
     this.inputFields.projectId = this.form.get('projectid').value;

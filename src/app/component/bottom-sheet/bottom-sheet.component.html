@@ -1,6 +1,6 @@
 <div class="form-container">
   <header class="task-header">
-    Task manager
+    New Task
   </header>
   <mat-divider></mat-divider>
   <form [formGroup]="form" class="form-section">
@@ -47,6 +47,10 @@
       </mat-form-field>
       <mat-divider style="margin-top: 10px;width: 100%"></mat-divider>
       <div class="submit-button-section">
+        <button mat-button (click)="closeModal()">
+          <span style="color: var(--darkColor)">Close</span>
+          
+        </button>
         <button [disabled]="form.invalid" buttonLoader [loaderColor]="'white'" (click)="addTask()"
           class="attach-button mat-raised-button mat-primary save">
           <span></span>

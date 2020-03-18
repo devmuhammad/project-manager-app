@@ -24,7 +24,7 @@
   display: flex;
   /* justify-content: space-between; */
   cursor: pointer !important;
-  background: #f1f2f1fc;
+  /* background: #f1f2f1fc; */
   padding:10px 0;
   border-bottom:.5px solid #358484;
   padding-left: 10px;
@@ -123,11 +123,12 @@
 }
 
 .t-area{
-  width: 75%;
-  /* border-radius: 10px; */
+  width: 90%;
+  /* background: rgba(128, 128, 128, 0.108); */
+  border-radius: 10px;
   /* border: 2px solid #76767a99; */
   outline: 0;
-  /* padding: 10px; */
+  padding: 10px;
 }
 
 

@@ -1,13 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
-/* @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
-@font-face {
+/* @import '~material-icons/iconfont/material-icons.css'; */
+@import "~bootstrap/dist/css/bootstrap.css";
+/* @import "assets/fonts/Raleway.woff2"; */
+/* @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');*/
+/* @font-face {
   font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2) format('woff2');
-} */
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+}  */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Raleway'), local('Raleway-Regular'), url("assets/fonts/Raleway.woff2") format('woff2');
+  /* unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; */
+}
+
+
+
+/* @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap'); */
 body{
   font-family: 'Raleway', sans-serif !important;
 
@@ -15,7 +29,7 @@ body{
 :root{
   --primaryFont:'Raleway', sans-serif;
   /* --primaryColor:#2E7D32; */
-  --primaryColor:#347137;
+  --primaryColor:#382B5F;
   --lightColor:#fff;
   --fontSize:16px;
   --dangerColor:#dd2b34;
@@ -166,7 +180,7 @@ mat-dialog-content {
   border-top:0px;
 
 }
-.project-form-field:nth-child(odd) {margin-right:20px}
+/* .project-form-field:nth-child(odd) {margin-right:20px} */
 .input-container{
 margin: auto;
    text-align: justify;

@@ -84,7 +84,7 @@
         <mat-form-field style="width: 45%;">
           <mat-select class="select" formControlName="projectmanager" placeholder="Project Manager"
             floatPlaceholder="never" required>
-            <mat-option *ngFor="let item of clientsList" [value]="item.id">{{item.name}}</mat-option>
+            <mat-option *ngFor="let item of allUsers" [value]="item.id">{{item.fullname}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

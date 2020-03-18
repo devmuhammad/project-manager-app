@@ -2,12 +2,40 @@
 
 <div>
   <div class="chartsContainer">
-    <div class="chartItem">
+    <div class="boxes" style="background-color: #9F7AEA;">
+      <div class="box">
+        <span class="boxtext-head">Total Projects</span>
+        <span class="boxtext">{{totalproj}}</span>
+        <!-- <span class="boxtext">8</span> -->
+      </div>
+    </div>
+    <div class="boxes" style="background-color: #805AD5;">
+      <div class="box">
+        <span class="boxtext-head">Total Tasks</span>
+        <span class="boxtext">{{totaltask}}</span>
+        <!-- <span class="boxtext">15</span> -->
+      </div>
+    </div>
+    <div class="boxes" style="background-color: #553C9A;">
+      <div class="box">
+        <span class="boxtext-head">Tasks in progress</span>
+        <span class="boxtext">{{ongoingtask}}</span>
+        <!-- <span class="boxtext">5</span> -->
+      </div>
+    </div>
+    <div class="boxes" style="background-color: #44337A;">
+      <div class="box">
+        <span class="boxtext-head">Outstanding Tasks</span>
+        <span class="boxtext">{{uncompletedtask}}</span>
+        <!-- <span class="boxtext">10</span> -->
+      </div>
+    </div>
+    <!-- <div class="chartItem">
       <canvas id="lineChart"></canvas>
     </div>
     <div class="chartItem">
         <canvas id="barChart"></canvas>
-    </div>
+    </div> -->
   </div>
   <mat-divider style="margin-top: 5%;margin-bottom:5%"></mat-divider>
   <div class="chartsContainer">
@@ -15,7 +43,9 @@
           <canvas id="doughnut"></canvas>
       </div>
       <div class="chartItem">
-        <canvas id="radarChart"></canvas>
+        <!-- <canvas id="radarChart"></canvas> -->
+        <canvas id="barChart"></canvas>
+
       </div>
   </div>
 </div>

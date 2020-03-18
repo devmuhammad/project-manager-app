@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormControlDirective, NgForm, FormGroupDirective } from '@angular/forms';
 import { MatSnackBar, ErrorStateMatcher } from '@angular/material';
@@ -47,6 +47,9 @@ export class SignupComponent implements OnInit {
   vpasswordType: string;
   show: boolean;
   matcher = new MyErrorStateMatcher();
+
+  @Output() changePage = new EventEmitter<string>();
+  
   constructor(
     private btnLoader: AngularButtonLoaderService,
     private routerHelper: DefaultlayoutService,
@@ -84,6 +87,10 @@ export class SignupComponent implements OnInit {
         console.log(this.designationList);
       }
       );
+  }
+
+  gotoPage(){
+    this.changePage.emit('login')
   }
 
   fetchInstitutionList() {

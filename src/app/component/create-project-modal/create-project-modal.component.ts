@@ -6,6 +6,7 @@ import { getLocaleDateFormat } from '@angular/common';
 import { ClientsService } from 'src/app/services/clients.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AngularButtonLoaderService } from 'angular-button-loader';
+import { UsersService } from 'src/app/services/users.service';
 
 
 
@@ -51,6 +52,17 @@ export class CreateProjectModalComponent implements OnInit {
     datecreated:'',
     lastmodified: '',
   }
+  public clientPayload() {
+    return {
+      'enddate': '',
+      'institutionId': 0,
+      'page': 0,
+      'sfilter': '',
+      'size': 50,
+      'startdate': ''
+    }
+}
+allUsers = [];
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +70,7 @@ export class CreateProjectModalComponent implements OnInit {
     private loadingBar: LoadingBarService,
     private btnLoader: AngularButtonLoaderService,
     private snackbar: MatSnackBar,
+    private userService: UsersService,
     private clientservice: ClientsService,
     private dialogRef: MatDialogRef<CreateProjectModalComponent>) {
     this.form = this.fb.group({
@@ -75,8 +88,9 @@ export class CreateProjectModalComponent implements OnInit {
     });
   }
   getClients() {
-    this.clientservice.gettableData()
+    this.clientservice.getClients(this.clientPayload)
       .subscribe((clnt) => {
+        console.log(clnt)
         this.clientsList = clnt.map(item => {
           return { id: item.id, name: item.name };
         });
@@ -105,7 +119,43 @@ export class CreateProjectModalComponent implements OnInit {
   ngOnInit() {
     this.getCurrentDate();
     this.getClients();
+    this.fetchUsers();
     this.getProjectTypes();
+  }
+
+  fetchUsers() {
+    const authUser = JSON.parse(localStorage.getItem('profile'));
+    this.loadingBar.start();
+    this.userService.userList(authUser.id)
+      .subscribe(({ message, data }) => {
+
+        console.log(data)
+        if (message === "Success") {
+          let users = data.map((user: any) => {
+            return { ...user };
+          });
+          this.allUsers = users;
+          // this.dataSource = new MatTableDataSource(users);
+        } else {
+          this.snackbar.open('Fail to load data', "Dismiss",
+            {
+              duration: 7000,
+              direction: 'rtl',
+              panelClass: ['error']
+            })
+          return this.loadingBar.complete();
+        }
+       
+        return this.loadingBar.complete();
+      },error=>{
+        this.snackbar.open("Failed to load data Please try again", "Dismiss",
+        {
+          duration: 7000,
+          direction: 'rtl',
+          panelClass: ['error']
+        });
+        return this.loadingBar.complete();
+      });
   }
 
   save() {

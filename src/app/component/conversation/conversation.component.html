@@ -29,7 +29,7 @@
       </div>
     </div>
     <div style="transform: translateY(70%)" *ngIf="!chartIsloading && !activityList.length">
-      <div style="text-align: center"> Start Conversion!</div>
+      <div style="text-align: center"> Start a conversion </div>
     </div>
     <div *ngIf="posted || (chartIsloading && !activityList.length)" style="width: 100%;text-align:center">
       <div class="lds-facebook">
@@ -42,7 +42,7 @@
       <div style="padding-top: 50px;" >
         <!-- <textarea class="t-area" [(ngModel)]="comment" rows="2" placeholder="Write your message"
           floatPlaceholder="never" required></textarea> -->
-          <mat-form-field class="t-area" floatLabel="never">
+          <mat-form-field class="t-area" appearance="fill" floatLabel="never">
             <textarea matInput [(ngModel)]="comment"  placeholder="Write your message"  ></textarea>
           </mat-form-field>
         <button (click)="adduserComment()" mat-icon-button class="submit">
@@ -55,7 +55,7 @@
 
   <div class="chat-sidebar">
     <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
-      <h4 mat-line ><mat-icon mat-list-icon style="float: left;">chat</mat-icon> General</h4>
+      <span mat-line ><mat-icon mat-list-icon style="float: left;">chat</mat-icon>&nbsp; General</span>
     </mat-list-item>
     <mat-accordion>
       <mat-expansion-panel>
@@ -67,7 +67,7 @@
 
         <mat-list-item [ngClass]="idx === i? 'focus':'' " (click)="showProjectChart(projects[i],i)" class="litem" button
           *ngFor="let project of projects;let i = index">
-          <h4 mat-line><mat-icon mat-list-icon style="float: left;">chat</mat-icon> {{project.projectname}}</h4>
+          <span mat-line><mat-icon mat-list-icon style="float: left;font-size:13px">chat</mat-icon> {{project.projectname}}</span>
         </mat-list-item>
       </mat-expansion-panel>
     </mat-accordion>

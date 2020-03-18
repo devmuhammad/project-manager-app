@@ -6,8 +6,8 @@
   font-size: 20px;
   margin:15px 0 5px 0;
   color: var(--primaryColor);
-  font-family: var(--primaryFont);
-  letter-spacing: 3px;
+  font-family: 'Raleway';
+  /* letter-spacing: 3px; */
 }
 
 /* :host ::ng-deep {
@@ -25,7 +25,7 @@ mat-form-field{
 padding: 0.1em 0 0.1em 0;
 }
 .mat-label{
-  font-family: var(--primaryFont);
+  font-family: 'Raleway';
   transform: translate(14px, 12px);
   color:var(--greyColor);
 }
@@ -50,8 +50,8 @@ opacity: .5;
 
 .attach-button{
   font-weight: 200;
-  font-family: var(--primaryFont);
-  letter-spacing: 2.5px;
+  font-family: 'Raleway';
+  /* letter-spacing: 2.5px; */
   background: var(--primaryColor);
   padding: 0 20px 0 20px;
   color: var(--lightColor);
@@ -65,9 +65,9 @@ opacity: .5;
 }
 .submit-button-section button{
   color: var(--lightColor);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   /* width: 100%; */
-  font-family: var(--primaryFont);
+  font-family: 'Raleway';
   letter-spacing: 2.5px;
   font-size: 16px;
 }

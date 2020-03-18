@@ -11,6 +11,8 @@ background: #eee8;
   padding-top: 0px !important;
   padding: 10px;
   padding-right:20px; 
+  margin-top:10px !important;
+  /* margin-bottom:50px !important; */
 }
 .account{
   position: absolute;
@@ -29,6 +31,22 @@ background: #eee8;
 
 .in-active{
   background-color:inherit;
+}
+.link-name{
+  font-family:"Raleway";
+  font-weight:500;
+  
+}
+
+.title-text{
+  font-family:"Raleway";
+  font-weight:600;
+  font-size:22px;
+  color:"#fff";
+  justify-content: center;
+  text-align:"center";
+  padding-top:10px;
+  padding-bottom:10px;
 }
 
 .user-acc{
@@ -110,7 +128,7 @@ bottom:2%;
 }
 .sidenav {
   border-right: none;
-  width: 250px;
+  width: 230px;
   padding-right:0 !important;
   /* background: linear-gradient(to right, #4caf50, #52c234); */
   /* background: linear-gradient(228.76deg, rgb(126, 196, 46) -34.42%, --primaryColor 127.18%); */
@@ -162,8 +180,8 @@ margin-right: 0;
 
 .navbar-items{
   position: fixed;
-  right: -5%;
-  width: 30%;
+  right: 5%;
+  /* width: 30%; */
   display: flex;
   flex-direction:row;
   align-items: flex-end;
@@ -173,7 +191,7 @@ margin-right: 0;
 }
 ::ng-deep .main-nav{
   z-index: 998;
-
+  color:"transparent";
   position: fixed !important;
 }
 .toolbar-item{
@@ -256,7 +274,7 @@ mat-list-item{
 .mat-badge-medium.mat-badge-above .mat-badge-content {
   top: -7px !important;
 }
-/deep/ div.mat-expansion-panel-body{
+/* /deep/ div.mat-expansion-panel-body{
 padding: 0;
 }
 
@@ -267,7 +285,7 @@ padding: 0;
   background: linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(250, 255, 253) 127.18%);
   color: var(--primaryColor);
   opacity: .5;
-}
+} */
 
 a[mat-list-item]:hover{
   background: linear-gradient(228.76deg, rgb(235, 238, 234) -34.42%, rgb(250, 255, 253) 127.18%);
@@ -316,7 +334,7 @@ margin: 5px 0 2px 0;
 
 }
 .notification-icon{
-  padding:10px;
+  /* padding:10px; */
 }
 
 div.notification-container{
@@ -359,10 +377,11 @@ div.notification-details{
   padding-bottom: 0;
   /* padding:12px; */
 }
+
 @media (min-width: 320px) and (max-width: 1007px) {
   .notification-icon{
    
-    right: 40%;
+    right: 20%;
   }
   
   }

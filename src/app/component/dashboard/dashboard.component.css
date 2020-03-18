@@ -10,3 +10,29 @@
     width: 40%;
     max-height: 20rem;
 }
+
+.boxes{
+    height:200px;
+    width:20%;
+    margin:10px;
+    border-radius:5px
+}
+.box{
+    padding:10px;
+    padding-left:15px;
+    display:flex;
+    align-items:flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.boxtext-head{
+    color:#fff;
+    font-size: 18px;
+    font-family:'Raleway'
+}
+.boxtext{
+    color:#fff;
+    font-size:70px;
+    font-weight:900;
+    font-family: 'Raleway';
+}

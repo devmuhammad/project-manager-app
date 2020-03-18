@@ -89,7 +89,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'user/management', component: DefaultlayoutComponent, children: [
+    path: 'user-manager', component: DefaultlayoutComponent, children: [
       {
         path: '', component: UserContainerComponent, data: {animation: 'isRight'}
       }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 import { AuthserviceService } from 'src/app/services/authservice.service';
@@ -13,6 +13,8 @@ import { AngularButtonLoaderService } from 'angular-button-loader';
 })
 export class ResetuserpasswordComponent implements OnInit {
 
+
+  @Output() changePage = new EventEmitter<string>();
   constructor( 
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -36,6 +38,10 @@ export class ResetuserpasswordComponent implements OnInit {
   doNothing() {
     // tslint:disable-next-line: deprecation
     event.preventDefault();
+  }
+
+  gotoPage(){
+    this.changePage.emit('login')
   }
 
   resetpassword() {

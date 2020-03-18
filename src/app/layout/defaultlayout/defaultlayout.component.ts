@@ -29,7 +29,10 @@ export class DefaultlayoutComponent implements OnInit {
     private service: DefaultlayoutService,
     private dialog: MatDialog,
     private activityService: ActivityService,
-    private bottomSheet: MatBottomSheet) { }
+    private bottomSheet: MatBottomSheet,
+    private commonservice: DefaultlayoutService ) { }
+
+    public crumb: any;
   name: '';
   alias: '';
   selected: any;
@@ -48,25 +51,25 @@ export class DefaultlayoutComponent implements OnInit {
     );
 
   step = '';
-  opened = true;
+  opened = false;
   status = true;
 
   menuList = [
     { name: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
     {
-      name: 'Project', icon: 'folder', link: '/project'
+      name: 'Projects', icon: 'business_center', link: '/project'
     },
     {
-      name: 'Activities', icon: 'business_center', link: '/activity',
+      name: 'Activities', icon: 'local_activity', link: '/activity',
     },
     {
-      name: 'Documents', icon: 'list_alt', link: '/documents'
+      name: 'Documents', icon: 'folder', link: '/documents'
     },
     {
-      name: 'Clients', icon: 'people_outlined', link: '/client'
+      name: 'Clients', icon: 'supervised_user_circle', link: '/client'
     },
     {
-      name: 'User Managment', icon: 'people', link: '/user/management'
+      name: 'User Managment', icon: 'account_box', link: '/user-manager'
       // children: [
       //   { name: 'Groups', icon: 'people', link: '/user/group' },
       //   { name: 'Requests', icon: 'person_add', link: '/user/request' },
@@ -128,7 +131,7 @@ export class DefaultlayoutComponent implements OnInit {
       .subscribe(({ message, data }) => {
         if (message === 'Success') {
            this.activityList = data.map((item: any) => ({ ...item }));
-           console.log(this.activityList);
+          //  console.log(this.activityList);
         } else {
           this.activityList = [];
         }
@@ -143,7 +146,16 @@ export class DefaultlayoutComponent implements OnInit {
     this.alias = username;
   }
 
-  ngOnInit() {
+  gotoPath(path) {
+    this.commonservice.navigateToPath(path);
+  }
+
+  async ngOnInit() {
+    await this.commonservice.geteBreadChrome()
+    .subscribe(chrome => {
+     this.crumb = chrome;
+    });
+
     const authUser = localStorage.getItem('currentUser');
     if (!authUser) { return this.service.navigateToPath('/login'); }
     this.getProfile(this.service.user);

@@ -1,20 +1,20 @@
-<div class="card-wrapper">
+<!-- <div class="card-wrapper"> -->
   <div class="form-wrapper">
-    <ul>
-      <li>
+    <!-- <ul> -->
+      <!-- <li>
         <mat-divider style="width:100px"></mat-divider>
-      </li>
-      <li>
-        <p style="width: 100px;">Sign Up</p>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li> -->
+        <span style="width: 100%;display:flex;font-weight:600;justify-content: center; color:var(--primaryColor);font-size:22px">Sign Up</span>
+      <!-- </li> -->
+      <!-- <li>
         <mat-divider style="width:100px"></mat-divider>
-      </li>
-    </ul>
+      </li> -->
+    <!-- </ul> -->
     <form [formGroup]="form" (submit)="getSignUp()">
       <div class="form-container">
-        <div class="form-control">
-          <label for="fullname">Fullname</label>
+        <!-- <div class="form-control">
+          <label for="fullname">Fullname</label> -->
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
             <input matInput placeholder="Fullname" formControlName="fullname" floatPlaceholder="never">
             <button mat-button matSuffix mat-icon-button (click)="doNothing()">
@@ -22,9 +22,9 @@
             </button>
             <mat-error>Invalid name</mat-error>
           </mat-form-field>
-        </div>
-        <div class="form-control">
-          <label for="username">Username</label>
+        <!-- </div> -->
+        <!-- <div class="form-control">
+          <label for="username">Username</label> -->
           <mat-form-field class="project-form-field auth-form-field " floatLabel="never">
             <input matInput placeholder="username" formControlName="username" floatPlaceholder="never">
             <button mat-button matSuffix mat-icon-button (click)="doNothing()">
@@ -32,9 +32,9 @@
             </button>
             <mat-error>Invalid  username</mat-error>
           </mat-form-field>
-        </div>
-        <div class="form-control ">
-          <label for="email">Contact Email</label>
+        <!-- </div> -->
+        <!-- <div class="form-control ">
+          <label for="email">Contact Email</label> -->
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
             <input matInput placeholder="Email" formControlName="contactemail" floatPlaceholder="never">
             <button mat-button matSuffix mat-icon-button (click)="doNothing()">
@@ -42,9 +42,9 @@
             </button>
             <mat-error>Invalid email address</mat-error>
           </mat-form-field>
-        </div>
-        <div class="form-control ">
-          <label for="phone">Phone number</label>
+        <!-- </div> -->
+        <!-- <div class="form-control ">
+          <label for="phone">Phone number</label> -->
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
             <input matInput placeholder="Phone"  formControlName="phone" floatPlaceholder="never">
             <button mat-button matSuffix mat-icon-button (click)="doNothing()">
@@ -52,10 +52,10 @@
             </button>
             <mat-error>Invalid phone number</mat-error>
           </mat-form-field>
-        </div>
+        <!-- </div> -->
        
-        <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
-          <label for="password">Password</label>
+        <!-- <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
+          <label for="password">Password</label> -->
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
             <input matInput placeholder="Password" ng-minlength="6" type="{{inputType}}" formControlName="password"
               floatPlaceholder="never">
@@ -69,11 +69,11 @@
               Please enter your newpassword
             </mat-error> -->
           </mat-form-field>
-        </div>
-        <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
-          <label for="verifyPassword">Verify Password</label>
+        <!-- </div> -->
+        <!-- <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
+          <label for="verifyPassword">Verify Password</label> -->
           <mat-form-field class="project-form-field auth-form-field" floatLabel="never">
-            <input matInput placeholder="Verify Password" type="{{vpasswordType}}" [errorStateMatcher]="matcher" formControlName="verifyPassword"
+            <input matInput  placeholder="Verify Password" type="{{vpasswordType}}" [errorStateMatcher]="matcher" formControlName="verifyPassword"
               floatPlaceholder="never">
             <button mat-button matSuffix mat-icon-button>
               <mat-icon (click)="toggleShow()">
@@ -83,7 +83,7 @@
             </button>
             <!-- <mat-error *ngIf="form.hasError('notSame')">Password Missmatch</mat-error> -->
           </mat-form-field>
-        </div>
+        <!-- </div> -->
         <!-- <div class="form-control"  style="width:45%;margin-left: -5px; display:inline-block">
           <label for="">Institution</label>
           <mat-form-field floatLabel="never" class="project-form-field auth-form-field ">
@@ -112,8 +112,10 @@
             Sign Up
           </button>
         </div>
+        <span class="info-text">Already have an Account?<button mat-button (click)="gotoPage()" class="sign-up">Login
+          here</button></span>
       </div>
     </form>
   </div>
-  <p class="info-text">Already have an Account?<button mat-button (click)="gotoPath()" class="sign-up">Login
-      here</button></p>
+  
+<!-- </div> -->

@@ -1,20 +1,20 @@
 
 <mat-card class="card-wrapper">
 <div class="page-container" style="height:70vh;overflow-y:hidden">
-    <p class="page-tittle">
-      Project Activities
-    </p>
+    <!-- <p class="page-tittle">
+      Activities
+    </p> -->
     <div class="actiivty-wrapper">
 
       <div class="project-list"(mouseleave)="scrollRight=false" (mouseenter)="scrollRight=true;scrollLeft=false">
 
-        <h3 mat-subheader>Projects List</h3>
+        <h5 mat-subheader>Projects List</h5>
                   <cdk-virtual-scroll-viewport (scrolledIndexChange)="getNextbar($event)" itemSize="100" class="scroll-container">
                       <mat-list>
                         <mat-list-item *cdkVirtualFor="let item of allProjects">
                             <mat-icon class="project-icon" mat-list-icon>folder</mat-icon>
-                            <h4 class="project-name" mat-line>{{item.name}}</h4>
-                            <p mat-line> {{item.date}} </p>
+                            <h4 class="project-name" mat-line>{{item.projectname}}</h4>
+                            <p mat-line> {{dateStarted(item.startdate)}} </p>
                             <mat-divider></mat-divider>
                         </mat-list-item>
                       </mat-list>
@@ -22,7 +22,7 @@
 
       </div>
      <div class="detail-container">
-          <p mat-subheader>Activities</p>
+          <h5 mat-subheader>Activities</h5>
           <app-activity-detail>
           </app-activity-detail>
      </div>

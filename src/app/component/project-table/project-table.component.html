@@ -1,36 +1,188 @@
-<div class="section-header" style="width: 100%;">
-  <mat-form-field class="search-form-field" style="padding-right: 10px;">
-    <input [(ngModel)]="accountsearchKey" (keyup)="applyAccountFilter()" matInput
+<div class="section-header" style="width: 100%;max-height:50px">
+  <mat-form-field class="search-form-field" style="padding-right: 60px;margin:0;justify-self:center">
+    <input [(ngModel)]="projsearchKey" (keyup)="applyProjFilter()" matInput
       placeholder="Search Project" />
-    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="accountsearchKey"
-      (click)="onAccountSearchClear()">
+
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="projsearchKey"
+      (click)="onProjSearchClear()">
       <mat-icon>close</mat-icon>
     </button>
-    <button mat-button matSuffix mat-icon-button *ngIf="!searchKey">
-      <mat-icon>search</mat-icon>
-    </button>
+    <!-- <button mat-button matSuffix mat-icon-button *ngIf="!searchKey"> -->
+      <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+    <!-- </button> -->
   </mat-form-field>
-    <div style="margin-right: 15px" class="button add">
+    <!-- <div style="margin-right: 15px" class="button add">
           
         <button (click)="onCreate()" mat-button mat-raised-button>Create Project</button>
-      </div>
+      </div> -->
 </div>
-<div >
-<mat-table class="table" [dataSource]="dataSource" matSort >
+<div>
+  <div class="projContainer">
+    <div style="margin-left:5px;display:flex;justify-content:center;align-items:center; margin-right:5px;height: 100px;width:100%;margin-top:20px; margin-bottom:20px; border-radius:5px; background-color:#E9D8FD">
+      <div style="display:flex; flex-direction:column">
+        <span style="padding-bottom:10px">Hi {{alias}}, You have a total of {{totalProj}} projects and completed {{completedProj}} this week.</span>
+        <!-- <span>You have completed 5 projects in the last week </span> -->
+          <span>You have {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing project, You are almost there</span>
+      </div>
+      
+    </div>
+    <div style="display: flex;flex-direction: row;">
+    <mat-card class="projItem" style="margin-right:10px;">
+      <div>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <div style="display:flex; flex-direction: row;justify-content:space-between; margin-bottom:10px">
+          <!-- <div style="border-bottom-width:5px; border-bottom-color:#805AD5"> -->
+        <mat-card-title style="font-weight:600; font-size: medium;color:var(--primaryColor)">Project Overview</mat-card-title>
+      <!-- </div> -->
+        <mat-card-subtitle><mat-icon style="color:var(--primaryColor); font-size: small;">calendar_today</mat-icon> {{todayDate}}</mat-card-subtitle>
+        </div>
+
+      </div>
+      <mat-card-subtitle>{{completedProj}} projects completed out of {{totalProj}}</mat-card-subtitle>
+      <mat-progress-bar mode="determinate" color="var(--primaryColor)" [value]="projectsProgress"></mat-progress-bar>
+      
+      <mat-card-content style= "margin-top:30px; margin-bottom:10px">
+        <mat-list-item *ngFor="let data of projArray">
+
+          <div style="display:flex;flex-direction: row;justify-content:space-between;align-items: center; margin-top:10px;margin-bottom:10px">
+        <mat-card-title style="font-weight:500;justify-content: flex-start;flex:1; font-size: medium;color:var(--primaryColor)">{{data.code}} </mat-card-title>
+        <mat-chip-list style="justify-content: center;flex:1">
+          <mat-menu #statusMenu="matMenu" yPosition="below">
+            <button style="background-color:#90CDF4;" class="menu-button" mat-menu-item>
+               <span>
+                 To Do
+               </span>
+             </button>
+             <button style="background-color:#FBD38D;" class="menu-button" mat-menu-item>
+                <span>
+                  In Progress
+                </span>
+              </button>
+              <button style="background-color:#9AE6B4;" class="menu-button" mat-menu-item>
+                  <span>
+                    Complete
+                  </span>
+                </button>
+                </mat-menu>
+        <mat-chip [matMenuTriggerFor]="statusMenu" style="background-color:#90CDF4;cursor: pointer; " *ngIf="data.projectstatus === 'New'">To do</mat-chip>
+        <mat-chip [matMenuTriggerFor]="statusMenu" style="background-color:#FBD38D;cursor: pointer" *ngIf="data.projectstatus === 'string'">In progress</mat-chip>
+        <mat-chip [matMenuTriggerFor]="statusMenu" style="background-color:#9AE6B4;cursor: pointer" *ngIf="data.projectstatus === 'Completed'">Completed</mat-chip>
+        </mat-chip-list>
+        <span   style="flex:1;display:flex; justify-content:center; align-items: center;">
+          <img matTooltip="Team Members" style="cursor:pointer" (click)="toggleExpand(data,'Team')" matTooltipPosition="right" width="20px" src="../../../assets/img/avatar.png" alt="Team"> {{data.teamMemberCounts}}</span>
+       
+          <div style="flex:1;display:flex; justify-content: flex-end">
+          <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_vert</mat-icon></button>
+          <mat-menu #moreMenu="matMenu" yPosition="below">
+              <button class="menu-button" mat-menu-item>
+                <mat-icon >
+                  timer
+                </mat-icon>
+                 <span>
+                   Set Duration
+                 </span>
+               </button>
+               <button class="menu-button" mat-menu-item>
+                  <mat-icon >
+                    router
+                  </mat-icon>
+                  <span>
+                    Server Credentials
+                  </span>
+                </button>
+                <button class="menu-button" mat-menu-item>
+                    <mat-icon >
+                      link
+                    </mat-icon>
+                    <span>
+                      Repository
+                    </span>
+                  </button>
+                  <button class="menu-button" (click)="toggleExpand(row,'webHook')" mat-menu-item>
+                      <mat-icon style="color:var(--darkColor)">
+                        web
+                      </mat-icon>
+                      <span>
+                        Web Hook
+                      </span>
+                  </button>
+                  </mat-menu>
+                </div>
+        </div>
+
+        <div style="display: flex;flex-direction: row;align-items:center; justify-content: space-between;margin-bottom:5px;padding-top:20px">
+          
+          <button mat-button  (click)="toggleExpand(data,'Activities')"><mat-card-subtitle>{{data.activityCounts}} activities</mat-card-subtitle></button>
+          <button mat-button><mat-card-subtitle>{{data.taskCounts}} tasks</mat-card-subtitle></button>
+          <button mat-button (click)="toggleExpand(data,'Documents')"><mat-card-subtitle>{{data.documentCounts}} documents</mat-card-subtitle></button>
+          <mat-card-subtitle>Due: {{deadlineDate(data.enddate)}}</mat-card-subtitle>
+        </div>
+        <mat-divider></mat-divider>
+
+          <!-- <h4 mat-line>{{folder.name}}</h4>
+          <p mat-line> {{folder.updated | date}} </p> -->
+        </mat-list-item>
+        
+      </mat-card-content> 
+      <mat-card-actions-row>
+        <button mat-button>See More ...</button>
+        <!-- <button mat-button>SHARE</button> -->
+      </mat-card-actions-row>
+    </mat-card>
+    <mat-card class="projItem">
+      <!-- <div> -->
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <div style="display:flex; flex-direction: row;align-items:center; justify-content:space-between; margin-bottom:30px">
+        <mat-card-title style="font-weight:600; font-size: medium;color:var(--primaryColor)">My Tasks</mat-card-title>
+          <div>
+        <button mat-button (click)="newTask()"><mat-icon style="font-size:18px">add_circle</mat-icon> New Task</button>
+        <button mat-stroked-button routerLink="/activity">All Tasks</button>
+        </div>
+        </div>
+        <mat-card-content style= "margin-top:15px">
+        <!-- <div  " *ngFor="let task of taskList"> -->
+          <mat-list-item class="mb-4 flex:1" *ngFor="let task of taskList">
+          <div style=" display: flex;flex:1; flex-direction:row; justify-content:space-between">
+            <span class="d-flex flex-1">
+          <mat-icon (click)="setComplete()" *ngIf="!isCompleted(task.projectid.projectstatus) && !taskcomplete" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
+          <mat-icon (click)="setComplete()" *ngIf="isCompleted(task.projectid.projectstatus) || taskcomplete" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
+            <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+            
+            <mat-card-subtitle  *ngIf="isCompleted(task.projectid.projectstatus) || taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> {{task.projectid.code}}/{{task.tasktype}} <mat-card-subtitle class="font-weight-lighter" style=" font-size:12px; ">{{task.usercomment}}</mat-card-subtitle></mat-card-subtitle>
+          
+          <mat-card-subtitle  *ngIf="!isCompleted(task.projectid.projectstatus) && !taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> {{task.projectid.code}} / {{task.tasktype}} <mat-card-subtitle class="font-weight-lighter" style=" font-size:12px; ">{{task.usercomment}}</mat-card-subtitle></mat-card-subtitle>
+              
+          </span>
+            <span  class="d-flex flex-1 " >
+            <mat-chip-list>
+              <mat-chip style="background-color:#E2E8F0; font-size:14px; " *ngIf="task.projectid.projectstatus === 'New' && !taskcomplete">Started</mat-chip>
+              <mat-chip style="background-color:#F6E05E;  font-size:14px" *ngIf="task.projectid.projectstatus === 'string' && !taskcomplete">In progress</mat-chip>
+              <mat-chip style="background-color:#48BB78;  font-size:14px" *ngIf="task.projectid.projectstatus === 'Completed' || taskcomplete">Completed</mat-chip>
+            </mat-chip-list>
+              </span>
+              </div>
+          </mat-list-item>
+        <!-- </div> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </div>
+  
+<!-- <mat-table class="table" [dataSource]="dataSource" matSort > -->
     <!-- Position Column -->
-    <ng-container colspan="2" matColumnDef="alias" style="padding: 0 0 0 10px">
+    <!-- <ng-container colspan="2" matColumnDef="alias" style="padding: 0 0 0 10px">
       <mat-header-cell colspan="2" mat-sort-header *matHeaderCellDef> Alias</mat-header-cell>
       <mat-cell class="code" colspan="1" *matCellDef="let element"> {{element.code}} </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
+    <!-- <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
       <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.projectname}} </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <!-- Weight Column -->
-    <ng-container class="status-container"  matColumnDef="status">
+    <!-- <ng-container class="status-container"  matColumnDef="status">
       <mat-header-cell class="status-column" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
       <mat-cell class="status-cell"  *matCellDef="let element"
       [ngClass]="{
@@ -40,15 +192,15 @@
      }"
       >
       <span class="status-span">{{element.projectstatus}}</span></mat-cell>
-    </ng-container>
+    </ng-container> -->
     
     <!-- Symbol Column -->
-    <ng-container matColumnDef="date">
+    <!-- <ng-container matColumnDef="date">
       <mat-header-cell class="status-column" *matHeaderCellDef> Created At</mat-header-cell>
       <mat-cell *matCellDef="let element"> <span class="status-span">{{element.startdate | date}}</span> </mat-cell>
-    </ng-container>
+    </ng-container> -->
      <!-- Symbol Column -->
-     <ng-container matColumnDef="activities">
+     <!-- <ng-container matColumnDef="activities">
         <mat-header-cell *matHeaderCellDef>Activities</mat-header-cell>
         <mat-cell *matCellDef="let row;">
         <button (click)="toggleExpand(row,'Activities')" mat-icon-button>
@@ -80,7 +232,7 @@
         </button>
        
         </mat-cell>
-      </ng-container>
+      </ng-container> -->
       <!-- <ng-container matColumnDef="webhooks">
           <mat-header-cell *matHeaderCellDef> Web Hooks</mat-header-cell>
           <mat-cell *matCellDef="let row;">
@@ -94,7 +246,7 @@
         </ng-container> -->
 
      <!-- Weight Column -->
-     <ng-container  matColumnDef="action">
+     <!-- <ng-container  matColumnDef="action">
         <mat-header-cell *matHeaderCellDef >Action</mat-header-cell>
         <mat-cell *matCellDef="let row">
             <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
@@ -135,8 +287,8 @@
            </mat-cell>
       </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row;columns: displayedColumns;" [ngClass]="{'active':row ===selectedrow}" (click)="selectedrow = row" ></mat-row>
+    <mat-row *matRowDef="let row;columns: displayedColumns;" [ngClass]="{'active':row ===selectedrow}" (click)="selectedrow = row" ></mat-row> -->
     <!-- <mat-footer-row *matFooterRowDef="['noData']"></mat-footer-row> -->
-  </mat-table>
-<mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  <!-- </mat-table> -->
+<!-- <mat-paginator [pageSizeOptions]="[5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator> -->
 </div>

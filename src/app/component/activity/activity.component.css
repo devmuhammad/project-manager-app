@@ -1,7 +1,8 @@
 .scroll-container{
-  margin-top: 40px;
+  margin-top: 20px;
   height: 600px;
   font-family: var(--primaryFont);
+  scrollbar-width: thin;
 }
 
 .card-wrapper{

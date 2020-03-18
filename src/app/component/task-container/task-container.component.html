@@ -5,9 +5,10 @@
         <p>Task List</p>
       </div>
       <div class="add-task-action">
-        <button  [disabled]="userRole" (click)="addTasks()" mat-button>
+        <!-- [disabled]="userRole" -->
+        <button (click)="addTasks()" mat-button>
           <mat-icon>add</mat-icon>
-          <span>Add Task</span>
+          <span>New Task</span>
         </button>
 
       </div>
@@ -15,8 +16,85 @@
     
      <div class="task-body">
       <div class="t-items" *ngFor="let task of taskList; let i = index" style="position: relative; border: none">
-        <div class="t-item-main">
-          <div style="width: 25%;margin-bottom: 10px">
+        <!-- <div class="t-item-main"> -->
+          <!-- style=" display: flex;flex:1;align-items:center; flex-direction:row; justify-content:space-between" -->
+          <div class="t-item-footer" style="align-items:center">
+            <span class="d-flex flex-1  mt-4">
+          <mat-icon (click)="setComplete()" *ngIf="!isCompleted(task.projectid.projectstatus) && !taskcomplete" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
+          <mat-icon (click)="setComplete()" *ngIf="isCompleted(task.projectid.projectstatus) || taskcomplete" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
+            <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+            
+            <mat-card-subtitle  *ngIf="isCompleted(task.projectid.projectstatus) || taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> {{task.projectid.code}}/{{task.tasktype}} <mat-card-subtitle class="font-weight-lighter" style=" font-size:12px; ">{{task.usercomment}}</mat-card-subtitle></mat-card-subtitle>
+          
+          <mat-card-subtitle  *ngIf="!isCompleted(task.projectid.projectstatus) && !taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> {{task.projectid.code}} / {{task.tasktype}} <mat-card-subtitle class="font-weight-lighter" style=" font-size:12px; ">{{task.usercomment}}</mat-card-subtitle></mat-card-subtitle>
+              
+          </span>
+            <span  class="d-flex flex-1" >
+            <mat-chip-list>
+              <mat-chip style="background-color:#90CDF4; font-size:14px; " *ngIf="task.projectid.projectstatus === 'New' && !taskcomplete">Started</mat-chip>
+              <mat-chip style="background-color:#F6E05E;  font-size:14px" *ngIf="task.projectid.projectstatus === 'string' && !taskcomplete">In progress</mat-chip>
+              <mat-chip style="background-color:#48BB78;  font-size:14px" *ngIf="task.projectid.projectstatus === 'Completed' || taskcomplete">Completed</mat-chip>
+            </mat-chip-list>
+              </span>
+              
+              <div style="transform: translateY(30%);font-size: 13px;text-align: center">
+                Assigned by:
+                <span *ngIf="task.userid.id!==self" style="color:var(--primaryColor)"> {{task.userid.fullname}}</span>
+                <span *ngIf="task.userid.id===self" style="color:var(--primaryColor)">Self</span>
+              </div>
+              <div style="text-align: center">
+                <button mat-icon-button>
+                  <mat-icon style="font-size: 15px">attach_file</mat-icon>
+                </button>
+                <p style="font-size:12px;color:var(--greyColor)">0 file(s) attached</p>
+              </div>
+              <div style="text-align: center">
+                <button mat-icon-button>
+                  <mat-icon style="font-size: 15px">calendar_today</mat-icon>
+                </button>
+                <p style="font-size:12px;color:var(--greyColor)">23rd Sept 2019</p>
+              </div>
+              <!-- <div style="transform: translateY(10%);text-align: center; color:var(--greyColor);font-size: 14px">
+                <mat-icon style="transform: translateY(20%);font-size: 13px">calendar_today</mat-icon> 23rd Sept 2019
+              </div> -->
+              
+              <button (click)="deletetask()" mat-icon-button>
+                <mat-icon style="color: inherit" >
+                  delete_outline
+                </mat-icon>
+                <!-- <span style="color: inherit;font-size: 14px;font-family: var(--primaryFont)">
+                  Delete Task
+                </span> -->
+              </button>
+
+              </div>
+              <!-- <div class="t-item-footer">
+                <div style="width:50%;transform: translateY(10%);color:var(--greyColor);font-size: 15px">
+                  <mat-icon style="transform: translateY(20%);">calendar_today</mat-icon> 23rd Sept 2019
+                </div>
+                <div style="width:40%;transform: translateY(30%);font-size: 13px">
+                  Assigned by:
+                  <span *ngIf="task.userid.id!==self" style="color:var(--primaryColor)"> {{task.userid.fullname}}</span>
+                  <span *ngIf="task.userid.id===self" style="color:var(--primaryColor)">Self</span>
+                </div>
+                <div >
+                  <button [disabled]="userRole" [matMenuTriggerFor]="options" mat-icon-button>
+                    <mat-icon style="font-size: 18px">settings</mat-icon>
+                  </button>
+                  <mat-menu #options="matMenu" yPosition="above">
+                    <button style="color: var(--dangerColor)" (click)="deletetask()" class="menu-button" mat-menu-item>
+                      <mat-icon style="color: inherit">
+                        delete_outline
+                      </mat-icon>
+                      <span style="color: inherit;font-size: 14px;font-family: var(--primaryFont)">
+                        Delete Task
+                      </span>
+                    </button>
+                  
+                  </mat-menu>
+                </div>
+              </div> -->
+          <!-- <div style="width: 25%;margin-bottom: 10px">
             <h3>{{task.tasktype}}</h3>
             <p style="font-size: 12px;text-transform:lowercase; max-width: 16em">{{task.usercomment}}</p>
           </div>
@@ -78,10 +156,11 @@
             
             </mat-menu>
           </div>
-        </div>
+        </div> -->
     
-      </div>
+      <!-- </div> -->
     </div> 
 
   </div>
+</div>
 </div>

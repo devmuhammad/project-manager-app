@@ -2,11 +2,11 @@
   <mat-sidenav #drawer class="sidenav custom" position="end" mode="push"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [(opened)]="showSide">
-    <div class="side-content" *ngIf="showSide" style="padding: 0px">
-      <button (click)="closeSidePanel()" mat-button mat-icon-button>
-        <mat-icon style="font-size: 13px">close</mat-icon>
+    <div class="side-content" *ngIf="showSide" style="padding: 0px;">
+      <button (click)="closeSidePanel()" mat-button mat-icon-button style="float:right">
+        <mat-icon style="font-size: 14px">cancel</mat-icon>
       </button>
-      <mat-form-field style="margin: 5px;width:90%" class="search-form-field project-form-field item-search"
+      <!-- <mat-form-field appearance="fill" style="margin: 5px;width:90%" class="search-form-field project-form-field item-search"
         floatLabel="never">
         <input [(ngModel)]="searchKey" (keyup)="applyFilter()" matInput placeholder="Search " />
         <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
@@ -15,7 +15,7 @@
         <button mat-button matSuffix mat-icon-button *ngIf="!searchKey">
           <mat-icon>search</mat-icon>
         </button>
-      </mat-form-field>
+      </mat-form-field> -->
       <!-- <p class="sub-title">Project Info</p> -->
       <ng-container *ngFor="let item of expandableData;let i = index">
         <mat-expansion-panel class="panel-section" [ngClass]="{
@@ -32,9 +32,9 @@
             <mat-expansion-panel (click)="toogleCollapse(idx)" [expanded]="innerpane===idx" [attr.data-index]="idx"
               class="panel-child" style="margin-bottom: 10px">
               <mat-expansion-panel-header>
-                <label class="panel-label" for="">Activity Type:</label>
+                <label class="panel-label" for="">Activity Type: </label>
                 <span
-                  style="font-size: 12.5px;font-family: var(--primaryFont);color:var(--primaryColor);font-weight: 500">{{activity.actionflow}}</span>
+                  style="font-size: 13px;color:var(--primaryColor);font-weight: 500">{{activity.actionflow}}</span>
               </mat-expansion-panel-header>
 
               <mat-panel-description>
@@ -45,16 +45,16 @@
                               'inprogress' : activity.projectid.projectstatus =='string',
                               'completed' :activity.projectid.projectstatus =='Completed'
                            }"></span> -->
-                  <ul style="margin-top:-5px " class="teammate-details">
-                    <li>
+                  <ul style="margin-top:-5px" class="teammate-details">
+                    <li *ngIf="activity.tasktype">
                       <label for="">Type of Task Assigned :</label>
                       <span>{{activity.tasktype}}</span>
                     </li>
-                    <li>
+                    <li *ngIf="activity.assignedto">
                       <label for="">Assignee :</label>
                       <span>{{activity.assignedto.fullname}}</span>
                     </li>
-                    <li>
+                    <li *ngIf="activity.userid">
                       <label for="">Assigned by :</label>
                       <span>{{activity.userid.fullname}}</span>
                     </li>
@@ -83,9 +83,9 @@
             <mat-expansion-panel class="docxexpand" (click)="toogleCollapse(i)" [expanded]="innerpane===i"
               [attr.data-index]="i" style="margin-bottom: 10px">
               <mat-expansion-panel-header matTooltip="{{document.docurl}}">
-                <mat-icon style="font-size: 16px;">folder_open</mat-icon>
+                <mat-icon style="font-size: 16px;">folder</mat-icon>
                 <span
-                  style="font-size: 12px;text-transform: capitalize; margin-right: 1.5px">{{resizeName(document.docurl,20)}}</span>
+                  style="color:var(--primaryColor);font-weight: 600; font-size: 13px;text-transform: capitalize; margin-right: 1.5px">{{resizeName(document.docurl,20)}}</span>
               </mat-expansion-panel-header>
               <button mat-icon-button [matMenuTriggerFor]="docxmenu" class="docx-more">
                 <mat-icon>more_horizontal</mat-icon>
@@ -120,7 +120,7 @@
                   </span>
                 </button>
               </mat-menu>
-              <p style="font-size: 10px;font-family:var(--primaryFont);padding: 5px;">Description:
+              <p style="font-size: 11px;color:var(--primaryColor);padding: 5px;">Description:
                 {{document.description}}</p>
               <div class="docbody">
                 <div class="imageDiv">
@@ -152,7 +152,7 @@
               [attr.data-index]="idx" style="margin-bottom: 10px">
               <mat-expansion-panel-header>
                 <img class="teammate" src="../../../assets/img/avatar.png" />
-                <span style="font-size: 13px">{{teammate.fullname}}</span>
+                <span style="font-size: 13px; color:var(--primaryColor)">{{teammate.fullname}}</span>
               </mat-expansion-panel-header>
 
               <mat-panel-description>
