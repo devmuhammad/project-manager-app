@@ -155,7 +155,7 @@ resizeName = (initialName, size) => {
 async getTeamProfiles(id) {
   this.service.getProjectTeamMembers(id).subscribe(({data}) => {
     this.teamprofiles = data;
-    console.log(this.teamprofiles);
+    // console.log(this.teamprofiles);
   });
 }
 

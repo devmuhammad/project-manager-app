@@ -89,7 +89,10 @@ export class AuthenticationComponent implements OnInit {
           store.dispatch({ type: 'GET_PROFILE', payload: response.data });
           localStorage.setItem('currentUser', JSON.stringify(response.password + response.id));
           localStorage.setItem('profile', JSON.stringify(response.data));
-          console.log(localStorage.getItem('profile'));
+          if (response.data.roletype === 'Authorizer'){
+            localStorage.setItem('userType', "admin")
+          }else localStorage.setItem('userType', "user")
+          // console.log(localStorage.getItem('profile'));
           this.loadingBar.complete();
           this.btnloader.hideLoader();
           return this.router.navigateByUrl('/dashboard');

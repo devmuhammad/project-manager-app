@@ -23,6 +23,7 @@ export class BreadcrumblayoutComponent implements OnInit {
   alias: '';
   pathname: string;
   pathOrigin: string;
+  isAdmin= false;
   public param = {
     page: 0 as number,
     assigntoid: 0 as number,
@@ -43,6 +44,9 @@ export class BreadcrumblayoutComponent implements OnInit {
 
     // const authUser = localStorage.getItem('currentUser');
     // if (!authUser) { return this.service.navigateToPath('/login'); }
+    const userType = localStorage.getItem('userType')
+    if (userType === 'admin') this.isAdmin = true 
+    else this.isAdmin = false
     this.getProfile(this.commonservice.user);
     const profile = JSON.parse(localStorage.getItem('profile'));
     this.fetchOwnnotifications(profile.id);
@@ -75,7 +79,7 @@ export class BreadcrumblayoutComponent implements OnInit {
       });
   }
   getProfile({ fullname, username }) {
-    console.log(fullname);
+    // console.log(fullname);
     this.name = fullname;
     this.alias = username;
   }

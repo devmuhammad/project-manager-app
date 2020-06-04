@@ -53,15 +53,16 @@ export class DefaultlayoutComponent implements OnInit {
   step = '';
   opened = false;
   status = true;
+  menuList = []
 
-  menuList = [
+  adminList = [
     { name: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
     {
       name: 'Projects', icon: 'business_center', link: '/project'
     },
-    {
-      name: 'Activities', icon: 'local_activity', link: '/activity',
-    },
+    // {
+    //   name: 'Activities', icon: 'local_activity', link: '/activity',
+    // },
     {
       name: 'Documents', icon: 'folder', link: '/documents'
     },
@@ -87,6 +88,20 @@ export class DefaultlayoutComponent implements OnInit {
       //   { name: 'TaskTypes', icon: 'sort', link: '/settings/task/types' },
       // ]
     },
+  ] 
+
+  userList = [
+    { name: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
+    {
+      name: 'Projects', icon: 'business_center', link: '/project'
+    },
+    {
+      name: 'Activities', icon: 'local_activity', link: '/activity',
+    },
+    {
+      name: 'Documents', icon: 'folder', link: '/documents'
+    },
+   
   ];
 
   onCreate() {
@@ -158,6 +173,12 @@ export class DefaultlayoutComponent implements OnInit {
 
     const authUser = localStorage.getItem('currentUser');
     if (!authUser) { return this.service.navigateToPath('/login'); }
+    if(authUser){
+      const userType = localStorage.getItem('userType')
+      if (userType === 'admin'){
+        this.menuList = this.adminList
+      }else this.menuList = this.userList
+    }
     this.getProfile(this.service.user);
     const profile = JSON.parse(localStorage.getItem('profile'));
     this.fetchOwnnotifications(profile.id);
@@ -167,6 +188,7 @@ export class DefaultlayoutComponent implements OnInit {
   handleLogOut() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('profile');
+    localStorage.removeItem('userType');
     store.dispatch({type:'LOGOUT'});
     return this.service.navigateToPath('/login');
   }

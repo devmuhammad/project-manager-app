@@ -69,6 +69,9 @@ export class ProjectTableComponent implements OnInit {
   taskList: any[];
   actionflow = 'TASK';
   taskcomplete = false;
+  isAdmin= false
+  currUser :any;
+  statusList = []
 
   toggleExpand(row, panel) {
     // console.log(row);
@@ -82,6 +85,12 @@ export class ProjectTableComponent implements OnInit {
   }
   async ngOnInit() {
     const profile = JSON.parse(localStorage.getItem('profile'))
+    this.currUser = profile
+    
+    const userType = localStorage.getItem('userType')
+    if (userType === 'admin') { this.isAdmin = true
+    }else this.isAdmin = false
+
     this.fetchOwntaskList(profile.id);
     this.getProfile(this.commonservice.user);
     this.expand = false;
@@ -174,19 +183,54 @@ export class ProjectTableComponent implements OnInit {
       });
   }
 
+  async getTeamProfiles(project) {
+   
+    this.service.getProjectTeamMembers(project.projectId).subscribe(async ({data}) => {
+      const prjArray = []
+      
+      if( data.includes(data.find(async e => e.id == this.currUser.id))){
+         prjArray.push(project)
+         console.log(prjArray)
+      }
+      this.projArray = prjArray
+      this.putDetails(this.projArray)
+      this.loadingBar.complete();
+      // return data;
+      // console.log(this.projArray);
+    });
+  }
+
   updateRecord() {
     this.loadingBar.start();
-    this.service.getStatusList();
+    this.service.getStatusList().subscribe(async res => {if(res.message === 'Success'){
+      this.statusList = res.data
+      console.log(this.statusList)
+    }});
     this.service.getProjectList(this.queryParam)
-      .subscribe(response => {
+      .subscribe(async response => {
         if (response.message === 'Success') {
-          this.loadingBar.complete();
-          const datarray = response.data.map(item => {
+          
+          const datarray = await response.data.map(item => {
             return { ...item };
           });
           // console.log(datarray)
+          if (!this.isAdmin){
           this.projArray = datarray
-          this.putDetails(datarray)
+           this.putDetails(datarray)
+            }else {
+
+             await datarray.forEach(async el => {
+               if (el.teamMemberCounts >= 1){
+                 await this.getTeamProfiles(el)
+    
+               }
+             }) 
+            //  this.projArray = prjArray
+            //  this.putDetails(prjArray)
+            //  console.log(prjArray)
+          }
+          
+          // this.putDetails(datarray)
           // this.dataSource = new MatTableDataSource(datarray);
           // this.dataSource.sort = this.sort;
           // this.dataSource.paginator = this.paginator;

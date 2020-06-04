@@ -20,7 +20,11 @@
     <div style="display:flex; align-items:center;flex-direction: row;">
       <div style="display:flex; align-items:center;margin-right:30px">
 
-      <button (click)="onCreate()" style="background-color: var(--primaryColor);color:white" mat-raised-button  matTooltipPosition="right" matTooltip="New project" >
+       <button *ngIf="isAdmin" (click)="onCreate()" style="background-color: var(--primaryColor);color:white" mat-raised-button  matTooltipPosition="right" matTooltip="New project" >
+        <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> -->
+        New Project
+      </button>
+       <button *ngIf="!isAdmin" disabled  style="background-color: rgb(209, 206, 206);color:white;cursor:not-allowed" mat-raised-button >
         <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> -->
         New Project
       </button>
