@@ -60,9 +60,9 @@ export class DefaultlayoutComponent implements OnInit {
     {
       name: 'Projects', icon: 'business_center', link: '/project'
     },
-    // {
-    //   name: 'Activities', icon: 'local_activity', link: '/activity',
-    // },
+    {
+      name: 'Activities', icon: 'local_activity', link: '/activity',
+    },
     {
       name: 'Documents', icon: 'folder', link: '/documents'
     },
@@ -156,7 +156,7 @@ export class DefaultlayoutComponent implements OnInit {
       });
   }
   getProfile({ fullname, username }) {
-    console.log(fullname);
+    // console.log(fullname);
     this.name = fullname;
     this.alias = username;
   }

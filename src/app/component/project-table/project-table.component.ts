@@ -60,8 +60,10 @@ export class ProjectTableComponent implements OnInit {
   alias: '';
   todayDate= new Date().toDateString();
   completedProj: number = 0
+  completedTask: number = 0
   totalProj: number = 0
   uncompletedProj: number = 0
+  uncompletedTask: number = 0
   ongoingProj: number = 0
   projectsProgress: number = 0
   status: [];
@@ -72,6 +74,9 @@ export class ProjectTableComponent implements OnInit {
   isAdmin= false
   currUser :any;
   statusList = []
+  myTasks: number = 0
+  projSearchKey = ''
+  allprojs = []
 
   toggleExpand(row, panel) {
     // console.log(row);
@@ -88,24 +93,20 @@ export class ProjectTableComponent implements OnInit {
     this.currUser = profile
     
     const userType = localStorage.getItem('userType')
-    if (userType === 'admin') { this.isAdmin = true
-    }else this.isAdmin = false
-
-    this.fetchOwntaskList(profile.id);
+    if (userType === 'admin') { 
+      this.isAdmin = true
+      this.fetchAllTasks()
+    }else {
+      this.isAdmin = false
+      this.fetchOwntaskList(profile.id);
+    }
+    
     this.getProfile(this.commonservice.user);
     this.expand = false;
     this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Project Type'});
     this.updateRecord();
   }
 
-    projSearchKey=""
-    onAppSearchClear(){
-      this.projSearchKey="";
-      this.applyProjFilter();
-    }
-    applyProjFilter(){
-    //  return this.projArray.filter(this.projSearchKey.trim().toLocaleLowerCase());
-    }
 
   setComplete(){
     this.taskcomplete = !this.taskcomplete
@@ -138,17 +139,32 @@ export class ProjectTableComponent implements OnInit {
     );
   }
 
+   async fetchAllTasks(){
+    this.loadingBar.start();
+
+    await this.service.getTasksList(this.queryParam)
+      .subscribe(async response => {
+        if (response.message === 'Success') {
+          
+          this.taskList = await response.data.map(item => {
+            return { ...item };});
+
+            this.loadingBar.complete();
+        }
+      })
+  }
+
   getProfile({ fullname, username }) {
     // console.log(fullname);
     this.name = fullname;
     this.alias = username;
   }
 
-  putDetails(datarray){
-   
+  async putDetails(datarray){
+    // if (datarray){
     this.totalProj = datarray.length
     datarray.forEach(element => {
-      if (element.projectstatus === 'string'){
+      if (element.projectstatus === 'Ongoing'){
         this.ongoingProj++
         this.uncompletedProj++
       }else if (element.projectstatus === 'Completed'){
@@ -156,7 +172,26 @@ export class ProjectTableComponent implements OnInit {
       }else this.uncompletedProj++
     })
 
-    this.projectsProgress = Math.round(100/this.totalProj*this.completedProj)
+   
+  // }
+  }
+
+  async taskDetails(){
+    this.myTasks = this.taskList.length
+
+    this.taskList.forEach(el => {
+     if (el.status === 'Completed'){
+        this.completedTask++
+      }else this.uncompletedTask++
+    })
+
+    this.projectsProgress = Math.round(100/this.myTasks*this.completedTask)
+  }
+
+  passDeadline(date){
+    if (new Date() > new Date(date)){
+      return true
+    }else return false
   }
 
   deadlineDate(date){
@@ -166,13 +201,14 @@ export class ProjectTableComponent implements OnInit {
   async fetchOwntaskList(id) {
     this.loadingBar.start();
     this.param.assigntoid = id;
-    await this.activityService.getAssigneeActivities(this.param)
-      .subscribe(({ message, data }) => {
+    await this.service.getAssigneeTasks(this.param)
+      .subscribe(async({ message, data }) => {
         if (message === 'Success') {
-          this.loadingBar.complete();
-          this.activityList = data.map((item: any) => ({ ...item }));
+          this.taskList = data.map((item: any) => ({ ...item }));
           // console.log(this.activityList);
-          this.taskList = this.activityList.filter((item: any) => item.actionflow === this.actionflow);
+          // this.taskList = this.activityList.filter((item: any) => item.actionflow === this.actionflow);
+          await this.taskDetails()
+          this.loadingBar.complete();
 
         } else {
           this.activityList = [];
@@ -183,30 +219,88 @@ export class ProjectTableComponent implements OnInit {
       });
   }
 
-  async getTeamProfiles(project) {
-   
-    this.service.getProjectTeamMembers(project.projectId).subscribe(async ({data}) => {
-      const prjArray = []
-      
-      if( data.includes(data.find(async e => e.id == this.currUser.id))){
-         prjArray.push(project)
-         console.log(prjArray)
-      }
-      this.projArray = prjArray
-      this.putDetails(this.projArray)
+
+  async updateStatus(data, status){
+    this.loadingBar.start();
+
+    let projUpdt: any =  {}
+    projUpdt.clientid	= data.client.clientid
+    projUpdt.code	 = data.code
+    projUpdt.datecreated	= data.datecreated
+    projUpdt.description	= data.description
+    projUpdt.enddate	= data.enddate
+    projUpdt.lastmodified	= data.lastmodified
+    projUpdt.projecmangerid	= data.projecmanager
+    projUpdt.projectId	= data.projectId
+    projUpdt.projectname	= data.projectname
+    projUpdt.projectstatus	= status.description
+    projUpdt.projecttypeId	= data.projecttype.projecttypeid
+    projUpdt.startdate = data.startdate
+
+   await this.service.updateProject(projUpdt).subscribe(async res =>{
+    if (res.message === 'Success') {
       this.loadingBar.complete();
-      // return data;
-      // console.log(this.projArray);
-    });
+      await this.reloadProject()
+      this.snackBar.open('Update Successful', 'Dismiss', {
+        panelClass: ['success'],
+        duration: 7000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right'
+      });
+    }
+   }, err => {
+      this.loadingBar.complete();
+    this.snackBar.open('Network Failed', 'Dismiss', {
+     panelClass: ['error'],
+     duration: 7000,
+     verticalPosition: 'bottom',
+     horizontalPosition: 'right'
+   })
+  })
   }
 
-  updateRecord() {
+  async updateTaskStatus(data, status){
     this.loadingBar.start();
-    this.service.getStatusList().subscribe(async res => {if(res.message === 'Success'){
-      this.statusList = res.data
-      console.log(this.statusList)
-    }});
-    this.service.getProjectList(this.queryParam)
+
+    let task: any =  {}
+    task.assignedto	= data.assignedto.id
+    task.comments	 = data.comments
+    task.datecreated	= data.datecreated
+    task.description	= data.description
+    task.enddate	= data.enddate
+    task.lastmodified	= data.lastmodified
+    task.parentid	= data.parentid
+    task.taskid	= data.taskid
+    task.projectid	= data.projectid.projectId
+    task.status	= status.description
+    // task.tasktypeId	= data.tasktype
+    task.startdate = data.startdate
+    task.userid = data.userid.id
+
+   await this.service.updateTask(task).subscribe(async res =>{
+    if (res.message === 'Success') {
+      this.loadingBar.complete();
+      await this.fetchOwntaskList(this.currUser.id)
+      this.snackBar.open('Update Successful', 'Dismiss', {
+        panelClass: ['success'],
+        duration: 7000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right'
+      });
+    }
+   }, err => {
+      this.loadingBar.complete();
+    this.snackBar.open('Network Failed', 'Dismiss', {
+     panelClass: ['error'],
+     duration: 7000,
+     verticalPosition: 'bottom',
+     horizontalPosition: 'right'
+   })
+  })
+  }
+
+  async reloadProject(){
+    await this.service.getProjectList(this.queryParam)
       .subscribe(async response => {
         if (response.message === 'Success') {
           
@@ -214,29 +308,56 @@ export class ProjectTableComponent implements OnInit {
             return { ...item };
           });
           // console.log(datarray)
-          if (!this.isAdmin){
+          if (this.isAdmin){
           this.projArray = datarray
            this.putDetails(datarray)
+           this.loadingBar.complete();
+
             }else {
+              const myprojects = []
 
              await datarray.forEach(async el => {
                if (el.teamMemberCounts >= 1){
-                 await this.getTeamProfiles(el)
-    
+                await this.service.getProjectTeamMembers(el.projectId).subscribe(async ({data}) => {
+                 
+                  await data.forEach(async e => {
+                   if(e.id === this.currUser.id){
+                    await myprojects.push(el)
+                    this.projArray.push(el)
+ 
+                   }
+                   
+                  })
+                  // await this.putDetails(myprojects)
+                });
+                
+                
+                
                }
              }) 
-            //  this.projArray = prjArray
-            //  this.putDetails(prjArray)
-            //  console.log(prjArray)
+
+            //  this.projArray = myprojects
+             
+             this.loadingBar.complete();
           }
           
           // this.putDetails(datarray)
           // this.dataSource = new MatTableDataSource(datarray);
           // this.dataSource.sort = this.sort;
           // this.dataSource.paginator = this.paginator;
+        }else {
+          this.projArray = []
+          this.loadingBar.complete();
+          this.snackBar.open('Could not retrieve projects', 'Dismiss', {
+          panelClass: ['error'],
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right'
+        })
         }
       }, err => {
         console.log(err);
+        this.projArray = []
         this.loadingBar.complete();
         this.snackBar.open('Network Failed', 'Dismiss', {
           panelClass: ['error'],
@@ -246,12 +367,34 @@ export class ProjectTableComponent implements OnInit {
         });
       });
   }
-  onSearchClear() {
-    this.searchKey = '';
-    this.applyFilter();
+
+  async updateRecord() {
+    this.loadingBar.start();
+   await this.service.getStatusList().subscribe(async res => {if(res.message === 'Success'){
+      this.statusList = res.data
+      // console.log(this.statusList)
+    }});
+    
+    await this.reloadProject()
   }
+  // onSearchClear() {
+  //   this.searchKey = '';
+  //   this.applyFilter();
+  // }
   applyFilter() {
     this.dataSource.filter = this.searchKey.trim().toLocaleLowerCase();
+  }
+  
+  clearSearch(){
+    this.projSearchKey="";
+    this.projArray = this.allprojs
+  }
+  async applyProjFilter(){
+    await this.allprojs.push(this.projArray)
+    // function filterByValue(array, value) {
+      return this.projArray.filter((data) =>  JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1);
+    // }
+  //  return this.projArray.filter(this.projSearchKey.trim().toLocaleLowerCase());
   }
 
 }

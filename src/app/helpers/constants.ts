@@ -52,6 +52,7 @@ export const BaseApi = {
     TASK_DOCUMENT: 'task/documents',
     TASK_HISTORY: 'task/history',
     TASK_ASSIGNEE: 'task/assignee',
+    TASK_UPDATE: 'task/update',
     // Documents
     DOC_UPDATE: 'document/update',
     DOC_RETRIEVE: 'document/retrieve',

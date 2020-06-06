@@ -122,7 +122,7 @@
         </div>
       </div>
     </mat-sidenav>
-    <mat-sidenav-content  >
+    <mat-sidenav-content>
       <!-- <div  class="main-nav"> -->
         <!-- <app-breadcrumblayout></app-breadcrumblayout> -->
         <!-- <div id="crumbs">
@@ -138,7 +138,8 @@
         
       
       <!-- </div> -->
-      <div class="content" [@routeAnimations]="prepareRoute(outlet)" fxFlex>
+      <div class="content"  fxFlex>
+        <!-- [@routeAnimations]="prepareRoute(outlet)" -->
         <router-outlet #outlet="outlet"></router-outlet>
       </div>
       <!-- <p class="footer">CopyRight Comsoft Limited &copy;2019</p> -->
