@@ -29,6 +29,7 @@ export class UpdateProjectTypeModalComponent implements OnInit {
     description: '',
     statustypeid: '',
     institutionid: '',
+    projecttypeid: this.row.data.projecttypeId
   };
   constructor(
     @Inject(MAT_DIALOG_DATA) private row: any,
@@ -52,7 +53,6 @@ export class UpdateProjectTypeModalComponent implements OnInit {
     this.dropdownService.getInstitutions()
       .subscribe((res) => {
         this.institutionList = res.data;
-        console.log(this.institutionList);
       });
   }
 
@@ -66,11 +66,10 @@ this.fetchInstitutionList();
     this.inputFields.statustypeid = this.formData.statustypeid;
     this.inputFields.description = this.form.get('description').value;
     this.inputFields.institutionid = this.form.get('institution').value;
-    console.log(this.inputFields);
+    
     return this.status.updateProjectType(this.inputFields)
     .subscribe(({ message, data}) => {
-      console.log(message);
-      console.log(data);
+    
       if (message === 'Success' || 'Operation Successful') {
         this.loadingBar.complete();
         this.btnLoader.hideLoader();

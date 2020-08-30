@@ -1,0 +1,29 @@
+<div style="width: 100%;" >
+  <h2 mat-dialog-title id="title">Project Timeline for  {{proj}}</h2>
+
+  <form [formGroup]="form" class="nwproject-form" style="display:flex; flex-direction:column">
+    <!-- <div style=" flex:1; flex-direction: column"> -->
+      <div class="man-history" id="printElem">
+       
+       <mat-vertical-stepper [linear]="isLinear" #stepper editable='false' >
+     
+       <mat-step *ngFor="let activity of activityList" >
+         <form >
+           <ng-template matStepLabel active> {{activity.username}} <br>
+             Date:  {{getDate(activity.datecreated)}} <br>
+             Activity: {{activity.activitystatus}}<br>
+             Comment: {{activity.usercomment}}
+           </ng-template>
+           
+         </form>
+       </mat-step>
+     
+     </mat-vertical-stepper>
+   </div>
+    <mat-dialog-actions align="end">
+      <button class="mat-raised-button mat-primary" (click)="exportXL()">Export XLS</button>
+      <button class="mat-raised-button mat-primary" (click)="print()">Print </button>
+      <button class="mat-raised-button" (click)="close()">Close</button>
+    </mat-dialog-actions>
+  </form>
+</div>

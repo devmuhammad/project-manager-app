@@ -10,7 +10,7 @@
 
     <mat-form-field class="search-form-field" style="padding-right: 10px;">
       <input [(ngModel)]="accountsearchKey" (keyup)="applyAccountFilter()" matInput
-        placeholder="Search Server Account" />
+        placeholder="Search" />
       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="accountsearchKey"
         (click)="onAccountSearchClear()">
         <mat-icon>close</mat-icon>

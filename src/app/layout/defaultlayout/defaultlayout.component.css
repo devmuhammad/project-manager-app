@@ -5,12 +5,14 @@
 }
 .sidenav-container {
   height: 100%;
-background: #eee8;
+  background: #eee8;
+ 
 }
 .content{
   padding-top: 0px !important;
   padding: 10px;
-  padding-right:20px; 
+  margin-left: 50px;
+  /* padding-right:20px;  */
   margin-top:10px !important;
   /* margin-bottom:50px !important; */
 }
@@ -33,13 +35,13 @@ background: #eee8;
   background-color:inherit;
 }
 .link-name{
-  font-family:"Raleway";
+  /* font-family:"Raleway"; */
   font-weight:500;
   
 }
 
 .title-text{
-  font-family:"Raleway";
+  /* font-family:"Raleway"; */
   font-weight:600;
   font-size:22px;
   color:"#fff";
@@ -219,6 +221,7 @@ margin-right: 0;
 }
 .maindiv{
   overflow:  hidden !important;
+  
 }
 .sidenav .mat-toolbar {
   background:var(--primaryColor);

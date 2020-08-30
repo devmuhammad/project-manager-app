@@ -12,7 +12,41 @@ transform:translateY(-10%);
 /* margin-left: 20px; */
 }
 .subtexts{
-  padding-left:30px
+  /* padding-left:30px */
+}
+
+.task-body {
+  padding: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.t-items {
+  border-radius: 10px;
+  /* display:flex; */
+  /* border: 1px solid #b4aaaa !important; */
+  margin-bottom: 30px;
+  width: 100%;
+  padding: 5px 20px;
+  z-index: 1000;
+  /* padding:5px; */
+  background: #E9D8FD;
+  /* font-family: var(--primaryFont); */
+  color: #00000099;
+}
+.t-items:last-child {
+  margin-bottom: 0;
+}
+.t-item-main {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+}
+.t-status-text {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: -10px;
 }
 
 .links{
@@ -73,13 +107,54 @@ footer{
 }
 
 .comment{
-  position: relative;
+  position: absolute;
   display: flex;
+  align-self:flex-start;
   flex-direction: row;
   justify-items: flex-start;
   justify-content: space-evenly;
+  width:50%;
+  margin:10px;
+  margin-top:10px;
+  padding-left:15px;
+  /* padding-right:20px; */
 
+  /* padding-left:20px */
 
+}
+.date-form{
+  display: inline-block;
+  position: absolute;
+  align-self:flex-end;
+  margin:10px;
+  /* background-color:#fff; */
+  width: 50%;
+  /* padding-top: -10px; */
+  /* padding-bottom:0px; */
+  padding-right: 40px;
+  /* margin: auto; */
+  color: #00000099;
+  font-size: 14px;
+}
+.auth-form-field{
+  display: inline-block;
+  /* align-self:flex-end; */
+  /* background-color:#fff; */
+  width: 30%;
+  margin: 10px;
+  color: #00000099;
+  font-size: 14px;
+  margin-right: 40px;
+  border:0.3 solid #b0b0b0 !important;
+  /* border:none; */
+  /* margin-top:15px; */
+  border-radius: 2px;
+  /* padding:0.8em; */
+
+  /* margin:10px 20px 10px 20px; */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  font-size: 13px;
+  font-family: var(--primaryFont);
 }
 
 .comment-input{
@@ -105,6 +180,12 @@ footer{
 p{
   font-weight: 200;
   letter-spacing: 2px;
+}
+
+.topBar{
+  justify-content: space-evenly;
+  flex-direction: row;
+  padding-left:30px !important
 }
 
 .comment{

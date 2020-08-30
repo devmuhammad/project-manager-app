@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,OnChanges, ChangeDetectionStrategy, ViewChild, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
 import { ProjectType, project } from 'src/app/reducer/project.reducer';
 import { ProjectService } from '../../services/project.service';
@@ -8,14 +8,18 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
 import { ActivityService } from 'src/app/services/activity.service';
 import { BottomSheetComponent } from 'src/app/component/bottom-sheet/bottom-sheet.component';
-
-
+import { UsersService } from 'src/app/services/users.service';
+import { RepositoryComponent } from 'src/app/component/modals/repository/repository.component'
+import { ReassignProjectComponent } from 'src/app/component/modals/reassign-project/reassign-project.component'
+import { ProjectTimelineComponent } from 'src/app/component/modals/project-timeline/project-timeline.component'
+import { ServerCredentialsComponent } from 'src/app/component/modals/server-credentials/server-credentials.component'
 
 
 @Component({
   selector: 'app-project-table',
   templateUrl: './project-table.component.html',
-  styleUrls: ['./project-table.component.css']
+  styleUrls: ['./project-table.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ProjectTableComponent implements OnInit {
@@ -34,6 +38,8 @@ export class ProjectTableComponent implements OnInit {
   constructor(private service: ProjectService,
               private activityService: ActivityService,
               private loadingBar: LoadingBarService,
+              private userService: UsersService,
+
               private snackBar: MatSnackBar,
               private commonservice: DefaultlayoutService,
               private dialog: MatDialog
@@ -47,7 +53,7 @@ export class ProjectTableComponent implements OnInit {
   @Output() public getExpand = new EventEmitter();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @Input() stats: boolean;
 
   public param = {
     page: 0 as number,
@@ -77,17 +83,29 @@ export class ProjectTableComponent implements OnInit {
   myTasks: number = 0
   projSearchKey = ''
   allprojs = []
+  sideOpened = true
+  userLabel = ''
+  userList : any[]
+  filtTaskList: any[]
+  currtaskProj: null
+  statsList = []
 
   toggleExpand(row, panel) {
     // console.log(row);
     this.expand = true;
+    this.sideOpened = true
     // this.rowData = {...row, expand: this.expand};
     // console.log(this.expand);
     return this.getExpand.emit({ showDrawer: this.expand, panelType: panel, data: row });
   }
 
+  openTask(){
+    this.sideOpened = !this.sideOpened
+  }
+
   getDataTable() {
   }
+
   async ngOnInit() {
     const profile = JSON.parse(localStorage.getItem('profile'))
     this.currUser = profile
@@ -96,6 +114,9 @@ export class ProjectTableComponent implements OnInit {
     if (userType === 'admin') { 
       this.isAdmin = true
       this.fetchAllTasks()
+      // this.fetchOwntaskList(profile.id);
+      this.fetchUsersList(profile.id)
+
     }else {
       this.isAdmin = false
       this.fetchOwntaskList(profile.id);
@@ -107,9 +128,42 @@ export class ProjectTableComponent implements OnInit {
     this.updateRecord();
   }
 
+  fetchUsersList(payload) {
+    this.userLabel = 'Fetching users...';
+    this.userService.userList(payload)
+      .subscribe(({ meta, data, message }) => {
+        if (message === 'Success') {
+          this.userLabel = 'Assigned to';
+          // console.log(data);
+          this.userList = data.map(item => {
+            return { ...item };
+          });
+        }
+      }, err => this.userLabel = 'Could\'nt fetch users');
+  }
 
-  setComplete(){
-    this.taskcomplete = !this.taskcomplete
+  async getTasks(project){
+    // console.log(project)
+    
+  if (!this.isAdmin){
+    return ;
+  }
+  this.openTask()
+  this.currtaskProj = project.projectId
+  this.loadingBar.start();
+    await this.service.getTaskByProject(project.projectId)
+    .subscribe(async({ message, data }) => {
+      if (message) {
+        this.taskList = data.map((item: any) => ({ ...item }));
+        this.loadingBar.complete();
+  }
+})
+  }
+
+  async setComplete(task){
+    // this.taskcomplete = !this.taskcomplete
+      const status = "Complete"
+      await this.updateTaskStatus(task, status)
   }
 
   newTask() {
@@ -117,8 +171,71 @@ export class ProjectTableComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data = this.currtaskProj
     dialogConfig.width = '40%';
-    this.dialog.open(BottomSheetComponent, dialogConfig);
+    this.dialog.open(BottomSheetComponent, dialogConfig).afterClosed().subscribe(data => {
+      if(data && data.action === 1) {
+        if (this.isAdmin){
+          this.fetchAllTasks()
+          // this.fetchOwntaskList(this.currUser.id)
+        }else this.fetchOwntaskList(this.currUser.id)
+        
+      }
+    });;
+  }
+
+  reassignProj(data) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = data
+    dialogConfig.width = '30%';
+    this.dialog.open(ReassignProjectComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.updateRecord();
+    }
+    );
+  }
+
+  projectTimeline(data){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = data
+    dialogConfig.width = '40%';
+    this.dialog.open(ProjectTimelineComponent, dialogConfig).afterClosed().subscribe(() => {
+      // this.updateRecord();
+    }
+    );
+  }
+
+
+
+  repo(data){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = data 
+    dialogConfig.width = '30%';
+    this.dialog.open(RepositoryComponent, dialogConfig).afterClosed().subscribe(data => {
+      if(data && data.action === 1) {
+        
+      }
+    });;
+  }
+
+  serverCreds(data){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = data 
+    dialogConfig.width = '70%';
+    this.dialog.open(ServerCredentialsComponent, dialogConfig).afterClosed().subscribe(data => {
+      if(data && data.action === 1) {
+        
+      }
+    });;
   }
 
   isCompleted(status){
@@ -131,7 +248,7 @@ export class ProjectTableComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '55%';
+    dialogConfig.width = '45%';
     this.dialog.open(CreateProjectModalComponent, dialogConfig).afterClosed().subscribe(
       () => {
         this.updateRecord();
@@ -145,12 +262,16 @@ export class ProjectTableComponent implements OnInit {
     await this.service.getTasksList(this.queryParam)
       .subscribe(async response => {
         if (response.message === 'Success') {
-          
           this.taskList = await response.data.map(item => {
             return { ...item };});
-
+            this.filtTaskList = await response.data.map(item => {
+              return { ...item };});
             this.loadingBar.complete();
+            // console.log(this.taskList)
         }
+      },err => {
+        console.log(err);
+        return this.taskList = [];
       })
   }
 
@@ -164,12 +285,13 @@ export class ProjectTableComponent implements OnInit {
     // if (datarray){
     this.totalProj = datarray.length
     datarray.forEach(element => {
-      if (element.projectstatus === 'Ongoing'){
+      if (element.projectstatus === 'Ongoing' || element.projectstatus === 'Initiated'){
         this.ongoingProj++
-        this.uncompletedProj++
+        // this.uncompletedProj++
       }else if (element.projectstatus === 'Completed'){
         this.completedProj++;
-      }else this.uncompletedProj++
+      }else if (element.projectstatus === 'Started' || element.projectstatus === 'Stopped' || element.projectstatus === 'Suspended'){
+        this.uncompletedProj++}
     })
 
    
@@ -182,7 +304,10 @@ export class ProjectTableComponent implements OnInit {
     this.taskList.forEach(el => {
      if (el.status === 'Completed'){
         this.completedTask++
-      }else this.uncompletedTask++
+      }else if (el.status === 'Ongoing' || el.status === 'Initiated' || el.status === 'Started'){
+        this.uncompletedTask++
+      }
+      
     })
 
     this.projectsProgress = Math.round(100/this.myTasks*this.completedTask)
@@ -205,38 +330,35 @@ export class ProjectTableComponent implements OnInit {
       .subscribe(async({ message, data }) => {
         if (message === 'Success') {
           this.taskList = data.map((item: any) => ({ ...item }));
+          this.filtTaskList = data.map((item: any) => ({ ...item }))
           // console.log(this.activityList);
           // this.taskList = this.activityList.filter((item: any) => item.actionflow === this.actionflow);
           await this.taskDetails()
           this.loadingBar.complete();
 
         } else {
-          this.activityList = [];
+          this.taskList = [];
         }
       }, err => {
         console.log(err);
-        return this.activityList = [];
+        return this.taskList = [];
       });
   }
 
 
   async updateStatus(data, status){
     this.loadingBar.start();
-
-    let projUpdt: any =  {}
-    projUpdt.clientid	= data.client.clientid
-    projUpdt.code	 = data.code
-    projUpdt.datecreated	= data.datecreated
-    projUpdt.description	= data.description
-    projUpdt.enddate	= data.enddate
-    projUpdt.lastmodified	= data.lastmodified
-    projUpdt.projecmangerid	= data.projecmanager
-    projUpdt.projectId	= data.projectId
-    projUpdt.projectname	= data.projectname
-    projUpdt.projectstatus	= status.description
-    projUpdt.projecttypeId	= data.projecttype.projecttypeid
-    projUpdt.startdate = data.startdate
-
+    if (status === 'Stopped') status = 'Suspended'
+    
+    let projUpdt : any = {}
+    Object.assign(projUpdt, ...data)
+   
+    // return;
+    projUpdt.projecmangerid = projUpdt.projecmanger.id
+    projUpdt.projecttypeId = projUpdt.projecttype.projecttypeId
+    projUpdt.projectstatus	= status
+   
+    // return;
    await this.service.updateProject(projUpdt).subscribe(async res =>{
     if (res.message === 'Success') {
       this.loadingBar.complete();
@@ -261,26 +383,18 @@ export class ProjectTableComponent implements OnInit {
 
   async updateTaskStatus(data, status){
     this.loadingBar.start();
-
-    let task: any =  {}
-    task.assignedto	= data.assignedto.id
-    task.comments	 = data.comments
-    task.datecreated	= data.datecreated
-    task.description	= data.description
-    task.enddate	= data.enddate
-    task.lastmodified	= data.lastmodified
-    task.parentid	= data.parentid
-    task.taskid	= data.taskid
-    task.projectid	= data.projectid.projectId
-    task.status	= status.description
-    // task.tasktypeId	= data.tasktype
-    task.startdate = data.startdate
-    task.userid = data.userid.id
+    // console.log(data)
+    let task : any = {}
+    Object.assign(task, ...data)
+ 
+    task.status	= status
+    task.usercomment = task.usercomment || ""
 
    await this.service.updateTask(task).subscribe(async res =>{
     if (res.message === 'Success') {
       this.loadingBar.complete();
       await this.fetchOwntaskList(this.currUser.id)
+      await this.reloadProject()
       this.snackBar.open('Update Successful', 'Dismiss', {
         panelClass: ['success'],
         duration: 7000,
@@ -310,6 +424,7 @@ export class ProjectTableComponent implements OnInit {
           // console.log(datarray)
           if (this.isAdmin){
           this.projArray = datarray
+          this.allprojs = datarray
            this.putDetails(datarray)
            this.loadingBar.complete();
 
@@ -371,7 +486,9 @@ export class ProjectTableComponent implements OnInit {
   async updateRecord() {
     this.loadingBar.start();
    await this.service.getStatusList().subscribe(async res => {if(res.message === 'Success'){
+
       this.statusList = res.data
+      res.data.forEach(el => {if(el.description != 'Completed') this.statsList.push(el)})
       // console.log(this.statusList)
     }});
     
@@ -390,11 +507,26 @@ export class ProjectTableComponent implements OnInit {
     this.projArray = this.allprojs
   }
   async applyProjFilter(){
-    await this.allprojs.push(this.projArray)
-    // function filterByValue(array, value) {
-      return this.projArray.filter((data) =>  JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1);
-    // }
-  //  return this.projArray.filter(this.projSearchKey.trim().toLocaleLowerCase());
+     this.projArray = this.allprojs
+     this.loadingBar.start();
+
+      // console.log(this.projArray.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1))
+      this.projArray = this.projArray.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1)
+        
+    this.loadingBar.complete();
+   
+  }
+
+  async filterTask(userId){
+     this.taskList = this.filtTaskList
+     this.loadingBar.start();
+
+     this.taskList = this.taskList.filter((task) => task.assignedto.id == userId)
+      // console.log(this.projArray.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1))
+      // this.projArray = this.projArray.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1)
+        
+    this.loadingBar.complete();
+   
   }
 
 }

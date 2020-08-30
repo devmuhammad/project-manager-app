@@ -1,0 +1,41 @@
+<div style="width: 100%">
+  <h2 mat-dialog-title>New Activity</h2>
+
+  <form [formGroup]="form" class="nwproject-form" style="display:flex; flex-direction:column">
+    <!-- <div style=" flex:1; flex-direction: column"> -->
+      <p>
+          <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
+            <mat-label>Activity Date</mat-label>
+            <!-- [value]="date.value"  -->
+
+          <input disabled matInput [matDatepicker]="picker" formControlName="startdate">
+                <!-- (dateInput)="filterDt('input', $event)"  -->
+              <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+          
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+      </p>
+      <p>
+      <mat-form-field class="project-form-field comment-input" floatLabel="never" style="width:100%">
+        <textarea matInput  formControlName="comment"
+                placeholder="Comment"
+                name="comment"  floatPlaceholder="never" ></textarea>
+                <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                  <mat-icon >person </mat-icon>
+               </button> 
+               <mat-error >Invalid activity</mat-error>
+    </mat-form-field>
+    </p>
+      
+    <mat-dialog-actions align="end">
+      <button class="mat-raised-button" (click)="close()">Close</button>
+     
+      <button class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'"
+        (click)="addActivities()">
+        <span></span>
+        Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>

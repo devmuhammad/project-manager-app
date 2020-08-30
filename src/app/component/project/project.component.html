@@ -3,6 +3,9 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [(opened)]="showSide">
     <div class="side-content" *ngIf="showSide" style="padding: 0px;">
+      <!-- <button *ngIf="item.title=== 'Team'" (click)="addTeam(sideData)" mat-button mat-icon-button style="float:left">
+        <mat-icon style="font-size: 14px">add_circle</mat-icon>
+      </button> -->
       <button (click)="closeSidePanel()" mat-button mat-icon-button style="float:right">
         <mat-icon style="font-size: 14px">cancel</mat-icon>
       </button>
@@ -18,20 +21,23 @@
       </mat-form-field> -->
       <!-- <p class="sub-title">Project Info</p> -->
       <ng-container *ngFor="let item of expandableData;let i = index">
-        <mat-expansion-panel class="panel-section" [ngClass]="{
+        <mat-expansion-panel class="panel-section" 
+        [ngClass]="{
           'todo' : sideData.projectstatus =='New',
           'inprogress' : sideData.projectstatus =='string',
           'completed' :sideData.projectstatus =='Completed'
-       }" *ngIf="item.title=== 'Activities' && sideData" (click)="toggleExpand(i)" [expanded]="panel===i"
+       }" 
+       *ngIf="item.title=== 'Activities' && sideData" (click)="toggleExpand(i)" [expanded]="panel===i"
           style="margin-bottom: 10px" [attr.data-index]="i">
           <mat-expansion-panel-header>
-            <span style="margin-right: 10px">{{sideData.activityCounts}} </span>{{item.title}}
+            <span style="margin-right: 10px">{{actvLength}} </span>{{item.title}}
           </mat-expansion-panel-header>
 
           <ng-container *ngFor=" let activity of projectActivities;let idx = index">
             <mat-expansion-panel (click)="toogleCollapse(idx)" [expanded]="innerpane===idx" [attr.data-index]="idx"
               class="panel-child" style="margin-bottom: 10px">
-              <mat-expansion-panel-header>
+              <mat-expansion-panel-header > 
+                
                 <label class="panel-label" for="">Activity Type: </label>
                 <span
                   style="font-size: 13px;color:var(--primaryColor);font-weight: 500">{{activity.actionflow}}</span>
@@ -39,29 +45,32 @@
 
               <mat-panel-description>
                 <div class="desc-container">
-                  <p matTooltip="Project Name" class="teammate-title">{{activity.projectid.description}}</p>
+                  <p matTooltip="Project Name" class="teammate-title">
+                  <mat-icon style="font-size: 12px">insert_comment</mat-icon>
+                    {{activity.usercomment}}
+                  </p>
                   <!-- <span matTooltip="Current project status is {{activity.projectid.projectstatus}} " class="panel-status"  [ngClass]="{
                               'todo' : activity.projectid.projectstatus =='New',
                               'inprogress' : activity.projectid.projectstatus =='string',
                               'completed' :activity.projectid.projectstatus =='Completed'
                            }"></span> -->
                   <ul style="margin-top:-5px" class="teammate-details">
-                    <li *ngIf="activity.tasktype">
-                      <label for="">Type of Task Assigned :</label>
-                      <span>{{activity.tasktype}}</span>
+                    <li *ngIf="activity.activitystatus">
+                      <label for="">Activity Type :</label>
+                      <span>{{activity.activitystatus}}</span>
                     </li>
                     <li *ngIf="activity.assignedto">
                       <label for="">Assignee :</label>
-                      <span>{{activity.assignedto.fullname}}</span>
+                      <span>{{activity.asssignedtoname}}</span>
                     </li>
-                    <li *ngIf="activity.userid">
+                    <li >
                       <label for="">Assigned by :</label>
-                      <span>{{activity.userid.fullname}}</span>
+                      <span>{{activity.username}}</span>
                     </li>
                     <li matTooltip="Additional  Comment">
                       <mat-divider></mat-divider>
-                      <mat-icon style="font-size: 12px">insert_comment</mat-icon>
-                      <label for="">{{activity.usercomment}}</label>
+                     
+                      <label for="">{{activity.projectname}}</label>
                     </li>
                   </ul>
 
@@ -146,6 +155,20 @@
             <span>Member(s)</span>
           </mat-expansion-panel-header>
 
+          <!-- <div style="flex:1; flex-direction:row;">
+          <mat-form-field appearance="outline" >
+            <mat-label>Add Team Member</mat-label>
+            <mat-select formControlName="assignTo" [(ngModel)]="selectedUser" class="input-select">
+              <mat-option *ngFor="let user of usersList" [value]="user.id">
+                {{user.fullname}}
+              </mat-option>
+            </mat-select>
+            
+          </mat-form-field>
+          <button mat-icon-button matSuffix class="mr-1 ml-1">
+            <mat-icon (click)="addTeam()" style="font-size:30px; color:grey">check_circle</mat-icon>
+          </button>
+        </div> -->
 
           <ng-container *ngFor=" let teammate of teamprofiles;let idx = index">
             <mat-expansion-panel style="margin-bottom: 7px" (click)="toogleCollapse(idx)" [expanded]="innerpane===idx"
@@ -173,6 +196,7 @@
               </mat-panel-description>
             </mat-expansion-panel>
           </ng-container>
+          
         </mat-expansion-panel>
 
 

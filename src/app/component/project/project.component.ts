@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar} from '@angular/material';
 import { ProjectService } from 'src/app/services/project.service';
 import {  DefaultlayoutService} from 'src/app/services/defaultlayout.service';
+import { UsersService } from 'src/app/services/users.service';
 import { isNgTemplate } from '@angular/compiler';
 import { DocumentUpdateComponent } from '../document-update/document-update.component';
 import { DocumentsService } from 'src/app/services/documents.service';
 import { AngularButtonLoaderService } from 'angular-button-loader';
+import {ProjectTableComponent} from '../project-table/project-table.component'
 
 @Component({
   selector: 'app-project',
@@ -19,6 +21,17 @@ export class ProjectComponent implements OnInit {
     size: 20,
     projectid: 0 as number,
   };
+  public queryParams = {
+    datefrom: '',
+    dateto: '',
+    enddate: '',
+    institutionId: '',
+    sFilter: '',
+    page: 0,
+    size: 20,
+  };
+  @ViewChild(ProjectTableComponent)
+  childComponent: ProjectTableComponent;
 
   sideData: any;
   constructor(
@@ -28,6 +41,8 @@ export class ProjectComponent implements OnInit {
     private documentservice: DocumentsService,
     private snackBar: MatSnackBar,
     private commonservice: DefaultlayoutService,
+    private userService: UsersService,
+
      ) { }
      isHandset$:any;
   showSide: boolean;
@@ -44,6 +59,10 @@ export class ProjectComponent implements OnInit {
   currentId: any;
   searchKey = '';
   SuggestedProject: any[];
+  usersList: any[];
+  selectedUser: any 
+  actvLength = 0;
+  
   expandables = [
     {title: 'Activities', description: 'No Activity', panelType: 'Activities'},
     {title: 'Documents', description: 'No Document attatched to Project', panelType: 'Documents'},
@@ -74,6 +93,11 @@ resizeName = (initialName, size) => {
     }
 
   }
+
+
+  // ngAfterViewInit() {
+  //   this.status = true;
+  // }
 
   getErrorNotification(message) {
     this.btnLoader.hideLoader();
@@ -132,7 +156,7 @@ resizeName = (initialName, size) => {
   }
 
   getUpdateDocx(row) {
-    console.log(row);
+    // console.log(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -144,7 +168,23 @@ resizeName = (initialName, size) => {
       }
     );
   }
+  userLabel = ""
 
+  fetchUserList() {
+    const authUser = JSON.parse(localStorage.getItem('profile'));
+
+    this.userLabel = 'Fetching users...';
+    this.userService.userList(authUser.id)
+      .subscribe(({ meta, data, message }) => {
+        if (message === 'Success') {
+          this.userLabel = 'Add Team Member';
+          // console.log(data);
+          this.usersList = data.map(item => {
+            return { ...item };
+          });
+        }
+      }, err => this.userLabel = 'Could\'nt fetch users');
+  }
 
   getFileExt(file) {
     const extToArray = [...file];
@@ -153,6 +193,9 @@ resizeName = (initialName, size) => {
   }
 
 async getTeamProfiles(id) {
+
+  this.fetchUserList()
+
   this.service.getProjectTeamMembers(id).subscribe(({data}) => {
     this.teamprofiles = data;
     // console.log(this.teamprofiles);
@@ -164,7 +207,7 @@ async getDocuments(id: number){
   this.queryParam.projectid =id;
   this.service.getProjectDocx(this.queryParam)
   .subscribe(({data})=>{
-    console.log(data)
+    // console.log(data)
     this.projectDocx = data.map((item: any) =>{
       const fileExt = this.getFileExt(item.docurl);
       return {...item, fileExt}
@@ -175,9 +218,12 @@ async getDocuments(id: number){
 
 async getActivities(projectId) {
   this.queryParam.projectid = projectId;
-  this.service.getProjectActivities(this.queryParam).subscribe(({data, message}) => {
-    console.log(data);
-    if (message === 'Success') { return  this.projectActivities = data;  }
+  this.service.getActivitiesByProject(projectId).subscribe(({data, message}) => {
+    
+    if (message === 'true') { 
+              this.actvLength = data.length;
+      return  this.projectActivities = data.map(item => {return { ...item };})
+    }
     this.projectActivities = [];
   }, err => this.projectActivities = []);
 
@@ -189,6 +235,7 @@ toogleCollapse(id) {
 
 closeSidePanel() {
   this.showSide =false;
+  this.childComponent.openTask()
 }
 
   toggleExpand(id) {
@@ -205,8 +252,14 @@ closeSidePanel() {
 
   }
 
+  // showTeamSelect = false
+
+  addTeam(team){
+
+  }
+
   getExpandData($event) {
-    console.log($event);
+    // console.log($event);
     const {showDrawer, data, panelType} = $event;
     this.sideData = data;
     this.showSide = showDrawer;

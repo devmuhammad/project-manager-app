@@ -1,88 +1,102 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import {MatTableDataSource, MatSort,MatPaginator} from '@angular/material'
+import { Component, OnInit,ViewChild, Input } from '@angular/core';
+import {MatTableDataSource, MatSort,MatPaginator, MatDialog, MatDialogConfig} from '@angular/material'
 import {ServerService} from '../../services/server.service'
 import { DefaultlayoutService } from 'src/app/services/defaultlayout.service';
+
+import { AddServerCredentialComponent } from '../modals/add-server-credentials/add-server-credential.component'
+
 @Component({
   selector: 'app-server-details',
   templateUrl: './server-details.component.html',
   styleUrls: ['./server-details.component.css']
 })
 export class ServerDetailsComponent implements OnInit {
-  displayedAccountColumns: string[] = ['#', 'name',  'provider', 'charges', 'actions'];
-  displayedCredentialsColumns: string[] = ['#', 'username',  'password','ipAddress','OS','servername','Type','accountid','actions'];
-  displayedToolsColumns: string[] = ['#',  'Database', 'applicationserver','credentialid','actions'];
-  displayedApplications: string[] =['#','applicationname', 'utilid', 'actions'];
-  constructor(private service: ServerService, private commonservice: DefaultlayoutService) { }
+ 
+  displayedCredentialsColumns: string[] = ['#', 'username',  'password','ipAddress','OS','servername','Type','actions'];
+  @Input() project: any 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator)paginator: MatPaginator;
+ 
+  constructor(private service: ServerService, 
+              private commonservice: DefaultlayoutService,
+              private dialog: MatDialog ) { }
+  
+  projId: any
   searchKey: '';
-  accountdataSource: MatTableDataSource<any>
-  toolsdataSource: MatTableDataSource<any>
+  credentials : any
   credentialsdataSource: MatTableDataSource<any>
-  applicationdataSource: MatTableDataSource<any>
+ 
   ngOnInit() {
-    this.commonservice.handleBreadChrome({parent: 'Sertings', child: 'Server'});
-    /* account data table*/
-    this.service.getSeverAccount()
-    .subscribe((account)=>{
-      let dataArray =account.map((item)=>{
-        return {...item}
-      });
-      this.accountdataSource = new MatTableDataSource(dataArray);
-    })
-    this.accountdataSource.sort =this.sort;
-    this.accountdataSource.paginator = this.paginator;
-     /* tools data table*/
-     this.service.getServerTools()
-    .subscribe((tools)=>{
-      let dataArray =tools.map((item)=>{
-        return {...item}
-      });
-      this.toolsdataSource = new MatTableDataSource(dataArray);
-    })
-    this.toolsdataSource.sort =this.sort;
-    this.toolsdataSource.paginator = this.paginator;
+    this.commonservice.handleBreadChrome({parent: 'Settings', child: 'Server'});
+
     /* credentials data table*/
-    this.service.getServerCredentials()
-    .subscribe((cred)=>{
-      let dataArray =cred.map((item)=>{
-        return {...item}
-      });
-      this.credentialsdataSource = new MatTableDataSource(dataArray);
-    })
-    this.credentialsdataSource.sort =this.sort;
-    this.credentialsdataSource.paginator = this.paginator;
+    this.projId = this.project.projectId
+    this.getCreds()
     /**
      * Application data table config
      * */
-    this.service.getServerApps()
-    .subscribe((apps)=>{
-      let dataArray =apps.map((item)=>{
-        return {...item}
-      });
-      this.applicationdataSource = new MatTableDataSource(dataArray);
+  //   this.service.getServerApps()
+  //   .subscribe((apps)=>{
+  //     let dataArray = apps.map((item)=>{
+  //       return {...item}
+  //     });
+  //     this.applicationdataSource = new MatTableDataSource(dataArray);
+  //   })
+  //   this.applicationdataSource.sort =this.sort;
+  //   this.applicationdataSource.paginator = this.paginator;
+  }
+
+  deleteServer(id){
+    this.service.deleteServerCredential(id)
+    .subscribe((res)=>{
+        if (res.message === "Success"){
+          this.getCreds()
+        }
     })
-    this.applicationdataSource.sort =this.sort;
-    this.applicationdataSource.paginator = this.paginator;
+ }
+
+    getCreds(){
+      this.service.getServerCredentialsProject(this.projId)
+      .subscribe((cred)=>{
+        let dataArray = cred.data
+        this.credentials = cred.data
+        // map((item)=>{
+        //   return {...item}
+        // });
+        this.credentialsdataSource = new MatTableDataSource(dataArray);
+      })
+      this.credentialsdataSource.sort =this.sort;
+      this.credentialsdataSource.paginator = this.paginator;
+  
+    }
+
+   openNew(el){
+     if (el){
+       this.project = {...this.project, ...el}
+     }else {
+      const projId = this.project.projectId
+      const projname = this.project.projectname
+      this.project = {}
+      this.project.projectid = projId
+      this.project.projectname = projname
+    }
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.data = this.project
+  dialogConfig.width = '30%';
+  this.dialog.open(AddServerCredentialComponent, dialogConfig).afterClosed().subscribe(() => {
+    // this.updateRecord();
+    this.getCreds()
+
   }
+  );
+}
+
+
 /*account table methods*/
-  accountsearchKey=""
-  onAccountSearchClear(){
-    this.accountsearchKey="";
-    this.applyAccountFilter();
-  }
-  applyAccountFilter(){
-    this.accountdataSource.filter = this.accountsearchKey.trim().toLocaleLowerCase();
-  }
-  /* tools table methods */
-  toolsearchKey=""
-  onToolSearchClear(){
-    this.toolsearchKey="";
-    this.applyToolFilter();
-  }
-  applyToolFilter(){
-    this.toolsdataSource.filter = this.toolsearchKey.trim().toLocaleLowerCase();
-  }
+  
    /* credentials table methods */
    credentialsSearchKey=""
    onCredSearchClear(){
@@ -93,12 +107,5 @@ export class ServerDetailsComponent implements OnInit {
      this.credentialsdataSource.filter = this.credentialsSearchKey.trim().toLocaleLowerCase();
    }
     /* Applications table methods */
-    appSearchKey=""
-    onAppSearchClear(){
-      this.appSearchKey="";
-      this.applyAppFilter();
-    }
-    applyAppFilter(){
-      this.applicationdataSource.filter = this.appSearchKey.trim().toLocaleLowerCase();
-    }
+   
 }

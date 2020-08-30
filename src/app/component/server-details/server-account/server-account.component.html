@@ -1,0 +1,87 @@
+
+<div class="page-container">
+   
+<div class="section-container">
+    <section>
+        <div class="section-header" style="width: 100%;">
+
+          <div>
+      <button small class="mat-raised-button" style="justify-content: flex-start;" (click)="openNew()">New Account</button>
+
+            <!-- <div><p><mat-icon>network</mat-icon></p></div>
+            <div><p>Sever Account</p></div> -->
+          </div>
+          <mat-form-field class="search-form-field" floatLabel="never" >
+              <input [(ngModel)]="accountsearchKey" (keyup)="applyAccountFilter()" matInput  placeholder="Search Server Account"/>
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="accountsearchKey" (click)="onAccountSearchClear()">
+                  <mat-icon >close</mat-icon>
+              </button>
+              <button mat-button matSuffix mat-icon-button  *ngIf="!searchKey" >
+                  <mat-icon >search</mat-icon>
+              </button>
+          </mat-form-field>
+        </div>
+          <div class="mat-elevation-z8">
+              <mat-table [dataSource]="accountdataSource" matSort >
+                  <ng-container  matColumnDef="#" style="padding: 0 0 0 10px">
+                      <mat-header-cell  mat-sort-header *matHeaderCellDef> # </mat-header-cell>
+                      <mat-cell colspan="1" *matCellDef="let element"> {{element.id}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                        <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="provider">
+                        <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Server Provider </mat-header-cell>
+                        <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.serverProvider}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="charges">
+                        <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Monthly Charges (₦) </mat-header-cell>
+                        <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.monthlyCharges}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Status </mat-header-cell>
+                        <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.status}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell class="cell-name" *matHeaderCellDef >Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_horizontal</mat-icon></button>
+                            <mat-menu #moreMenu="matMenu" yPosition="below">
+                                <button class="menu-button" mat-menu-item (click)="openNew(element)">
+                                  <mat-icon >
+                                    edit
+                                  </mat-icon>
+                                   <span>
+                                     Edit
+                                   </span>
+                                 </button>
+                                 <button class="menu-button" mat-menu-item (click)="deleteServer(element.id)">
+                                    <mat-icon >
+                                      delete_forever
+                                    </mat-icon>
+                                    <span>
+                                      Delete
+                                    </span>
+                                  </button>
+                                  <button class="menu-button" mat-menu-item>
+                                      <mat-icon >
+                                          arrow_drop_down
+                                      </mat-icon>
+                                      <span>
+                                        {{showStatus(element.status)}}
+                                      </span>
+                                    </button>
+                                    </mat-menu>
+                           </mat-cell>
+                      </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedAccountColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedAccountColumns;"></mat-row>
+              </mat-table>
+              <mat-paginator [pageSizeOptions]="[3,5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+          </div>
+      </section>
+
+ 
+</div>
+    </div>

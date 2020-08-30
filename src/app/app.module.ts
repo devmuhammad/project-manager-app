@@ -63,6 +63,7 @@ import { DocumentTypesComponent } from './component/document-types/document-type
 import { StatusTypesComponent } from './component/status-types/status-types.component';
 import { BreadcrumblayoutComponent } from './layout/breadcrumblayout/breadcrumblayout.component';
 import { NotificationsComponent } from './component/modals/notifications/notifications.component';
+import { RepositoryComponent } from './component/modals/repository/repository.component';
 import { ActivityContainerComponent } from './component/activity-container/activity-container.component';
 import { DocumentContainerComponent } from './component/document-container/document-container.component';
 import { DragDropDirective } from './component/drag-drop.directive';
@@ -88,7 +89,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -111,6 +112,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { SettingsContainerComponent } from './component/settings-container/settings-container.component';
+import { ReassignProjectComponent } from './component/modals/reassign-project/reassign-project.component';
+import { ProjectTimelineComponent } from './component/modals/project-timeline/project-timeline.component';
+import { AddActivityComponent } from './component/modals/add-activity/add-activity.component';
+import { ServerAccountComponent } from './component/server-details/server-account/server-account.component';
+import { ToolsComponent } from './component/server-details/tools/tools.component';
+import { AddServerAccountComponent } from './component/modals/add-server-account/add-server-account.component';
+import { AddServerCredentialComponent } from './component/modals/add-server-credentials/add-server-credential.component';
+import { AddServerToolComponent } from './component/modals/add-server-tools/add-server-tool.component';
 // import { persistStore } from 'redux-persist';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -164,6 +173,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     StatusTypesComponent,
     BreadcrumblayoutComponent,
     NotificationsComponent,
+    RepositoryComponent,
     ActivityContainerComponent,
     DocumentContainerComponent,
     DragDropDirective,
@@ -171,7 +181,16 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     DocumentUpdateComponent,
     TaskContainerComponent,
     UserContainerComponent,
-    SettingsContainerComponent
+    SettingsContainerComponent,
+    ReassignProjectComponent,
+    ProjectTimelineComponent,
+    AddActivityComponent,
+    ServerAccountComponent,
+    ToolsComponent,
+    AddServerAccountComponent,
+    AddServerCredentialComponent,
+    AddServerToolComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -186,7 +205,6 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     MaterialModule,
     ScrollingModule,
     MatInputModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     A11yModule,
     CdkStepperModule,
@@ -238,6 +256,14 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     HttpClientModule
   ],
   entryComponents: [
+    AddServerCredentialComponent,
+    AddServerToolComponent,
+    AddServerAccountComponent,
+    ServerCredentialsComponent,
+    AddActivityComponent,
+    ProjectTimelineComponent,
+    ReassignProjectComponent,
+    RepositoryComponent,
     BottomSheetComponent,
     CreateProjectModalComponent,
     NewUserModalComponent,
@@ -261,7 +287,11 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     NotificationsComponent,
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ProjectService, MatDatepickerModule,AuthGuard],
+  providers: [ProjectService, MatDatepickerModule,AuthGuard, 
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    // {provide: MAT_RADIO_DEFAULT_OPTIONS,
+    // useValue: { color: 'primary' }
+],
   bootstrap: [AppComponent]
 })
 

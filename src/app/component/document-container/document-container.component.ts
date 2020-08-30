@@ -27,6 +27,7 @@ export class DocumentContainerComponent implements OnInit {
   fileColumns = ['File Name', 'Actions'];
   // activityService: any;
   taskList: any;
+  docList: any[];
   constructor(private commonservice: DefaultlayoutService,
               private loadingBar: LoadingBarService,
               private fb: FormBuilder,
@@ -39,7 +40,7 @@ export class DocumentContainerComponent implements OnInit {
               private users: UsersService,
               private documentservice: DocumentsService) {
     this.form = this.fb.group({
-      activityid: ['', Validators.required],
+      // activityid: ['', Validators.required],
       documenttypeid: ['', Validators.required],
       projectid: ['', Validators.required],
       receivedfrom: ['', Validators.required],
@@ -50,7 +51,9 @@ export class DocumentContainerComponent implements OnInit {
   public credentials = {
     page: 0, institutionId: 1, size: 20, sFilter: '', dateto: '', datefrom: ''
   };
-
+  showFolders = true
+  isAdmin = false
+  currUser : any
   public queryParam = {
     datefrom: '',
     dateto: '',
@@ -65,10 +68,10 @@ export class DocumentContainerComponent implements OnInit {
     receivedfrom: '',
     file: null,
     parentId: 0 as number,
-    // taskId: '',
+    taskId: 0,
     description: '',
     projectId: 0 as number,
-    activityId: '',
+    activityId: 1,
     doctypeId: 0 as number,
 
 
@@ -83,7 +86,9 @@ export class DocumentContainerComponent implements OnInit {
   files: any = [];
   documentList = [];
   searchKey: '';
-  projectList: '';
+  projectList = [];
+  projSearchKey = '';
+
   resizeName = (initialName) => {
     if (initialName) {
       const length = 20;
@@ -106,15 +111,55 @@ export class DocumentContainerComponent implements OnInit {
     }
 
   }
+
+  openFiles(proj){
+    this.documentList = this.docList
+    this.documentList = this.documentList.filter((el) => {
+       return el.projectid == proj.projectId
+    })
+    this.showFolders =!this.showFolders
+  }
+
   getProjectList() {
     this.projectservice.getProjectList(this.queryParam)
-      .subscribe(response => {
+      .subscribe(async response => {
         if (response.message === 'Success') {
           this.loadingBar.complete();
-          this.projectList = response.data.map(item => {
+          
+          const datarray = response.data.map(item => {
             return { ...item };
           });
-          console.log(this.projectList);
+          if (this.isAdmin){
+            this.projectList = datarray
+             this.loadingBar.complete();
+  
+              }else {
+                const myprojects = []
+  
+               await datarray.forEach(async el => {
+                 if (el.teamMemberCounts >= 1){
+                  await this.projectservice.getProjectTeamMembers(el.projectId).subscribe(async ({data}) => {
+                   
+                    await data.forEach(async e => {
+                     if(e.id === this.currUser.id){
+                      // await myprojects.push(el)
+                      this.projectList.push(el)
+   
+                     }
+                     
+                    })
+                    // await this.putDetails(myprojects)
+                  });
+                  
+                  
+                  
+                 }
+               }) 
+  
+               
+               this.loadingBar.complete();
+            }
+          // console.log(this.projectList);
         }
       });
   }
@@ -157,7 +202,6 @@ export class DocumentContainerComponent implements OnInit {
     this.loadingBar.start();
     return this.documentservice.getDocumentList(credentials)
       .subscribe(res => {
-        console.log(res);
         if (res.message === 'Success') {
           this.loadingBar.complete();
           this.documentList = res.data.map((item: any) => {
@@ -166,6 +210,7 @@ export class DocumentContainerComponent implements OnInit {
             // console.log({ ...item, fileExt });
             return { ...item, fileExt, name };
           });
+          this.docList = this.documentList
           this.dataSource = new MatTableDataSource(this.documentList);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
@@ -184,13 +229,18 @@ export class DocumentContainerComponent implements OnInit {
   }
   ngOnInit() {
     const profile = JSON.parse(localStorage.getItem('profile'));
+    this.currUser = profile
+    const userType = localStorage.getItem('userType')
+    if (userType === 'admin') { 
+      this.isAdmin = true
+    }
     this.getList(this.credentials);
     this.fetchInstitutionList();
     this.getUsers(profile.id);
     // this.fetchOwntaskList(profile.id);
     this.getDocType();
     this.getProjectList();
-    this.commonservice.handleBreadChrome({ parent: 'Document', child: 'Activities' });
+    this.commonservice.handleBreadChrome({ parent: 'Document', child: 'Files' });
   }
 
   async fetchOwntaskList(id) {
@@ -234,16 +284,19 @@ export class DocumentContainerComponent implements OnInit {
     });
   }
   attatchFile(event : FileList) {
-    this.inputFields.file = event.item(0);
-    console.log(event.item(0))
+    // this.inputFields.file = '@'+event.item(0).name+';type='+event.item(0).type;
+    this.inputFields.file = event.item(0)
+    // console.log(event.item(0))
     this.files.push(event.item(0));
   }
 
   uploadIteratedfiles(payload) {
-    console.log(payload);
+    // console.log(payload);
     this.documentservice.uploadDocument(payload)
       .subscribe(res => {
-        if (res.message === 'Success') {return this.getSuccessNotified('New Document Added') }
+        if (res.message === 'Success') {
+          this.getList(this.credentials);
+          return this.getSuccessNotified('New Document Added') }
         this.getErrorNotified("Something went wrong");
         this.flag =1;
       }, err => {
@@ -272,7 +325,7 @@ export class DocumentContainerComponent implements OnInit {
     // if (this.files) {
       // for (const item of this.files) {
         // console.log(item);
-    this.inputFields.activityId = this.form.get('activityid').value;
+    // this.inputFields.activityId = 1;
     this.inputFields.description = this.form.get('description').value;
     this.inputFields.doctypeId = this.form.get('documenttypeid').value;
     // this.inputFields.taskId = this.form.get('taskid').value;
@@ -362,6 +415,22 @@ export class DocumentContainerComponent implements OnInit {
   applyFilter() {
     this.dataSource.filter = this.searchKey.trim().toLocaleLowerCase();
   }
+
+  clearSearch(){
+    this.projSearchKey="";
+    this.documentList = this.docList
+  }
+
+  async applyDocFilter(){
+    this.documentList = this.docList
+    this.loadingBar.start();
+
+     // console.log(this.projects.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1))
+     this.documentList = this.documentList.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1)
+       
+   this.loadingBar.complete();
+  
+ }
 
 }
 

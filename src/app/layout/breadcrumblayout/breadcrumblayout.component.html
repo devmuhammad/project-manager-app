@@ -18,17 +18,17 @@
   <!-- <app-breadcrumblayout></app-breadcrumblayout> -->
 
     <div style="display:flex; align-items:center;flex-direction: row;">
-      <div style="display:flex; align-items:center;margin-right:30px">
+      <!-- <div style="display:flex; align-items:center;margin-right:30px">
 
        <button *ngIf="isAdmin" (click)="onCreate()" style="background-color: var(--primaryColor);color:white" mat-raised-button  matTooltipPosition="right" matTooltip="New project" >
-        <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> -->
+        <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> 
         New Project
       </button>
        <button *ngIf="!isAdmin" disabled  style="background-color: rgb(209, 206, 206);color:white;cursor:not-allowed" mat-raised-button >
-        <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> -->
+        <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> 
         New Project
       </button>
-    </div>
+    </div> -->
       <div style="display:flex; justify-content:space-around; align-items:center;margin-right:30px">
         
         
@@ -52,20 +52,21 @@
               
             <div class="nwrapper">
                
-                <h4 style="color: var(--greyColor);font-size: 15px;"> <span style="color: var(--primaryColor)">{{item.usercomment}}</span></h4>
+                <!-- <h4 style="color: var(--greyColor);font-size: 15px;"> <span style="color: var(--primaryColor)">{{item.usercomment}}</span></h4> -->
               <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)">{{item.projectid.projectname}}</p> -->
                 <div class="notification-header">
-                    <p class="actionflow"> <span style="color: var(--greyColor);font-size: 13px" >Action flow</span> {{item.actionflow}}</p>
-                    <p style="color: var(--greyColor);font-size: 13px">Action: <span style="color: var(--primaryColor)">{{item.tasktype}}</span></p>
+                  <div class="author">
+                    <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)"><span style="color: var(--greyColor);font-size: 13px" >Project name</span>{{item.projectid.projectname}}</p>  -->
+
+                  <!-- <span  style="color: var(--greyColor);font-size: 13px;margin-right: 10px">Assigned By </span>
+                  <p style="font-size: 11px;"> {{item.userid.fullname}}</p> -->
+                  <!-- <span><img width="20px" src="../../../assets/img/avatar.png" alt="assignedby"></span> -->
+              </div>
+                    <!-- <p class="actionflow"> <span style="color: var(--greyColor);font-size: 13px" >Action flow</span> {{item.actionflow}}</p> -->
+                    <!-- <p style="color: var(--greyColor);font-size: 13px">Action: <span style="color: var(--primaryColor)">{{item.tasktype}}</span></p> -->
                   </div>
                   
-                  <div class="author">
-                      <!-- <p  style="text-align: center;margin-top:5px;color: var(--primaryColor)"><span style="color: var(--greyColor);font-size: 13px" >Project name</span>{{item.projectid.projectname}}</p>  -->
-
-                    <span  style="color: var(--greyColor);font-size: 13px;margin-right: 10px">Assigned By </span>
-                    <p style="font-size: 11px;"> {{item.userid.fullname}}</p>
-                    <!-- <span><img width="20px" src="../../../assets/img/avatar.png" alt="assignedby"></span> -->
-                </div>
+                 
               </div>
               <mat-divider></mat-divider>
             <!-- <mat-divider></mat-divider> -->

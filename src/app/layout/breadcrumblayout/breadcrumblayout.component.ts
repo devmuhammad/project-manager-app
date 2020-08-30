@@ -45,8 +45,8 @@ export class BreadcrumblayoutComponent implements OnInit {
     // const authUser = localStorage.getItem('currentUser');
     // if (!authUser) { return this.service.navigateToPath('/login'); }
     const userType = localStorage.getItem('userType')
-    if (userType === 'admin') this.isAdmin = true 
-    else this.isAdmin = false
+    if (userType === 'admin'){ this.isAdmin = true 
+    }else this.isAdmin = false
     this.getProfile(this.commonservice.user);
     const profile = JSON.parse(localStorage.getItem('profile'));
     this.fetchOwnnotifications(profile.id);

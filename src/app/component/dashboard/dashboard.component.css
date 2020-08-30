@@ -28,11 +28,11 @@
 .boxtext-head{
     color:#fff;
     font-size: 18px;
-    font-family:'Raleway'
+    /* font-family:'Raleway' */
 }
 .boxtext{
     color:#fff;
     font-size:70px;
     font-weight:900;
-    font-family: 'Raleway';
+    /* font-family: 'Raleway'; */
 }

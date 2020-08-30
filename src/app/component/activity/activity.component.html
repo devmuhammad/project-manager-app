@@ -6,23 +6,43 @@
     </p> -->
     <div class="actiivty-wrapper">
 
-      <div class="project-list"(mouseleave)="scrollRight=false" (mouseenter)="scrollRight=true;scrollLeft=false">
+      <div class="project-list" style="width:25%" (mouseleave)="scrollRight=false" (mouseenter)="scrollRight=true;scrollLeft=false">
 
-        <h5 mat-subheader>Projects List</h5>
-                  <cdk-virtual-scroll-viewport (scrolledIndexChange)="getNextbar($event)" itemSize="100" class="scroll-container">
-                      <mat-list>
-                        <mat-list-item *cdkVirtualFor="let item of allProjects">
-                            <mat-icon class="project-icon" mat-list-icon>folder</mat-icon>
-                            <h4 class="project-name" mat-line>{{item.projectname}}</h4>
-                            <p mat-line> {{dateStarted(item.startdate)}} </p>
-                            <mat-divider></mat-divider>
-                        </mat-list-item>
-                      </mat-list>
+        <h5 mat-subheader>Projects List </h5>
+        <form [formGroup]="form" class="form-section">
+                  <cdk-virtual-scroll-viewport (scrolledIndexChange)="getNextbar($event)" itemSize="50"  class="scroll-container">
+                    <mat-selection-list #projects [multiple]="false" >
+
+                      <mat-list-option *ngFor="let item of allProjects" [selected]="item.selected" [value]="item" (click)="handleSelectionChange(item)">
+                          <mat-icon class="project-icon" mat-list-icon>folder</mat-icon>
+                          <h4 class="project-name" mat-line>{{item.projectname}}</h4>
+                          <p mat-line> {{dateStarted(item.startdate)}} </p>
+                          <!-- <mat-divider></mat-divider> -->
+                          
+                      </mat-list-option>
+                    </mat-selection-list>
+                    <!-- <mat-list role="list" >
+                      <mat-list-item style="flex-direction: row;margin-bottom:10px" role="listitem" *ngFor="let item of allProjects; let i = index">
+                        -->
+                      <!-- <mat-radio-button [value]="item" (change)="handleSelectionChange($event.value)">
+                        <mat-list-item >
+                          <mat-icon class="project-icon" mat-list-icon>folder</mat-icon>
+                          <h4 class="project-name" mat-line>{{item.projectname.toUpperCase()}}</h4>
+                          <p mat-line> {{dateStarted(item.startdate)}} </p>
+                          <mat-divider></mat-divider>
+                          
+                      </mat-list-item>
+                      </mat-radio-button> -->
+                      
+                      <!-- </mat-list-item>
+                      </mat-list> -->
+                    
                     </cdk-virtual-scroll-viewport>
-
+          </form>
+                    
       </div>
      <div class="detail-container">
-          <h5 mat-subheader>Activities</h5>
+          <h5 mat-subheader style="margin-left: 25px;margin-bottom:50px">Activities</h5>
           <app-activity-detail>
           </app-activity-detail>
      </div>

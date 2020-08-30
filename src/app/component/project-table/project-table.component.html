@@ -1,33 +1,44 @@
 <div class="section-header" style="width: 100%;max-height:50px">
   <mat-form-field class="search-form-field" style="padding-right: 20px;">
-    <input [(ngModel)]="projSearchKey" (keyup)="applyProjFilter()" matInput
+    <input [(ngModel)]="projSearchKey" (keyup.enter)="applyProjFilter()" matInput
       placeholder="Search Project" />
 
     <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="projSearchKey"
       (click)="clearSearch()"> -->
-      <mat-icon matSuffix *ngIf="projSearchKey" (click)="clearSearch()">close</mat-icon>
+      <mat-icon button matSuffix *ngIf="projSearchKey" style="cursor:pointer " (click)="clearSearch()">close</mat-icon>
     <!-- </button> -->
     <!-- <button mat-button matSuffix mat-icon-button *ngIf="!searchKey"> -->
-      <mat-icon matSuffix *ngIf="!projSearchKey">search</mat-icon>
+      <mat-icon matSuffix *ngIf="!projSearchKey" >search</mat-icon>
     <!-- </button> -->
   </mat-form-field>
+  <div style="display:flex; align-items:center;">
+
+    <button *ngIf="isAdmin" (click)="onCreate()" style="background-color: var(--primaryColor);color:white" mat-raised-button  matTooltipPosition="right" matTooltip="New project" >
+     <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> -->
+     New Project
+   </button>
+    <button *ngIf="!isAdmin" disabled  style="background-color: rgb(209, 206, 206);color:white;cursor:not-allowed" mat-raised-button >
+     <!-- <mat-icon style="font-size:20px" class="tool-icon">add</mat-icon> -->
+     New Project
+   </button>
+ </div>
    
 </div>
 <div>
   <div class="projContainer">
 
     <!-- TOP SUMMARY CARD -->
-    <div style="margin-left:5px;display:flex;justify-content:center;align-items:center; margin-right:5px;height: 100px;width:100%;margin-top:20px; margin-bottom:20px; border-radius:5px; background-color:#E9D8FD">
+    <div style="margin-left:5px;display:flex;justify-content:center;align-items:center; margin-right:5px;height: 80px;width:100%;margin-top:40px; margin-bottom:20px; border-radius:5px; background-color:#E9D8FD">
       <div *ngIf="isAdmin" style="display:flex; flex-direction:column">
-        <span  style="padding-bottom:10px">Hi {{alias}}, You have a total of {{totalProj}} projects and completed {{completedProj}} this week.</span>
+        <span  style="padding-bottom:10px">Hi {{alias}}, There are {{totalProj}} total projects and {{completedProj}} completed this week.</span>
         <!-- <span>You have completed 5 projects in the last week </span> -->
-          <span>You have {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing project, You are almost there</span>
+          <span> {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing project</span>
       </div>
           <div *ngIf="!isAdmin" style="display:flex; flex-direction:column">
        
-          <span style="padding-bottom:10px">Hi {{alias}}, You have a total of {{totalProj}} tasks and completed {{completedProj}} this week.</span>
+          <span style="padding-bottom:10px">Hi {{alias}}, You have a total of {{myTasks}} tasks and completed {{completedTask}} this week.</span>
         <!-- <span>You have completed 5 projects in the last week </span> -->
-          <span>You have {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing tasks, You are almost there</span>
+          <span>You have {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing tasks, You are doing well</span>
       </div>
       
     </div>
@@ -43,8 +54,10 @@
           <!-- <div style="border-bottom-width:5px; border-bottom-color:#805AD5"> -->
         <mat-card-title style="font-weight:600; font-size: medium;color:var(--primaryColor)">Project Overview</mat-card-title>
       <!-- </div> -->
-        <mat-card-subtitle><mat-icon style="color:var(--primaryColor); font-size: small;">calendar_today</mat-icon> {{todayDate}}</mat-card-subtitle>
-        </div>
+        <mat-card-subtitle style="margin-bottom:0px"><mat-icon style="color:var(--primaryColor); font-size: small;">calendar_today</mat-icon> {{todayDate}}</mat-card-subtitle>
+        <button mat-button small (click)="openTask()">View Tasks</button>
+        
+      </div>
 
       </div>
       
@@ -55,28 +68,38 @@
         <mat-card-title style="font-weight:500;justify-content: flex-start;flex:1; font-size: medium;color:var(--primaryColor)">{{data.code}} </mat-card-title>
         <mat-chip-list style="justify-content: center;flex:1">
           <div  >
-            <mat-chip [matMenuTriggerFor]="menu" (click)="updateStatus(data,status)" style="background-color:#E2E8F0;cursor: pointer; " *ngIf="data.projectstatus === 'New'">Created</mat-chip>
-            <mat-chip [matMenuTriggerFor]="menu" (click)="updateStatus(data,status)" style="background-color:#FBD38D;cursor: pointer" *ngIf="data.projectstatus === 'Ongoing'">In progress</mat-chip>
-            <mat-chip [matMenuTriggerFor]="menu" (click)="updateStatus(data,status)" style="background-color:#90CDF4;cursor: pointer" *ngIf="data.projectstatus === 'Initiated'">Started</mat-chip>
-            <mat-chip [matMenuTriggerFor]="menu" (click)="updateStatus(data,status)" style="background-color:#FEB2B2;cursor: pointer" *ngIf="data.projectstatus === 'Stopped'">Stopped</mat-chip>
-            <mat-chip [matMenuTriggerFor]="menu" (click)="updateStatus(data,status)" style="background-color:#9AE6B4;cursor: pointer" *ngIf="data.projectstatus === 'Completed'">Completed</mat-chip>
+            <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#E2E8F0;cursor: pointer; " *ngIf="data.projectstatus === 'Created'">Created</mat-chip>
+            <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#FBD38D;cursor: pointer" *ngIf="data.projectstatus === 'Ongoing'">In progress</mat-chip>
+            <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#90CDF4;cursor: pointer" *ngIf="data.projectstatus === 'Initiated'">Started</mat-chip>
+            <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#FEB2B2;cursor: pointer" *ngIf="data.projectstatus === 'Stopped' || data.projectstatus === 'Suspended'">Suspended</mat-chip>
+            <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#9AE6B4;cursor: pointer" *ngIf="data.projectstatus === 'Completed'">Completed</mat-chip>
           </div>
           <mat-menu  #menu="matMenu" yPosition="below" style="background-color:#f3f3f3;">
-            <button *ngFor="let status of statusList"  class="menu-button" mat-menu-item >
-               <span>
+            <ng-container *ngIf="isAdmin"  >
+            <button *ngFor="let status of statsList" (click)="updateStatus(data,status.description)" class="menu-button" mat-menu-item >
+               <span >
                  {{status.description}}
                </span>
              </button>
-            
+            </ng-container>
                 </mat-menu>
        
       </mat-chip-list>
         <span   style="flex:1;display:flex; justify-content:center; align-items: center;">
-          <img matTooltip="Team Members" style="cursor:pointer" (click)="toggleExpand(data,'Team')" matTooltipPosition="right" width="20px" src="../../../assets/img/avatar.png" alt="Team"> {{data.teamMemberCounts}}</span>
+          <img matTooltip="Team Members" style="cursor:pointer" (click)="toggleExpand(data,'Team')" matTooltipPosition="right" width="20px" src="../../../assets/img/avatar.png" alt="Team"> 
+          {{data.teamMemberCounts}}</span>
        
           <div style="flex:1;display:flex; justify-content: flex-end">
           <button id="file" mat-icon-button [matMenuTriggerFor]="moreMenu"><mat-icon>more_vert</mat-icon></button>
           <mat-menu #moreMenu="matMenu" yPosition="below">
+            <button class="menu-button" (click)="projectTimeline(data)" mat-menu-item>
+              <mat-icon style="color:var(--darkColor)">
+                local_activity
+              </mat-icon>
+              <span>
+                Project Timeline
+              </span>
+          </button>
               <!-- <button class="menu-button" mat-menu-item>
                 <mat-icon >
                   timer
@@ -85,7 +108,15 @@
                    Set Duration
                  </span>
                </button> -->
-               <button class="menu-button" mat-menu-item>
+               <button [disabled]="!isAdmin" class="menu-button" mat-menu-item (click)="reassignProj(data)">
+                  <mat-icon>
+                    person
+                  </mat-icon>
+                  <span>
+                    Reassign Project
+                  </span>
+                </button>
+               <button class="menu-button" mat-menu-item (click)="serverCreds(data)">
                   <mat-icon >
                     router
                   </mat-icon>
@@ -93,7 +124,7 @@
                     Server Credentials
                   </span>
                 </button>
-                <button class="menu-button" mat-menu-item>
+                <button class="menu-button" mat-menu-item (click)="repo(data)">
                     <mat-icon >
                       link
                     </mat-icon>
@@ -101,25 +132,19 @@
                       Repository
                     </span>
                   </button>
-                  <!-- <button class="menu-button" (click)="toggleExpand(row,'webHook')" mat-menu-item>
-                      <mat-icon style="color:var(--darkColor)">
-                        web
-                      </mat-icon>
-                      <span>
-                        Web Hook
-                      </span>
-                  </button> -->
+                  
                   </mat-menu>
                 </div>
         </div>
 
         <div style="display: flex;flex-direction: row;align-items:center; justify-content: space-between;margin-bottom:5px;padding-top:20px">
           
-          <button mat-button  (click)="toggleExpand(data,'Activities')"><mat-card-subtitle>{{data.activityCounts}} activities</mat-card-subtitle></button>
-          <button mat-button ><mat-card-subtitle>{{data.taskCounts}} tasks</mat-card-subtitle></button>
-          <button mat-button (click)="toggleExpand(data,'Documents')"><mat-card-subtitle>{{data.documentCounts}} documents</mat-card-subtitle></button>
-          <mat-card-subtitle *ngIf="!passDeadline(data.enddate)">Due: {{deadlineDate(data.enddate)}}</mat-card-subtitle>
-          <mat-card-subtitle *ngIf="passDeadline(data.enddate)" style="color:red">Due: {{deadlineDate(data.enddate)}}</mat-card-subtitle>
+        <mat-card-subtitle style="justify-content: flex-start;"><span style="font-weight: 600;">{{data.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span></mat-card-subtitle>
+          <!-- <button mat-button  (click)="toggleExpand(data,'Activities')"><mat-card-subtitle>{{data.activityCounts}} activities</mat-card-subtitle></button> -->
+          <button mat-button style="flex:1;display:flex; justify-content:flex-end; align-items: center;" (click)=getTasks(data)><mat-card-subtitle>{{data.taskCounts}} tasks</mat-card-subtitle></button>
+          <button mat-button style="flex:1;display:flex; justify-content:flex-end; align-items: center;" (click)="toggleExpand(data,'Documents')"><mat-card-subtitle>{{data.documentCounts}} documents</mat-card-subtitle></button>
+          <mat-card-subtitle style="flex:1;display:flex;align-items: center;justify-content: flex-end;" *ngIf="!passDeadline(data.enddate)">Due: {{deadlineDate(data.enddate)}}</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="passDeadline(data.enddate)" style="color:red;flex:1;display:flex; align-items: center;justify-content: flex-end;">Due: {{deadlineDate(data.enddate)}}</mat-card-subtitle>
         </div>
         <mat-divider></mat-divider>
 
@@ -136,7 +161,7 @@
 
 
     <!-- Right Card TASKS -->
-    <mat-card class="projItem">
+    <mat-card class="projItem" *ngIf="!sideOpened">
 
       <!-- FOR USERS -->
       <div *ngIf="!isAdmin">
@@ -158,21 +183,20 @@
           <mat-list-item class="mb-4 flex:1" *ngFor="let task of taskList">
           <div style=" display: flex;flex:1; flex-direction:row; justify-content:space-between">
             <span class="d-flex flex-1">
-          <mat-icon (click)="setComplete()" *ngIf="!isCompleted(task.status) && !taskcomplete" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
-          <mat-icon (click)="setComplete()" *ngIf="isCompleted(task.status) || taskcomplete" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
+          <mat-icon (click)="setComplete(task)" *ngIf="task.status !== 'Complete'" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
+          <mat-icon (click)="setComplete(task)" *ngIf="task.status === 'Complete'" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
             
-            <mat-card-subtitle  *ngIf="isCompleted(task.status) || taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> 
+            <mat-card-subtitle  *ngIf="task.status === 'Complete'" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> 
               {{task.description}}
-              <mat-card-subtitle class="font-weight-lighter" style=" font-size:14px; ">
-                {{task.projectid.projectname}} / {{task.tasktype}}
-              </mat-card-subtitle>
+              <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
+                {{task.projectname}}/ {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span>              </mat-card-subtitle>
             </mat-card-subtitle>
           
-          <mat-card-subtitle  *ngIf="!isCompleted(task.status) && !taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> 
+          <mat-card-subtitle  *ngIf="task.status !== 'Complete'" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> 
             {{task.description}}
             
-            <mat-card-subtitle class="font-weight-lighter" style=" font-size:14px; ">
-            {{task.projectid.projectname}} / {{task.tasktype}} 
+            <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
+            {{task.projectname}}/ {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span> 
 
             </mat-card-subtitle>
             </mat-card-subtitle>
@@ -181,14 +205,15 @@
             <span  class="d-flex flex-1">
               <mat-chip-list >
                 <div>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#E2E8F0;cursor: pointer; " *ngIf="data.projectstatus === 'null'">Created</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#FBD38D;cursor: pointer" *ngIf="data.projectstatus === 'Ongoing'">In progress</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#90CDF4;cursor: pointer" *ngIf="data.projectstatus === 'Initiated'">Started</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#FEB2B2;cursor: pointer" *ngIf="data.projectstatus === 'Stopped'">Stopped</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#9AE6B4;cursor: pointer" *ngIf="data.projectstatus === 'Completed'">Completed</mat-chip>
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#E2E8F0;cursor: pointer; " *ngIf="task.status == null || task.status === 'Created'">Created</mat-chip>
+                  <!-- <ng-template #showCreated> <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#E2E8F0;cursor: pointer; " >Created</mat-chip></ng-template> -->
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#FBD38D;cursor: pointer" *ngIf="task.status === 'Ongoing'">In progress</mat-chip>
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#90CDF4;cursor: pointer" *ngIf="task.status === 'Initiated'">Started</mat-chip>
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#FEB2B2;cursor: pointer" *ngIf="task.status === 'Stopped' || task.status === 'Suspended'">Stopped</mat-chip>
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#9AE6B4;cursor: pointer" *ngIf="task.status === 'Completed'">Completed</mat-chip>
                 </div>
                 <mat-menu  #menu="matMenu" yPosition="below" style="background-color:#f3f3f3;">
-                  <button *ngFor="let status of statusList"  class="menu-button" mat-menu-item >
+                  <button *ngFor="let status of statusList" (click)="updateTaskStatus(task,status.description)"  class="menu-button" mat-menu-item >
                      <span>
                        {{status.description}}
                      </span>
@@ -209,12 +234,22 @@
       <div *ngIf="isAdmin">
         <!-- <div mat-card-avatar class="example-header-image"></div> -->
         <div style="display:flex; flex-direction: row;align-items:center; justify-content:space-between; margin-bottom:30px">
-        <mat-card-title style="font-weight:600; font-size: medium;color:var(--primaryColor)">All Tasks</mat-card-title>
-          <div>
-        <button mat-button (click)="newTask()"><mat-icon style="font-size:18px">add_circle</mat-icon> New Task</button>
-        <!-- <button mat-stroked-button routerLink="/activity">All Tasks</button> -->
+        <!-- <mat-card-title style="font-weight:600; font-size: medium;color:var(--primaryColor)">All Tasks</mat-card-title> -->
+          <!-- <div> -->
+            
+            <mat-form-field appearance="outline" class="auth-form-field" floatLabel="never">
+              <mat-label>{{userLabel}}</mat-label>
+            <mat-select (selectionChange)="filterTask($event.value)"  class="input-select">
+              <mat-option *ngFor="let user of userList" [value]="user.id">
+                {{user.fullname}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        <button mat-button (click)="newTask()"><mat-icon style="font-size:18px">add_circle</mat-icon>Assign New Task</button>
+        <button mat-stroked-button (click)="fetchAllTasks()">All Tasks</button>
         
-      </div>
+      <!-- </div> -->
         </div>
 
         <!-- <div style="margin-bottom:10px">
@@ -226,41 +261,55 @@
           <mat-list-item class="mb-4 flex:1" *ngFor="let task of taskList">
           <div style=" display: flex;flex:1; flex-direction:row; justify-content:space-between">
             <span class="d-flex flex-1">
-          <mat-icon (click)="setComplete()" *ngIf="!isCompleted(task.status) && !taskcomplete" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
+          <!-- <mat-icon (click)="setComplete()" *ngIf="!isCompleted(task.status) && !taskcomplete" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
           <mat-icon (click)="setComplete()" *ngIf="isCompleted(task.status) || taskcomplete" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
-            
-            <mat-card-subtitle  *ngIf="isCompleted(task.status) || taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> 
+             -->
+             <div *ngIf="task.status === 'Complete'">
+            <mat-card-subtitle   style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> 
               {{task.description}}
-              <mat-card-subtitle class="font-weight-lighter" style=" font-size:14px; ">
-                {{task.projectid.projectname}} / {{task.tasktype}}
+              <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
+                {{task.projectname}}/ {{task.tasktypename}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span><br>
+                <!-- <mat-card-subtitle class="font-weight-normal" style=" font-size:14px; "> -->
+               Assigned to: {{task.assignedto.fullname}}
+              <!-- </mat-card-subtitle> -->
               </mat-card-subtitle>
+               
             </mat-card-subtitle>
+           
+              </div>
           
-          <mat-card-subtitle  *ngIf="!isCompleted(task.status) && !taskcomplete" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> 
+          <div *ngIf="task.status !== 'Complete'">
+          <mat-card-subtitle style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> 
             {{task.description}}
             
-            <mat-card-subtitle class="font-weight-lighter" style=" font-size:14px; ">
-            {{task.projectid.projectname}} / {{task.tasktype}} 
-
+              <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
+                {{task.projectname}}/ {{task.tasktypename}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span><br>
+                <!-- <mat-card-subtitle class="font-weight-normal" style=" font-size:14px; "> -->
+               Assigned to: {{task.assignedto.fullname}}
+              <!-- </mat-card-subtitle> -->
+              </mat-card-subtitle>
+              
             </mat-card-subtitle>
-            </mat-card-subtitle>
+            
+            </div>
               
           </span>
             <span  class="d-flex flex-1">
               <mat-chip-list >
-                <div>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#E2E8F0;cursor: pointer; " *ngIf="data.projectstatus === 'null'">Created</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#FBD38D;cursor: pointer" *ngIf="data.projectstatus === 'Ongoing'">In progress</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#90CDF4;cursor: pointer" *ngIf="data.projectstatus === 'Initiated'">Started</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#FEB2B2;cursor: pointer" *ngIf="data.projectstatus === 'Stopped'">Stopped</mat-chip>
-                  <mat-chip [matMenuTriggerFor]="menu" (click)="updateTaskStatus(data,status)" style="background-color:#9AE6B4;cursor: pointer" *ngIf="data.projectstatus === 'Completed'">Completed</mat-chip>
+                <div class="mt-3">
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#E2E8F0;cursor: pointer; " *ngIf="task.status == null || task.status === 'Created'">Created</mat-chip>
+                  <!-- <ng-template #showCreated> <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#E2E8F0;cursor: pointer; " >Created</mat-chip></ng-template> -->
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#FBD38D;cursor: pointer" *ngIf="task.status === 'Ongoing'">In progress</mat-chip>
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#90CDF4;cursor: pointer" *ngIf="task.status === 'Initiated'">Started</mat-chip>
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#FEB2B2;cursor: pointer" *ngIf="task.status === 'Stopped' || task.status === 'Suspended'">Suspended</mat-chip>
+                  <mat-chip [matMenuTriggerFor]="menu"  style="background-color:#9AE6B4;cursor: pointer" *ngIf="task.status === 'Completed'">Completed</mat-chip>
                 </div>
                 <mat-menu  #menu="matMenu" yPosition="below" style="background-color:#f3f3f3;">
-                  <button *ngFor="let status of statusList"  class="menu-button" mat-menu-item >
+                  <!-- <button *ngFor="let status of statusList"  class="menu-button" mat-menu-item >
                      <span>
                        {{status.description}}
-                     </span>
-                   </button>
+                     </span> 
+                   </button> -->
                   
                       </mat-menu>
              

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-server-credentials',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServerCredentialsComponent implements OnInit {
 
-  constructor() { }
+  projName : string
+  proj: any 
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<ServerCredentialsComponent>
+
+  ) { }
 
   ngOnInit() {
+
+    this.projName = this.data.projectname
+    this.proj = this.data
   }
 
+  
+  
+
+  close() {
+    this.dialogRef.close();
+  }
 }

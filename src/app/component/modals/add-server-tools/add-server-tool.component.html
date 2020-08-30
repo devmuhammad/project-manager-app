@@ -1,0 +1,63 @@
+<div style="width: 100%">
+  <h2 mat-dialog-title>{{type}} Server Tool</h2>
+
+  <form [formGroup]="form" class="nwproject-form" style="display:flex; flex-direction:column">
+    <!-- <div style=" flex:1; flex-direction: column"> -->
+      <p>
+       
+          <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;">
+            <mat-label>Database</mat-label>
+            <input matInput  formControlName="database"  floatPlaceholder="never">
+             
+          </mat-form-field>
+       
+      </p>
+      <p>
+        <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;">
+          <mat-label>Appliation Server</mat-label>
+          <input matInput  formControlName="applicationserver"  floatPlaceholder="never">
+           
+        </mat-form-field>
+      </p>
+      <!-- <p>
+       
+          <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;">
+            <mat-label>Monthly Charges (N)</mat-label>
+            <input matInput  formControlName="monthlyCharges"  floatPlaceholder="never">
+             
+          </mat-form-field>
+       
+    </p> -->
+    <p>
+
+      <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
+        <mat-label>Server Credential</mat-label>
+        <mat-select formControlName="serverCredId"  class="input-select">
+          <mat-option *ngFor="let cred of serverCredList" [value]="cred.id">
+            {{cred.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+
+      <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status"  class="input-select">
+          <mat-option *ngFor="let status of statusList" [value]="status.value">
+            {{status.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+      
+    <mat-dialog-actions align="end">
+      <button class="mat-raised-button" (click)="close()">Close</button>
+     
+      <button class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'"
+        (click)="addServerTool()">
+        <span></span>
+        Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>

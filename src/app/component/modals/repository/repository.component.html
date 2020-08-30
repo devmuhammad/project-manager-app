@@ -1,0 +1,69 @@
+<div style="width: 100%">
+  <h2 mat-dialog-title>Repository</h2>
+
+  <form [formGroup]="form" class="nwproject-form" style="display:flex; flex-direction:column">
+    <!-- <div style=" flex:1; flex-direction: column"> -->
+      <p>
+        <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
+          <mat-label>Repo Type</mat-label>
+          <mat-select formControlName="repotype"  class="input-select">
+            <mat-option *ngFor="let repo of repoType" [value]="repo.value">
+              {{repo.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    
+      </p>
+      <p>
+      <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;">
+        <mat-label>Project Repository URL</mat-label>
+        <input matInput  formControlName="repo"  floatPlaceholder="never">
+        
+          <!-- <mat-icon>folder </mat-icon> -->
+        <!-- </button> -->
+      <!-- <span style="color: red; font-size: xx-small;" *ngIf="invalidUrl">Invalid URL</span> -->
+      </mat-form-field>
+    </p>
+      <p>
+      <mat-form-field class="project-form-field auth-form-field"  appearance="outline"  style="width:100%;">
+        <mat-label>Username</mat-label>
+        <input matInput  formControlName="username"  floatPlaceholder="never">
+        
+          <!-- <mat-icon>folder </mat-icon> -->
+        <!-- </button> -->
+      <!-- <span style="color: red; font-size: xx-small;" *ngIf="invalidUrl">Invalid URL</span> -->
+      </mat-form-field>
+    </p>
+      <p>
+      <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;">
+        <mat-label>password</mat-label>
+        <input matInput  formControlName="password"  floatPlaceholder="never">
+          <!-- <mat-icon>folder </mat-icon> -->
+        <!-- </button> -->
+      <!-- <span style="color: red; font-size: xx-small;" *ngIf="invalidUrl">Invalid URL</span> -->
+      </mat-form-field>
+    </p>
+      <p>
+      <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
+        <mat-label>My branch</mat-label>
+        <input matInput  formControlName="branch" floatPlaceholder="never">
+        
+          <!-- <mat-icon>list </mat-icon> -->
+        <!-- </button> -->
+        <!-- <mat-error>Invalid project name</mat-error> -->
+      </mat-form-field>
+      </p>
+    <!-- </div> -->
+    <mat-dialog-actions align="end">
+      <button class="mat-raised-button" (click)="close()">Close</button>
+      <!-- <button  class="mat-raised-button mat-secondary save" buttonLoader [loaderColor]="'white'"
+        (click)="verifyRepo()">
+        <span></span>
+        Verify</button> -->
+      <button class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'"
+        (click)="save()">
+        <span></span>
+        Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>

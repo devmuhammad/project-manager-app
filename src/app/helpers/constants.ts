@@ -2,6 +2,7 @@
 
 export const BaseApi = {
   URL: 'http://comsoftltd.net:9090/projappapi/',
+  // URL: 'http://localhost:8080/projappapi/',
   PATH: {
     LOGIN: 'entrance/user/signin',
     RESET_PASSWORD: 'entrance/password-reset',
@@ -31,6 +32,7 @@ export const BaseApi = {
     PROJECT_UPDATE: 'project/update',
     PROJECTS_RETRIEVE: 'project/retrieve',
     PROJECT_ACTIVITY: 'project/activities',
+    PROJECT_MANAGER: 'project/managersbyproject',
     // PROJECT TYPES
     PROJECT_TYPES: 'project/projecttypes',
     PROJECT_TYPE_ADD: 'project/projecttype/add',
@@ -38,25 +40,35 @@ export const BaseApi = {
     PROJECT_TYPE_DELETE: 'project/projecttype/delete',
     // Activity
     ASSIGNEE_ACTIVITIES: 'activities/assignee',
-    LIST_ACTIVITIES:'activities/list',
+    LIST_ACTIVITIES:'activities/list/all',
     ADD_ACTIVITIES:'activities/add',
     DELETE_ACTIVITIES:'activities/delete/',
+    ACTIVITIES_BY_PROJECT: 'activities/retrievebyproject',
+    // Conversations
+    ADD_USER_CONVERSATION: 'conversation/add',
+    ADD_PROJECT_CONVERSATION: 'conversation/addgroup',
+    ADD_GENERAL_CONVERSATION: 'conversation/addgeneral',
+    PROJECT_CONVERSATION: 'conversation/group/conversation/project',
+    GENERAL_CONVERSATION: 'conversation/general/conversation',
+    USER_CONVERSATION: 'conversation/conversation/user',
+    DELETE_CONVERSATION: 'conversation/delete',
     // Tasks Type
     TASK_TYPE_ADD : 'project/tasktype/add',
     TASK_TYPE_UPDATE: 'project/tasktype/update',
     TASK_TYPES: 'project/tasktypes',
     // Tasks
     TASK_ADD: 'task/add',
-    TASK_LIST: 'task/list',
+    TASK_LIST: 'task/tasklist',
     TASK_INITIATOR: 'task/initiator',
     TASK_DOCUMENT: 'task/documents',
     TASK_HISTORY: 'task/history',
     TASK_ASSIGNEE: 'task/assignee',
     TASK_UPDATE: 'task/update',
+    TASK_BYPROJECT: 'task/retrievebyproject',
     // Documents
     DOC_UPDATE: 'document/update',
     DOC_RETRIEVE: 'document/retrieve',
-    DOC_PREVIEW: 'document/preview',
+    DOC_PREVIEW: 'document/filepreview',
     DOC_ADD: 'document/add',
     DOCLIST:'document/list',
     DOC_DELETE:'document/delete',
@@ -80,13 +92,41 @@ export const BaseApi = {
     DELETE_CLIENT: 'project/client/delete',
     RETRIEVE_CLIENT: 'project/client/retrieve',
     UPDATE_CLIENT: 'project/client/update',
-    CLIENTS: 'project/clients',
+    CLIENTS: 'project/clients/all',
 
     // Team Members
     TEAM_MEMBERS: 'project/teammembers',
     // PROJECT ACTIVITY
    
+    // REPO
+    ADD_REPO: 'repo/add',
+    ADD_BRANCH_REPO: 'repo/addbranch',
+    REPO_LIST: 'repo/list',
+    REPO_BRANCH_LIST: 'repo/branch/list',
+    REPO_BRANCH_UPDATE: 'repo/branch/update',
+    REPO_UPDATE: 'repo/update',
 
+    // SERVERS
+    // SERVER CREDENTIALS
+    SERVER_CREDENTIAL_LIST: 'server/servercredential/list/all',
+    SERVER_CREDENTIAL_PROJECT: 'server/servercredentials/retrievebyproject',
+    ADD_SERVER_CREDENTIAL: 'server/add/servercredentials',
+    UPDATE_SERVER_CREDENTIAL: 'server/update/servercredentials',
+    DELETE_SERVER_CREDENTIAL: 'server/servercredentials/delete',
+
+    // SERVER ACCOUNT
+    SERVER_ACCOUNT_LIST: 'server/serveraccount/list/all',
+    SERVER_ACCOUNT_PROJECT: 'server/serveraccount/retrievebyproject',
+    ADD_SERVER_ACCOUNT: 'server/add/serveraccount',
+    UPDATE_SERVER_ACCOUNT: 'server/update',
+    DELETE_SERVER_ACCOUNT: 'server/serveraccount/delete',
+
+    // SERVER 
+    SERVER_TOOLS_LIST: 'server/servertool/list/all',
+    SERVER_TOOL_PROJECT: 'server/servertool/retrievebyproject',
+    ADD_SERVER_TOOL: 'server/add/servertool',
+    UPDATE_SERVER_TOOL: 'server/update/servertool',
+    DELETE_SERVER_TOOL: 'server/servertool/delete'
   }
 };
 

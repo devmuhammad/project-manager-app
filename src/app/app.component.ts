@@ -2,6 +2,8 @@ import { Component, ElementRef, Inject, OnInit, Renderer2, PLATFORM_ID } from '@
 import {fader, slider} from './router-animations/router-animations.module'
 import * as FontFaceObserver from 'fontfaceobserver';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -14,11 +16,13 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'projectmanager';
+  userAvail : any
   
   constructor(
     private elementRef: ElementRef,
     @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2,
+    private router: Router,
     // ...
   ) {}
 
@@ -34,7 +38,13 @@ export class AppComponent implements OnInit {
       // On the server side, add the class to show icons immediately.
       this.renderer.addClass(this.elementRef.nativeElement, 'material-icons-loaded');
     }
+    this.userAvail = JSON.parse(localStorage.getItem('profile'))
+    if (this.userAvail == null){
+      this.router.navigateByUrl('/login')
+    }
   }
+
+  
 }
 
 

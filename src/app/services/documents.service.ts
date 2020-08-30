@@ -54,7 +54,7 @@ export class DocumentsService {
   
    const formData = new FormData();
    formData.append('userId',requestpayload.userId);
-   formData.append('receivedfrom', requestpayload.receivedfrom);
+   formData.append('recivedfrom', requestpayload.receivedfrom);
    formData.append('file',requestpayload.file);
    formData.append('parentId',requestpayload.parentId);
    formData.append('taskId', requestpayload.taskId);
@@ -62,11 +62,14 @@ export class DocumentsService {
    formData.append('projectId',requestpayload.projectId);
    formData.append('activityId',requestpayload.activityId);
    formData.append('doctypeId',requestpayload.doctypeId);
-   console.log(formData);
+   formData.append('comment', "done");
+   formData.append('minorEdit', "true");
+  //  console.log(formData);
    return this.http.post(`${BaseApi.URL + BaseApi.PATH.DOC_UPLOAD}`, formData, {
+      
       headers : new HttpHeaders({
         // 'Content-Type' : uploadfile.file.type
-        'Content-Type': 'application/json'
+        // 'Content-Type': 'multipart/form-data;boundary='
       })});
   }
   downloadfile(filepayload): Observable <any> {
@@ -74,7 +77,7 @@ export class DocumentsService {
     return this.http.get(`${BaseApi.URL + BaseApi.PATH.DOC_DOWNLOAD}/${documentId}/${userId}`);
   }
   DocumentPreview(filepayload): Observable <any> {
-    const {documntId, userId} = filepayload;
-    return this.http.get(`${BaseApi.URL + BaseApi.PATH.DOC_PREVIEW}/${documntId}/${userId}`);
+    const {documentId, userId} = filepayload;
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.DOC_PREVIEW}?documentId=${documentId}&userId=${userId}`);
   }
 }

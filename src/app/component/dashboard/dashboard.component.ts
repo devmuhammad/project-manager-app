@@ -200,9 +200,19 @@ renderInfoInBarChart(){
   });
   
 }
+
+isAdmin = false
+currUser: any
   ngOnInit() {
     const profile = JSON.parse(localStorage.getItem('profile'))
-    this.fetchOwntaskList(profile.id);
+    this.currUser= profile
+    const userType = localStorage.getItem('userType')
+    if (userType === 'admin') { 
+      this.isAdmin = true
+      this.fetchAllTasks()
+      // this.fetchOwntaskList(profile.id)
+    }else  this.fetchOwntaskList(profile.id);
+
     
     this.getProjects();
     this.commonservice.handleBreadChrome({parent: 'Dashboard', child: ''});
@@ -212,22 +222,43 @@ renderInfoInBarChart(){
     this.radarInfoChart();
   }
 
+  async fetchAllTasks(){
+    this.loadingBar.start();
+
+    await this.service.getTasksList(this.queryParam)
+      .subscribe(async response => {
+        if (response.message === 'Success') {
+          const taskList = await response.data.map(item => {
+            return { ...item };});
+            this.totaltask = taskList.length
+            this.loadingBar.complete();
+            const stringStat = taskList.filter((item: any) => item.status === 'Ongoing')
+            this.ongoingtask = stringStat.length
+            
+            const newStat = taskList.filter((item: any) => item.status === 'Created')
+            this.uncompletedtask = newStat.length
+        }
+      },err => {
+        console.log(err);
+        // return this.taskList = [];
+      })
+  }
+
   async fetchOwntaskList(id) {
     this.loadingBar.start();
     this.param.assigntoid = id;
-    await this.activityService.getAssigneeActivities(this.param)
+    await this.service.getAssigneeTasks(this.param)
       .subscribe(({ message, data }) => {
         if (message === 'Success') {
           this.loadingBar.complete();
-          const activityList = data.map((item: any) => ({ ...item }));
-          
-          const taskList = activityList.filter((item: any) => item.actionflow === 'TASK');
+          const taskList = data.map((item: any) => ({ ...item }));
+          // const taskList = activityList.filter((item: any) => item.actionflow === 'TASK');
           this.totaltask = taskList.length
           // console.log(taskList)
-          const stringStat = taskList.filter((item: any) => item.projectid.projectstatus === 'string')
+          const stringStat = taskList.filter((item: any) => item.status === 'Ongoing')
           this.ongoingtask = stringStat.length
-          // console.log(stringStat)
-          const newStat = taskList.filter((item: any) => item.projectid.projectstatus === 'New')
+          
+          const newStat = taskList.filter((item: any) => item.status === 'Created')
           this.uncompletedtask = newStat.length
         } 
       }, err => {
@@ -245,13 +276,41 @@ renderInfoInBarChart(){
     this.loadingBar.start();
    
     this.service.getProjectList(this.queryParam)
-      .subscribe(response => {
+      .subscribe(async response => {
         if (response.message === 'Success') {
           this.loadingBar.complete();
           const datarray = response.data.map(item => {
             return { ...item };
           });
+          if (this.isAdmin){
           this.totalproj = datarray.length
+          }else{
+            const myprojects = []
+
+           await datarray.forEach(async el => {
+             if (el.teamMemberCounts >= 1){
+              await this.service.getProjectTeamMembers(el.projectId).subscribe(async ({data}) => {
+               
+                await data.forEach(async e => {
+                 if(e.id === this.currUser.id){
+                  await myprojects.push(el)
+                  
+                  this.totalproj = myprojects.length
+                 }
+                 
+                })
+                // await this.putDetails(myprojects)
+              });
+              
+              
+              
+             }
+           }) 
+
+          //  this.projArray = myprojects
+           
+           this.loadingBar.complete();
+        }
         }
       }, err => {
         console.log(err);

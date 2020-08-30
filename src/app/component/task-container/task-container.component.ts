@@ -104,7 +104,7 @@ export class TaskContainerComponent implements OnInit {
       this.addChat.userid = profile.id;
       this.addChat.parentid = task.activityid;
       this.addChat.activityType = 'TASK';
-      this.activityService.getAddActivities(this.addChat)
+      this.activityService.AddActivities(this.addChat)
         .subscribe(res => {
           this.posted = false;
           if (res.message === 'Success') {

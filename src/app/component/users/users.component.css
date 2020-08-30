@@ -25,3 +25,13 @@ mat-cell:first-of-type {
   .small-cell {
     flex: 0 0 7% !important;
   }
+
+  .status-cell{
+    display: flex;
+    flex-direction: row;
+    text-align: center !important;
+    align-items: center !important;
+    justify-items: first baseline !important;
+    width: 100%;
+    color:var(--darkColor);
+  }

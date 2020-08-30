@@ -100,7 +100,7 @@ export class AuthenticationComponent implements OnInit {
         if(response.message === 'Falied'){
           this.loadingBar.complete();
           this.btnloader.hideLoader();
-          return this.snackBar.open(response.data, 'Dismiss', {
+          return this.snackBar.open("response.data.response", 'Dismiss', {
             duration: 7000,
             verticalPosition: 'bottom',
             horizontalPosition: 'left',

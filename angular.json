@@ -28,7 +28,6 @@
               "node_modules/angular-button-loader/style/button-loader.min.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -137,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "projectmanager"
+  "defaultProject": "projectmanager",
+  "cli": {
+    "analytics": false
+  }
 }

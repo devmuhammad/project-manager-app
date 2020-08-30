@@ -1,0 +1,55 @@
+<div style="width: 100%">
+  <h2 mat-dialog-title>Reassign Project</h2>
+
+  <form [formGroup]="form" class="nwproject-form" style="display:flex; flex-direction:column">
+   <div class="man-history">
+     <p>Project Managers Trail</p>
+    <mat-vertical-stepper [linear]="isLinear" #stepper editable='false' >
+  
+    <mat-step *ngFor="let manager of managerList">
+      <form >
+        <ng-template matStepLabel > {{manager.name}} <br>
+          Date:  {{getDate(manager.startdate)}} - {{getDate(manager.endate)}}<br>
+          Reason: {{manager.reason}}<br>
+          Comment: {{manager.comments}}
+        </ng-template>
+        
+      </form>
+    </mat-step>
+  
+  </mat-vertical-stepper>
+</div>
+    <!-- <p></p> -->
+    <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
+      <mat-label>{{userLabel}}</mat-label>
+      <mat-select formControlName="projecmanger"  class="input-select">
+        <mat-option *ngFor="let user of userList" [value]="user">
+          {{user.fullname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
+      <mat-label>Reason for re-assignment</mat-label>
+      <mat-select formControlName="reason"  class="input-select">
+        <mat-option *ngFor="let reason of Reasons" [value]="reason.value">
+          {{reason.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;">
+      <mat-label>Comment</mat-label>
+      <input matInput  formControlName="comments"  floatPlaceholder="never">
+       
+    </mat-form-field>
+
+    <mat-dialog-actions align="end">
+      <button class="mat-raised-button" (click)="close()">Close</button>
+      <button  class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'"
+        (click)="updateProjAssign()">
+        <span></span>
+        Update</button>
+    </mat-dialog-actions>
+  </form>
+</div>

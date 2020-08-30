@@ -6,12 +6,41 @@
   <div class="firstLayerContainer">
 
     <!-- <p style="margin-left:20%">All Documents</p> -->
-    <mat-card class="layerContent">
+    <!-- Folders -->
+    <mat-card *ngIf="showFolders" class="layerContent">
+      <div class="doCards">
+        <div class="listContainer" *ngFor="let proj of projectList" [matTooltip]="proj.description" (click)="openFiles(proj)" style="display:flex;cursor: pointer; justify-content:space-evenly">
+
+        <mat-icon style="font-size: 60px;text-align: center; color:#D6BCFA ">folder</mat-icon>
+        <article class="footer">
+          <p class="docurl" style="text-align: center; font-size:14px">{{proj.projectname}}</p>
+        </article>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card *ngIf="!showFolders" class="layerContent">
       <!-- <button style="position: absolute;top:-30px;right:20px;z-index: 100000;" mat-icon-button (click)="grid =!grid">heoo</button> -->
+      <div style="flex:1; flex-direction: row;">
+      <button mat-icon-button (click)="showFolders = !showFolders">
+        <mat-icon matTooltip="Back"> arrow_back</mat-icon>
+      </button>
+      <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:50%;" >
+        <input [(ngModel)]="projSearchKey" (keyup.enter)="applyDocFilter()" matInput
+          placeholder="Search Files" />
+    
+          <mat-icon button matSuffix *ngIf="projSearchKey" style="cursor:pointer " (click)="clearSearch()">close</mat-icon>
+        
+          <mat-icon matSuffix *ngIf="!projSearchKey" >search</mat-icon>
+      </mat-form-field>
       <button class="toggleGrid" (click)="grid =!grid" mat-icon-button>
         <mat-icon matTooltip="List View" *ngIf="grid">view_module</mat-icon>
         <mat-icon matTooltip="Grid View" *ngIf="!grid">list_alt</mat-icon>
       </button>
+    </div>
+      <div *ngIf="documentList.length == 0">
+        <span style="font-size: 20px;color:gray; align-self: center;"> No files in this project folder <mat-icon>sad</mat-icon></span>
+      </div>
       <div *ngIf="!grid" class="doCards">
         <div class="listContainer" *ngFor="let docx of documentList" style="display:flex; justify-content:space-around">
             <button class="docxbtn" mat-icon-button [matMenuTriggerFor]="docxbtn">
@@ -253,13 +282,13 @@
         <div>
           <form [formGroup]="form" enctype="multipart/form-data">
             <div class="formControl">
-              <mat-form-field class="auth-form-field">
+              <!-- <mat-form-field class="auth-form-field">
                 <mat-select class="select" formControlName="activityid" placeholder="Institution">
                   <mat-option *ngFor="let item of institutionList" [value]="item.institutionId">{{item.institutionName}}
                   </mat-option>
                 </mat-select>
-                <!-- <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error> -->
-              </mat-form-field>
+                <mat-error *ngIf="weburl.errors && (weburl.dirty ||  weburl.touched)">Invalid url</mat-error>
+              </mat-form-field> -->
             </div>
             <div class="formControl">
               <mat-form-field class="auth-form-field ">

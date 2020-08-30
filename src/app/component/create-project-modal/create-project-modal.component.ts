@@ -44,13 +44,15 @@ export class CreateProjectModalComponent implements OnInit {
     projecttypeId: '',
     startdate: new Date(),
     enddate: new Date(),
-    projectstatus: 'New',
+    projectstatus: 'Created',
     description: '',
     code: '',
+    projecmangerid: 0,
     projectId: 6 as number,
     clientid: 0 as number,
     datecreated:'',
     lastmodified: '',
+    priority:''
   }
   public clientPayload() {
     return {
@@ -63,6 +65,7 @@ export class CreateProjectModalComponent implements OnInit {
     }
 }
 allUsers = [];
+priorityList = ['High','Medium','Low']
 
   constructor(
     private fb: FormBuilder,
@@ -85,16 +88,18 @@ allUsers = [];
       code: ['', Validators.required],
       client: ['', Validators.required],
       projectmanager: [''],
+      priority:[""]
     });
   }
   getClients() {
     this.clientservice.getClients(this.clientPayload)
-      .subscribe((clnt) => {
-        console.log(clnt)
-        this.clientsList = clnt.map(item => {
-          return { id: item.id, name: item.name };
+      .subscribe(({message, data}) => {
+        
+        this.clientsList = data.map(item => {
+          return { id: item.clientid, name: item.businessname };
         });
       });
+      
   }
 
   getProjectTypes() {
@@ -102,7 +107,7 @@ allUsers = [];
     this.service.getProjectType()
       .subscribe(({ meta, data, message }) => {
         if (message === "Success") {
-          console.log(data);
+          // console.log(data);
           this.types = data.map(item => {
             return { ...item };
           });
@@ -113,7 +118,7 @@ allUsers = [];
   getCurrentDate() {
     var today = new Date();
     this.currentDate = today.toISOString();
-    console.log(this.currentDate);
+    // console.log(this.currentDate);
     return this.currentDate;
   }
   ngOnInit() {
@@ -129,7 +134,7 @@ allUsers = [];
     this.userService.userList(authUser.id)
       .subscribe(({ message, data }) => {
 
-        console.log(data)
+        // console.log(data)
         if (message === "Success") {
           let users = data.map((user: any) => {
             return { ...user };
@@ -173,11 +178,12 @@ allUsers = [];
     this.inputFields.description = this.form.get('description').value;
     this.inputFields.datecreated = this.currentDate;
     this.inputFields.lastmodified = this.currentDate;
-    console.log(this.inputFields);
+    this.inputFields.priority = this.form.get('priority').value
+    this.inputFields.projecmangerid = this.form.get('projectmanager').value
+    // console.log(this.inputFields);
     return this.service.addnewProject(this.inputFields)
       .subscribe(({ meta, message, data }) => {
-        console.log(message);
-        console.log(data);
+        
         if (message === 'Failed') {
           this.loadingBar.complete();
           this.btnLoader.hideLoader();

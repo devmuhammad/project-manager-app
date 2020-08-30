@@ -11,24 +11,27 @@
     <div #scrollMe id="cArea" style="overflow-y: auto" *ngIf="activityList.length" class="chatArea">
       <div class="chatContent" *ngFor="let chat of activityList;let i = index">
         <div [ngClass]="self !== chat.userid? 'de-activate': '' " class="actions">
-          <button style="transform: translateY(25%)" (click)="fetchDeleteChat(i,chat.activityid)" mat-icon-button>
+          <button style="transform: translateY(25%)" (click)="fetchDeleteChat(i,chat.id)" mat-icon-button>
             <mat-icon style="color: rgb(241, 193, 193);transform:scale(.8)">delete_outline</mat-icon>
           </button>
         </div>
 
         <img height="30px" src="../../../assets/img/avatar2p.png" alt="">
-        <span class="time-left">11:00</span>
+        <span class="time-left" style="padding:5px; padding-top:7px" >{{chatTime(chat.datecreated)}}</span>
+        <span style="padding:5px">{{chat.username}}</span>
+        <!-- <span *ngIf="chat.usrname">{{chat.usrname}}</span> -->
         <div *ngIf="dltIndex ===i && delete" class="d-loader">
           <div style="transform: scale(.5)" class="lds-facebook">
             <div></div>
             <div></div>
             <div></div>
+            <div></div>
           </div>
         </div>
-        <p>{{chat.usercomment}}</p>
+        <p style="margin-top: 5px">{{chat.conversation}}</p>
       </div>
     </div>
-    <div style="transform: translateY(70%)" *ngIf="!chartIsloading && !activityList.length">
+    <div style="transform: translateY(70%)" *ngIf="!chartIsloading && activityList.length == 0">
       <div style="text-align: center"> Start a conversion </div>
     </div>
     <div *ngIf="posted || (chartIsloading && !activityList.length)" style="width: 100%;text-align:center">
@@ -55,7 +58,7 @@
 
   <div class="chat-sidebar">
     <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
-      <span mat-line ><mat-icon mat-list-icon style="float: left;">chat</mat-icon>&nbsp; General</span>
+      <span mat-line ><mat-icon mat-list-icon style="font-size:16px;float: left;">chat</mat-icon>&nbsp; General</span>
     </mat-list-item>
     <mat-accordion>
       <mat-expansion-panel>
@@ -65,24 +68,44 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <mat-list-item [ngClass]="idx === i? 'focus':'' " (click)="showProjectChart(projects[i],i)" class="litem" button
-          *ngFor="let project of projects;let i = index">
+        <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;" >
+          <input [(ngModel)]="projSearchKey" (keyup.enter)="applyProjFilter()" matInput
+            placeholder="Search Project" />
+      
+            <mat-icon button matSuffix *ngIf="projSearchKey" style="cursor:pointer " (click)="clearSearch()">close</mat-icon>
+          
+            <mat-icon matSuffix *ngIf="!projSearchKey" >search</mat-icon>
+        </mat-form-field>
+        
+        <mat-list-item [ngClass]="idx === i? 'focus':'' "  *ngFor="let project of projects;let i = index" 
+        (click)="showProjectChat(project,i)" class="litem" button>
           <span mat-line><mat-icon mat-list-icon style="float: left;font-size:13px">chat</mat-icon> {{project.projectname}}</span>
         </mat-list-item>
       </mat-expansion-panel>
     </mat-accordion>
-      <!-- <mat-list>
-        <mat-list-item [ngClass]="idx === -1? 'focus':'' " (click)="showGeneral()" class="litem" button>
-          <mat-icon mat-list-icon>folder</mat-icon>
-          <h4 mat-line>General</h4>
+    <!-- <mat-list-item  class="litem" button>
+      <span mat-line ><mat-icon mat-list-icon style="float: left;">chat</mat-icon>&nbsp; Private</span>
+    </mat-list-item> -->
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Private Chat
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field class="project-form-field auth-form-field" appearance="outline"  style="width:100%;" >
+          <input [(ngModel)]="teamSearchKey" (keyup.enter)="applyTeamFilter()" matInput
+            placeholder="Search Members" />
+      
+            <mat-icon button matSuffix *ngIf="teamSearchKey" style="cursor:pointer " (click)="clearTmSearch()">close</mat-icon>
+          
+            <mat-icon matSuffix *ngIf="!teamSearchKey" >search</mat-icon>
+        </mat-form-field>
+        <mat-list-item [ngClass]="idx === i? 'focus':'' "  class="litem" button *ngFor="let user of userList;let i = index" (click)="showUserChat(user,i)">
+          <span mat-line><mat-icon mat-list-icon style="float: left;font-size:13px">chat</mat-icon> {{user.fullname}}</span>
         </mat-list-item>
-        <h3 mat-subheader>Projects</h3>
-        <mat-list-item [ngClass]="idx === i? 'focus':'' " (click)="showProjectChart(projects[i],i)" class="litem" button
-          *ngFor="let project of projects;let i = index">
-          <mat-icon mat-list-icon>folder</mat-icon>
-          <h4 mat-line>{{project.projectname}}</h4>
-        </mat-list-item>
-      </mat-list> -->
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
 </div>
 

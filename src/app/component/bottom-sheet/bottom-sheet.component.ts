@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { UsersService } from 'src/app/services/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatDialogRef } from '@angular/material';
+import { MatSnackBar,MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AngularButtonLoaderService } from 'angular-button-loader';
 export interface Project {
@@ -19,7 +19,9 @@ export interface Task {
   templateUrl: './bottom-sheet.component.html',
   styleUrls: ['./bottom-sheet.component.css']
 })
+
 export class BottomSheetComponent implements OnInit {
+  
   form: FormGroup;
   public queryParam = {
     datefrom: '',
@@ -32,6 +34,7 @@ export class BottomSheetComponent implements OnInit {
   };
   userList: any[];
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private projectService: ProjectService,
     private userService: UsersService,
     private fb: FormBuilder,
@@ -40,12 +43,13 @@ export class BottomSheetComponent implements OnInit {
     private btnLoader: AngularButtonLoaderService,
     private dialogRef: MatDialogRef<BottomSheetComponent>
   ) {
-this.form =   this.form = this.fb.group({
+  this.form = this.fb.group({
   assignTo: ['', Validators.required],
   projectid: ['', Validators.required],
   description: ['', Validators.required],
   tasksTypeid: ['', Validators.required],
   comment: [''],
+  priority: ['']
 });
   }
   public taskFormInputs = {
@@ -54,16 +58,21 @@ this.form =   this.form = this.fb.group({
     projectid: '',
     tasktypeid: '',
     description: '',
-    comments: '',
-    parentid: 0 as number,
-    enddate: '',
-    startdate: '',
+    usercomment: '',
+    parentid: 1 as number,
+    enddate: new Date(),
+    startdate: null,
+    status:'Initiated',
+    priority: '',
+    
   };
   projectList: Project[] = [];
   typeLabel: any;
   projectLabel: any;
   userLabel: any;
   tasksTypes: Task[] = [];
+  disableAdmn = false
+
 
   getErrorNotified(message) {
     this.btnLoader.hideLoader();
@@ -76,6 +85,8 @@ this.form =   this.form = this.fb.group({
     });
   }
 
+  priorityList = ['High','Medium','Low']
+
   getFormInputs(){
     const authUser = JSON.parse(localStorage.getItem('profile'));
     this.taskFormInputs.userid = authUser.id;
@@ -83,7 +94,9 @@ this.form =   this.form = this.fb.group({
     this.taskFormInputs.projectid = this.form.get('projectid').value;
     this.taskFormInputs.assignedto = this.form.get('assignTo').value;
     this.taskFormInputs.description = this.form.get('description').value;
-    this.taskFormInputs.comments = this.form.get('comment').value;
+    this.taskFormInputs.usercomment = this.form.get('comment').value;
+    this.taskFormInputs.priority = this.form.get('priority').value;
+    this.taskFormInputs.startdate = new Date()
   }
   getSuccessNotified(message) {
     this.btnLoader.hideLoader();
@@ -102,7 +115,7 @@ this.form =   this.form = this.fb.group({
       .subscribe(({ meta, data, message }) => {
         if (message === 'Success') {
           this.projectLabel = 'Projects';
-          console.log(data);
+          // console.log(data);
           this.projectList = data.map(item => {
             return { id: item.projectId, name: item.projectname };
           });
@@ -116,7 +129,7 @@ this.form =   this.form = this.fb.group({
       .subscribe(({ meta, data, message }) => {
         if (message === 'Success') {
           this.typeLabel = 'Task Types';
-          console.log(data);
+          // console.log(data);
           this.tasksTypes = data.map(item => {
             return { ...item };
           });
@@ -130,7 +143,7 @@ this.form =   this.form = this.fb.group({
       .subscribe(({ meta, data, message }) => {
         if (message === 'Success') {
           this.userLabel = 'Assign to';
-          console.log(data);
+          // console.log(data);
           this.userList = data.map(item => {
             return { ...item };
           });
@@ -143,28 +156,45 @@ this.form =   this.form = this.fb.group({
     this.btnLoader.displayLoader();
     this.loadingBar.start();
     this.getFormInputs();
-    console.log(this.taskFormInputs);
+    // console.log(this.taskFormInputs);
     return this.projectService.addNewTask(this.taskFormInputs)
     .subscribe(response => {
-      console.log(response);
+      // console.log(response);
       if(response && response.message === 'Success') {
        return this.getSuccessNotified('New task added Successfully');
-      }
-      return this.getErrorNotified('Failed To add Task Check inputs');
+       
+      }else return this.getErrorNotified('Failed To add Task Check inputs');
     },err=>{
       console.log(err);
       return this.getErrorNotified('Network failed');
     })
   }
+
   ngOnInit() {
     const authUser = JSON.parse(localStorage.getItem('profile'));
+
+    const userType = localStorage.getItem('userType')
+    if (userType === 'admin') { 
+      this.disableAdmn = false      
+      this.taskFormInputs.status = 'Created'
+      if (this.data != null){
+        this.form.get('projectid').setValue(this.data)
+      }
+    }else {
+      this.disableAdmn = true
+      this.taskFormInputs.assignedto = authUser.id;
+      this.form.get('assignTo').setValue(authUser.id);
+      this.taskFormInputs.status = 'Initiated'
+
+    }
+
     this.fetchTaskTypeList();
     this.fetchProjectsList(this.queryParam);
     this.fetchUserList(authUser.id);
   }
 
   closeModal() {
-    this.dialogRef.close();
+    this.dialogRef.close({action: 1});
   }
 
 }

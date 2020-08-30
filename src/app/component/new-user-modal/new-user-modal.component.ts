@@ -33,6 +33,7 @@ export class NewUserModalComponent implements OnInit {
     contactemail: '',
     supervisor: '',
     status: true,
+    roletypes: '',
     institutionid: 2 as number,
     designationid: 1 as number,
     phone: '',
@@ -106,7 +107,7 @@ export class NewUserModalComponent implements OnInit {
     this.inputFields.phone = this.form.get('phone').value;
     this.inputFields.contactemail = this.form.get('contactemail').value;
     this.inputFields.groups = this.form.get('groups').value;
-    console.log(this.inputFields);
+    this.inputFields.roletypes = this.form.get('roletypes').value
     return this.userService.addNewUser(this.inputFields)
     .subscribe(({meta, message, data}) => {
       console.log(message);

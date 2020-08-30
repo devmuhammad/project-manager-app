@@ -19,18 +19,47 @@ export class ActivityService {
     return this.http.put(BaseApi.URL + BaseApi.PATH['DOC_TYPE_UPDATE'], payload);
   }
 
+  // Conversations
+  AddUserConversation(payload): Observable<any>{
+    return this.http.post(`${BaseApi.URL + BaseApi.PATH.ADD_USER_CONVERSATION}`, payload);
+  }
+  AddGeneralConversation(payload): Observable<any>{
+    return this.http.post(`${BaseApi.URL + BaseApi.PATH.ADD_GENERAL_CONVERSATION}`, payload);
+  }
+  AddProjectConversation(payload): Observable<any>{
+    return this.http.post(`${BaseApi.URL + BaseApi.PATH.ADD_PROJECT_CONVERSATION}`, payload);
+  }
+
+  getProjectConversations(projectid): Observable<any>{
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.PROJECT_CONVERSATION}?projectid=${projectid}`);
+  }
+ 
+  getGeneralConversations(): Observable<any>{
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.GENERAL_CONVERSATION}`);
+  }
+
+  getUserConversations(payload): Observable<any>{
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.USER_CONVERSATION}?postedby=${payload.postedby}&receivedby=${payload.receivedby}`);
+  }
+
+  deleteConversation(id: number): Observable<any>{
+    return this.http.delete(`${BaseApi.URL + BaseApi.PATH.DELETE_CONVERSATION}${id}`);
+  }
+  // END CONVERSATION
+
   getAssigneeActivities(param): Observable<any>{
     return this.http.get(`${BaseApi.URL + BaseApi.PATH.ASSIGNEE_ACTIVITIES}?assigntoid=${param.assigntoid}
     &page=${param.page}&size=${param.size}`);
   }
-  getAddActivities(payload): Observable<any>{
+  AddActivities(payload): Observable<any>{
     return this.http.post(`${BaseApi.URL + BaseApi.PATH.ADD_ACTIVITIES}`, payload);
   }
   deleteActivity(id: number): Observable<any>{
     return this.http.delete(`${BaseApi.URL + BaseApi.PATH.DELETE_ACTIVITIES}${id}`);
   }
-  getActivitiesList(param): Observable<any>{
-    return this.http.get(`${BaseApi.URL + BaseApi.PATH.LIST_ACTIVITIES}?page=${param.page}&size=${param.size}`);
+  getActivitiesList(): Observable<any>{
+    return this.http.get(`${BaseApi.URL + BaseApi.PATH.LIST_ACTIVITIES}`)
+    // ?page=${param.page}&size=${param.size}`);
   }
   fetchDocType(id: number): Observable<any> {
     return this.http.get(`${BaseApi.URL + BaseApi.PATH['DOC_RETRIEVE']}/${id}`);

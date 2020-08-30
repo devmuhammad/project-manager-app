@@ -23,8 +23,8 @@ export class DocumentUpdateComponent implements OnInit {
     size: 20,
   };
   public formInputs = {
-    activityid: 0 as number,
-    description: '',
+    activityid: 1 as number,
+    descripion: '',
     documentid: 0 as number,
     documenttypeid: 0 as number,
     docurl: '',
@@ -49,11 +49,11 @@ export class DocumentUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private dialogref: MatDialogRef<DocumentUpdateComponent>
   ) {
-    console.log(this.row.data);
+    // console.log(this.row.data);
     this.docxData = this.row.data;
-    console.log(this.docxData);
+    // console.log(this.docxData);
     this.form = this.fb.group({
-      description: [this.docxData.description, Validators.required],
+      description: [this.docxData.descripion, Validators.required],
       projectid:[this.docxData.projectid, Validators.required],
       documenttypeid: [this.docxData.documenttypeid, Validators.required],
       docurl: [this.docxData.docurl, Validators.required],
@@ -67,7 +67,7 @@ export class DocumentUpdateComponent implements OnInit {
         if (response.message === 'Success') {
          
           this.docTypeList = response.data.map(item => {
-            console.log({...item})
+            // console.log({...item})
             return { ...item };
           });
         }
@@ -86,7 +86,7 @@ export class DocumentUpdateComponent implements OnInit {
           this.projectList = response.data.map(item => {
             return { ...item };
           });
-          console.log(this.projectList);
+          // console.log(this.projectList);
         }
       });
   }
@@ -138,11 +138,11 @@ export class DocumentUpdateComponent implements OnInit {
   update(){
     this.loadingBar.start();
     this.btnLoader.displayLoader();
-    this.formInputs.activityid = this.docxData.activityid;
-    this.formInputs.description = this.form.get('description').value;
+    // this.formInputs.activityid = this.docxData.activityid;
+    this.formInputs.descripion = this.form.get('description').value;
     this.formInputs.documentid = this.docxData.documentid;
     this.formInputs.projectid = this.form.get('projectid').value;
-    this.formInputs.docurl = this.files ? this.files[0].url : this.form.get('docurl').value;
+    this.formInputs.docurl = this.files.length > 0 ? this.files[0].url : this.form.get('docurl').value;
     this.formInputs.receivedfrom = this.form.get('receivedfrom').value;
     this.formInputs.receivedby = this.form.get('receivedby').value;
     this.formInputs.documenttypeid = this.form.get('documenttypeid').value;

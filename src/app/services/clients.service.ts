@@ -15,7 +15,7 @@ export class ClientsService {
     return this.http.post<any>(BaseApi.URL + BaseApi.PATH['ADD_CLIENTS'], payload);
   }
   getClients(payload): Observable<any> {
-    return this.http.post(BaseApi.URL + BaseApi.PATH['CLIENTS'],payload);
+    return this.http.get(BaseApi.URL + BaseApi.PATH['CLIENTS'],payload);
   }
   getDeleteClients(id): Observable<any>{
     return this.http.delete(`${BaseApi.URL + BaseApi.PATH.DELETE_CLIENT}/${id}`)

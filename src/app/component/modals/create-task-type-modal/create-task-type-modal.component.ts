@@ -65,7 +65,7 @@ export class CreateTaskTypeModalComponent implements OnInit {
       console.log(this.projectType);
       this.btnLoader.displayLoader();
       this.loadingBar.start();
-      this.service.addProjectType(this.projectType)
+      this.service.addTaskType(this.projectType)
       .subscribe(({message, data, meta}) => {
         if (message === 'Success') {
           this.btnLoader.hideLoader();
@@ -112,7 +112,7 @@ export class CreateTaskTypeModalComponent implements OnInit {
     this.projectType.description = this.form.get('description').value;
     this.projectType.institutionid = this.form.get('institution').value;
     this.btnLoader.displayLoader();
-    this.service.addProjectType(this.projectType)
+    this.service.addTaskType(this.projectType)
     .subscribe(({message, data, meta}) => {
       if (message === 'Success') {
         this.btnLoader.hideLoader();

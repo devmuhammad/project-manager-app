@@ -2,7 +2,7 @@
 <div class="page-container">
    
 <div class="section-container">
-    <section>
+    <!-- <section>
         <div class="section-header" style="width: 100%;margin-left: -40px">
 
           <div style="margin-top: 30px" class="section-header">
@@ -74,14 +74,16 @@
               </mat-table>
               <mat-paginator [pageSizeOptions]="[3,5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
           </div>
-      </section>
+      </section> -->
 
   <section>
       <div class="section-header" style="width: 100%;">
 
-        <div style="margin-top: 30px" class="section-header">
-          <div><p><mat-icon>settings</mat-icon></p></div>
-          <div><p>Sever Credentials</p></div>
+        <div >
+          <button small class="mat-raised-button" style="justify-content: flex-start;" (click)="openNew()">New Credential</button>
+
+          <!-- <div><p><mat-icon>settings</mat-icon></p></div>
+          <div><p>Sever Credentials</p></div> -->
         </div>
         <mat-form-field class="search-form-field" floatLabel="never" >
             <input [(ngModel)]="credentialsSearchKey" (keyup)="applyCredFilter()" matInput  placeholder="Search Server credentials"/>
@@ -107,36 +109,40 @@
                       <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Server Password </mat-header-cell>
                       <mat-cell class="cell-name status-cell" style="color: var(--primaryColor)" *matCellDef="let element">
                         <span class="status-span">
-                            {{element.password}}
+                            {{element.serverPassword}}
                         </span>
                        </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="ipAddress">
-                      <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Server IP Address </mat-header-cell>
-                      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.ipAddress}}</mat-cell>
+                      <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Server IP</mat-header-cell>
+                      <mat-cell class="cell-name status-cell" style="color: var(--primaryColor)" *matCellDef="let element"> 
+                        <span class="status-span">
+                        {{element.serverIPAddress}}
+                      </span>
+                      </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="OS">
                       <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Server OS </mat-header-cell>
-                      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.OS}}</mat-cell>
+                      <mat-cell class="cell-name status-cell" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.serverOs}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="servername">
                       <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Server name </mat-header-cell>
-                      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.servername}}</mat-cell>
+                      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.serverName}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Type">
                       <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Server Type </mat-header-cell>
-                      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.Type}}</mat-cell>
+                      <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.serverType}}</mat-cell>
                   </ng-container>
-                  <ng-container matColumnDef="accountid">
+                  <!-- <ng-container matColumnDef="accountid">
                       <mat-header-cell class="cell-name" *matHeaderCellDef mat-sort-header>Account ID </mat-header-cell>
                       <mat-cell class="cell-name" style="color: var(--primaryColor)" *matCellDef="let element"> {{element.accountid}}</mat-cell>
-                  </ng-container>
+                  </ng-container> -->
                   <ng-container matColumnDef="actions">
                       <mat-header-cell class="cell-name" *matHeaderCellDef >Actions</mat-header-cell>
                       <mat-cell *matCellDef="let element">
                           <button id="file" mat-icon-button [matMenuTriggerFor]="credMenu"><mat-icon>more_horizontal</mat-icon></button>
                           <mat-menu #credMenu="matMenu" yPosition="below">
-                              <button class="menu-button" mat-menu-item>
+                              <button class="menu-button" mat-menu-item (click)="openNew(element)">
                                 <mat-icon >
                                   edit
                                 </mat-icon>
@@ -144,7 +150,7 @@
                                    Edit
                                  </span>
                                </button>
-                               <button class="menu-button" mat-menu-item>
+                               <button class="menu-button" mat-menu-item (click)="deleteServer(element.id)">
                                   <mat-icon >
                                     delete_forever
                                   </mat-icon>
@@ -152,14 +158,14 @@
                                     Delete
                                   </span>
                                 </button>
-                                <button class="menu-button" mat-menu-item>
+                                <!-- <button class="menu-button" mat-menu-item>
                                     <mat-icon >
                                         arrow_drop_down
                                     </mat-icon>
                                     <span>
                                       Suspend
                                     </span>
-                                  </button>
+                                  </button> -->
                                   </mat-menu>
                          </mat-cell>
                     </ng-container>
@@ -169,7 +175,7 @@
             <mat-paginator [pageSizeOptions]="[3,5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
         </div>
     </section>
-    <section>
+    <!-- <section>
         <div class="section-header" style="width: 100%;">
 
           <div style="margin-top: 30px" class="section-header">
@@ -325,6 +331,6 @@
                 </mat-table>
                 <mat-paginator [pageSizeOptions]="[3,5,10,20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
             </div>
-        </section>
+        </section> -->
 </div>
     </div>

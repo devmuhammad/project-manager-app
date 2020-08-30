@@ -1,11 +1,82 @@
-<div class="detail-section">
-  <div class="section right" >
-    <!-- <div style="padding-top:20px">
-      <h5 mat-subheading>Code Refractoring</h5>
-      <p class="subheading">Software Project</p>
-    </div> -->
+<div class="detail-section" style="margin-top:10px; ">
+  
+  <div class=" d-flex " style="flex-direction: column;flex:1; margin-top:0px;">
+    <div class="topBar">
 
-    <div class="detail-description">
+      <button small class="mat-raised-button" style="justify-content: flex-start;" (click)="addActivities()">New Activity</button>
+
+    <!-- <mat-form-field class="project-form-field auth-form-field" appearance="outline">
+      <mat-label>Filter by date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matInput disabled matStartDate placeholder="Start date" (dateChange)="filterDt('start', $event)">
+        <input matInput disabled matEndDate placeholder="End date" (dateChange)="filterDt('end', $event)">
+      </mat-date-range-input>
+      <mat-icon matPrefix disabled="false" style="cursor: pointer;" (click)="refreshActivities()"> refresh</mat-icon>
+
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
+    </mat-form-field>
+    </div> -->
+    <mat-form-field class="project-form-field auth-form-field" appearance="outline">
+      <mat-label>Filter start date</mat-label>
+      <!-- [value]="date.value"  -->
+
+      <input disabled matInput [matDatepicker]="picker" 
+          (dateChange)="filterDt('start', $event)">
+          <!-- (dateInput)="filterDt('input', $event)"  -->
+
+          <mat-icon matPrefix disabled="false" style="cursor: pointer;" (click)="refreshActivities()"> refresh</mat-icon>
+
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+     
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="project-form-field auth-form-field" appearance="outline">
+      <mat-label>Filter end date</mat-label>
+      <!-- [value]="date.value"  -->
+
+      <input disabled matInput [matDatepicker]="picker1" 
+          (dateChange)="filterDt('end', $event)">
+          <!-- (dateInput)="filterDt('input', $event)"  -->
+
+          <mat-icon matPrefix disabled="false" style="cursor: pointer;" (click)="refreshActivities()"> refresh</mat-icon>
+
+      <mat-datepicker-toggle matSuffix [for]="picker1">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+     
+      <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+    </mat-form-field>
+    </div>
+    <div class="task-body" style="max-height:500px;height:70%; margin-top:10;overflow: scroll; padding-top: 5px;">
+      
+      <h5 *ngIf="activityList && activityList.length == 0">No activity on this project yet ....</h5>
+      <div class="t-items" *ngFor="let activity of activityList; let i = index" style="border: none">
+        
+          <div class="t-item-footer" style="align-items:center; ">
+            <div class="subtexts">
+              <div style="flex-direction: row;">
+              <span style="font-size:x-small"> {{getDate(activity.datecreated)}} </span>
+              <span style="font-size:small; font-weight:600 ;"> - {{activity.activitystatus}} </span>
+            </div>
+            <!-- {{activity.userid.fullname}} -->
+              <mat-card-subtitle style="color:black"> <span *ngIf="activity.userid">{{activity.username}}</span> made a change on {{activity.projectname}} project  :    "{{activity.usercomment}}"</mat-card-subtitle>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- <div class="detail-description">
       <h5 class="description">21/09/2019 :</h5>
       <div class="subtexts">
       <span>10:01 AM</span>
@@ -22,14 +93,14 @@
       <div class="subtexts">
       <span>12:11 PM</span>
       <mat-card-subtitle>Hamza created a new user</mat-card-subtitle>
-    </div>
+    </div> -->
       <!-- <article>
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
          Eos ad est sunt velit magnam, laborum tempore eligendi! Officia perspiciatis, at quam ducimus incidunt,
         asperiores eveniet labore quis dolor possimus doloremque?
     </article> -->
-    </div>
-    <div class="detail-description">
+    <!-- </div> -->
+    <!-- <div class="detail-description">
       <h5 class="description">24/10/2019 :</h5>
       <div class="subtexts">
       <span>10:01 AM</span>
@@ -43,23 +114,23 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
          Eos ad est sunt velit magnam, laborum tempore eligendi! Officia perspiciatis, at quam ducimus incidunt,
         asperiores eveniet labore quis dolor possimus doloremque?
-    </article> -->
-    </div>
-    <div class="comment">
+    </article> 
+    </div> -->
+    <!-- <div class="comment">
 
           <mat-form-field class="project-form-field comment-input" floatLabel="never" >
               <textarea matInput  [(ngModel)]="comment"
-                      placeholder="Say something about this project"
-                     name="comment"  floatPlaceholder="never" ></textarea>
-                     <button mat-button matSuffix mat-icon-button aria-label="Clear">
+                      placeholder="Add an activity"
+                      name="comment"  floatPlaceholder="never" ></textarea>
+                     <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear">
                         <mat-icon >person </mat-icon>
-                     </button>
-                     <mat-error >Invalid project name</mat-error>
+                     </button> 
+                     <mat-error >Invalid activity</mat-error>
           </mat-form-field>
-          <button class="comment-button" mat-button mat-raised-button *ngIf="comment"> Save</button>
-    </div>
-  </div>
-  <div class="section left" style="border-left: 1px solid #d8d2d2">
+          <button class="comment-button"  mat-button mat-raised-button *ngIf="comment" (click)="addActivities()"> Save</button>
+    </div> -->
+  
+  <!-- <div class="section left" style="border-left: 1px solid #d8d2d2">
     <div class="detail-section links">
       <button mat-icon-button>
         <mat-icon style="color: var(--greyColor)">
@@ -107,13 +178,13 @@
           </span>
         </button>
       </mat-menu>
-    </div>
+    </div> 
     <div>
       <p class="header">Status</p>
     <mat-chip-list>
       <mat-chip  style="background-color:#90CDF4 " >To do</mat-chip>
     </mat-chip-list>
-      <!-- <h6 style="color: var(--darkColor);font-weight:300">To do <span class="todo"></span></h6> -->
+      <!-- <h6 style="color: var(--darkColor);font-weight:300">To do <span class="todo"></span></h6>  
     </div>
     <div>
       <p class="header">Assignee <span>
@@ -131,5 +202,5 @@
       <footer>Created At: <span style="color:var(--greyColor)">12 jan 2019 12:32:32 PM</span></footer>
       <footer>Updated At: <span style="color:var(--greyColor)">21st june 2019 10:04:11 AM</span></footer>
     </div>
-  </div>
-</div>
+  </div> -->
+

@@ -5,6 +5,11 @@ h2{
 .halfing{
   width: 20% ;
 }
+
+.nwproject-form{
+  /* padding:10px; */
+  margin-top:10px
+}
 .form-control{
   width: 100%;
   position: relative;
