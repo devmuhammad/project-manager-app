@@ -13,6 +13,7 @@ import { RepositoryComponent } from 'src/app/component/modals/repository/reposit
 import { ReassignProjectComponent } from 'src/app/component/modals/reassign-project/reassign-project.component'
 import { ProjectTimelineComponent } from 'src/app/component/modals/project-timeline/project-timeline.component'
 import { ServerCredentialsComponent } from 'src/app/component/modals/server-credentials/server-credentials.component'
+import { ExtendDuedateComponent } from '../modals/extend-duedate/extend-duedate.component';
 
 
 @Component({
@@ -162,7 +163,7 @@ export class ProjectTableComponent implements OnInit {
 
   async setComplete(task){
     // this.taskcomplete = !this.taskcomplete
-      const status = "Complete"
+      const status = "Completed"
       await this.updateTaskStatus(task, status)
   }
 
@@ -238,6 +239,18 @@ export class ProjectTableComponent implements OnInit {
     });;
   }
 
+  extendDate (data){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = data 
+    dialogConfig.width = '30%';
+    this.dialog.open(ExtendDuedateComponent, dialogConfig).afterClosed().subscribe(data => {
+        this.updateRecord();
+      }
+    );
+  }
+
   isCompleted(status){
     if (status === 'Completed') return true
     else return false
@@ -266,6 +279,7 @@ export class ProjectTableComponent implements OnInit {
             return { ...item };});
             this.filtTaskList = await response.data.map(item => {
               return { ...item };});
+              await this.taskDetails()
             this.loadingBar.complete();
             // console.log(this.taskList)
         }
@@ -301,7 +315,7 @@ export class ProjectTableComponent implements OnInit {
   async taskDetails(){
     this.myTasks = this.taskList.length
 
-    this.taskList.forEach(el => {
+    await this.taskList.forEach(el => {
      if (el.status === 'Completed'){
         this.completedTask++
       }else if (el.status === 'Ongoing' || el.status === 'Initiated' || el.status === 'Started'){
@@ -309,6 +323,7 @@ export class ProjectTableComponent implements OnInit {
       }
       
     })
+    // console.log(this.myTasks, this.completedTask)
 
     this.projectsProgress = Math.round(100/this.myTasks*this.completedTask)
   }
@@ -521,7 +536,7 @@ export class ProjectTableComponent implements OnInit {
      this.taskList = this.filtTaskList
      this.loadingBar.start();
 
-     this.taskList = this.taskList.filter((task) => task.assignedto.id == userId)
+     this.taskList = this.taskList.filter((task) => task.assignedto == userId)
       // console.log(this.projArray.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1))
       // this.projArray = this.projArray.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1)
         

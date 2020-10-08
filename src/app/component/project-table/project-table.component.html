@@ -30,15 +30,23 @@
     <!-- TOP SUMMARY CARD -->
     <div style="margin-left:5px;display:flex;justify-content:center;align-items:center; margin-right:5px;height: 80px;width:100%;margin-top:40px; margin-bottom:20px; border-radius:5px; background-color:#E9D8FD">
       <div *ngIf="isAdmin" style="display:flex; flex-direction:column">
-        <span  style="padding-bottom:10px">Hi {{alias}}, There are {{totalProj}} total projects and {{completedProj}} completed this week.</span>
+        <span  style="padding-bottom:10px">Hi {{alias}}, There are {{totalProj}} total projects and {{completedProj}} completed.</span>
         <!-- <span>You have completed 5 projects in the last week </span> -->
           <span> {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing project</span>
       </div>
           <div *ngIf="!isAdmin" style="display:flex; flex-direction:column">
        
-          <span style="padding-bottom:10px">Hi {{alias}}, You have a total of {{myTasks}} tasks and completed {{completedTask}} this week.</span>
+          <span style="padding-bottom:10px">Hi {{alias}}, You have completed {{completedTask}} tasks out of {{myTasks}}</span>
         <!-- <span>You have completed 5 projects in the last week </span> -->
-          <span>You have {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing tasks, You are doing well</span>
+          <!-- <span>You have {{uncompletedProj}} uncompleted and {{ongoingProj}} ongoing tasks, You are doing well</span> -->
+          <!-- <div style="margin-bottom:10px"> -->
+            <!-- <mat-card-subtitle>{{completedTask}} tasks completed out of {{myTasks}}</mat-card-subtitle> -->
+            <div style="flex:1; flex-direction: row;">
+            
+            <span>{{projectsProgress}}% completion<mat-progress-bar mode="determinate" color="#382B5F" [value]="projectsProgress"></mat-progress-bar>
+            </span>
+            </div>
+            <!-- </div> -->
       </div>
       
     </div>
@@ -100,14 +108,14 @@
                 Project Timeline
               </span>
           </button>
-              <!-- <button class="menu-button" mat-menu-item>
+              <button [disabled]="!isAdmin" class="menu-button" mat-menu-item (click)="extendDate(data)">
                 <mat-icon >
                   timer
                 </mat-icon>
                  <span>
-                   Set Duration
+                   Extend Deadline
                  </span>
-               </button> -->
+               </button>
                <button [disabled]="!isAdmin" class="menu-button" mat-menu-item (click)="reassignProj(data)">
                   <mat-icon>
                     person
@@ -174,29 +182,29 @@
         
       </div>
         </div>
-        <div style="margin-bottom:10px">
+        <!-- <div style="margin-bottom:10px">
           <mat-card-subtitle>{{completedTask}} tasks completed out of {{myTasks}}</mat-card-subtitle>
           <mat-progress-bar mode="determinate" color="var(--primaryColor)" [value]="projectsProgress"></mat-progress-bar>
-        </div>
+        </div> -->
         <mat-card-content style= "margin-top:15px">
           
           <mat-list-item class="mb-4 flex:1" *ngFor="let task of taskList">
           <div style=" display: flex;flex:1; flex-direction:row; justify-content:space-between">
             <span class="d-flex flex-1">
-          <mat-icon (click)="setComplete(task)" *ngIf="task.status !== 'Complete'" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
-          <mat-icon (click)="setComplete(task)" *ngIf="task.status === 'Complete'" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
+          <mat-icon (click)="setComplete(task)" *ngIf="task.status !== 'Completed'" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
+          <mat-icon (click)="setComplete(task)" *ngIf="task.status === 'Completed'" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
             
-            <mat-card-subtitle  *ngIf="task.status === 'Complete'" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> 
+            <mat-card-subtitle  *ngIf="task.status === 'Completed'" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> 
               {{task.description}}
               <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
-                {{task.projectname}}/ {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span>              </mat-card-subtitle>
+                {{task.projectname}} / {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span>              </mat-card-subtitle>
             </mat-card-subtitle>
           
-          <mat-card-subtitle  *ngIf="task.status !== 'Complete'" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> 
+          <mat-card-subtitle  *ngIf="task.status !== 'Completed'" style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> 
             {{task.description}}
             
             <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
-            {{task.projectname}}/ {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span> 
+            {{task.projectname}} / {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span> 
 
             </mat-card-subtitle>
             </mat-card-subtitle>
@@ -237,7 +245,7 @@
         <!-- <mat-card-title style="font-weight:600; font-size: medium;color:var(--primaryColor)">All Tasks</mat-card-title> -->
           <!-- <div> -->
             
-            <mat-form-field appearance="outline" class="auth-form-field" floatLabel="never">
+            <mat-form-field appearance="outline" class="project-form-field auth-form-field" floatLabel="never">
               <mat-label>{{userLabel}}</mat-label>
             <mat-select (selectionChange)="filterTask($event.value)"  class="input-select">
               <mat-option *ngFor="let user of userList" [value]="user.id">
@@ -264,13 +272,13 @@
           <!-- <mat-icon (click)="setComplete()" *ngIf="!isCompleted(task.status) && !taskcomplete" mat-list-icon matTooltip="Complete" style="cursor:pointer " matTooltipPosition="left" >radio_button_unchecked</mat-icon>
           <mat-icon (click)="setComplete()" *ngIf="isCompleted(task.status) || taskcomplete" style="color:green;cursor:pointer "  matTooltipPosition="left" >check_circle</mat-icon>
              -->
-             <div *ngIf="task.status === 'Complete'">
+             <div *ngIf="task.status === 'Completed'">
             <mat-card-subtitle   style="color:var(--primaryColor); padding-left: 5px; font-size:15px;text-decoration: line-through;text-decoration-thickness: 2px;text-decoration-color:#2D3748" class="font-weight-normal "> 
               {{task.description}}
               <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
-                {{task.projectname}}/ {{task.tasktypename}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span><br>
+                {{task.projectname}} / {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span><br>
                 <!-- <mat-card-subtitle class="font-weight-normal" style=" font-size:14px; "> -->
-               Assigned to: {{task.assignedto.fullname}}
+               Assigned to: {{task.assignedtoname}}
               <!-- </mat-card-subtitle> -->
               </mat-card-subtitle>
                
@@ -278,14 +286,14 @@
            
               </div>
           
-          <div *ngIf="task.status !== 'Complete'">
+          <div *ngIf="task.status !== 'Completed'">
           <mat-card-subtitle style="color:var(--primaryColor); padding-left: 5px; font-size:15px;" class="font-weight-normal "> 
             {{task.description}}
             
               <mat-card-subtitle class="font-weight-light" style=" font-size:14px; ">
-                {{task.projectname}}/ {{task.tasktypename}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span><br>
+                {{task.projectname}} / {{task.tasktype}} / <span style="font-weight: 600;">{{task.priority}}<mat-icon style="font-size: smaller;">flag</mat-icon></span><br>
                 <!-- <mat-card-subtitle class="font-weight-normal" style=" font-size:14px; "> -->
-               Assigned to: {{task.assignedto.fullname}}
+               Assigned to: {{task.assignedtoname}}
               <!-- </mat-card-subtitle> -->
               </mat-card-subtitle>
               

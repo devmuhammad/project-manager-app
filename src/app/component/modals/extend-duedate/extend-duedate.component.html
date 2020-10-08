@@ -1,0 +1,27 @@
+<div style="width: 100%">
+  <h2 mat-dialog-title>Extend Due Date</h2>
+
+  <form [formGroup]="form" class="nwproject-form" style="display:flex; flex-direction:column">
+   
+    <!-- <p></p> -->
+    <mat-form-field class="project-form-field auth-form-field" appearance="outline">
+      <mat-label>Due Date</mat-label>
+      <input disabled="true" matInput [matDatepicker]="picker" formControlName="enddate">
+
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+     
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-dialog-actions align="end">
+      <button class="mat-raised-button" (click)="close()">Close</button>
+      <button  class="mat-raised-button mat-primary save" buttonLoader [loaderColor]="'white'"
+        (click)="updateProjAssign()">
+        <span></span>
+        Update</button>
+    </mat-dialog-actions>
+  </form>
+</div>

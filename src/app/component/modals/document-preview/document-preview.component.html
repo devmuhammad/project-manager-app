@@ -1,0 +1,17 @@
+<div style="width: 100%">
+  
+  <mat-dialog-actions style="justify-content: space-between;">
+    <h2 mat-dialog-title>Preview: {{data.docName}}</h2>
+    <button class="mat-raised-button" (click)="close()">Close</button>
+    
+  </mat-dialog-actions>
+  <!-- <div id="idOnHTML">
+
+  </div> -->
+  <app-image-viewer  [images]="prevImg"
+    [idContainer]="'idOnHTML'"
+    [primaryColor]="'#382B5F'"
+    [loadOnInit]="true"></app-image-viewer>
+
+   
+</div>

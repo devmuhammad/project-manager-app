@@ -48,7 +48,7 @@ export class ActivityDetailComponent implements OnInit {
 
   addActivities(){
     if (this.currProj ==  null){
-      return alert("Please select a project to add activity")
+      return alert("Please select a single project to add activity")
     }
     
     const dialogConfig = new MatDialogConfig();
@@ -69,6 +69,8 @@ export class ActivityDetailComponent implements OnInit {
     return new Date(dt).toDateString()
   }
 
+  compDate : any
+
   filterDt(type: string, event: MatDatepickerInputEvent<Date>) {
     // this.events.push(`${type}: ${event.value}`);
     if (type === 'start'){
@@ -76,10 +78,11 @@ export class ActivityDetailComponent implements OnInit {
       return;
     }
     if(type === 'end' && this.startDate == null){
-      return ;
+      return alert("please select a start date");
     }
 
    const compDate = new Date(event.value).getDate()
+   this.compDate =compDate
 
    this.filterActivityByDate(this.startDate, compDate)
   }
@@ -127,6 +130,7 @@ export class ActivityDetailComponent implements OnInit {
  
     
    }
+   projActList = []
 
    async filterActivityByProj(proj){
     this.activityList = this.actvList
@@ -136,6 +140,10 @@ export class ActivityDetailComponent implements OnInit {
     this.activityList = this.activityList.filter((data) => {
       return data.projectid === proj.projectId
     })
+    this.projActList = this.activityList
+    if (this.startDate != null && this.compDate){
+      this.filterActivityByDate(this.startDate, this.compDate)
+    }
      // console.log(this.projArray.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1))
     //  this.activityList = this.activityList.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1)
        
@@ -148,7 +156,10 @@ export class ActivityDetailComponent implements OnInit {
     this.activityList = this.actvList
      }
     this.loadingBar.start();
-    
+    if(this.projActList.length != 0){
+      this.activityList = this.projActList
+
+    }
     this.activityList = this.activityList.filter((data) => {
       const dt = new Date(data.datecreated).getDate()
      

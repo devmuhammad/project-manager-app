@@ -10,6 +10,7 @@ import { ActivityService } from 'src/app/services/activity.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UsersService } from 'src/app/services/users.service';
 import { DocumentUpdateComponent } from '../document-update/document-update.component';
+import { DocumentPreviewComponent } from '../modals/document-preview/document-preview.component';
 
 @Component({
   selector: 'app-document-container',
@@ -28,6 +29,11 @@ export class DocumentContainerComponent implements OnInit {
   // activityService: any;
   taskList: any;
   docList: any[];
+  allprojs: any;
+  projSearch: any;
+  usrDocs: any[];
+  fileExt: any;
+  docName: any;
   constructor(private commonservice: DefaultlayoutService,
               private loadingBar: LoadingBarService,
               private fb: FormBuilder,
@@ -117,6 +123,7 @@ export class DocumentContainerComponent implements OnInit {
     this.documentList = this.documentList.filter((el) => {
        return el.projectid == proj.projectId
     })
+    this.usrDocs = this.documentList
     this.showFolders =!this.showFolders
   }
 
@@ -131,6 +138,7 @@ export class DocumentContainerComponent implements OnInit {
           });
           if (this.isAdmin){
             this.projectList = datarray
+            this.allprojs = datarray
              this.loadingBar.complete();
   
               }else {
@@ -144,7 +152,8 @@ export class DocumentContainerComponent implements OnInit {
                      if(e.id === this.currUser.id){
                       // await myprojects.push(el)
                       this.projectList.push(el)
-   
+                      this.allprojs.push(el)
+                      
                      }
                      
                     })
@@ -262,6 +271,26 @@ export class DocumentContainerComponent implements OnInit {
   })
 }
 
+previewDoc(doc) {
+  const dialogConfig = new MatDialogConfig();
+  const document = {
+    doc: doc,
+    docType : this.fileExt,
+    docName: this.docName
+  }
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.data = document
+  dialogConfig.width = '70%';
+  dialogConfig.height = '80%';
+  this.dialog.open(DocumentPreviewComponent, dialogConfig).afterClosed().subscribe(data => {
+    if(data && data.action === 1) {
+
+      
+    }
+  });;
+}
+
   getErrorNotified(message) {
     this.btnLoader.hideLoader();
     this.loadingBar.complete();
@@ -296,6 +325,7 @@ export class DocumentContainerComponent implements OnInit {
       .subscribe(res => {
         if (res.message === 'Success') {
           this.getList(this.credentials);
+          this.files.length = 0
           return this.getSuccessNotified('New Document Added') }
         this.getErrorNotified("Something went wrong");
         this.flag =1;
@@ -305,7 +335,7 @@ export class DocumentContainerComponent implements OnInit {
         const error = err.error.error;
         return this.getErrorNotified(`File failed to upload ${error}`);
       });
-    console.log(this.flag);
+    // console.log(this.flag);
   }
 
   getUsers(id: number) {
@@ -345,13 +375,21 @@ export class DocumentContainerComponent implements OnInit {
     // }
   }
 
-  filePreview(id: number){
+  filePreview(docx){
+   
+    const id = docx.documentid
+    this.fileExt = docx.fileExt
+    this.docName = docx.name
     this.loadingBar.start();
     const profile = JSON.parse(localStorage.getItem('profile'));
     const credential ={documentId:id, userId:profile.id};
     this.documentservice.DocumentPreview(credential)
     .subscribe(res=>{
-      if(res.message === 'Success') {return this.getSuccessNotified(' Document Previewed')};
+      if(res.message === 'Success') {
+      this.loadingBar.complete();
+        // return this.getSuccessNotified(' Document Previewed')
+        return this.previewDoc(res.data)
+      };
 
       this.getErrorNotified("Something went wrong");
       this.loadingBar.complete();
@@ -362,13 +400,27 @@ export class DocumentContainerComponent implements OnInit {
       return this.getErrorNotified(`File failed  ${err}`);
     });
   }
-  fileDownload(id: number){
+   downloadURI(uri, name) 
+{
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    link.click();
+}
+
+  fileDownload(docx){
+    const id = docx.documentid
     this.loadingBar.start();
     const profile = JSON.parse(localStorage.getItem('profile'));
     const credential ={documentId:id, userId:profile.id};
-    this.documentservice.downloadfile(credential)
-    .subscribe(res=>{
-      if(res.message === 'Success') {return this.getSuccessNotified(' Document Downloaded')};
+    this.documentservice.DocumentPreview(credential)
+    .subscribe(async res=>{
+      if(res.message === 'Success') {
+
+       await this.downloadURI(res.data, docx.name)
+        return this.getSuccessNotified(' Document Downloaded')
+      }
+        
 
       this.getErrorNotified("Something went wrong");
       this.loadingBar.complete();
@@ -380,7 +432,6 @@ export class DocumentContainerComponent implements OnInit {
     });
   }
   getUpdateDocx(row) {
-    console.log(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -388,7 +439,7 @@ export class DocumentContainerComponent implements OnInit {
     dialogConfig.data = { data: row };
     this.dialog.open(DocumentUpdateComponent, dialogConfig).afterClosed().subscribe(
       () => {
-        this.getList(this.credentials);
+        // this.getList(this.credentials);
       }
     );
   }
@@ -418,7 +469,11 @@ export class DocumentContainerComponent implements OnInit {
 
   clearSearch(){
     this.projSearchKey="";
-    this.documentList = this.docList
+    this.documentList = this.usrDocs
+  }
+  clearprjSearch(){
+    this.projSearch="";
+    this.projectList = this.allprojs
   }
 
   async applyDocFilter(){
@@ -431,6 +486,17 @@ export class DocumentContainerComponent implements OnInit {
    this.loadingBar.complete();
   
  }
+ async applyProjFilter(){
+  this.projectList = this.allprojs
+  this.loadingBar.start();
+
+   // console.log(this.projectList.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearchKey.toLowerCase()) !== -1))
+   this.projectList = this.projectList.filter((data) => JSON.stringify(data).replace(/("\w+":)/g, '').toLowerCase().indexOf(this.projSearch.toLowerCase()) !== -1)
+     
+ this.loadingBar.complete();
+
+}
+
 
 }
 

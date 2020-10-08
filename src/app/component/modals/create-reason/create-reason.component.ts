@@ -1,55 +1,51 @@
+
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBarRef, MatSnackBar } from '@angular/material';
 import { AngularButtonLoaderService } from 'angular-button-loader';
 import { LoadingBarComponent, LoadingBarService } from '@ngx-loading-bar/core';
-import { ClientsService } from 'src/app/services/clients.service';
+import { DropdownsService } from 'src/app/services/dropdowns.service';
+import { ReasonService } from 'src/app/services/reason.service';
 
 @Component({
-  selector: 'app-create-client',
-  templateUrl: './create-client.component.html',
-  styleUrls: ['./create-client.component.css']
+  selector: 'app-create-reason',
+  templateUrl: './create-reason.component.html',
+  styleUrls: ['./create-reason.component.css']
 })
-export class CreateClientComponent implements OnInit {
+export class CreateReasonComponent implements OnInit {
+
   form: FormGroup;
-  public clientsInputs = {
-    businessname: '',
-    code: '',
-    email: '',
-    institutionid: '',
-    contactphonenumber: '',
-    contactpersonemail: '',
-    phonenumber: '',
-    contactperson: '',
-    weburl: '',
+  public statusInputs = {
+    comments: '',
+    description: '',
   };
+  institutionList: any[];
   view: boolean;
   inputType: string;
   vpasswordType: string;
   show: boolean;
    groups: string;
   constructor(
-    private dialogRef: MatDialogRef<CreateClientComponent>,
+    private dialogRef: MatDialogRef<CreateReasonComponent>,
     private fb: FormBuilder,
     private btnLoader: AngularButtonLoaderService,
     private loadingBar: LoadingBarService,
     private snackbar: MatSnackBar,
-    private service: ClientsService
+    private dropdownService: DropdownsService,
+    private service: ReasonService
     ) {
       this.form = this.fb.group({
-        businessname: ['', Validators.required],
         code: ['', Validators.required],
-        email: ['', Validators.required],
-        contactperson: ['', Validators.required],
-        contactpersonemail: ['', Validators.required],
-        contactphonenumber: ['', Validators.required],
-        phonenumber: ['', Validators.required],
-        weburl: ['', Validators.required],
-
+        // institution: ['', Validators.required],
+        description: ['', Validators.required],
       });
      }
-
+     
   ngOnInit() {
+    this.fetchInstitutionList();
   }
   doNothing() {
     // tslint:disable-next-line: deprecation
@@ -58,19 +54,11 @@ export class CreateClientComponent implements OnInit {
 
   save() {
     if(this.form.valid){
-
-      this.clientsInputs.businessname = this.form.get('businessname').value;
-      this.clientsInputs.code = this.form.get('code').value;
-      this.clientsInputs.email = this.form.get('email').value;
-      this.clientsInputs.phonenumber = this.form.get('phonenumber').value;
-      this.clientsInputs.contactperson = this.form.get('contactperson').value;
-      this.clientsInputs.contactpersonemail = this.form.get('contactpersonemail').value;
-      this.clientsInputs.contactphonenumber = this.form.get('contactphonenumber').value;
-      this.clientsInputs.weburl = this.form.get('weburl').value;
-      console.log(this.clientsInputs);
+      this.statusInputs.comments = this.form.get('code').value;
+      this.statusInputs.description = this.form.get('description').value;
       this.btnLoader.displayLoader();
       this.loadingBar.start();
-      this.service.addClients(this.clientsInputs)
+      this.service.addReason(this.statusInputs)
       .subscribe(({message, data, meta}) => {
         if (message === 'Success') {
           this.btnLoader.hideLoader();
@@ -86,7 +74,7 @@ export class CreateClientComponent implements OnInit {
         if (message === 'Failed') {
           this.btnLoader.hideLoader();
           this.loadingBar.stop();
-          return this.snackbar.open('Failed to Create new Group\'', 'Dismiss', {
+          return this.snackbar.open('Failed to Create new Reason\'', 'Dismiss', {
             panelClass: ['error'],
             duration: 7000,
             horizontalPosition: 'left',
@@ -107,27 +95,26 @@ export class CreateClientComponent implements OnInit {
     }
   }
 
+  fetchInstitutionList() {
+    this.dropdownService.getInstitutions()
+      .subscribe((res) => {
+        this.institutionList = res.data;
+        console.log(this.institutionList);
+      });
+  }
   saveAndAdd() {
-    if(!this.form.valid){
-      return ;
-    }
-
-    this.clientsInputs.businessname = this.form.get('businessname').value;
-    this.clientsInputs.code = this.form.get('code').value;
-    this.clientsInputs.email = this.form.get('email').value;
-    this.clientsInputs.phonenumber = this.form.get('phonenumber').value;
-    this.clientsInputs.contactperson = this.form.get('contactperson').value;
-    this.clientsInputs.contactpersonemail = this.form.get('contactpersonemail').value;
-    this.clientsInputs.contactphonenumber = this.form.get('contactphonenumber').value;
-    this.clientsInputs.weburl = this.form.get('weburl').value;
+    if(this.form.valid){
+    this.statusInputs.comments = this.form.get('code').value;
+    this.statusInputs.description = this.form.get('description').value;
+    // this.statusInputs.institutionid = this.form.get('institution').value;
     this.btnLoader.displayLoader();
-    this.service.addClients(this.clientsInputs)
+    this.service.addReason(this.statusInputs)
     .subscribe(({message, data, meta}) => {
       if (message === 'Success') {
         this.btnLoader.hideLoader();
         this.loadingBar.stop();
         this.form.reset();
-        return this.snackbar.open(`${message } ${data[0].name}`, 'Dismiss', {
+        return this.snackbar.open(`${message } `, 'Dismiss', {
           panelClass: ['success'],
           duration: 7000,
           horizontalPosition:'left',
@@ -137,7 +124,7 @@ export class CreateClientComponent implements OnInit {
       if (message === 'Failed') {
         this.btnLoader.hideLoader();
         this.loadingBar.stop();
-        return this.snackbar.open('Failed to Create new Group\'', 'Dismiss', {
+        return this.snackbar.open('Failed to Create Reason\'', 'Dismiss', {
           panelClass: ['error'],
           duration: 7000,
           horizontalPosition:'left',
@@ -156,6 +143,7 @@ export class CreateClientComponent implements OnInit {
       });
     });
   }
+}
 
   close() {
     this.dialogRef.close();

@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from './node_modules/src/app/services/users.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from "@angular/material";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { ProjectService } from 'src/app/services/project.service';
-import { ReasonService } from 'src/app/services/reason.service';
+import { ProjectService } from './node_modules/src/app/services/project.service';
+import { ReasonService } from './node_modules/src/app/services/reason.service';
 
 @Component({
   selector: 'app-reassign-project',

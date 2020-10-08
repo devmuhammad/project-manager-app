@@ -97,6 +97,12 @@ export const BaseApi = {
     // Team Members
     TEAM_MEMBERS: 'project/teammembers',
     // PROJECT ACTIVITY
+
+    // Reasons
+    ADD_REASON: 'reason/add',
+    UPDATE_REASON: 'reason/update',
+    LIST_REASONS: 'reason/list/all',
+    DELETE_REASON: 'reason/delete',
    
     // REPO
     ADD_REPO: 'repo/add',

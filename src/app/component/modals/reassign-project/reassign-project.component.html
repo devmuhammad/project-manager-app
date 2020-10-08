@@ -32,8 +32,8 @@
     <mat-form-field class="project-form-field auth-form-field" appearance="outline" style="width:100%;">
       <mat-label>Reason for re-assignment</mat-label>
       <mat-select formControlName="reason"  class="input-select">
-        <mat-option *ngFor="let reason of Reasons" [value]="reason.value">
-          {{reason.name}}
+        <mat-option *ngFor="let reason of Reasons" [value]="reason.id">
+          {{reason.description}}
         </mat-option>
       </mat-select>
     </mat-form-field>

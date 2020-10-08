@@ -39,7 +39,7 @@ RadarChart = [];
 totalproj = 0
 totaltask = 0
 ongoingtask = 0
-uncompletedtask = 0
+uncompletedtask : any
 
 renderLineChart() {
   
@@ -235,8 +235,9 @@ currUser: any
             const stringStat = taskList.filter((item: any) => item.status === 'Ongoing')
             this.ongoingtask = stringStat.length
             
-            const newStat = taskList.filter((item: any) => item.status === 'Created')
-            this.uncompletedtask = newStat.length
+            const newStat = taskList.filter((item: any) => item.status === 'Completed')
+            
+            this.uncompletedtask = (newStat.length/this.totaltask*100).toFixed(1)
         }
       },err => {
         console.log(err);
@@ -258,8 +259,8 @@ currUser: any
           const stringStat = taskList.filter((item: any) => item.status === 'Ongoing')
           this.ongoingtask = stringStat.length
           
-          const newStat = taskList.filter((item: any) => item.status === 'Created')
-          this.uncompletedtask = newStat.length
+          const newStat = taskList.filter((item: any) => item.status === 'Completed')
+          this.uncompletedtask = (newStat.length/this.totaltask*100).toFixed(1)
         } 
       }, err => {
         console.log(err);

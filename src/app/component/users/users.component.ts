@@ -29,6 +29,7 @@ export class UsersComponent implements OnInit {
     private commonservice: DefaultlayoutService,
     private userService: UsersService,
   ) { }
+  
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: MatTableDataSource<any>;
@@ -36,6 +37,7 @@ export class UsersComponent implements OnInit {
   groupList: any;
   allUsers: any;
   status: boolean;
+  
   onCreate() {
     console.log(this.groupList)
     const dialogConfig = new MatDialogConfig();

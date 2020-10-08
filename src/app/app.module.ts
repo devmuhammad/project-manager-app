@@ -10,6 +10,7 @@ import { AuthenticationComponent } from './component/auth/authentication/authent
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ProjectComponent } from './component/project/project.component';
 import { RecordsComponent } from './component/records/records.component';
+import { ReasonsComponent } from './component/reasons/reasons.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { routing } from './app-routing.module';
@@ -50,7 +51,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CreateProjectTypeModalComponent } from './component/modals/create-project-type-modal/create-project-type-modal.component';
 import { UpdateProjectTypeModalComponent } from './component/modals/update-project-type-modal/update-project-type-modal.component';
 import { UpdateStatusModalComponent } from './component/modals/update-status-modal/update-status-modal.component';
+import { UpdateReasonComponent } from './component/modals/update-reason/update-reason.component';
 import { CreateStatusModalComponent } from './component/modals/create-status-modal/create-status-modal.component';
+import { CreateReasonComponent } from './component/modals/create-reason/create-reason.component';
 import { CreateTaskTypeModalComponent } from './component/modals/create-task-type-modal/create-task-type-modal.component';
 import { UpdateTaskTypeModalComponent } from './component/modals/update-task-type-modal/update-task-type-modal.component';
 import { UpdateDoctypeModalComponent } from './component/modals/update-doctype-modal/update-doctype-modal.component';
@@ -120,6 +123,9 @@ import { ToolsComponent } from './component/server-details/tools/tools.component
 import { AddServerAccountComponent } from './component/modals/add-server-account/add-server-account.component';
 import { AddServerCredentialComponent } from './component/modals/add-server-credentials/add-server-credential.component';
 import { AddServerToolComponent } from './component/modals/add-server-tools/add-server-tool.component';
+import { ExtendDuedateComponent } from './component/modals/extend-duedate/extend-duedate.component';
+import { DocumentPreviewComponent } from './component/modals/document-preview/document-preview.component';
+import { ImageViewerModule } from 'ng2-image-viewer';
 // import { persistStore } from 'redux-persist';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
@@ -132,6 +138,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     AuthenticationComponent,
     DashboardComponent,
     ProjectComponent,
+    ReasonsComponent,
     RecordsComponent,
     SettingsComponent,
     ProjectTableComponent,
@@ -159,6 +166,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     ClientsTableComponent,
     CreateProjectTypeModalComponent,
     UpdateProjectTypeModalComponent,
+    CreateReasonComponent,
+    UpdateReasonComponent,
     UpdateStatusModalComponent,
     CreateStatusModalComponent,
     CreateTaskTypeModalComponent,
@@ -183,6 +192,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     UserContainerComponent,
     SettingsContainerComponent,
     ReassignProjectComponent,
+    ExtendDuedateComponent,
+    DocumentPreviewComponent,
     ProjectTimelineComponent,
     AddActivityComponent,
     ServerAccountComponent,
@@ -198,6 +209,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     routing,
     AngularButtonLoaderModule.forRoot(),
     LoadingBarModule,
+    ImageViewerModule,
     // LoadingBarHttpClientModule,
     // LoadingBarHttpModule,
     BrowserAnimationsModule,
@@ -256,6 +268,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     HttpClientModule
   ],
   entryComponents: [
+    CreateReasonComponent,
+    UpdateReasonComponent,
     AddServerCredentialComponent,
     AddServerToolComponent,
     AddServerAccountComponent,
@@ -263,6 +277,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     AddActivityComponent,
     ProjectTimelineComponent,
     ReassignProjectComponent,
+    ExtendDuedateComponent,
+    DocumentPreviewComponent,
     RepositoryComponent,
     BottomSheetComponent,
     CreateProjectModalComponent,

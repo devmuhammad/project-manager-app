@@ -162,7 +162,8 @@ fetchDeleteChat(index, id: number) {
 
     this.activityServices.AddGeneralConversation(newChat)
       .subscribe(res => {
-        if (res.message === 'Success') {
+        // if (res.message === 'Success') {
+        if (res) {
           this.showGeneral()
          
 
@@ -195,7 +196,8 @@ fetchDeleteChat(index, id: number) {
 
       this.activityServices.AddUserConversation(newChat)
       .subscribe(res => {
-        if (res.message === 'Success') {
+        if (res) {
+        // if (res.message === 'Success') {
           this.fetchUserConversation()
          
 
@@ -227,7 +229,8 @@ fetchDeleteChat(index, id: number) {
 
       this.activityServices.AddProjectConversation(newChat)
       .subscribe(res => {
-        if (res.message === 'Success') {
+        // if (res.message === 'Success') {
+        if (res) {
           this.fetchProjectComments()
          
           
