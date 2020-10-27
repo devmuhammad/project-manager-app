@@ -1,7 +1,7 @@
 
 
 export const BaseApi = {
-  URL: 'https://comsoftltd.net:9090/projappapi/',
+  URL: 'http://comsoftltd.net:9090/projappapi/',
   // URL: 'http://localhost:8080/projappapi/',
   PATH: {
     LOGIN: 'entrance/user/signin',
