@@ -100,7 +100,7 @@ export class NewUserModalComponent implements OnInit {
     this.btnLoader.displayLoader();
     this.inputFields.fullname = this.form.get('fullname').value;
     this.inputFields.username = this.form.get('contactemail').value;
-    // this.inputFields.username = this.form.get('username').value;
+    this.inputFields.password = this.form.get('password').value;
     // this.inputFields.institutionid = 0
     // this.inputFields.designationid = 1
     this.inputFields.supervisor = this.form.get('supervisor').value;
@@ -110,8 +110,8 @@ export class NewUserModalComponent implements OnInit {
     this.inputFields.roletypes = this.form.get('roletypes').value
     return this.userService.addNewUser(this.inputFields)
     .subscribe(({meta, message, data}) => {
-      console.log(message);
-      console.log(data);
+      // console.log(message);
+      // console.log(data);
       if (message === 'Failed') {
         this.loadingBar.complete();
         this.btnLoader.hideLoader();
